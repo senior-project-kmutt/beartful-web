@@ -1,6 +1,6 @@
 
-export default function Hello() {
+export default function Home() {
   return (
-      <h1>Hellllooo</h1>
+      <h1>Homepage</h1>
   )
 }
