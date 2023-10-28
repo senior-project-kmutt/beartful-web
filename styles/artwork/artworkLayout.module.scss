@@ -1,0 +1,12 @@
+.artwork_container {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 240px);
+    grid-auto-rows: 10px;
+    justify-content: center;
+}

@@ -1,3 +1,4 @@
+import Artwork from "@/components/Artwork/Artwork"
 import { testApi } from "@/services/TestApi"
 import { useEffect, useState } from "react"
 
@@ -14,6 +15,7 @@ export default function Home() {
       <div className="m-4">
         <h1>Homepage</h1>
         <p>Username : {user}</p>
+        <Artwork />
       </div>
   )
 }
