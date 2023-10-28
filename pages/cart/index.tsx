@@ -1,4 +1,5 @@
 import CheckoutCreditCard from "@/components/CheckoutFormPayment/CheckoutCreditCard"
+import CheckoutInternetBanking from "@/components/CheckoutFormPayment/CheckoutInternetBanking"
 import { Cart } from "@/models/cart"
 
 const Cart = () => {
@@ -13,6 +14,9 @@ const Cart = () => {
         <div>
             <button>Buy</button>
             <CheckoutCreditCard
+                cart={cart}
+            />
+            <CheckoutInternetBanking
                 cart={cart}
             />
         </div>
