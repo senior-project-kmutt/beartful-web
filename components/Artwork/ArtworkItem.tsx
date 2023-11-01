@@ -1,6 +1,6 @@
 import { Artwork } from "@/models/artwork";
 import ArtworkImage from "./ArtworkImage";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 interface Props {
   item: Artwork;
 }
