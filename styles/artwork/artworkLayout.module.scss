@@ -1,5 +1,8 @@
-.artwork_container {
+.container {
     width: 85%;
+}
+
+.artwork_container {
     margin: 20px auto;
     padding: 0 20px;
     columns: 5;
@@ -24,6 +27,17 @@
     word-wrap: break-word;
 }
 
+.artwork_detail {
+    margin: 20px auto;
+    padding: 0 20px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
 @media (max-width:1200px) {
     .artwork_container {
         max-width: calc(100% - 40px);
@@ -33,8 +47,11 @@
 }
 
 @media (max-width:1024px) {
-    .artwork_container {
+    .container {
         width: 80%;
+    }
+
+    .artwork_container {
         padding: 0 15px;
         columns: 3;
     }
