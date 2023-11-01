@@ -1,21 +1,31 @@
 import { Artwork } from "@/models/artwork";
-import ArtworkImage from "./ArtworkImage";
-import { useEffect, useRef, useState } from "react";
+import ArtworkImage, {
+  ArtworkImageContainer,
+  ArtworkName,
+  IconArrow,
+  ShopLinkButton,
+  ShopPrice,
+} from "./ArtworkStyled";
 import styled from "@/styles/artwork/artworkLayout.module.scss";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 interface Props {
   item: Artwork;
 }
 const ArtworkItem = (props: Props) => {
-  const item = props;
-
-  const style = {
-    src: item.item.images[0],
-  };
+  const { images, name, price } = props.item;
 
   return (
     <>
       <div className={styled.artwork_box}>
-        <ArtworkImage theme={style} />
+        <ArtworkImageContainer>
+          <ArtworkName>{name}</ArtworkName>
+          <ArtworkImage theme={{ src: images[0] }} />
+          <ShopLinkButton>
+            Maexzomeiei
+            <IconArrow icon={faArrowUp} />
+          </ShopLinkButton>
+          <ShopPrice>เรทราคา : {price}</ShopPrice>
+        </ArtworkImageContainer>
       </div>
     </>
   );
