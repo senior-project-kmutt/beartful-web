@@ -1,24 +1,32 @@
 import { Artwork } from "@/models/artwork";
 import ArtworkImage from "./ArtworkImage";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 interface Props {
   item: Artwork;
 }
 const ArtworkItem = (props: Props) => {
   const item = props;
   const [rowSpan, setRowSpan] = useState<number>();
+  const imgRef = useRef<HTMLImageElement | null>(null);
 
-  useEffect(() => {
+  const artworkLayout = () => {
     const img = new Image();
     img.src = item.item.images[0];
-    const container = document.getElementById("container");
-    if (container) {
-      const imageAspectRatio = img.naturalWidth / img.naturalHeight;
-      const newRowSpan = Math.ceil(
-        container.offsetWidth / imageAspectRatio / 10
-      );
-      setRowSpan(newRowSpan);
+    if (imgRef.current) {
+      imgRef.current.onload = () => {
+        const imageAspectRatio = img.naturalWidth / img.naturalHeight;
+        const newRowSpan = Math.ceil(
+          (imgRef.current?.offsetWidth ?? 0) / imageAspectRatio / 10
+        );
+        if (newRowSpan !== null) {
+          setRowSpan(newRowSpan);
+        }
+      };
     }
+  }
+
+  useEffect(() => {
+    artworkLayout()
   }, []);
 
   const style = {
@@ -28,7 +36,7 @@ const ArtworkItem = (props: Props) => {
 
   return (
     <>
-      <ArtworkImage id="container" theme={style} />
+      <ArtworkImage ref={imgRef} theme={style} />
     </>
   );
 };
