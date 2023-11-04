@@ -8,6 +8,7 @@ import ArtworkDetail from "./ArtworkDetail";
 
 const Artwork = () => {
   const [artwork, setArtwork] = useState<Artwork[]>();
+  const [artworkDetail, setArtworkDetail] = useState<Artwork>();
   const [isShowDetail, setIsShowDetail] = useState<boolean>(false);
 
   useEffect(() => {
@@ -15,17 +16,31 @@ const Artwork = () => {
       setArtwork(res.data);
     });
   }, []);
+
+  const onShowDetail = (item: Artwork) => {
+    setIsShowDetail(true);
+    setArtworkDetail(item);
+  };
+
+  const onCloseDetail = () => {
+    setIsShowDetail(false);
+  };
+
   return (
     <div className="flex">
       <ArtworkCategory />
       <div className={style.container}>
-        {true && <ArtworkDetail />}
+        {isShowDetail && artworkDetail && (
+          <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
+        )}
         <div className={style.artwork_container}>
-          {artwork?.map((item) => {
+          {artwork?.map((item, index) => {
             return (
-              <>
-                <ArtworkItem item={item} />
-              </>
+              <ArtworkItem
+                item={item}
+                key={index}
+                onShowDetail={onShowDetail}
+              />
             );
           })}
         </div>

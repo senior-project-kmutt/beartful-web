@@ -1,22 +1,50 @@
+import { Artwork } from "@/models/artwork";
 import style from "@/styles/artwork/artworkLayout.module.scss";
 import { Carousel } from "flowbite-react";
 
-const ArtworkDetail = () => {
-  const images = [
-    "https://firebasestorage.googleapis.com/v0/b/beartful-ef55a.appspot.com/o/cartoon1.jpeg?alt=media&token=98b9e198-2709-4f75-bc22-9e79d6d4bbc9&_gl=1*hiayej*_ga*OTU1MTIxMTUxLjE2OTg0ODk2Mzg.*_ga_CW55HF8NVT*MTY5ODUxNTQyNy40LjEuMTY5ODUxNjM2MS42MC4wLjA.",
-    "https://firebasestorage.googleapis.com/v0/b/beartful-ef55a.appspot.com/o/cartoon4.jpeg?alt=media&token=eec6cf23-880a-462a-93a9-33f17765699f&_gl=1*fqk4cn*_ga*OTU1MTIxMTUxLjE2OTg0ODk2Mzg.*_ga_CW55HF8NVT*MTY5ODUxNTQyNy40LjEuMTY5ODUxNjM5My4yOC4wLjA.",
-    "https://firebasestorage.googleapis.com/v0/b/beartful-ef55a.appspot.com/o/logo2.jpeg?alt=media&token=61849198-a41a-48ff-8e5a-94632cdea358&_gl=1*1qzrpra*_ga*OTU1MTIxMTUxLjE2OTg0ODk2Mzg.*_ga_CW55HF8NVT*MTY5ODUwODI1OC4yLjEuMTY5ODUwODc1OS4zNy4wLjA.",
-  ];
+interface Props {
+  item: Artwork;
+  onCloseDetail: () => void;
+}
+
+const ArtworkDetail = (props: Props) => {
+  const { images, name, price, description, likeCount } = props.item;
+  const { onCloseDetail } = props;
+
+  const handleCloseDetail = () => {
+    onCloseDetail();
+  };
 
   return (
     <div className={style.artwork_detail}>
-      <div className="h-96 w-5/12">
+      <div className={style.image_gallery}>
         <Carousel slide={false}>
-          {images.map((item) => {
-            return <img src={item} />;
+          {images.map((item, index) => {
+            return <img key={index} src={item} />;
           })}
         </Carousel>
       </div>
+      <div className={`${style.detail}`}>
+        <div className={style.name}>{name}</div>
+        <div className={style.category}>
+          <span>{`Fan Art`}</span>
+          <span>{`Character Design`}</span>
+          <span>{`Infographic`}</span>
+        </div>
+        <div className={style.description}>
+          <p>รายละเอียด</p>
+          <span>{description}</span>
+        </div>
+        <div className={style.price}>
+          <span>เรทราคา</span>
+          <span className={style.price_tag}>{price}</span>
+        </div>
+        <div className={style.heart}>
+          <span>จำนวนที่ถูกใจ</span>
+          <span className={style.heart_count}>{likeCount}</span>
+        </div>
+      </div>
+      <div onClick={handleCloseDetail}>test close Detail click</div>
     </div>
   );
 };
