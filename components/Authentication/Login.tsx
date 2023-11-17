@@ -5,6 +5,7 @@ import Link from "next/link";
 import style from "@/styles/login/loginLayout.module.scss"
 import { useState } from "react";
 import Router from 'next/router';
+import Swal from 'sweetalert2'
 
 interface formDataType {
   [key: string]: any;
@@ -24,6 +25,17 @@ const Login = () => {
       const res = login(responseBody as unknown as LoginUser).subscribe((res: any) => {
         localStorage.setItem("auth", res.data.token);
         Router.push('/');
+      }, error => {
+        console.log(error);
+        if (error.response?.status === 401) {
+          Swal.fire({
+          icon: "error",
+          title: "Please Try Again!",
+          text: " username or password not correct"
+        });
+        } else {
+          console.log(error);
+        }
       })
     }
   };
