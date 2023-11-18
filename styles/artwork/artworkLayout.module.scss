@@ -1,0 +1,127 @@
+.container {
+    width: 85%;
+}
+
+.artwork_container {
+    margin: 20px auto;
+    padding: 0 20px;
+    columns: 5;
+    column-gap: 20px;
+
+    .artwork_box {
+        width: 100%;
+        margin-bottom: 10px;
+        break-inside: avoid;
+
+        img {
+            max-width: 100%;
+            border-radius: 15px;
+        }
+    }
+}
+
+.artwork_category {
+    margin: 20px auto;
+    padding: 0 12px;
+    width: 15%;
+    word-wrap: break-word;
+}
+
+.artwork_detail {
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex;
+
+    .image_gallery {
+        width: 40%;
+        height: 384px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .detail {
+        width: 60%;
+        margin: auto 15px;
+        height: 384px;
+
+        .name {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .category {
+            span {
+                border: solid 1px #B45020;
+                margin-right: 10px;
+                padding: 5px 20px;
+                border-radius: 15px;
+                color: #B45020;
+            }
+        }
+
+        .description {
+            p {
+                margin-top: 20px;
+                margin-bottom: 12px;
+            }
+
+            span {
+                margin-top: 20px;
+            }
+        }
+
+        .price {
+            margin-top: 20px;
+
+            .price_tag {
+                color: #B45020;
+                position: absolute;
+                right: 35px;
+            }
+        }
+
+        .heart {
+            margin-top: 8px;
+
+            .heart_count {
+                color: #B45020;
+                position: absolute;
+                right: 35px;
+            }
+        }
+    }
+}
+
+@media (max-width:1200px) {
+    .artwork_container {
+        max-width: calc(100% - 40px);
+        padding: 0 18px;
+        columns: 4;
+    }
+}
+
+@media (max-width:1024px) {
+    .container {
+        width: 80%;
+    }
+
+    .artwork_container {
+        padding: 0 15px;
+        columns: 3;
+    }
+
+    .artwork_category {
+        width: 20%;
+    }
+}
+
+@media (max-width:650px) {
+    .artwork_container {
+        padding: 0 10px;
+        columns: 2;
+    }
+}
