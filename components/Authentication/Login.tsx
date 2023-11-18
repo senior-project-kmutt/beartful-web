@@ -74,9 +74,9 @@ const Login = () => {
                   <input name="password" type="password" />
                 </label>
               </div>
-              <div className="ml-32">
+              <div className={style.input_button}>
                 <input className={`${style.submit_button} mr-4`} type="submit" value="SIGN IN" />
-                <Link className={style.cancle_button} href="/">CANCLE</Link>
+                <Link className={style.cancel_button} href="/">CANCEL</Link>
                 <p className="text-xs pt-3 pl-2 font-medium">New to BeArtFul?&nbsp;
                   <span onClick={() => setActiveMenu('sign up')} className="underline cursor-pointer">Create an account</span>
                 </p>
