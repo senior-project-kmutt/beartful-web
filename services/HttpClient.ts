@@ -1,5 +1,6 @@
 import Axios from './axios';
 import { IncomingHttpHeaders } from 'http';
+import { AxiosResponse } from '@/node_modules/axios/index';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
