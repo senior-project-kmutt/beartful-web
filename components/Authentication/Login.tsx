@@ -24,6 +24,7 @@ const Login = () => {
     if (responseBody) {
       const res = login(responseBody as unknown as LoginUser).subscribe((res: any) => {
         localStorage.setItem("auth", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         Router.push('/');
       }, error => {
         console.log(error);
