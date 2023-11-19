@@ -1,0 +1,130 @@
+.main {
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+
+    .warp {
+        display: flex;
+        justify-content: center;
+    }
+
+    .switch {
+        display: flex;
+        border-radius: 20px;
+        background: #F9E0D4;
+        font-weight: 800;
+
+        .item {
+            padding: 6px 50px;
+            border-radius: 20px;
+        }
+
+        .item_active {
+            padding: 6px 50px;
+            border-radius: 20px;
+            background: #E78353;
+        }
+    }
+
+    .input_form {
+        margin-bottom: 20px;
+
+        input {
+            width: 380px;
+            border: 1.5px solid #5A2810;
+            border-radius: 4px;
+            margin-left: 40px;
+        }
+
+        label {
+            font-weight: 600;
+            padding: 0;
+        }
+    }
+
+    .input_button {
+        margin-left: 130px;
+        font-size: 12px;
+        font-weight: 700;
+
+        .submit_button {
+            width: 35%;
+            background-color: #EDA27E;
+            color: white;
+            padding: 8px;
+            border-radius: 20px;
+
+            &:hover {
+                background-color: #E16428;
+                border-color: #E16428;
+            }
+        }
+
+        .cancel_button {
+            display: inline-block;
+            text-align: center;
+            width: 35%;
+            color: #B45020;
+            padding: 8px;
+            border-radius: 20px;
+            border: #B45020 2px solid;
+
+            &:hover {
+                background-color: #E16428;
+                color: white;
+                border-color: #E16428;
+            }
+        }
+    }
+
+    @media (max-width:610px) {
+        .input_form {
+            input {
+                display: block;
+                margin-left: 0;
+                margin-top: 6px;
+            }
+        }
+
+        .input_button {
+            margin-left: 0;
+            text-align: center;
+
+            .submit_button,
+            .cancel_button {
+                width: 47.5%;
+            }
+        }
+    }
+
+    @media (max-width:390px) {
+        .switch {
+            font-size: 14px;
+
+            .item,
+            .item_active {
+                padding: 6px 40px;
+            }
+        }
+
+        .input_form {
+            font-size: 14px;
+
+            input {
+                width: 280px;
+                display: block;
+                margin-left: 0;
+                margin-top: 6px;
+            }
+        }
+
+        .input_button {
+            font-size: 10px;
+
+            .submit_button,
+            .cancel_button {
+                width: 45%;
+            }
+        }
+    }
+}
