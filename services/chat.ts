@@ -1,8 +1,8 @@
 import { Observable } from "rxjs";
 import { get, post } from "./HttpClient"
-import { IMassage } from "@/pages/chat";
+import { IMassage } from "@/components/Chat/ChatMessage";
 
-export const getMessageByChatRoomId = (chatRoomId: number): Observable<any> => {
+export const getMessageByChatRoomId = (chatRoomId: string): Observable<any> => {
     return get(`/message/${chatRoomId}`);
 }
 
