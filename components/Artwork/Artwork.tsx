@@ -54,13 +54,11 @@ const Artwork = () => {
           <div className={style.artwork_container}>
             {artwork?.map((item, index) => {
               return (
-                <>
-                  <ArtworkItem
-                    item={item}
-                    key={index}
-                    onShowDetail={onShowDetail}
-                  />
-                </>
+                <ArtworkItem
+                  item={item}
+                  key={index}
+                  onShowDetail={onShowDetail}
+                />
               );
             })}
           </div>
