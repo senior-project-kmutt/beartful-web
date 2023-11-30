@@ -1,0 +1,39 @@
+.main {
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+
+    .warp {
+        display: flex;
+        justify-content: center;
+    }
+
+    @media (max-width:610px) {
+        .input_form {
+            input {
+                display: block;
+                margin-left: 0;
+                margin-top: 6px;
+            }
+        }
+
+        .input_button {
+            margin-left: 0;
+            text-align: center;
+
+            .submit_button,
+            .cancel_button {
+                width: 47.5%;
+            }
+        }
+    }
+}
+
+.text_menu {
+    color: #E78353;
+    font-weight: 800;
+
+    &:hover {
+        color: #5A2810;
+    }
+}
