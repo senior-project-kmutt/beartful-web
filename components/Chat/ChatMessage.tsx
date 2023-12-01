@@ -3,6 +3,7 @@ import styles from "@/styles/chat/chat.module.scss";
 import { socket } from "@/config/socket";
 import { useEffect, useRef, useState } from 'react';
 import { getMessageByChatRoomId, sendMessage } from '@/services/chat';
+import MessageItem from './MessageItem';
 
 interface Props {
   selectedChatRoom?: IChatRoom
@@ -70,7 +71,7 @@ const ChatMessage = (props: Props) => {
     return user?.profile_image
   }
 
-  console.log(inputMessage);
+
 
   return (
     <div className={styles.message_main}>
@@ -81,6 +82,7 @@ const ChatMessage = (props: Props) => {
         </div>
         <div className={styles.message_wrap} ref={chatContainerRef}>
           {messages.map((item, index) => {
+            const profileImage = getImageByUserId(item.sender)
             let isShowProfileImage: boolean = false;
             if (index >= 0) {
               const previousSender = messages[index - 1]?.sender;
@@ -89,19 +91,11 @@ const ChatMessage = (props: Props) => {
 
             return (
               <>
-                <div>
-                  <div className={`${item.sender == user?.id ? "flex flex-row-reverse items-start mr-3 mb-2" : "flex justify-start items-start ml-3 mb-2"}`}>
-                    {(item.sender !== user?.id) && (
-                      <img className={(item.sender !== user?.id && isShowProfileImage) ? 'mr-3' : 'mr-3 invisible'} src={getImageByUserId(item.sender)} alt="" />
-                    )}
-                    <div
-                      className={item.sender == user?.id ?
-                        `${styles.message_1} rounded-xl ${isShowProfileImage && `rounded-tr-none`}` :
-                        `${styles.message_2} rounded-xl ${isShowProfileImage && `rounded-tl-none`}`}>
-                      {item.message}
-                    </div>
-                  </div>
-                </div>
+                <MessageItem
+                  item={item}
+                  isShowProfileImage={isShowProfileImage}
+                  profileImage={profileImage}
+                />
               </>
             )
           })}

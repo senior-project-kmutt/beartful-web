@@ -42,7 +42,6 @@
     .message_main {
         display: flex;
         width: 100%;
-        height: 170vh;
 
         .message_container {
             width: 65%;
@@ -107,6 +106,41 @@
                     height: 40px;
                     border-radius: 50%;
                     object-fit: cover;
+                }
+
+                .image_message {
+                    border-radius: 0%;
+                    width: auto;
+                    height:auto;
+                    margin: 5px 0;
+                }
+
+                .file_message {
+                    display: flex;
+                    border-radius: 0%;
+                    width: auto;
+                    height:auto;
+                    margin: 5px 0;
+                    cursor: pointer;
+
+                    .icon {
+                        height: fit-content;
+                        background-color: white;
+                        padding: 12px 15px;
+                        border-radius: 50%;
+                        margin-right: 12px;
+                    }
+
+                    h1 {
+                        font-weight: 700;
+                        margin-top: 2px;
+                        margin-right: 2px;
+                    }
+
+                    p {
+                        font-size: 11px;
+                        color: gray;
+                    }
                 }
 
                 .message_1 {
