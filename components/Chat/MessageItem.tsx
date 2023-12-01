@@ -59,7 +59,7 @@ const MessageItem = (props: Props) => {
 
 
   useEffect(() => {
-    if (metaData?.contentType === 'image/jpeg') {
+    if (metaData?.contentType?.includes('image/')) {
       setIsImage(true)
     }
   }, [metaData]);
@@ -103,7 +103,7 @@ const MessageItem = (props: Props) => {
             onClick={() => handleDownload(item.message)}
           >
             {isFileMessage ? (
-              <div>
+              <div className='break-all'>
                 {isImage ? (
                   <div>
                     <img className={styles.image_message} src={item.message} alt="" />

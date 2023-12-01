@@ -122,7 +122,7 @@
                     height:auto;
                     margin: 5px 0;
                     cursor: pointer;
-
+                    
                     .icon {
                         height: fit-content;
                         background-color: white;
@@ -135,7 +135,7 @@
                         font-weight: 700;
                         margin-top: 2px;
                         margin-right: 2px;
-                    }
+                                            }
 
                     p {
                         font-size: 11px;
@@ -161,10 +161,21 @@
                 }
             }
 
+            .preview {
+                // background-color: #5A2810;
+            }
+
             .input_field {
                 margin: 0 8px;
                 background-color: #FBF6F6;
                 border-radius: 8px;
+                display: flex;
+
+                .input_file {
+                    input {
+                        display: none;
+                    }
+                }
 
                 input {
                     width: 90%;
