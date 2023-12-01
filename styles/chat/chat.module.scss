@@ -1,17 +1,34 @@
 .container {
     display: flex;
     width: 100%;
-    height: 100%;
-    padding: 24px 16px;
+    padding: 34px;
+    margin-top: 28px;
+
 
     .chat_room {
         width: 25%;
-        height: 50%;
-        border-right: #5A2810 1px solid;
     }
 
     .chat_messages {
         width: 75%;
+    }
+
+    .no_message {
+        border-left: #5A2810 1px solid;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        justify-items: center;
+        height: 80vh;
+        font-size: 28px;
+        font-weight: 700;
+
+        .icon {
+            color: #5A2810;
+            position: relative;
+            left: 12%;
+        }
     }
 
     .chat_room_main {
@@ -42,11 +59,13 @@
     .message_main {
         display: flex;
         width: 100%;
+        height: 75vh;
 
         .message_container {
             width: 65%;
-            height: 50%;
+            height: 100%;
             border-right: #5A2810 1px solid;
+            border-left: #5A2810 1px solid;
 
             .chat_header {
                 display: flex;
@@ -55,12 +74,11 @@
                 border-radius: 8px;
                 padding: 10px 25px;
                 margin: 0 8px;
-                // margin-bottom: 12px;
 
                 img {
                     object-fit: cover;
-                    width: 50px;
-                    height: 50px;
+                    width: 45px;
+                    height: 45px;
                     border-radius: 50%;
                     margin-right: 14px;
                 }
@@ -95,7 +113,7 @@
             .message_wrap {
                 min-height: 84%;
                 margin: 14px 8px;
-                height: 550px;
+                height: 40%;
                 padding: 10px;
                 border-radius: 12px;
                 overflow-y: scroll;
@@ -111,7 +129,7 @@
                 .image_message {
                     border-radius: 0%;
                     width: auto;
-                    height:auto;
+                    height: auto;
                     margin: 5px 0;
                 }
 
@@ -119,10 +137,10 @@
                     display: flex;
                     border-radius: 0%;
                     width: auto;
-                    height:auto;
+                    height: auto;
                     margin: 5px 0;
                     cursor: pointer;
-                    
+
                     .icon {
                         height: fit-content;
                         background-color: white;
@@ -135,7 +153,7 @@
                         font-weight: 700;
                         margin-top: 2px;
                         margin-right: 2px;
-                                            }
+                    }
 
                     p {
                         font-size: 11px;
@@ -194,5 +212,10 @@
             height: 50%;
         }
     }
+}
 
+@media (max-width:1500px) {
+    .container .no_message .icon {
+        left: 16%;
+    }
 }

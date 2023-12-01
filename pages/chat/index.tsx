@@ -3,6 +3,9 @@ import styles from "@/styles/chat/chat.module.scss";
 import { getChatRoomByUserId } from "@/services/chat/chat.api";
 import ChatRoomItem from "@/components/Chat/ChatRoomItem";
 import ChatMessage from "@/components/Chat/ChatMessage";
+import NavBar from "@/components/Layout/NavBar"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMessage } from "@fortawesome/free-solid-svg-icons";
 
 export interface IChatRoom {
   participants: IParticipant[];
@@ -61,6 +64,8 @@ export default function Home() {
   }
 
   return (
+    <>
+      <NavBar />
       <div className={styles.container}>
         <div className={styles.chat_room}>
           <h1 className="font-extrabold underline underline-offset-2 p-3 mb-4">CHAT</h1>
@@ -78,12 +83,23 @@ export default function Home() {
             })}
           </div>
         </div>
-        <div className={styles.chat_messages}>
-          <ChatMessage
-            selectedChatRoom={selectedChatRoom}
-            participants={selectedChatRoom?.participants}
-          />
-        </div>
+        {selectedChatRoom ? (
+          <div className={styles.chat_messages}>
+            <ChatMessage
+              selectedChatRoom={selectedChatRoom}
+              participants={selectedChatRoom?.participants}
+            />
+          </div>
+        ) : (
+          <div className={styles.chat_messages}>
+            <div className={styles.no_message}>
+              <div className={styles.icon}><FontAwesomeIcon icon={faMessage} size="lg" /></div>
+              <p className={styles.text}>CHOOSE CHAT TO READ</p>
+              <p>. . .</p>
+            </div>
+          </div>
+        )}
       </div>
+    </>
   );
 }
