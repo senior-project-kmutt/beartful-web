@@ -1,27 +1,21 @@
 import Link from 'next/link';
 import { Navbar } from 'flowbite-react';
+import style from "@/styles/navbar/navbarLayout.module.scss"
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
   return (
     <>
-      <Navbar fluid rounded>
-      <Navbar.Brand as={Link} href="https://flowbite-react.com">
-        {/* <img src="/favicon.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" /> */}
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">BEARTFUL</span>
-      </Navbar.Brand>
-      <Navbar.Toggle />
-      <Navbar.Collapse>
-        {/* <Navbar.Link href="#" active>
-          Home
-        </Navbar.Link>
-        <Navbar.Link as={Link} href="#">
-          About
-        </Navbar.Link> */}
-        {/* <Navbar.Link href="#">Services</Navbar.Link> */}
-        <Navbar.Link href="#">SIGN IN</Navbar.Link>
-        <Navbar.Link href="#">SIGN UP</Navbar.Link>
-      </Navbar.Collapse>
-    </Navbar>
+      <Navbar className="ml-8 mr-8 h-8 sm:h-12" fluid rounded>
+        <Navbar.Brand as={Link} href="/">
+          <img src="../../picture/logo.png" className="h-8 sm:h-12" alt="Beartful Logo" />
+        </Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse>
+          <Navbar.Link className={style.text_menu} href="/login">SIGN IN</Navbar.Link>
+          <Navbar.Link className={style.text_menu} href="/register">SIGN UP</Navbar.Link>
+        </Navbar.Collapse>
+      </Navbar>
     </>
   );
 }
