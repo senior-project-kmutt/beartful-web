@@ -16,8 +16,11 @@ export interface IChatRoom {
 export interface IParticipant {
   user_id: string;
   username: string;
+  firstname: string;
+  lastname: string;
   role: string;
   profile_image: string;
+  createdAt: Date
 }
 
 export interface IUser {

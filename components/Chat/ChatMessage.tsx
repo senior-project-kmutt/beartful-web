@@ -9,6 +9,7 @@ import { faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '@/config/firebase.config';
+import ChatProfile from './ChatProfile';
 
 interface Props {
   selectedChatRoom?: IChatRoom
@@ -37,6 +38,7 @@ const ChatMessage = (props: Props) => {
   const [inputFiles, setInputFiles] = useState<File[]>([]);
   const [successMessage, setSuccessMessage] = useState<IMassage>();
   const [user, setUser] = useState<IUser>();
+  const [interlocutor, setInterlocutor] = useState<IParticipant>();
   const chatContainerRef = useRef<HTMLDivElement>(null); // Create a ref for the chat container div
 
   initializeApp(firebaseConfig);
@@ -55,6 +57,12 @@ const ChatMessage = (props: Props) => {
       getMessageByChatRoomId(selectedChatRoom._id).subscribe((res: any) => {
         setMessages(res.data);
       });
+    }
+    const filterProfile = participants?.filter((item) => {
+      return item.user_id !== user?.id
+    })
+    if(filterProfile) {
+      setInterlocutor(filterProfile[0])
     }
   }, [selectedChatRoom]);
 
@@ -211,6 +219,9 @@ const ChatMessage = (props: Props) => {
         </div>
       </div>
       <div className={styles.profile}>
+        {interlocutor && (
+          <ChatProfile profile={interlocutor} />
+        )}
       </div>
     </div>
   );

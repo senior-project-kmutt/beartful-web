@@ -257,6 +257,56 @@
         .profile {
             width: 35%;
             height: 50%;
+
+            .profile_warp {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                .info {
+                    width: 100%;
+                    padding: 0 32px;
+
+                    table {
+                        font-size: 14px;
+                        width: 100%;
+                        color: #5A2810;
+                        font-weight: 500;
+                        margin: 24px 0;
+                    }
+    
+                    .star {
+                        color: #E16428;
+                    }
+                }
+
+                img {
+                    border-radius: 50%;
+                    width: 130px;
+                    height: 130px;
+                    object-fit: cover;
+                }
+
+                .role {
+                    font-size: 14px;
+                    color: #FDFBFB;
+                    background-color: #E16428;
+                    padding: 4px 16px;
+                    border-radius: 18px;
+                    margin-top: 6px;
+                    font-weight: 700;
+                }
+
+                .view_profile {
+                    background-color: #EDA27E;
+                    color: #FAF2F2;
+                    border-radius: 20px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    padding: 6px 18px;
+                }
+            }
         }
     }
 }
