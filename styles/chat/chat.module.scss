@@ -177,6 +177,26 @@
                     padding: 10px 15px;
                     word-wrap: break-word;
                 }
+
+                .time {
+                    color: #ACA9A9;
+                    font-size: 9px;
+                    margin: 0 6px;
+                    margin-bottom: 2px;
+                }
+
+                .date {
+                    text-align: center;
+                    font-size: 10px;
+                    margin: 22px 0;
+                    span {
+                        background-color: #FAF2F2;
+                        color: #C8A1A1;
+                        padding: 4px 12px;
+                        border-radius: 20px;
+                        
+                    }
+                }
             }
 
             .preview {

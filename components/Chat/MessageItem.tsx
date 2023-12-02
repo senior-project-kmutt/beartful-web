@@ -88,6 +88,14 @@ const MessageItem = (props: Props) => {
     }
   };
 
+  const getTime = (dateTime?: Date) => {
+    if (dateTime) {
+      const convertToDate = new Date(dateTime)
+      const hours = String(convertToDate.getHours()).padStart(2, '0');
+      const minutes = String(convertToDate.getMinutes()).padStart(2, '0');
+      return `${hours}:${minutes}`
+    }
+  }
 
   return (
     <div>
@@ -125,6 +133,9 @@ const MessageItem = (props: Props) => {
             ) : (
               <p>{item.message}</p>
             )}
+          </div>
+          <div className={`${styles.time} self-end`}>
+            <p>{getTime(item.createdAt)}</p>
           </div>
         </div>
       </div>

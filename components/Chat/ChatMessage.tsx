@@ -19,7 +19,7 @@ export interface IMassage {
   chat_room_id: string;
   sender: string;
   message: string;
-  createAt?: Date;
+  createdAt?: Date;
 }
 
 export interface IFileUpload {
@@ -119,6 +119,31 @@ const ChatMessage = (props: Props) => {
     }
   }
 
+  const compareDateEqual = (date1: Date, date2: Date) => {
+    const d1 = new Date(date1);
+    const d2 = new Date(date2);
+
+    return (
+      d1.getFullYear() === d2.getFullYear() &&
+      d1.getMonth() === d2.getMonth() &&
+      d1.getDate() === d2.getDate()
+    );
+  }
+
+  const getDate = (dateTime?: Date) => {
+    const months = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    if (dateTime) {
+      const convertToDate = new Date(dateTime)
+      const date = String(convertToDate.getDate()).padStart(2, '0');
+      const monthIndex = convertToDate.getMonth();
+      const year = String(convertToDate.getFullYear())
+      return `${date} ${months[monthIndex]} ${year}`
+    }
+  }
+
   return (
     <div className={styles.message_main}>
       <div className={styles.message_container}>
@@ -130,12 +155,22 @@ const ChatMessage = (props: Props) => {
           {messages.map((item, index) => {
             const profileImage = getImageByUserId(item.sender)
             let isShowProfileImage: boolean = false;
+            let isShowDate: boolean = true;
             if (index >= 0) {
-              const previousSender = messages[index - 1]?.sender;
-              isShowProfileImage = item.sender !== previousSender
+              const previousMessage = messages[index - 1];
+              isShowProfileImage = item.sender !== previousMessage?.sender;
+              if (item.createdAt && previousMessage?.createdAt) {
+                isShowDate = !compareDateEqual(item?.createdAt, previousMessage.createdAt);
+              }
             }
+
             return (
               <>
+              {isShowDate && (
+                <div className={styles.date}>
+                  <span>{getDate(item.createdAt)}</span>
+                </div>
+              )}
                 <MessageItem
                   item={item}
                   isShowProfileImage={isShowProfileImage}
