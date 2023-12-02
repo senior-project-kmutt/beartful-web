@@ -97,6 +97,20 @@ const MessageItem = (props: Props) => {
     }
   }
 
+  const detectAndRenderLinks = (message: string) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+  
+    return message.split(urlRegex).map((part, index) => {
+      return urlRegex.test(part) ? (
+        <a className='underline text-sky-600' key={index} href={part} target="_blank" rel="noopener noreferrer">
+          {part}
+        </a>
+      ) : (
+        part
+      );
+    });
+  };
+
   return (
     <div>
       <div>
@@ -131,7 +145,7 @@ const MessageItem = (props: Props) => {
 
               </div>
             ) : (
-              <p>{item.message}</p>
+              <p>{detectAndRenderLinks(item.message)}</p>
             )}
           </div>
           <div className={`${styles.time} self-end`}>
