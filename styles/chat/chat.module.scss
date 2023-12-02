@@ -183,26 +183,53 @@
                 // background-color: #5A2810;
             }
 
-            .input_field {
-                margin: 0 8px;
-                background-color: #FBF6F6;
-                border-radius: 8px;
+            .input_warp {
                 display: flex;
+                align-items: center;
+                .input_field {
+                    width: 92%;
+                    margin: 0 8px;
+                    background-color: #FBF6F6;
+                    border-radius: 20px;
+                    display: flex;
+                    align-items: center;
+                    padding: 2px 16px;
+                    margin-right: 16px;
+    
+                    .input_file {
+                        input {
+                            display: none;
+                        }
 
-                .input_file {
+                        .icon {
+                            cursor: pointer;
+                            color: #5A2810
+                        }
+
+                        .icon:hover {
+                            color: #000
+                        }
+                    }
+    
                     input {
-                        display: none;
+                        margin-left: 4px;
+                        font-size: 14px;
+                        width: 90%;
+                        background-color: #FBF6F6;
+                        border: 0;
+                    }
+    
+                    input[type="text"]:focus {
+                        box-shadow: none
                     }
                 }
 
-                input {
-                    width: 90%;
-                    background-color: #FBF6F6;
-                    border: 0;
+                .send {
+                    color: #5A2810;
                 }
 
-                input:focus {
-                    border: #5A2810 solid 1px
+                .send:hover {
+                    color: #000;
                 }
             }
         }

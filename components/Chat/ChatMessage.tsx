@@ -5,7 +5,7 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { getMessageByChatRoomId, sendMessage } from '@/services/chat';
 import MessageItem from './MessageItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '@/config/firebase.config';
@@ -155,19 +155,24 @@ const ChatMessage = (props: Props) => {
 
           </div>
         </div>
-        <div className={styles.input_field}>
-          <div className={styles.input_file}>
-            <label htmlFor="file-input">
-              <FontAwesomeIcon icon={faPaperclip} />
-            </label>
-            <input id="file-input" type="file" onChange={handleFileChange} multiple />
+        <div className={styles.input_warp}>
+          <div className={styles.input_field}>
+            <div className={styles.input_file}>
+              <label htmlFor="file-input">
+                <FontAwesomeIcon className={styles.icon} icon={faPaperclip} size='lg' />
+              </label>
+              <input id="file-input" type="file" onChange={handleFileChange} multiple />
+            </div>
+            <input
+              type="text"
+              placeholder='Type Something ...'
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+            />
           </div>
-          <input
-            type="text"
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-          />
-          <button onClick={handleSendMessage}>send</button>
+          <div className={styles.send}>
+            <FontAwesomeIcon onClick={handleSendMessage} className='cursor-pointer' icon={faPaperPlane} size='lg' />
+          </div>
         </div>
       </div>
       <div className={styles.profile}>
