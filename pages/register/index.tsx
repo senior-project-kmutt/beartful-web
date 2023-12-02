@@ -1,7 +1,13 @@
 import Register from "@/components/Authentication/Register";
+import NavBar from "@/components/Layout/NavBar";
 
 const RegisterUser = () => {
-  return <Register />;
+  return (
+    <>
+      <NavBar />
+      <Register />
+    </>
+  );
 };
 
 export default RegisterUser;
