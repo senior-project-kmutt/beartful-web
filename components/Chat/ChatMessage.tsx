@@ -5,11 +5,12 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { getMessageByChatRoomId, sendMessage } from '@/services/chat';
 import MessageItem from './MessageItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { faCircleXmark, faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '@/config/firebase.config';
 import ChatProfile from './ChatProfile';
+import { faFile } from '@fortawesome/free-regular-svg-icons';
 
 interface Props {
   selectedChatRoom?: IChatRoom
@@ -61,7 +62,7 @@ const ChatMessage = (props: Props) => {
     const filterProfile = participants?.filter((item) => {
       return item.user_id !== user?.id
     })
-    if(filterProfile) {
+    if (filterProfile) {
       setInterlocutor(filterProfile[0])
     }
   }, [selectedChatRoom]);
@@ -174,11 +175,11 @@ const ChatMessage = (props: Props) => {
 
             return (
               <>
-              {isShowDate && (
-                <div className={styles.date}>
-                  <span>{getDate(item.createdAt)}</span>
-                </div>
-              )}
+                {isShowDate && (
+                  <div className={styles.date}>
+                    <span>{getDate(item.createdAt)}</span>
+                  </div>
+                )}
                 <MessageItem
                   item={item}
                   isShowProfileImage={isShowProfileImage}
@@ -187,19 +188,24 @@ const ChatMessage = (props: Props) => {
               </>
             )
           })}
-          <div className={styles.preview}>
-            {inputFiles.map((item) => {
-              return (
-                <>
-                  <p>{item.name}</p>
-                </>
-              )
-            })}
-
-          </div>
+        </div>
+        <div className={styles.preview}>
+          {inputFiles.map((item) => {
+            return (
+              <>
+                <div className={`${styles.preview_item}`}>
+                  <div className={styles.file_name}>
+                    <FontAwesomeIcon icon={faFile} size='xl' />
+                    <p className='border-none'>{item.name}</p>
+                  </div>
+                  <FontAwesomeIcon className={styles.close} icon={faCircleXmark} />
+                </div>
+              </>
+            )
+          })}
         </div>
         <div className={styles.input_warp}>
-          <div className={styles.input_field}>
+          <div className={styles.input_box}>
             <div className={styles.input_file}>
               <label htmlFor="file-input">
                 <FontAwesomeIcon className={styles.icon} icon={faPaperclip} size='lg' />

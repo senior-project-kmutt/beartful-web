@@ -59,11 +59,12 @@
     .message_main {
         display: flex;
         width: 100%;
-        height: 75vh;
+        height: 80vh;
 
         .message_container {
             width: 65%;
-            height: 100%;
+            display: flex;
+            flex-direction: column;
             border-right: #5A2810 1px solid;
             border-left: #5A2810 1px solid;
 
@@ -74,6 +75,7 @@
                 border-radius: 8px;
                 padding: 10px 25px;
                 margin: 0 8px;
+                height: 10%;
 
                 img {
                     object-fit: cover;
@@ -89,32 +91,10 @@
                 }
             }
 
-            .message {
-                color: #000;
-                clear: both;
-                line-height: 18px;
-                font-size: 15px;
-                padding: 8px;
-                position: relative;
-                margin: 8px 0;
-                max-width: 85%;
-                word-wrap: break-word;
-                z-index: -1;
-            }
-
-            .message:after {
-                position: absolute;
-                content: "";
-                width: 0;
-                height: 0;
-                border-style: solid;
-            }
-
             .message_wrap {
-                min-height: 84%;
-                margin: 14px 8px;
-                height: 40%;
-                padding: 10px;
+                margin: 8px 10px;
+                height: 83%;
+                padding: 4px 2px;
                 border-radius: 12px;
                 overflow-y: scroll;
                 overflow-x: hidden;
@@ -200,21 +180,54 @@
             }
 
             .preview {
-                // background-color: #5A2810;
+                font-size: 13px;
+                padding: 12px 20px;
+                margin-left: 3%;
+                margin-right: 10.2%;
+                background-color: #FAF2F2;
+                border-radius: 18px 18px 0 0;
+                .preview_item {
+                    border-bottom: #e0d0d0 1px solid;
+                    display: flex;
+                    align-items: center;
+                    padding: 12px 0;
+                    .file_name {
+                        display: flex;
+                        width: 90vh;
+                        margin-left: 1%;
+                        p {
+                            margin-left: 8px;
+                        }
+
+                    }
+                    .close {
+                        color: #E16428;
+                        justify-self: end;
+                        cursor: pointer;
+                        margin-right: 1.5%;
+                    }
+                    .close:hover {
+                        color: #B45020;
+                    }
+                }
+                .preview_item:last-child {
+                    border-bottom: none;
+                }
             }
 
             .input_warp {
                 display: flex;
                 align-items: center;
-                .input_field {
-                    width: 92%;
-                    margin: 0 8px;
+                height: 7%;
+                padding: 0 8px;
+                .input_box {
+                    width: 93%;
+                    height: 100%;
                     background-color: #FBF6F6;
                     border-radius: 20px;
                     display: flex;
                     align-items: center;
-                    padding: 2px 16px;
-                    margin-right: 16px;
+                    padding: 0 16px;
     
                     .input_file {
                         input {
@@ -235,6 +248,7 @@
                         margin-left: 4px;
                         font-size: 14px;
                         width: 90%;
+                        height: 100%;
                         background-color: #FBF6F6;
                         border: 0;
                     }
@@ -245,7 +259,9 @@
                 }
 
                 .send {
+                    width: 7%;
                     color: #5A2810;
+                    text-align: center;
                 }
 
                 .send:hover {
