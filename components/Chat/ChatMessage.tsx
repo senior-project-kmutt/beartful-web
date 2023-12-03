@@ -72,7 +72,7 @@ const ChatMessage = (props: Props) => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
-  }, [messages, inputFiles]);
+  }, [messages]);
 
   useEffect(() => {
     if (successMessage) {
@@ -153,6 +153,13 @@ const ChatMessage = (props: Props) => {
     }
   }
 
+  const deleteFileInput = (fileIndex: number) => {
+    setInputFiles((prevInputFiles) => {
+      const updatedInputFiles = [...prevInputFiles.slice(0, fileIndex), ...prevInputFiles.slice(fileIndex + 1)];
+      return updatedInputFiles;
+    });
+  };
+
   return (
     <div className={styles.message_main}>
       <div className={styles.message_container}>
@@ -189,8 +196,9 @@ const ChatMessage = (props: Props) => {
             )
           })}
         </div>
-        <div className={styles.preview}>
-          {inputFiles.map((item) => {
+        {inputFiles.length !== 0 && (
+          <div className={styles.preview}>
+          {inputFiles.map((item, index) => {
             return (
               <>
                 <div className={`${styles.preview_item}`}>
@@ -198,12 +206,13 @@ const ChatMessage = (props: Props) => {
                     <FontAwesomeIcon icon={faFile} size='xl' />
                     <p className='border-none'>{item.name}</p>
                   </div>
-                  <FontAwesomeIcon className={styles.close} icon={faCircleXmark} />
+                  <FontAwesomeIcon onClick={() => deleteFileInput(index)} className={styles.close} icon={faCircleXmark} size='lg' />
                 </div>
               </>
             )
           })}
         </div>
+        )}
         <div className={styles.input_warp}>
           <div className={styles.input_box}>
             <div className={styles.input_file}>
