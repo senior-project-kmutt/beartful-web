@@ -47,7 +47,7 @@
 
         .latest_message {
             font-size: 12px;
-            color: #424949
+            color: #424949;
         }
 
         &.active {
@@ -169,12 +169,13 @@
                     text-align: center;
                     font-size: 10px;
                     margin: 22px 0;
+
                     span {
                         background-color: #FAF2F2;
                         color: #C8A1A1;
                         padding: 4px 12px;
                         border-radius: 20px;
-                        
+
                     }
                 }
             }
@@ -186,30 +187,36 @@
                 margin-right: 9vh;
                 background-color: #FAF2F2;
                 border-radius: 18px 18px 0 0;
+
                 .preview_item {
                     border-bottom: #e0d0d0 1px solid;
                     display: flex;
                     align-items: center;
                     padding: 12px 0;
+
                     .file_name {
                         display: flex;
                         width: 90vh;
                         margin-left: 1%;
+
                         p {
                             margin-left: 8px;
                         }
 
                     }
+
                     .close {
                         color: #E16428;
                         justify-self: end;
                         cursor: pointer;
                         margin-right: 1.5%;
                     }
+
                     .close:hover {
                         color: #B45020;
                     }
                 }
+
                 .preview_item:last-child {
                     border-bottom: none;
                 }
@@ -220,6 +227,7 @@
                 align-items: center;
                 height: 7%;
                 padding: 0 8px;
+
                 .input_box {
                     width: 93%;
                     height: 100%;
@@ -228,7 +236,7 @@
                     display: flex;
                     align-items: center;
                     padding: 0 16px;
-    
+
                     .input_file {
                         input {
                             display: none;
@@ -243,7 +251,7 @@
                             color: #000
                         }
                     }
-    
+
                     input {
                         margin-left: 4px;
                         font-size: 14px;
@@ -252,7 +260,7 @@
                         background-color: #FBF6F6;
                         border: 0;
                     }
-    
+
                     input[type="text"]:focus {
                         box-shadow: none
                     }
@@ -291,7 +299,7 @@
                         font-weight: 500;
                         margin: 24px 0;
                     }
-    
+
                     .star {
                         color: #E16428;
                     }

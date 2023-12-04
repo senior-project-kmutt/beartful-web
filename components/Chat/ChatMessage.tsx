@@ -2,7 +2,7 @@ import { IChatRoom, IParticipant, IUser } from '@/pages/chat';
 import styles from "@/styles/chat/chat.module.scss";
 import { socket } from "@/config/socket";
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { getMessageByChatRoomId, sendMessage } from '@/services/chat';
+import { getMessageByChatRoomId, sendMessage } from '@/services/chat/chat.api';
 import MessageItem from './MessageItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
