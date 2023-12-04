@@ -11,7 +11,7 @@ FROM node:20.4.0 AS server
 WORKDIR /app
 COPY --from=build /usr/src/app/next.config.js ./
 COPY --from=build /usr/src/app/public ./public
-COPY --from=build /usr/src/app/build ./build
+COPY --from=build /usr/src/app/.next ./build
 COPY --from=build /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/package.json ./package.json
 EXPOSE 80
