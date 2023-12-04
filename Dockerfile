@@ -6,6 +6,6 @@ COPY . .
 RUN npm run build
 
 FROM nginx:1.25.3-alpine3.18 as production-stage
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build ./next.config.js /usr/share/nginx/html
 EXPOSE 3000
 CMD ["npm", "start"]
