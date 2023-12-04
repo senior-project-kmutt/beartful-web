@@ -1,6 +1,6 @@
 const path = require('path');
 const nextConfig = {
-  // basePath: '/ssi1',
+  basePath: '/ssi1',
   trailingSlash: true,
   reactStrictMode: true,
   sassOptions: {
