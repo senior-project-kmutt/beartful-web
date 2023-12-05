@@ -15,4 +15,5 @@ COPY --from=build /usr/src/app/build /usr/share/nginx/html
 # COPY --from=build /usr/src/app/node_modules ./node_modules
 # COPY --from=build /usr/src/app/package.json ./package.json
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "run", "start"]
+# CMD ["nginx", "-g", "daemon off;"]
