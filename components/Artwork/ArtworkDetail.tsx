@@ -1,6 +1,8 @@
 import { Artwork } from "@/models/artwork";
 import style from "@/styles/artwork/artworkLayout.module.scss";
 import { Carousel } from "flowbite-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart , faBookmark } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   item: Artwork;
@@ -18,14 +20,19 @@ const ArtworkDetail = (props: Props) => {
   return (
     <div className={style.artwork_detail}>
       <div className={style.image_gallery}>
-        <Carousel slide={false}>
+        <Carousel className="bg-black" slide={false}>
           {images.map((item, index) => {
             return <img key={index} src={item} />;
           })}
         </Carousel>
       </div>
       <div className={`${style.detail}`}>
-        <div className={style.name}>{name}</div>
+        <div onClick={handleCloseDetail} className={`${style.close}`}><span className="cursor-pointer"> X </span></div>
+        <div className={style.name}>
+          {name}
+          <span className={`${style.heart} cursor-pointer`}><FontAwesomeIcon icon={faHeart} className={style.heart_icon}></FontAwesomeIcon></span>
+          <span className={`${style.bookmark} cursor-pointer`}><FontAwesomeIcon icon={faBookmark} className={style.bookmark_icon}></FontAwesomeIcon></span>
+        </div>
         <div className={style.category}>
           <span>{`Fan Art`}</span>
           <span>{`Character Design`}</span>
@@ -33,7 +40,7 @@ const ArtworkDetail = (props: Props) => {
         </div>
         <div className={style.description}>
           <p>รายละเอียด</p>
-          <span>{description}</span>
+          <span className="text-primary3">{description}</span>
         </div>
         <div className={style.price}>
           <span>เรทราคา</span>
@@ -41,10 +48,17 @@ const ArtworkDetail = (props: Props) => {
         </div>
         <div className={style.heart}>
           <span>จำนวนที่ถูกใจ</span>
-          <span className={style.heart_count}>{likeCount}</span>
+          <span className={style.heart_count}>{likeCount} ครั้ง</span>
+        </div>
+        <div className={style.profile}>
+          <img src="../../picture/user1.gif" />
+          <div className={style.name_box}>
+            <p className={style.username}>naphattt</p>
+            <p className={style.fullname}>Naphat Nuansri</p>
+          </div>
+          <button className={`${style.btn} justify-self-end`}>Go to Shop</button>
         </div>
       </div>
-      <div onClick={handleCloseDetail}>test close Detail click</div>
     </div>
   );
 };
