@@ -1,27 +1,19 @@
-# FROM node:20-alpine as build
-# WORKDIR /usr/src/app
-# COPY package*.json ./
-# RUN npm install
-# COPY . .
-# RUN npm run build
-
-# FROM node:20.4.0 as production-stage
-# COPY --from=build /usr/src/app/build /usr/share/nginx/html
-# # FROM node:20.4.0 AS server
-# WORKDIR /app
-# COPY --from=build /usr/src/app/next.config.js ./
-# COPY --from=build /usr/src/app/public ./public
-# COPY --from=build /usr/src/app/build ./build
-# COPY --from=build /usr/src/app/node_modules ./node_modules
-# COPY --from=build /usr/src/app/package.json ./package.json
-# EXPOSE 80
-# CMD ["npm", "run", "start"]
-# # CMD ["nginx", "-g", "daemon off;"]
-FROM node:20-alpine
-WORKDIR /app
+FROM node:20-alpine as build
+WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
+
+FROM node:20-alpine as production-stage
+COPY --from=build /usr/src/app/build /usr/share/nginx/html
+# FROM node:20.4.0 AS server
+WORKDIR /app
+COPY --from=build /usr/src/app/next.config.js ./
+COPY --from=build /usr/src/app/public ./public
+COPY --from=build /usr/src/app/build ./build
+COPY --from=build /usr/src/app/node_modules ./node_modules
+COPY --from=build /usr/src/app/package.json ./package.json
 EXPOSE 80
 CMD ["npm", "start"]
+# CMD ["nginx", "-g", "daemon off;"]
