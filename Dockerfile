@@ -5,7 +5,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-FROM nginx:1.25.3-alpine3.18 as production-stage
+FROM node:20.4.0 as production-stage
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 # FROM node:20.4.0 AS server
 # WORKDIR /app
