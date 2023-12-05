@@ -37,7 +37,6 @@ const ChatMessage = (props: Props) => {
   const [messages, setMessages] = useState<IMassage[]>([]);
   const [inputMessage, setInputMessage] = useState<string>('');
   const [inputFiles, setInputFiles] = useState<File[]>([]);
-  const [successMessage, setSuccessMessage] = useState<IMassage>();
   const [user, setUser] = useState<IUser>();
   const [interlocutor, setInterlocutor] = useState<IParticipant>();
   const chatContainerRef = useRef<HTMLDivElement>(null); // Create a ref for the chat container div
@@ -46,7 +45,9 @@ const ChatMessage = (props: Props) => {
   socket.connect();
 
   socket.on("recieved_message", (newMessage) => {
-    setMessages([...messages, newMessage]);
+    if (newMessage.chat_room_id === selectedChatRoom?._id) {
+      setMessages([...messages, newMessage]);
+    }
   });
 
   useEffect(() => {
@@ -72,14 +73,7 @@ const ChatMessage = (props: Props) => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
-  }, [messages]);
-
-  useEffect(() => {
-    if (successMessage) {
-      setMessages([...messages, successMessage])
-    }
-  }, [successMessage]);
-
+  }, [messages, selectedChatRoom]);
 
   const handleSendMessage = () => {
     if (selectedChatRoom) {
@@ -109,7 +103,6 @@ const ChatMessage = (props: Props) => {
         message: message,
       };
       sendMessage(cleanData).subscribe((res: any) => {
-        setSuccessMessage(res.data)
         socket.emit("send-message", res.data, socket.id);
       });
     }

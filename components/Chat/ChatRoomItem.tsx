@@ -5,6 +5,7 @@ import styles from "@/styles/chat/chat.module.scss";
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard, faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { socket } from "@/config/socket";
 
 interface Props {
   chatRoomItem: IChatRoom
@@ -14,10 +15,22 @@ interface Props {
 
 const ChatRoomItem = (props: Props) => {
   const { chatRoomItem, selectedChatRoom, setSelectedChatRoom } = props
-  const [latestMessage, setLatestMessage] = useState<string>("ddd")
+  const [latestMessage, setLatestMessage] = useState<string>("")
   const [isFileMessage, setIsFileMessage] = useState<boolean>(false)
+  socket.connect();
+
+  socket.on("recieved_message", (newMessage) => {
+    console.log(newMessage);
+    if (newMessage.chat_room_id === chatRoomItem._id) {
+      getLatestMessage();
+    }
+  });
 
   useEffect(() => {
+    getLatestMessage();
+  }, [])
+
+  const getLatestMessage = () => {
     getLatestMessageByChatRoomId(chatRoomItem._id).subscribe(res => {
       const isFileMessage = res.data.message?.includes(BUGKET_STORAGE);
       setIsFileMessage(isFileMessage)
@@ -26,9 +39,8 @@ const ChatRoomItem = (props: Props) => {
       } else {
         setLatestMessage(res.data.message)
       }
-
     })
-  }, [])
+  }
   return (
     <div
       onClick={() => setSelectedChatRoom(chatRoomItem)}
