@@ -1,7 +1,7 @@
 import { IChatRoom, IParticipant, IUser } from '@/pages/chat';
 import styles from "@/styles/chat/chat.module.scss";
 import { socket } from "@/config/socket";
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { getMessageByChatRoomId, sendMessage } from '@/services/chat/chat.api';
 import MessageItem from './MessageItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -94,6 +94,12 @@ const ChatMessage = (props: Props) => {
     }
     return;
   };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleSendMessage();
+    }
+  }
 
   const submitSend = (message: string) => {
     if (user && selectedChatRoom) {
@@ -219,6 +225,7 @@ const ChatMessage = (props: Props) => {
               placeholder='Type Something ...'
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
           </div>
           <div className={styles.send}>
