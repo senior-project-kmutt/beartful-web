@@ -46,8 +46,10 @@ const ChatRoomItem = (props: Props) => {
       onClick={() => setSelectedChatRoom(chatRoomItem)}
       className={`${styles.chat_room_main} ${chatRoomItem._id === selectedChatRoom?._id && `${styles.active}`}`}
     >
-      <img src={chatRoomItem.participants[0].profile_image} alt="" />
-      <div className='ml-5'>
+      <div className={styles.image}>
+        <img src={chatRoomItem.participants[0].profile_image} alt="" />
+      </div>
+      <div className={`${styles.text} ml-5`}>
         <h1 className='font-extrabold'>{chatRoomItem.participants[0].username}</h1>
         <p className={styles.latest_message}>
           {isFileMessage && (
