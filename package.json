@@ -11,7 +11,8 @@
   "homepage": "/ssi1",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
-    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@types/node": "20.6.1",
     "@types/react": "18.2.21",
@@ -21,6 +22,7 @@
     "bcryptjs": "^2.4.3",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
+    "firebase": "^10.7.0",
     "flowbite-react": "^0.6.4",
     "next": "13.4.19",
     "postcss": "8.4.29",
