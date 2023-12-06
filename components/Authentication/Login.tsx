@@ -1,6 +1,5 @@
 import { LoginUser } from "@/models/users";
 import { login } from "@/services/user/user.api";
-import bcrypt from "bcryptjs";
 import Link from "next/link";
 import style from "@/styles/login/loginLayout.module.scss"
 import { useState } from "react";
@@ -25,7 +24,7 @@ const Login = () => {
       const res = login(responseBody as unknown as LoginUser).subscribe((res: any) => {
         localStorage.setItem("auth", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-        Router.push('/');
+        Router.back();
       }, error => {
         console.log(error);
         if (error.response?.status === 401) {
