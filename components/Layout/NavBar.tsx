@@ -9,7 +9,7 @@ const NavBar = () => {
     <>
       <Navbar className="ml-8 mr-8 h-8 sm:h-12" fluid rounded>
         <Navbar.Brand as={Link} href="/">
-          <img src="../../picture/logo.png" className="h-8 sm:h-12" alt="Beartful Logo" />
+          <img src="/ssi1/picture/logo.png" className="h-8 sm:h-12" alt="Beartful Logo" />
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
