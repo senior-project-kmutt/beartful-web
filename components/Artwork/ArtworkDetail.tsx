@@ -10,7 +10,7 @@ interface Props {
 }
 
 const ArtworkDetail = (props: Props) => {
-  const { images, name, price, description, likeCount } = props.item;
+  const { _id, images, name, price, description, likeCount } = props.item;
   const { onCloseDetail } = props;
 
   const handleCloseDetail = () => {
@@ -20,7 +20,7 @@ const ArtworkDetail = (props: Props) => {
   return (
     <div className={style.artwork_detail}>
       <div className={style.image_gallery}>
-        <Carousel className="bg-black" slide={false}>
+        <Carousel key={_id} className="bg-black" slide={false}>
           {images.map((item, index) => {
             return <img key={index} src={item} />;
           })}
