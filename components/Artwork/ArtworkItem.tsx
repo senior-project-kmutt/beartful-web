@@ -13,7 +13,7 @@ interface Props {
   onShowDetail: (item: Artwork) => void;
 }
 const ArtworkItem = (props: Props) => {
-  const { images, name, price } = props.item;
+  const { images, name, price, type } = props.item;
   const { onShowDetail } = props;
 
   const handleClickDetail = () => {
@@ -30,7 +30,7 @@ const ArtworkItem = (props: Props) => {
             Maexzomeiei
             <IconArrow icon={faArrowUp} />
           </ShopLinkButton>
-          <ShopPrice>เรทราคา : {price}</ShopPrice>
+          <ShopPrice>{type == 'hired' ? 'เรทราคา :' : 'ราคา :'} {price}</ShopPrice>
         </ArtworkImageContainer>
       </div>
     </>

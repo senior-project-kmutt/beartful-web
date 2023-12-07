@@ -8,7 +8,7 @@ interface Props {
 }
 
 const ArtworkDetail = (props: Props) => {
-  const { images, name, price, description, likeCount } = props.item;
+  const { images, name, price, description, likeCount, type } = props.item;
   const { onCloseDetail } = props;
 
   const handleCloseDetail = () => {
@@ -36,7 +36,7 @@ const ArtworkDetail = (props: Props) => {
           <span>{description}</span>
         </div>
         <div className={style.price}>
-          <span>เรทราคา</span>
+          <span>{type == 'hired' ? 'เรทราคา :' : 'ราคา :'}</span>
           <span className={style.price_tag}>{price}</span>
         </div>
         <div className={style.heart}>

@@ -13,17 +13,18 @@ const Artwork = () => {
   const [isShowDetail, setIsShowDetail] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState(true);
+  const [type, setType] = useState<string>('hired');
 
   useEffect(() => {
     const getData = async () => {
-      setArtwork(await fetchArtworkData(page));
+      setArtwork(await fetchArtworkData(page, type));
       setPage(2);
     };
     getData();
-  }, []);
+  }, [type]);
 
   const fetchData = async () => {
-    const data = await fetchArtworkData(page);
+    const data = await fetchArtworkData(page, type);
     setArtwork((prevItems) => [...prevItems, ...data]);
     setHasMore(data.length > 0);
     setPage((prevPage) => prevPage + 1);
@@ -40,7 +41,7 @@ const Artwork = () => {
 
   return (
     <div className="flex">
-      <ArtworkCategory />
+      <ArtworkCategory type={type} setType={setType} setPage={setPage} setHasMore={setHasMore} />
       <div className={style.container}>
         {isShowDetail && artworkDetail && (
           <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
