@@ -53,8 +53,16 @@ const Login = () => {
   };
 
   return (
-    <div className={style.main}>
+    <div>
+      <Link href="/">
+        <img src="/ssi1/picture/logo.png" className="h-4 sm:h-6 ml-6 mt-6" alt="Beartful Logo" />
+      </Link>
+      <div className={style.main}>
       <div>
+        <div className={style.welcome}>
+          <h1>WELCOME</h1>
+          <p>We are really happy to see you again !</p>
+        </div>
         <div className={style.warp}>
           <div className={style.switch}>
             <div
@@ -74,10 +82,6 @@ const Login = () => {
 
         {activeMenu === 'sign in' && (
           <div>
-            <div className={style.welcome}>
-              <h1>WELCOME</h1>
-              <p>We are really happy to see you again !</p>
-            </div>
             <div className={`${style.warp} mt-14`}>
               <form onSubmit={submitForm}>
                 <div className={style.input_form}>
@@ -108,6 +112,7 @@ const Login = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };
