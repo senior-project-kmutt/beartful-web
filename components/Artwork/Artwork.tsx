@@ -33,6 +33,10 @@ const Artwork = () => {
   const onShowDetail = (item: Artwork) => {
     setIsShowDetail(true);
     setArtworkDetail(item);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    },);
   };
 
   const onCloseDetail = () => {
