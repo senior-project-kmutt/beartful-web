@@ -20,7 +20,6 @@ const ChatRoomItem = (props: Props) => {
   socket.connect();
 
   socket.on("recieved_message", (newMessage) => {
-    console.log(newMessage);
     if (newMessage.chat_room_id === chatRoomItem._id) {
       getLatestMessage();
     }
@@ -31,15 +30,21 @@ const ChatRoomItem = (props: Props) => {
   }, [])
 
   const getLatestMessage = () => {
-    getLatestMessageByChatRoomId(chatRoomItem._id).subscribe(res => {
-      const isFileMessage = res.data.message?.includes(BUGKET_STORAGE);
-      setIsFileMessage(isFileMessage)
-      if (isFileMessage) {
-        setLatestMessage("File Attach");
-      } else {
-        setLatestMessage(res.data.message)
-      }
-    })
+    const token = localStorage.getItem("auth");
+    if (token) {
+      const headers = {
+        Authorization: `Bearer ${token}`
+      };
+      getLatestMessageByChatRoomId(chatRoomItem._id, headers).then(res => {
+        const isFileMessage = res.message?.includes(BUGKET_STORAGE);
+        setIsFileMessage(isFileMessage)
+        if (isFileMessage) {
+          setLatestMessage("File Attach");
+        } else {
+          setLatestMessage(res.message)
+        }
+      })
+    }
   }
   return (
     <div
@@ -53,7 +58,7 @@ const ChatRoomItem = (props: Props) => {
         <h1 className='font-extrabold'>{chatRoomItem.participants[0].username}</h1>
         <p className={styles.latest_message}>
           {isFileMessage && (
-             <FontAwesomeIcon className='mr-1' icon={faPaperclip} size='sm' />
+            <FontAwesomeIcon className='mr-1' icon={faPaperclip} size='sm' />
           )}
           {latestMessage}
         </p>
