@@ -17,8 +17,8 @@ const Artwork = () => {
 
   useEffect(() => {
     const getData = async () => {
-      setArtwork(await fetchArtworkData(page, type));
-      setPage(2);
+      // setArtwork(await fetchArtworkData(page, type));
+      // setPage(2);
     };
     getData();
   }, [type, artworkDetail]);
@@ -57,7 +57,7 @@ const Artwork = () => {
           <div className={style.type_header}> READY MADE </div>
         }
         {artwork.length === 0 &&
-          <div className={style.no_artwork}> Coming Soon <br /> . . . . </div>
+          <div className={style.no_artwork}> NO ARTWORK <br /> . . . . </div>
         }
         {isShowDetail && artworkDetail && (
           <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
