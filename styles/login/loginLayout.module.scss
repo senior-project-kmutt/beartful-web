@@ -9,7 +9,7 @@
     }
 
     .welcome {
-        margin-top: 80px;
+        margin-top: 30px;
         text-align: center;
         h1 {
             font-weight: 900;
@@ -22,6 +22,7 @@
         border-radius: 20px;
         background: #F9E0D4;
         font-weight: 800;
+        margin-top: 50px;
 
         .item {
             padding: 6px 50px;
@@ -37,15 +38,28 @@
 
     .input_form {
         margin-bottom: 20px;
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: center;
 
-        input {
-            width: 380px;
-            border: 1.5px solid #5A2810;
-            border-radius: 4px;
-            margin-left: 40px;
+        .error_message {
+            color: red;
+            font-size: 12px;
+            margin-top: 4px;
+            margin-left: 36px;
+        }
+
+        div {
+            input {
+                width: 380px;
+                border: 1.5px solid #5A2810;
+                border-radius: 4px;
+                margin-left: 32px;
+            }
         }
 
         label {
+            display: block;
             font-weight: 600;
             padding: 0;
         }
@@ -88,10 +102,17 @@
 
     @media (max-width:610px) {
         .input_form {
-            input {
-                display: block;
+            display: block;
+
+            .error_message {
                 margin-left: 0;
-                margin-top: 6px;
+            }
+    
+            div {
+                input {
+                    margin-top: 6px;
+                    margin-left: 0;
+                }
             }
         }
 

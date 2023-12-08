@@ -11,17 +11,29 @@ interface formDataType {
 }
 const Login = () => {
   const [activeMenu, setActiveMenu] = useState<string>('sign in');
+  const [usernameErr, setUsernameErr] = useState<string>('');
+  const [passwordErr, setPasswordErr] = useState<string>('');
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const responseBody: formDataType = {};
     const formData = new FormData(event.currentTarget as HTMLFormElement);
+    let isValid = true;
 
     for (const [property, value] of formData) {
       responseBody[property] = value;
+      if (!value) {
+        isValid = false
+        if (property === 'username') {
+          setUsernameErr('กรุณากรอกชื่อผู้ใช้')
+        }
+        if (property === 'password') {
+          setPasswordErr('กรุณากรอกรหัสผ่าน')
+        }
+      }
     }
 
-    if (responseBody) {
-      const res = login(responseBody as unknown as LoginUser).subscribe((res: any) => {
+    if (isValid) {
+      login(responseBody as unknown as LoginUser).subscribe((res: any) => {
         localStorage.setItem("auth", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
         Router.back();
@@ -39,9 +51,18 @@ const Login = () => {
       })
     }
   };
+
   return (
-    <div className={style.main}>
+    <div>
+      <Link href="/">
+        <img src="/ssi1/picture/logo.png" className="h-4 sm:h-6 ml-6 mt-6" alt="Beartful Logo" />
+      </Link>
+      <div className={style.main}>
       <div>
+        <div className={style.welcome}>
+          <h1>WELCOME</h1>
+          <p>We are really happy to see you again !</p>
+        </div>
         <div className={style.warp}>
           <div className={style.switch}>
             <div
@@ -61,23 +82,17 @@ const Login = () => {
 
         {activeMenu === 'sign in' && (
           <div>
-            <div className={style.welcome}>
-              <h1>WELCOME</h1>
-              <p>We are really happy to see you again !</p>
-            </div>
             <div className={`${style.warp} mt-14`}>
               <form onSubmit={submitForm}>
                 <div className={style.input_form}>
-                  <label>
-                    USERNAME
-                    <input name="username" type="text" />
-                  </label>
+                  <label htmlFor='username'> USERNAME </label>
+                  <div><input onChange={() => setUsernameErr('')} id="username" name="username" type="text" /></div>
+                  <p></p><p className={style.error_message}>{usernameErr}</p>
                 </div>
                 <div className={style.input_form}>
-                  <label>
-                    PASSWORD
-                    <input name="password" type="password" />
-                  </label>
+                  <label htmlFor="password"> PASSWORD </label>
+                  <div><input onChange={() => setPasswordErr('')} id="password" name="password" type="password" /></div>
+                  <p></p><p className={style.error_message}>{passwordErr}</p>
                 </div>
                 <div className={style.input_button}>
                   <input className={`${style.submit_button} mr-4`} type="submit" value="SIGN IN" />
@@ -97,6 +112,7 @@ const Login = () => {
           </div>
         )}
       </div>
+    </div>
     </div>
   );
 };
