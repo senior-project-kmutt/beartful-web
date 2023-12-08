@@ -9,7 +9,7 @@ import { Users } from '@/models/users';
 
 const NavBar = () => {
   const router = useRouter();
-  const [user, setUser] = useState<Users>()
+  const [user, setUser] = useState<Users | null>(null);
 
   useEffect(() => {
     const userSession = localStorage.getItem('user')
@@ -18,7 +18,13 @@ const NavBar = () => {
       setUser(user)
     }
   }, []);
-  
+
+  const logout = () => {
+    localStorage.removeItem("auth");
+    localStorage.removeItem("user");
+    setUser(null);
+  }
+
   return (
     <>
       <Navbar className="space-x-6 h-8 sm:h-12" fluid rounded>
@@ -64,7 +70,7 @@ const NavBar = () => {
                   <Dropdown.Item>My Shop</Dropdown.Item>
                   <Dropdown.Item>Settings</Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item>Sign out</Dropdown.Item>
+                  <Dropdown.Item onClick={logout}>Sign out</Dropdown.Item>
                 </Dropdown>
                 <Navbar.Toggle />
               </div>
