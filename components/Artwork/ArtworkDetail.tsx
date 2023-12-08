@@ -135,7 +135,7 @@ const ArtworkDetail = (props: Props) => {
           <span className={style.heart_count}>{likeCount} ครั้ง</span>
         </div>
         <div className={style.profile}>
-          <img src="../../picture/user1.gif" />
+          <img src="../../ssi1/picture/user1.gif" />
           <div className={style.name_box}>
             <p className={style.username}>naphattt</p>
             <p className={style.fullname}>Naphat Nuansri</p>
