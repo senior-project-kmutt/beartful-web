@@ -56,9 +56,15 @@ const ChatMessage = (props: Props) => {
 
   useEffect(() => {
     if (selectedChatRoom) {
-      getMessageByChatRoomId(selectedChatRoom._id).subscribe((res: any) => {
-        setMessages(res.data);
-      });
+      const token = localStorage.getItem("auth");
+      if (token) {
+        const headers = {
+          Authorization: `Bearer ${token}`
+        };
+        getMessageByChatRoomId(selectedChatRoom._id, headers).then((res: any) => {
+          setMessages(res);
+        });
+      }
     }
     const filterProfile = participants?.filter((item) => {
       return item.user_id !== user?.id
@@ -108,9 +114,15 @@ const ChatMessage = (props: Props) => {
         sender: user.id,
         message: message,
       };
-      sendMessage(cleanData).subscribe((res: any) => {
-        socket.emit("send-message", res.data, socket.id);
-      });
+      const token = localStorage.getItem("auth");
+      if (token) {
+        const headers = {
+          Authorization: `Bearer ${token}`
+        };
+        sendMessage(cleanData, headers).then((res: any) => {
+          socket.emit("send-message", res, socket.id);
+        });
+      }
     }
   }
 
@@ -197,20 +209,20 @@ const ChatMessage = (props: Props) => {
         </div>
         {inputFiles.length !== 0 && (
           <div className={styles.preview}>
-          {inputFiles.map((item, index) => {
-            return (
-              <>
-                <div className={`${styles.preview_item}`}>
-                  <div className={styles.file_name}>
-                    <FontAwesomeIcon icon={faFile} size='xl' />
-                    <p className='border-none'>{item.name}</p>
+            {inputFiles.map((item, index) => {
+              return (
+                <>
+                  <div className={`${styles.preview_item}`}>
+                    <div className={styles.file_name}>
+                      <FontAwesomeIcon icon={faFile} size='xl' />
+                      <p className='border-none'>{item.name}</p>
+                    </div>
+                    <FontAwesomeIcon onClick={() => deleteFileInput(index)} className={styles.close} icon={faCircleXmark} size='lg' />
                   </div>
-                  <FontAwesomeIcon onClick={() => deleteFileInput(index)} className={styles.close} icon={faCircleXmark} size='lg' />
-                </div>
-              </>
-            )
-          })}
-        </div>
+                </>
+              )
+            })}
+          </div>
         )}
         <div className={styles.input_warp}>
           <div className={styles.input_box}>
