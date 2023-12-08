@@ -18,15 +18,15 @@ const NavBar = () => {
           <Navbar.Link className={style.text_menu} onClick={() => router.push('/login')}>SIGN IN</Navbar.Link>
           <Navbar.Link className={style.text_menu} onClick={() => router.push('/register')}>SIGN UP</Navbar.Link>
           <div className={style.menu}>
-            <Navbar.Link href="/register">
+            <Navbar.Link>
               <FontAwesomeIcon icon={faCartShopping} className={`${style.icon}`}></FontAwesomeIcon>
               <span className={`${style.count} absolute-4 top-0 right-24`}>15</span>
             </Navbar.Link>
-            <Navbar.Link href="/register">
+            <Navbar.Link onClick={() => router.push('/chat')}>
               <FontAwesomeIcon icon={faMessage} className={style.icon}></FontAwesomeIcon>
               <span className={`${style.count} absolute top-0 right-12`}>1</span>
             </Navbar.Link>
-            <Navbar.Link href="/register">
+            <Navbar.Link>
               <FontAwesomeIcon icon={faBell} className={`${style.icon}`}></FontAwesomeIcon>
               <span className={`${style.count} absolute top-0 -right-2`}>21</span>
             </Navbar.Link>
