@@ -17,8 +17,8 @@ const Artwork = () => {
 
   useEffect(() => {
     const getData = async () => {
-      // setArtwork(await fetchArtworkData(page, type));
-      // setPage(2);
+      setArtwork(await fetchArtworkData(page, type));
+      setPage(2);
     };
     getData();
   }, [type, artworkDetail]);
