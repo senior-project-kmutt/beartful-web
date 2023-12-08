@@ -1,6 +1,6 @@
 import { Artwork } from "@/models/artwork";
 import style from "@/styles/artwork/artworkLayout.module.scss";
-import { Carousel, CustomFlowbiteTheme, Flowbite } from "flowbite-react";
+import { Carousel, CustomFlowbiteTheme } from "flowbite-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,58 +8,6 @@ interface Props {
   item: Artwork;
   onCloseDetail: () => void;
 }
-
-// const carouselTheme: CustomFlowbiteTheme['carousel'] = {
-//   control: {
-//     "base": "inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary8/40 group-hover:bg-white/50 group-hover:ring-4 group-hover:ring-primary1 group-focus:outline-none group-focus:ring-4 group-focus:ring-primary1 sm:h-10 sm:w-10",
-//     "icon": "h-5 w-5 text-primary1 dark:text-gray-800 sm:h-6 sm:w-6"
-//   },
-//   indicators: {
-//     active: {
-//       off: "bg-primary7",
-//       on: "bg-primary2 border-white-600"
-//     }
-//   }
-// };
-
-// interface CustomFlowbiteTheme {
-//   carousel: {
-//     control: {
-//       base: string;
-//       icon: string;
-//     };
-//     indicators: {
-//       active: {
-//         off: string;
-//         on: string;
-//       };
-//     };
-//   };
-// }
-
-// interface CarouselProps {
-//   key: string;
-//   theme: CustomFlowbiteTheme['carousel'];
-//   control: React.ReactNode;
-//   indicators: boolean;
-//   slide: boolean;
-// }
-
-// const Carousel: React.FC<CarouselProps> = ({ key, theme, control, indicators, slide, children }) => {
-//   // Assume the implementation of the Carousel component
-
-//   return (
-//     <div>
-//       {/* Your Carousel implementation here */}
-//       {children}
-//     </div>
-//   );
-// };
-
-// interface YourComponentProps {
-//   _id: string;
-//   images: string[];
-// }
 
 const carouselTheme: CustomFlowbiteTheme['carousel'] = {
   control: {
@@ -73,20 +21,6 @@ const carouselTheme: CustomFlowbiteTheme['carousel'] = {
     }
   }
 };
-// const YourComponent: React.FC<YourComponentProps> = ({ _id, images }) => {
-//   const carouselTheme: CustomFlowbiteTheme['carousel'] = {
-//     control: {
-//       base: "inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary8/40 group-hover:bg-white/50 group-hover:ring-4 group-hover:ring-primary1 group-focus:outline-none group-focus:ring-4 group-focus:ring-primary1 sm:h-10 sm:w-10",
-//       icon: "h-5 w-5 text-primary1 dark:text-gray-800 sm:h-6 sm:w-6"
-//     },
-//     indicators: {
-//       active: {
-//         off: "bg-primary7",
-//         on: "bg-primary2 border-white-600"
-//       }
-//     }
-//   };
-// }
 
 const ArtworkDetail = (props: Props) => {
   const { _id, images, name, price, description, likeCount, type } = props.item;
@@ -99,16 +33,11 @@ const ArtworkDetail = (props: Props) => {
   return (
     <div className={style.artwork_detail}>
       <div className={style.image_gallery}>
-        <Carousel key={_id} theme={carouselTheme} control="icon" indicators={true} slide={false}>
+        <Carousel key={_id} theme={carouselTheme} indicators={true} slide={false}>
           {images.map((item, index) => {
             return <img key={index} src={item} />;
           })}
         </Carousel>
-        {/* <Carousel key={_id} theme={carouselTheme} control={<YourIconComponent />} indicators={true} slide={false}>
-          {images.map((item, index) => (
-            <img key={index} src={item} alt={`Image ${index}`} />
-          ))}
-        </Carousel> */}
       </div>
       <div className={`${style.detail}`}>
         <div onClick={handleCloseDetail} className={`${style.close}`}><span className="cursor-pointer"> X </span></div>
