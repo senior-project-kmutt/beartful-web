@@ -77,7 +77,7 @@ const YourComponent: React.FC<YourComponentProps> = ({ _id, images }) => {
 }
 
 const ArtworkDetail = (props: Props) => {
-  const { _id, images, name, price, description, likeCount } = props.item;
+  const { _id, images, name, price, description, likeCount, type } = props.item;
   const { onCloseDetail } = props;
 
   const handleCloseDetail = () => {
@@ -115,7 +115,7 @@ const ArtworkDetail = (props: Props) => {
           <span className="text-primary3">{description}</span>
         </div>
         <div className={style.price}>
-          <span>เรทราคา</span>
+          <span>{type == 'hired' ? 'เรทราคา :' : 'ราคา :'}</span>
           <span className={style.price_tag}>{price}</span>
         </div>
         <div className={style.heart}>

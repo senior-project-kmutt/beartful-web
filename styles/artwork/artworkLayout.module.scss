@@ -25,7 +25,24 @@
     padding: 0 12px;
     width: 15%;
     word-wrap: break-word;
+
+    .warp {
+        display: flex;
+    }
+
+    .switch {
+        font-weight: 800;
+
+        .item {
+            color: black;
+        }
+
+        .item_active {
+            color: #E78353;
+        }
+    }
 }
+
 
 .artwork_detail {
     margin: 40px 2%;

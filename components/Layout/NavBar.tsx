@@ -3,18 +3,20 @@ import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import style from "@/styles/navbar/navbarLayout.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faMessage, faBell, faPalette } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/router';
 
 const NavBar = () => {
+  const router = useRouter();
   return (
     <>
       <Navbar className="space-x-6 h-8 sm:h-12" fluid rounded>
         <Navbar.Brand as={Link} href="/">
-          <img src="../../picture/logo.png" className="h-4 sm:h-6 ml-4" alt="Beartful Logo" />
+        <img src="/ssi1/picture/logo.png" className="h-8 sm:h-12" alt="Beartful Logo" />
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Navbar.Link className={style.text_menu} href="/login">SIGN IN</Navbar.Link>
-          <Navbar.Link className={style.text_menu} href="/register">SIGN UP</Navbar.Link>
+        <Navbar.Link className={style.text_menu} onClick={() => router.push('/login')}>SIGN IN</Navbar.Link>
+        <Navbar.Link className={style.text_menu} onClick={() => router.push('/register')}>SIGN UP</Navbar.Link>
           <div className={style.menu}>
             <Navbar.Link href="/register">
               <FontAwesomeIcon icon={faCartShopping} className={`${style.icon}`}></FontAwesomeIcon>
