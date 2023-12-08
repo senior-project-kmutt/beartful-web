@@ -11,12 +11,12 @@ const NavBar = () => {
     <>
       <Navbar className="space-x-6 h-8 sm:h-12" fluid rounded>
         <Navbar.Brand as={Link} href="/">
-        <img src="/ssi1/picture/logo.png" className="h-8 sm:h-12" alt="Beartful Logo" />
+          <img src="/ssi1/picture/logo.png" className="h-4 sm:h-6 ml-4" alt="Beartful Logo" />
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
-        <Navbar.Link className={style.text_menu} onClick={() => router.push('/login')}>SIGN IN</Navbar.Link>
-        <Navbar.Link className={style.text_menu} onClick={() => router.push('/register')}>SIGN UP</Navbar.Link>
+          <Navbar.Link className={style.text_menu} onClick={() => router.push('/login')}>SIGN IN</Navbar.Link>
+          <Navbar.Link className={style.text_menu} onClick={() => router.push('/register')}>SIGN UP</Navbar.Link>
           <div className={style.menu}>
             <Navbar.Link href="/register">
               <FontAwesomeIcon icon={faCartShopping} className={`${style.icon}`}></FontAwesomeIcon>
@@ -36,7 +36,7 @@ const NavBar = () => {
               arrowIcon={true}
               inline
               label={
-                <Avatar alt="User settings" img="../../picture/user1.gif" rounded />
+                <Avatar alt="User settings" img="../../ssi1/picture/user1.gif" rounded />
               }
             >
               <Dropdown.Header>

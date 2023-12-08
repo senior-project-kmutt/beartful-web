@@ -8,7 +8,7 @@ const getArtwork = (page:number, pageSize:number, type:string): Observable<any> 
 
 export const fetchArtworkData = async (pageNumber:number, type:string) => {
   try {
-    const res = await getArtwork(pageNumber, 30, type).toPromise();
+    const res = await getArtwork(pageNumber, 50, type).toPromise();
     return res.data;
   } catch (error) {
     console.error("Error fetching artwork:", error);
