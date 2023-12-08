@@ -21,7 +21,7 @@ const Artwork = () => {
       setPage(2);
     };
     getData();
-  }, [type]);
+  }, [type, artworkDetail]);
 
   const fetchData = async () => {
     const data = await fetchArtworkData(page, type);
@@ -31,6 +31,9 @@ const Artwork = () => {
   };
 
   const onShowDetail = (item: Artwork) => {
+    setArtwork([])
+    setPage(1);
+    setHasMore(true)
     setIsShowDetail(true);
     setArtworkDetail(item);
     window.scrollTo({
@@ -42,13 +45,15 @@ const Artwork = () => {
   const onCloseDetail = () => {
     setIsShowDetail(false);
   };
-
   return (
     <div className="flex">
-      <ArtworkCategory type={type} setType={setType} setPage={setPage} setHasMore={setHasMore} />
+      <ArtworkCategory type={type} setType={setType} setPage={setPage} setArtwork={setArtwork} setHasMore={setHasMore} setIsShowDetail={setIsShowDetail} />
       <div className={style.container}>
         {isShowDetail && artworkDetail && (
           <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
+        )}
+        {isShowDetail && artworkDetail && (
+          <div className={style.text}>--------- คุณอาจชอบสิ่งนี้ ---------</div>
         )}
         <InfiniteScroll
           dataLength={artwork.length}

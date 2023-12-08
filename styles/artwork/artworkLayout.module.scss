@@ -1,5 +1,9 @@
 .container {
     width: 85%;
+    .text {
+        text-align: center;
+        color: #635B5B;
+    }
 }
 
 .artwork_container {
@@ -35,10 +39,12 @@
 
         .item {
             color: black;
+            cursor: pointer;
         }
 
         .item_active {
             color: #E78353;
+            cursor: pointer;
         }
     }
 }
