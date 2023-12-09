@@ -17,8 +17,8 @@ const Artwork = () => {
 
   useEffect(() => {
     const getData = async () => {
-      // setArtwork(await fetchArtworkData(page, type));
-      // setPage(2);
+      setArtwork(await fetchArtworkData(page, type));
+      setPage(2);
     };
     getData();
   }, [type, artworkDetail]);
@@ -47,7 +47,7 @@ const Artwork = () => {
     console.log(type);
   };
   return (
-    <div className="flex">
+    <div className="flex mt-8">
       <ArtworkCategory type={type} setType={setType} setPage={setPage} setArtwork={setArtwork} setHasMore={setHasMore} setIsShowDetail={setIsShowDetail} />
       <div className={style.container}>
         {type === 'hired' &&
