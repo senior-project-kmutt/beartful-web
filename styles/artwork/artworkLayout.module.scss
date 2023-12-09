@@ -23,8 +23,14 @@
     }
 }
 
+.type_header{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
 .artwork_category {
-    margin: 20px auto;
+    margin: 5% auto;
     margin-left: 2%;
     padding: 0 12px;
     width: 15%;
@@ -49,6 +55,16 @@
     }
 }
 
+.no_artwork{
+    text-align: center;
+    align-items: center;
+    position: absolute;
+    right: 35%;
+    top: 20%;
+    color: #5A2810;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
 
 .artwork_detail {
     margin: 40px 2%;
