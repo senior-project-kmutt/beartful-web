@@ -23,6 +23,7 @@ const NavBar = () => {
     localStorage.removeItem("auth");
     localStorage.removeItem("user");
     setUser(null);
+    router.push("/");
   }
 
   return (
