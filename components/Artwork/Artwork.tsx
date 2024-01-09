@@ -7,24 +7,29 @@ import ArtworkCategory from "./ArtworkCategory";
 import ArtworkDetail from "./ArtworkDetail";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const Artwork = () => {
+interface Props {
+  isSpecificFreelance?: boolean;
+  username?: string
+}
+const Artwork = (props: Props) => {
   const [artwork, setArtwork] = useState<Artwork[]>([]);
   const [artworkDetail, setArtworkDetail] = useState<Artwork>();
   const [isShowDetail, setIsShowDetail] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState(true);
   const [type, setType] = useState<string>('hired');
+  const { isSpecificFreelance = false, username = "" } = props;
 
   useEffect(() => {
     const getData = async () => {
-      setArtwork(await fetchArtworkData(page, type));
+      setArtwork(await fetchArtworkData(page, type, isSpecificFreelance, username));
       setPage(2);
     };
     getData();
   }, [type, artworkDetail]);
 
   const fetchData = async () => {
-    const data = await fetchArtworkData(page, type);
+    const data = await fetchArtworkData(page, type, isSpecificFreelance, username);
     setArtwork((prevItems) => [...prevItems, ...data]);
     setHasMore(data.length > 0);
     setPage((prevPage) => prevPage + 1);
@@ -59,6 +64,10 @@ const Artwork = () => {
         {artwork.length === 0 &&
           <div className={style.no_artwork}> NO ARTWORK <br /> . . . . </div>
         }
+        {isSpecificFreelance && (
+          <div style={{ height: 200 }}></div>
+          //ตรงรายละเอียดเพิ่มเติมเดะมาสร้าง component
+        )}
         {isShowDetail && artworkDetail && (
           <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
         )}
