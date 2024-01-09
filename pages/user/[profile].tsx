@@ -14,7 +14,7 @@ const FreelanceProfile: React.FC = () => {
     // }
 
     return (
-        <Artwork isSpecificFreelance={true} username={username} />
+        <Artwork username={username} />
     );
 };
 

@@ -8,7 +8,6 @@ import ArtworkDetail from "./ArtworkDetail";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {
-  isSpecificFreelance?: boolean;
   username?: string;
   isProfileEditMode?: boolean;
 }
@@ -19,7 +18,8 @@ const Artwork = (props: Props) => {
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState(true);
   const [type, setType] = useState<string>('hired');
-  const { isSpecificFreelance = false, username = "", isProfileEditMode = false } = props;
+  const [isSpecificFreelance, setIsSpecificFreelance] = useState<boolean>(false);
+  const { username = "" , isProfileEditMode = false } = props;
 
   useEffect(() => {
     const getData = async () => {
@@ -27,7 +27,12 @@ const Artwork = (props: Props) => {
       setPage(2);
     };
     getData();
-  }, [type, artworkDetail]);
+  }, [type, artworkDetail, isSpecificFreelance]);
+
+  useEffect(() => {
+    const isHaveUsername: boolean = (typeof username && username !== "undefined" && username.length > 0);
+    setIsSpecificFreelance(isHaveUsername)
+  }, [username]);
 
   const fetchData = async () => {
     const data = await fetchArtworkData(page, type, isSpecificFreelance, username);
