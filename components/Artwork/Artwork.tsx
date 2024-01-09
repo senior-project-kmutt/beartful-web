@@ -9,7 +9,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {
   isSpecificFreelance?: boolean;
-  username?: string
+  username?: string;
+  isProfileEditMode?: boolean;
 }
 const Artwork = (props: Props) => {
   const [artwork, setArtwork] = useState<Artwork[]>([]);
@@ -18,7 +19,7 @@ const Artwork = (props: Props) => {
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState(true);
   const [type, setType] = useState<string>('hired');
-  const { isSpecificFreelance = false, username = "" } = props;
+  const { isSpecificFreelance = false, username = "", isProfileEditMode = false } = props;
 
   useEffect(() => {
     const getData = async () => {
@@ -69,7 +70,7 @@ const Artwork = (props: Props) => {
           //ตรงรายละเอียดเพิ่มเติมเดะมาสร้าง component
         )}
         {isShowDetail && artworkDetail && (
-          <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
+          <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} isProfileEditMode={isProfileEditMode} />
         )}
         {isShowDetail && artworkDetail && (
           <div className={style.text}>--------- คุณอาจชอบสิ่งนี้ ---------</div>
@@ -87,6 +88,7 @@ const Artwork = (props: Props) => {
                   item={item}
                   key={index}
                   onShowDetail={onShowDetail}
+                  isProfileEditMode={isProfileEditMode}
                 />
               );
             })}

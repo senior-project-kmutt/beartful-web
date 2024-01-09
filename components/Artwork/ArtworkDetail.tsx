@@ -7,6 +7,7 @@ import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
 interface Props {
   item: Artwork;
   onCloseDetail: () => void;
+  isProfileEditMode: boolean;
 }
 
 const carouselTheme: CustomFlowbiteTheme['carousel'] = {
@@ -24,7 +25,7 @@ const carouselTheme: CustomFlowbiteTheme['carousel'] = {
 
 const ArtworkDetail = (props: Props) => {
   const { _id, images, name, price, description, likeCount, type } = props.item;
-  const { onCloseDetail } = props;
+  const { onCloseDetail, isProfileEditMode } = props;
 
   const handleCloseDetail = () => {
     onCloseDetail();
@@ -43,8 +44,10 @@ const ArtworkDetail = (props: Props) => {
         <div onClick={handleCloseDetail} className={`${style.close}`}><span className="cursor-pointer"> X </span></div>
         <div className={style.name}>
           {name}
-          <span className={`${style.heart} cursor-pointer`}><FontAwesomeIcon icon={faHeart} className={style.heart_icon}></FontAwesomeIcon></span>
-          <span className={`${style.bookmark} cursor-pointer`}><FontAwesomeIcon icon={faBookmark} className={style.bookmark_icon}></FontAwesomeIcon></span>
+          {!isProfileEditMode && <>
+            <span className={`${style.heart} cursor-pointer`}><FontAwesomeIcon icon={faHeart} className={style.heart_icon}></FontAwesomeIcon></span>
+            <span className={`${style.bookmark} cursor-pointer`}><FontAwesomeIcon icon={faBookmark} className={style.bookmark_icon}></FontAwesomeIcon></span>
+          </>}
         </div>
         <div className={style.category}>
           <span>{`Fan Art`}</span>
@@ -71,6 +74,12 @@ const ArtworkDetail = (props: Props) => {
           </div>
           <button className={`${style.btn} justify-self-end`}>View Profile</button>
         </div>
+
+        {/* show only when freelance account click to see own detail */}
+        {isProfileEditMode && (<>
+          <button>edit artwork</button>
+          <button>delete artwork</button></>
+        )}
       </div>
     </div>
   );
