@@ -1,12 +1,12 @@
 import { Observable } from "rxjs";
 import { get } from "../HttpClient";
 
-const getArtwork = (page: number, pageSize: number, type: string): Observable<any> => {
+export const getArtwork = (page: number, pageSize: number, type: string): Observable<any> => {
   const params = `?page=${page}&pageSize=${pageSize}&type=${type}`
   return get(`/artwork${params}`);
 };
 
-const getFreelanceArtwork = (userId: string, page: number, pageSize: number, type: string): Observable<any> => {
+export const getFreelanceArtwork = (userId: string, page: number, pageSize: number, type: string): Observable<any> => {
   const params = `/user/${userId}/artworks?page=${page}&pageSize=${pageSize}&type=${type}`
   return get(`${params}`);
 };

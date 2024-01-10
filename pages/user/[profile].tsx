@@ -1,4 +1,5 @@
 import Artwork from "@/components/Artwork/Artwork";
+import FreelanceArtwork from "@/components/Profile/FreelanceArtwork";
 import { Router, useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -6,7 +7,10 @@ const FreelanceProfile: React.FC = () => {
     const [username, setUsername] = useState<string>("");
     const router = useRouter();
     useEffect(() => {
-        setUsername(String(router.query.profile))
+        const user = router.query.profile
+        if (user) {
+            setUsername(String(user))
+        }
     }, [router.query.profile])
 
     // const getUsername = () => {
@@ -14,7 +18,11 @@ const FreelanceProfile: React.FC = () => {
     // }
 
     return (
-        <Artwork username={username} />
+        <>
+            {username && (
+                <FreelanceArtwork username={username} />
+            )}
+        </>
     );
 };
 
