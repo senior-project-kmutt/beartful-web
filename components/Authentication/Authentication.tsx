@@ -1,15 +1,16 @@
 import { LoginUser } from "@/models/users";
 import { login } from "@/services/user/user.api";
 import Link from "next/link";
-import style from "@/styles/login/loginLayout.module.scss"
+import style from "@/styles/authentication/loginLayout.module.scss"
 import { useState } from "react";
 import Router from 'next/router';
 import Swal from 'sweetalert2'
+import Register from "./Register";
 
 interface formDataType {
   [key: string]: any;
 }
-const Login = () => {
+const Authentication = () => {
   const [activeMenu, setActiveMenu] = useState<string>('sign in');
   const [usernameErr, setUsernameErr] = useState<string>('');
   const [passwordErr, setPasswordErr] = useState<string>('');
@@ -60,8 +61,20 @@ const Login = () => {
       <div className={style.main}>
       <div>
         <div className={style.welcome}>
-          <h1>WELCOME</h1>
-          <p>We are really happy to see you again !</p>
+            {activeMenu === "sign in" && (
+              <>
+                <h1>WELCOME</h1>
+                <p>We are really happy to see you again !</p>
+              </>
+            )}
+
+            {activeMenu === "sign up" && (
+              <div className={style.sign_in}>
+                <h1>GET STARTED WITH <span className="">BEARTFUL</span> </h1>
+                <p>Please fill in this form to create an account !</p>
+                <p>Already have an account? <span onClick={() => setActiveMenu('sign in')} className="font-extrabold cursor-pointer underline">SIGN IN</span></p>
+              </div>
+            )}
         </div>
         <div className={style.warp}>
           <div className={style.switch}>
@@ -108,7 +121,7 @@ const Login = () => {
 
         {activeMenu === 'sign up' && (
           <div className={`${style.warp} p-16`}>
-            WAIT FOR REGISTER!
+            <Register />
           </div>
         )}
       </div>
@@ -117,4 +130,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Authentication;
