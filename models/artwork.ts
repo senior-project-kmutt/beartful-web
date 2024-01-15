@@ -6,7 +6,7 @@ export interface Artwork {
     description: string
     price: string
     type: string
-    categoryId: number
+    categoryId: string[]
     likeCount: number
     createdAt: Date
     updatedAt: Date

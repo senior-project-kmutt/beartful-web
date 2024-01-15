@@ -1,5 +1,8 @@
 import { Observable } from "rxjs";
 import { get } from "../HttpClient";
+import { postPromise } from "../HttpClient";
+import { ArtworkFormData } from "@/components/Artwork/CRUDArtwork/ArtworkForm";
+import { IncomingHttpHeaders } from "http";
 
 export const getArtwork = (page: number, pageSize: number, type: string): Observable<any> => {
   const params = `?page=${page}&pageSize=${pageSize}&type=${type}`
@@ -20,4 +23,8 @@ export const fetchArtworkData = async (pageNumber: number, type: string, isSpeci
     console.error("Error fetching artwork:", error);
     throw error;
   }
+};
+
+export const createArtwork = async (body: ArtworkFormData, headers: IncomingHttpHeaders): Promise<any> => {
+  return await postPromise(`/artwork`, body, headers);
 };
