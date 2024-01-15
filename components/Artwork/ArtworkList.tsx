@@ -89,10 +89,10 @@ const ArtworkList = (props: Props) => {
         <div className={style.no_artwork}> NO ARTWORK <br /> . . . . </div>
       }
       {isShowDetail && artworkDetail && (
-        <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} isProfileEditMode={isProfileEditMode} />
-      )}
-      {isShowDetail && artworkDetail && (
-        <div className={style.text}>--------- คุณอาจชอบสิ่งนี้ ---------</div>
+        <>
+          <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} isProfileEditMode={isProfileEditMode} />
+          <div className={style.text}>--------- คุณอาจชอบสิ่งนี้ ---------</div>
+        </>
       )}
       <InfiniteScroll
         dataLength={artwork.length}
