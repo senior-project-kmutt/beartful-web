@@ -3,11 +3,24 @@ import { createUser } from "@/services/user/user.api";
 import bcrypt from "bcryptjs";
 import style from "@/styles/authentication/registerLayout.module.scss";
 import RegisterCustomer from "./RegisterCustomer";
+import { useState } from "react";
+import RegisterFreelance from "./RegisterFreelance";
 
 interface formDataType {
   [key: string]: any;
 }
 const Register = () => {
+  const [roleSelected, setRoleSelected] = useState<string>('customer')
+  const sideBarMenu = [
+    {
+      title: 'ข้อมูลส่วนบุคคล',
+      value: 'personal'
+    },
+    {
+      title: 'ประวัติการศึกษา',
+      value: 'education'
+    }
+  ]
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const responseBody: formDataType = {};
@@ -27,31 +40,26 @@ const Register = () => {
   };
   return (
     <div>
-      <RegisterCustomer />
-      {/* <form onSubmit={submitForm}>
-        <h1>Register</h1>
-        <label>
-          Email:
-          <input name="email" type="email" />
-        </label>
-        <label>
-          Username:
-          <input name="username" type="text" />
-        </label>
-        <label>
-          Firstname:
-          <input name="firstname" type="text" />
-        </label>
-        <label>
-          Lastname:
-          <input name="lastname" type="text" />
-        </label>
-        <label>
-          Password:
-          <input name="password" type="text" />
-        </label>
-        <input type="submit" value="Submit" />
-      </form> */}
+      <div className={style.container}>
+        <div className={`${style.side_menu} ${roleSelected === 'freelance' ? '' : style.close}`}>
+          <ul>
+            {sideBarMenu.map((menu, index) => {
+              return (
+                <div key={index}>{menu.title}</div>
+              )
+            })}
+          </ul>
+        </div>
+        <div className={style.input_container}>
+          {roleSelected === 'customer' ? (
+            <>
+              <RegisterCustomer roleSelected={roleSelected} setRoleSelected={setRoleSelected} />
+            </>
+          ) : (
+            <RegisterFreelance roleSelected={roleSelected} setRoleSelected={setRoleSelected} />
+          )}
+        </div>
+      </div>
     </div>
   );
 };
