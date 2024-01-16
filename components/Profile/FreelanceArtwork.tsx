@@ -1,11 +1,10 @@
-import Artwork from "@/components/Artwork/Artwork";
-import { Router, useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ArtworkCategory from "../Artwork/ArtworkCategory";
 import ArtworkList from "../Artwork/ArtworkList";
 
 interface Props {
     username: string;
+    isProfileEditMode?: boolean;
 }
 
 const FreelanceArtwork = (props: Props) => {
@@ -14,7 +13,7 @@ const FreelanceArtwork = (props: Props) => {
     return (
         <div>
             <ArtworkCategory type={type} setType={setType} />
-            <ArtworkList from="freelance" type={type} username={props.username} />
+            <ArtworkList from="freelance" type={type} username={props.username} isProfileEditMode={true} />
         </div>
     );
 };

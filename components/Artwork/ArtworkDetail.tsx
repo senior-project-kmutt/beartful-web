@@ -3,6 +3,8 @@ import style from "@/styles/artwork/artworkLayout.module.scss";
 import { Carousel, CustomFlowbiteTheme } from "flowbite-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
+import router from "next/router";
+import { deleteArtwork } from "@/services/artwork/artwork.api";
 
 interface Props {
   item: Artwork;
@@ -77,8 +79,11 @@ const ArtworkDetail = (props: Props) => {
 
         {/* show only when freelance account click to see own detail */}
         {isProfileEditMode && (<>
-          <button>edit artwork</button>
-          <button>delete artwork</button></>
+          <button onClick={() => router.push('/login')}>edit artwork</button>
+          <button onClick={() => {
+            deleteArtwork(_id)
+            window.location.reload()
+          }}>delete artwork</button></>
         )}
       </div>
     </div>

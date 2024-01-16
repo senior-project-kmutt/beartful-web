@@ -1,12 +1,13 @@
-import Artwork from "@/components/Artwork/Artwork";
-import { Router, useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import FreelanceArtwork from "./FreelanceArtwork";
 
-const Freelance: React.FC = () => {
+interface Props {
+    username: string
+    isProfileEditMode: boolean
+}
 
+const Freelance = (props: Props) => {
     return (
-        // ขอ mock username ไปก่อน เอามาจาก storage แหละ
-        <Artwork isSpecificFreelance={true} username={"freelance_test"} isProfileEditMode={true} />
+        <FreelanceArtwork username={props.username} isProfileEditMode={true} />
     );
 };
 

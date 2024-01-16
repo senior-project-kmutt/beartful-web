@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { get } from "../HttpClient";
+import { deleteMethod, get } from "../HttpClient";
 import { postPromise } from "../HttpClient";
 import { ArtworkFormData } from "@/components/Artwork/CRUDArtwork/ArtworkForm";
 import { IncomingHttpHeaders } from "http";
@@ -28,3 +28,8 @@ export const fetchArtworkData = async (pageNumber: number, type: string, isSpeci
 export const createArtwork = async (body: ArtworkFormData, headers: IncomingHttpHeaders): Promise<any> => {
   return await postPromise(`/artwork`, body, headers);
 };
+
+export const deleteArtwork = (artworkId: string) => {
+  return deleteMethod(`/artwork/${artworkId}`)
+
+}
