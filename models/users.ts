@@ -4,8 +4,9 @@ export interface Users {
   username: string;
   firstname: string;
   lastname: string;
-  profile_image: string;
-  role: string
+  profileImage: string;
+  role: string;
+  phoneNumber: string
 }
 
 export interface LoginUser {

@@ -3,6 +3,8 @@ import { createUser } from "@/services/user/user.api";
 import bcrypt from "bcryptjs";
 import style from "@/styles/authentication/form/PersonalForm.module.scss";
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
+import { errorMessageEmtryField, regexpEmail, regexpOnlyNumber, requiredFieldsCustomer } from "@/services/validation";
+import { uploadFileToFirebase } from "@/services/firebase/firebase-api";
 
 interface formDataType {
   [key: string]: any;
@@ -15,16 +17,18 @@ interface Props {
   setIsFinished: Dispatch<SetStateAction<boolean>>
 }
 const PersonalForm = (props: Props) => {
-  const { roleSelected, setRoleSelected, saveFormRegister, setIsFinished} = props
-  const [profileImage, serProfileImage] = useState<string>("https://i.pinimg.com/564x/d8/2c/87/d82c87e21e84a3e7649d16c968105553.jpg")
-  const [formPersonal, setFormPersonal] = useState<object>({})
-  const [errorMessgae, setErrorMessage] = useState<object>({})
+  const defaultProfileImage = "https://i.pinimg.com/564x/d8/2c/87/d82c87e21e84a3e7649d16c968105553.jpg";
+  const { roleSelected, setRoleSelected, saveFormRegister, setIsFinished } = props
+  const [profileImage, setProfileImage] = useState<string>(defaultProfileImage);
+  const [profileImageFile, setProfileImageFile] = useState<File[]>()
+  const [formPersonal, setFormPersonal] = useState<formDataType>({})
+  const [errorMessage, setErrorMessage] = useState<formDataType>({})
 
   useEffect(() => {
     setFormPersonal({
       ...formPersonal,
       role: roleSelected,
-      profile_image: profileImage
+      profileImage: profileImage
     })
   }, [])
 
@@ -50,48 +54,87 @@ const PersonalForm = (props: Props) => {
     if (event.target.files) {
       const [file] = event.target.files;
       const imageSrc = URL.createObjectURL(file);
-      serProfileImage(imageSrc);
-      setFormPersonal({
-        ...formPersonal,
-        "profile_image": imageSrc
-      })
+      setProfileImage(imageSrc);
+      setProfileImageFile([
+        ...event.target.files
+      ]);
     }
   }
 
   const handleInputChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const inputName = event.target.name;
     const inputValue = event.target.value;
+    setErrorMessage({
+      ...errorMessage,
+      [inputName]: ''
+    })
+
     if (inputName === 'role') {
       setRoleSelected(inputValue);
       setFormPersonal({
         ...formPersonal,
         [inputName]: inputValue
       })
-    } else {
-      setFormPersonal({
-        ...formPersonal,
-        [inputName]: inputValue
-      })
+    }
+    
+    if (inputName === 'email') {
+      if (!regexpEmail.test(inputValue)) {
+        setErrorMessage({
+          ...errorMessage,
+          [inputName]: 'กรุณาระบุ e-mail ให้ถูกต้อง'
+        })
+      }
+    }
+
+    setFormPersonal({
+      ...formPersonal,
+      [inputName]: inputValue
+    })
+  }
+
+  const onSubmit = async () => {
+    let isValid: boolean = true;
+    const newErrorMessage: formDataType = {};
+
+    requiredFieldsCustomer.forEach(key => {
+      if (!formPersonal[key]) {
+        newErrorMessage[key] = errorMessageEmtryField[key];
+        isValid = false;
+      }
+    });
+
+    if (!regexpEmail.test(formPersonal['email'])) {
+      console.log(formPersonal['email']);
+      newErrorMessage['email'] = 'กรุณาระบุ e-mail ให้ถูกต้อง'
+      isValid = false;
+    }
+
+    if (!regexpOnlyNumber.test(formPersonal['phoneNumber'])) {
+      newErrorMessage['phoneNumber'] = 'กรุณาระบุให้ถูกต้อง'
+      isValid = false;
+    }
+
+    if (formPersonal['confirmPassword'] !== formPersonal['password']) {
+      newErrorMessage['confirmPassword'] = 'รหัสผ่านไม่ตรงกัน'
+      isValid = false;
+    }
+
+    setErrorMessage(newErrorMessage);
+    if (isValid) {
+      const submitDataForm = formPersonal;
+      const encryptPassword = await bcrypt.hash(submitDataForm['password'] as string, 10);
+      delete submitDataForm['confirmPassword'];
+      submitDataForm['password'] = encryptPassword
+      if (profileImageFile) {
+        const imageUrls = await uploadFileToFirebase(profileImageFile, `user/profile-image`, formPersonal['username']);
+        submitDataForm['profileImage'] = imageUrls[0]
+      } else {
+        submitDataForm['profileImage'] = defaultProfileImage;
+      }
+      setIsFinished(true);
+      saveFormRegister(submitDataForm);
     }
   }
-
-  const onSubmit = () => {
-    setIsFinished(true);
-    saveFormRegister(formPersonal);
-  }
-
-  // const handleInputChange = (event: ChangeEvent<HTMLSelectElement>) => {
-  //   const inputName = event.target.name;
-  //   const inputValue = event.target.value;
-  //   if (inputName === 'role') {
-  //     // setRoleSelected(inputValue);
-  //     setFormPersonal({
-  //       ...formPersonal,
-  //       [inputName]: inputValue
-  //     })
-
-  //   }
-  // }
 
   return (
     <div className={style.main}>
@@ -120,7 +163,13 @@ const PersonalForm = (props: Props) => {
                   <p>firstname</p>
                   <p className={style.tips}>0 / 100 characters</p>
                 </div>
-                <input type="text" name="firstname" maxLength={100} onChange={(e) => handleInputChange(e)} />
+                <input
+                  type="text"
+                  name="firstname"
+                  maxLength={100}
+                  onChange={(e) => handleInputChange(e)}
+                />
+                <p className={style.error}>{errorMessage.firstname}</p>
               </label>
             </div>
             <div className={style.each_field}>
@@ -129,7 +178,13 @@ const PersonalForm = (props: Props) => {
                   <p>e-mail</p>
                   <p className={style.tips}>0 / 100 characters</p>
                 </div>
-                <input type="text" name="email" maxLength={100} onChange={(e) => handleInputChange(e)} />
+                <input
+                  type="text"
+                  name="email"
+                  maxLength={100}
+                  onChange={(e) => handleInputChange(e)}
+                />
+                <p className={style.error}>{errorMessage.email}</p>
               </label>
             </div>
             <div className={style.each_field}>
@@ -137,7 +192,12 @@ const PersonalForm = (props: Props) => {
                 <div>
                   <p>password</p>
                 </div>
-                <input type="password" name="password" onChange={(e) => handleInputChange(e)} />
+                <input
+                  type="password"
+                  name="password"
+                  onChange={(e) => handleInputChange(e)}
+                />
+                <p className={style.error}>{errorMessage.password}</p>
               </label>
             </div>
           </div>
@@ -148,7 +208,13 @@ const PersonalForm = (props: Props) => {
                   <p>username</p>
                   <p className={style.tips}>0 / 100 characters</p>
                 </div>
-                <input type="text" name="username" maxLength={100} onChange={(e) => handleInputChange(e)} />
+                <input
+                  type="text"
+                  name="username"
+                  maxLength={100}
+                  onChange={(e) => handleInputChange(e)}
+                />
+                <p className={style.error}>{errorMessage.username}</p>
               </label>
             </div>
             <div className={style.each_field}>
@@ -157,7 +223,13 @@ const PersonalForm = (props: Props) => {
                   <p>lastname</p>
                   <p className={style.tips}>0 / 100 characters</p>
                 </div>
-                <input type="text" name="lastname" maxLength={100} onChange={(e) => handleInputChange(e)} />
+                <input
+                  type="text"
+                  name="lastname"
+                  maxLength={100}
+                  onChange={(e) => handleInputChange(e)}
+                />
+                <p className={style.error}>{errorMessage.lastname}</p>
               </label>
             </div>
             <div className={style.each_field}>
@@ -166,7 +238,13 @@ const PersonalForm = (props: Props) => {
                   <p>phone number</p>
                   <p className={style.tips}>0 / 10 characters</p>
                 </div>
-                <input type="text" name="phoneNumber" maxLength={10} onChange={(e) => handleInputChange(e)} />
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  maxLength={10}
+                  onChange={(e) => handleInputChange(e)}
+                />
+                <p className={style.error}>{errorMessage.phoneNumber}</p>
               </label>
             </div>
             <div className={style.each_field}>
@@ -174,7 +252,12 @@ const PersonalForm = (props: Props) => {
                 <div>
                   <p>confirm password</p>
                 </div>
-                <input type="password" name="confirmPassword" onChange={(e) => handleInputChange(e)} />
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  onChange={(e) => handleInputChange(e)}
+                />
+                <p className={style.error}>{errorMessage.confirmPassword}</p>
               </label>
             </div>
           </div>

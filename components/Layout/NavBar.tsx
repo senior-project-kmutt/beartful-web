@@ -36,7 +36,7 @@ const NavBar = () => {
         <Navbar.Collapse>
           {!user ? (
             <>
-              <Navbar.Link className={style.text_menu} onClick={() => router.push('/login')}>SIGN IN</Navbar.Link>
+              <Navbar.Link className={style.text_menu} onClick={() => router.push('/authen')}>SIGN IN</Navbar.Link>
               <Navbar.Link className={`${style.text_menu} mr-4`} onClick={() => router.push('/register')}>SIGN UP</Navbar.Link>
             </>
           ) : (
@@ -60,7 +60,7 @@ const NavBar = () => {
                   arrowIcon={true}
                   inline
                   label={
-                    <Avatar alt="User settings" img={user.profile_image} rounded />
+                    <Avatar alt="User settings" img={user.profileImage} rounded />
                   }
                 >
                   <Dropdown.Header>
