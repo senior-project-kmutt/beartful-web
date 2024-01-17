@@ -19,14 +19,14 @@ export interface IParticipant {
   firstname: string;
   lastname: string;
   role: string;
-  profile_image: string;
+  profileImage: string;
   createdAt: Date
 }
 
 export interface IUser {
   id: string;
   username: string;
-  profile_image: string;
+  profileImage: string;
   role: string;
 }
 
