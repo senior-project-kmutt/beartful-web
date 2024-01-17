@@ -25,9 +25,10 @@ const Authentication = () => {
     }
   }, []);
 
-  useEffect(() => {
-    router.push(`/authen?page=${activeMenu}`);
-  }, [activeMenu]);
+  const changePageParams = (params: string) => {
+    setActiveMenu(params);
+    router.push(`/authen?page=${params}`);
+  }
 
 
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -88,20 +89,20 @@ const Authentication = () => {
               <div className={style.sign_in}>
                 <h1>GET STARTED WITH <span className="">BEARTFUL</span> </h1>
                 <p>Please fill in this form to create an account !</p>
-                <p>Already have an account? <span onClick={() => setActiveMenu('login')} className="font-extrabold cursor-pointer underline">SIGN IN</span></p>
+                <p>Already have an account? <span onClick={() => changePageParams('login')} className="font-extrabold cursor-pointer underline">SIGN IN</span></p>
               </div>
             )}
         </div>
         <div className={style.warp}>
           <div className={style.switch}>
             <div
-              onClick={() => setActiveMenu('login')}
+              onClick={() => changePageParams('login')}
               className={activeMenu === 'login' ? `${style.item_active}` : `${style.item}`}
             >
               SIGN IN
             </div>
             <div
-              onClick={() => setActiveMenu('signup')}
+              onClick={() => changePageParams('signup')}
               className={activeMenu === 'signup' ? `${style.item_active}` : `${style.item}`}
             >
               SIGN UP
@@ -127,7 +128,7 @@ const Authentication = () => {
                   <input className={`${style.submit_button} mr-4`} type="submit" value="SIGN IN" />
                   <Link className={style.cancel_button} href="/">CANCEL</Link>
                   <p className="text-xs pt-3 pl-2 font-medium">New to BeArtFul?&nbsp;
-                    <span onClick={() => setActiveMenu('signup')} className="underline cursor-pointer">Create an account</span>
+                    <span onClick={() => changePageParams('signup')} className="underline cursor-pointer">Create an account</span>
                   </p>
                 </div>
               </form>

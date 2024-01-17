@@ -36,8 +36,8 @@ const NavBar = () => {
         <Navbar.Collapse>
           {!user ? (
             <>
-              <Navbar.Link className={style.text_menu} onClick={() => router.push('/authen')}>SIGN IN</Navbar.Link>
-              <Navbar.Link className={`${style.text_menu} mr-4`} onClick={() => router.push('/register')}>SIGN UP</Navbar.Link>
+              <Navbar.Link className={style.text_menu} onClick={() => router.push('/authen?page=login')}>SIGN IN</Navbar.Link>
+              <Navbar.Link className={`${style.text_menu} mr-4`} onClick={() => router.push('/authen?page=signup')}>SIGN UP</Navbar.Link>
             </>
           ) : (
             <>
