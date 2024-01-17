@@ -2,8 +2,8 @@ import { LoginUser } from "@/models/users";
 import { login } from "@/services/user/user.api";
 import Link from "next/link";
 import style from "@/styles/authentication/loginLayout.module.scss"
-import { useState } from "react";
-import Router from 'next/router';
+import { useEffect, useState } from "react";
+import Router, { useRouter } from 'next/router';
 import Swal from 'sweetalert2'
 import Register from "./Register";
 
@@ -11,9 +11,25 @@ interface formDataType {
   [key: string]: any;
 }
 const Authentication = () => {
-  const [activeMenu, setActiveMenu] = useState<string>('sign in');
+  const router = useRouter();
+  const [activeMenu, setActiveMenu] = useState<string>('');
   const [usernameErr, setUsernameErr] = useState<string>('');
   const [passwordErr, setPasswordErr] = useState<string>('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlSearchString = window.location.search;
+      const params = new URLSearchParams(urlSearchString);
+      const page = params.get('page');
+      setActiveMenu(page || '')
+    }
+  }, []);
+
+  useEffect(() => {
+    router.push(`/authen?page=${activeMenu}`);
+  }, [activeMenu]);
+
+
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const responseBody: formDataType = {};
@@ -61,39 +77,39 @@ const Authentication = () => {
       <div className={style.main}>
       <div>
         <div className={style.welcome}>
-            {activeMenu === "sign in" && (
+            {activeMenu === "login" && (
               <>
                 <h1>WELCOME</h1>
                 <p>We are really happy to see you again !</p>
               </>
             )}
 
-            {activeMenu === "sign up" && (
+            {activeMenu === "signup" && (
               <div className={style.sign_in}>
                 <h1>GET STARTED WITH <span className="">BEARTFUL</span> </h1>
                 <p>Please fill in this form to create an account !</p>
-                <p>Already have an account? <span onClick={() => setActiveMenu('sign in')} className="font-extrabold cursor-pointer underline">SIGN IN</span></p>
+                <p>Already have an account? <span onClick={() => setActiveMenu('login')} className="font-extrabold cursor-pointer underline">SIGN IN</span></p>
               </div>
             )}
         </div>
         <div className={style.warp}>
           <div className={style.switch}>
             <div
-              onClick={() => setActiveMenu('sign in')}
-              className={activeMenu === 'sign in' ? `${style.item_active}` : `${style.item}`}
+              onClick={() => setActiveMenu('login')}
+              className={activeMenu === 'login' ? `${style.item_active}` : `${style.item}`}
             >
               SIGN IN
             </div>
             <div
-              onClick={() => setActiveMenu('sign up')}
-              className={activeMenu === 'sign up' ? `${style.item_active}` : `${style.item}`}
+              onClick={() => setActiveMenu('signup')}
+              className={activeMenu === 'signup' ? `${style.item_active}` : `${style.item}`}
             >
               SIGN UP
             </div>
           </div>
         </div>
 
-        {activeMenu === 'sign in' && (
+        {activeMenu === 'login' && (
           <div>
             <div className={`${style.warp} mt-14`}>
               <form onSubmit={submitForm}>
@@ -111,7 +127,7 @@ const Authentication = () => {
                   <input className={`${style.submit_button} mr-4`} type="submit" value="SIGN IN" />
                   <Link className={style.cancel_button} href="/">CANCEL</Link>
                   <p className="text-xs pt-3 pl-2 font-medium">New to BeArtFul?&nbsp;
-                    <span onClick={() => setActiveMenu('sign up')} className="underline cursor-pointer">Create an account</span>
+                    <span onClick={() => setActiveMenu('signup')} className="underline cursor-pointer">Create an account</span>
                   </p>
                 </div>
               </form>
@@ -119,7 +135,7 @@ const Authentication = () => {
           </div>
         )}
 
-        {activeMenu === 'sign up' && (
+        {activeMenu === 'signup' && (
           <div className={`${style.warp} p-16`}>
             <Register />
           </div>
