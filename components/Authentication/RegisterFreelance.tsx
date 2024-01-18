@@ -12,21 +12,26 @@ interface formDataType {
 interface Props {
   roleSelected: string;
   setRoleSelected: Dispatch<SetStateAction<string>>
+  activeMenu: string
 }
 const RegisterFreelance = (props: Props) => {
-  const { roleSelected, setRoleSelected} = props
+  const { roleSelected, setRoleSelected, activeMenu} = props
   const [formPersonal, setFormPersonal] = useState<any>({})
-  const [isFormPersonalValid, setIsFormPersonalValid,] = useState<boolean>(false)
+  const [isFormPersonalValid, setIsFormPersonalValid] = useState<boolean>(false)
   
   return (
-    <>
-      <PersonalForm
+    <div>
+      {activeMenu === "personal" ? (
+        <PersonalForm
         roleSelected={roleSelected}
         setRoleSelected={setRoleSelected}
         saveFormRegister={setFormPersonal}
         setIsFinished={setIsFormPersonalValid}
       />
-    </>
+      ) : (
+        <div>{activeMenu}</div>
+      )}
+    </div>
   );
 };
 

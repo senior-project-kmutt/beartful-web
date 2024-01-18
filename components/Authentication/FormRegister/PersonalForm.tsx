@@ -282,7 +282,7 @@ const PersonalForm = (props: Props) => {
         </div>
       </div>
       {roleSelected === 'freelance' && (
-        <div>for freelance</div>
+        <div></div>
       )}
       <div className={style.button}>
         <div className="flex justify-center">

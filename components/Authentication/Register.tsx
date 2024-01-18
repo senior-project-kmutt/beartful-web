@@ -11,14 +11,31 @@ interface formDataType {
 }
 const Register = () => {
   const [roleSelected, setRoleSelected] = useState<string>('customer')
+  const [activeMenu, setActiveMenu] = useState<string>('personal')
   const sideBarMenu = [
     {
-      title: 'ข้อมูลส่วนบุคคล',
+      title: 'ข้อมูลทั่วไป',
       value: 'personal'
     },
     {
       title: 'ประวัติการศึกษา',
       value: 'education'
+    },
+    {
+      title: 'ประสบการ์ทำงาน',
+      value: 'experience'
+    },
+    {
+      title: 'ทักษะและภาษา',
+      value: 'skillAndLanguage'
+    },
+    {
+      title: 'ใบอนุญาติ / รางวัลที่ได้รับ',
+      value: 'licenseAndAwards'
+    },
+    {
+      title: 'ข้อมูลบัญชีและการเงิน',
+      value: 'accountingAndFinancial'
     }
   ]
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -38,17 +55,27 @@ const Register = () => {
       createUser(responseBody as unknown as Users);
     }
   };
+
+  const handleChangeMenu = (menu: string) => {
+    setActiveMenu(menu)
+  }
   return (
     <div>
       <div className={style.container}>
         <div className={`${style.side_menu} ${roleSelected === 'customer' && style.close}`}>
-          <ul>
+          <div>
             {sideBarMenu.map((menu, index) => {
               return (
-                <div key={index}>{menu.title}</div>
+                <div
+                  className={`${style.item} ${menu.value === activeMenu && style.active}`}
+                  key={index}
+                  onClick={() => handleChangeMenu(menu.value)}
+                >
+                  {menu.title}
+                </div>
               )
             })}
-          </ul>
+          </div>
         </div>
         <div className={`${style.input_container} ${roleSelected === 'customer' && style.full}`}>
           {roleSelected === 'customer' ? (
@@ -56,7 +83,7 @@ const Register = () => {
               <RegisterCustomer roleSelected={roleSelected} setRoleSelected={setRoleSelected} />
             </>
           ) : (
-            <RegisterFreelance roleSelected={roleSelected} setRoleSelected={setRoleSelected} />
+            <RegisterFreelance roleSelected={roleSelected} setRoleSelected={setRoleSelected} activeMenu={activeMenu} />
           )}
         </div>
       </div>
