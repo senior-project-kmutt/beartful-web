@@ -6,6 +6,7 @@ import ChatMessage from "@/components/Chat/ChatMessage";
 import NavBar from "@/components/Layout/NavBar"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/router";
 
 export interface IChatRoom {
   participants: IParticipant[];
@@ -31,13 +32,18 @@ export interface IUser {
 }
 
 export default function Home() {
+  const router = useRouter();
   const [chatRoom, setChatRoom] = useState<IChatRoom[]>([])
   const [user, setUser] = useState<IUser>()
   const [selectedChatRoom, setSelectedChatRoom] = useState<IChatRoom>()
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user') || '');
-    setUser(user)
+    const userFromSession = localStorage.getItem('user');
+    if (userFromSession) {
+      setUser(JSON.parse(userFromSession))
+    } else {
+      router.push("/")
+    }
   }, []);
 
   useEffect(() => {
