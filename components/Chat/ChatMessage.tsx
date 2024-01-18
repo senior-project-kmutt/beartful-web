@@ -128,7 +128,7 @@ const ChatMessage = (props: Props) => {
 
   const getImageByUserId = (userId: string) => {
     const user = participants?.find((item) => item.user_id === userId)
-    return user?.profile_image
+    return user?.profileImage
   }
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -175,7 +175,7 @@ const ChatMessage = (props: Props) => {
     <div className={styles.message_main}>
       <div className={styles.message_container}>
         <div className={styles.chat_header}>
-          <img src={selectedChatRoom?.participants[0].profile_image} alt="" />
+          <img src={selectedChatRoom?.participants[0].profileImage} alt="" />
           <p>{selectedChatRoom?.participants[0].username}</p>
         </div>
         <div className={styles.message_wrap} ref={chatContainerRef}>

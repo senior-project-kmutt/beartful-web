@@ -38,7 +38,7 @@ const ChatProfile = (props: Props) => {
 
   return (
     <div className={styles.profile_warp}>
-      <img src={profile.profile_image} alt="" />
+      <img src={profile.profileImage} alt="" />
       <p className='text-3xl font-bold mt-5'>{profile.username}</p>
       <p className='text-xl font-bold text-stone-500 py-2'>{profile.firstname} {profile.lastname}</p>
       <div className={styles.role}>
