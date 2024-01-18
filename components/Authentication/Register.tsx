@@ -41,7 +41,7 @@ const Register = () => {
   return (
     <div>
       <div className={style.container}>
-        <div className={`${style.side_menu} ${roleSelected === 'freelance' ? '' : style.close}`}>
+        <div className={`${style.side_menu} ${roleSelected === 'customer' && style.close}`}>
           <ul>
             {sideBarMenu.map((menu, index) => {
               return (
@@ -50,7 +50,7 @@ const Register = () => {
             })}
           </ul>
         </div>
-        <div className={style.input_container}>
+        <div className={`${style.input_container} ${roleSelected === 'customer' && style.full}`}>
           {roleSelected === 'customer' ? (
             <>
               <RegisterCustomer roleSelected={roleSelected} setRoleSelected={setRoleSelected} />

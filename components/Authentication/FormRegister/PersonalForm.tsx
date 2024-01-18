@@ -138,7 +138,7 @@ const PersonalForm = (props: Props) => {
 
   return (
     <div className={style.main}>
-      <div className="flex">
+      <div className="flex justify-center">
         <div className={style.input_field}>
           <div className={style.left}>
             <div className={style.each_field}>
@@ -161,7 +161,7 @@ const PersonalForm = (props: Props) => {
               <label>
                 <div>
                   <p>firstname</p>
-                  <p className={style.tips}>0 / 100 characters</p>
+                  <p className={style.tips}>{formPersonal.firstname?.length || 0} / 100 characters</p>
                 </div>
                 <input
                   type="text"
@@ -176,7 +176,7 @@ const PersonalForm = (props: Props) => {
               <label>
                 <div>
                   <p>e-mail</p>
-                  <p className={style.tips}>0 / 100 characters</p>
+                  <p className={style.tips}>{formPersonal.email?.length || 0} / 100 characters</p>
                 </div>
                 <input
                   type="text"
@@ -206,7 +206,7 @@ const PersonalForm = (props: Props) => {
               <label>
                 <div>
                   <p>username</p>
-                  <p className={style.tips}>0 / 100 characters</p>
+                  <p className={style.tips}>{formPersonal.username?.length || 0} / 100 characters</p>
                 </div>
                 <input
                   type="text"
@@ -221,7 +221,7 @@ const PersonalForm = (props: Props) => {
               <label>
                 <div>
                   <p>lastname</p>
-                  <p className={style.tips}>0 / 100 characters</p>
+                  <p className={style.tips}>{formPersonal.lastname?.length || 0} / 100 characters</p>
                 </div>
                 <input
                   type="text"
@@ -236,7 +236,7 @@ const PersonalForm = (props: Props) => {
               <label>
                 <div>
                   <p>phone number</p>
-                  <p className={style.tips}>0 / 10 characters</p>
+                  <p className={style.tips}>{formPersonal.phoneNumber?.length || 0} / 10 characters</p>
                 </div>
                 <input
                   type="text"
@@ -285,8 +285,10 @@ const PersonalForm = (props: Props) => {
         <div>for freelance</div>
       )}
       <div className={style.button}>
-        <button className={style.submit} onClick={onSubmit}>Submit</button>
-        <button className={style.cancel}>Cancel</button>
+        <div className="flex justify-center">
+          <button className={style.submit} onClick={onSubmit}>Submit</button>
+          <button className={style.cancel}>Cancel</button>
+        </div>
       </div>
     </div>
   );
