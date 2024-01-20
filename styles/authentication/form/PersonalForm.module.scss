@@ -2,48 +2,52 @@
     width: 100%;
 
     .input_field {
-        display: flex;
         width: 75%;
 
         .each_field {
             width: 85%;
             margin-bottom: 26px;
+        }
 
-            label {
-                margin-bottom: 40px;
+        label {
+            margin-bottom: 40px;
 
-                div {
-                    display: flex;
-                    margin-bottom: 2px;
-                    align-items: center;
+            div {
+                display: flex;
+                margin-bottom: 2px;
+                align-items: center;
 
-                    .tips {
-                        color: #545151;
-                        margin-left: auto;
-                        font-size: 13px;
-                    }
+                .tips {
+                    color: #545151;
+                    margin-left: auto;
+                    font-size: 13px;
                 }
+            }
 
-                p {
-                    font-weight: 800;
-                    text-transform: uppercase;
-                }
+            p {
+                font-weight: 800;
+                text-transform: uppercase;
+            }
 
-                .error {
-                    color: red;
-                    font-size: 12px;
-                    font-weight: 400;
-                    text-transform: none;
-                    margin-top: 2px;
-                }
+            .error {
+                color: red;
+                font-size: 12px;
+                font-weight: 400;
+                text-transform: none;
+                margin-top: 2px;
             }
         }
 
         input,
-        select {
+        select,
+        textarea {
             border: 1px solid #5a2810;
             border-radius: 6px;
             width: 100%;
+        }
+
+        textarea {
+            width: 92%;
         }
 
         .left {
@@ -54,6 +58,22 @@
         .right {
             width: 50%;
             // border: 1px solid green;
+        }
+
+        .dateOfBirth {
+            display: flex;
+
+            .date {
+                width: 20%;
+                margin-right: 20px
+            }
+            .month {
+                width: 36%;
+                margin-right: 20px
+            }
+            .year {
+                width: 31%
+            }
         }
     }
 

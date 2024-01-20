@@ -24,6 +24,11 @@ const PersonalForm = (props: Props) => {
   const [formPersonal, setFormPersonal] = useState<formDataType>({})
   const [errorMessage, setErrorMessage] = useState<formDataType>({})
 
+  const thaiMonths = [
+    'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+    'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
+  ];
+
   useEffect(() => {
     setFormPersonal({
       ...formPersonal,
@@ -61,7 +66,7 @@ const PersonalForm = (props: Props) => {
     }
   }
 
-  const handleInputChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {
     const inputName = event.target.name;
     const inputValue = event.target.value;
     setErrorMessage({
@@ -76,7 +81,7 @@ const PersonalForm = (props: Props) => {
         [inputName]: inputValue
       })
     }
-    
+
     if (inputName === 'email') {
       if (!regexpEmail.test(inputValue)) {
         setErrorMessage({
@@ -136,137 +141,205 @@ const PersonalForm = (props: Props) => {
     }
   }
 
+  function generateOptions(start: number, end: number) {
+    const options = [];
+    for (let i = start; i <= end; i++) {
+      options.push(<option key={i} value={i}>{i}</option>);
+    }
+    return options;
+  }
+
   return (
     <div className={style.main}>
       <div className="flex justify-center">
         <div className={style.input_field}>
-          <div className={style.left}>
-            <div className={style.each_field}>
-              <label>
-                <div>
-                  <p>member type</p>
-                </div>
-                <select
-                  onChange={(e) => handleInputChange(e)}
-                  value={roleSelected}
-                  id="role"
-                  name="role"
-                >
-                  <option value="customer">customer</option>
-                  <option value="freelance">freelance</option>
-                </select>
-              </label>
+          <div className="flex justify-center">
+            <div className={style.left}>
+              <div className={style.each_field}>
+                <label>
+                  <div>
+                    <p>ประเภทสมาชิก</p>
+                  </div>
+                  <select
+                    onChange={(e) => handleInputChange(e)}
+                    value={roleSelected}
+                    id="role"
+                    name="role"
+                  >
+                    <option value="customer">customer</option>
+                    <option value="freelance">freelance</option>
+                  </select>
+                </label>
+              </div>
+              <div className={style.each_field}>
+                <label>
+                  <div>
+                    <p>ชื่อ</p>
+                    <p className={style.tips}>{formPersonal.firstname?.length || 0} / 100 characters</p>
+                  </div>
+                  <input
+                    type="text"
+                    name="firstname"
+                    maxLength={100}
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                  <p className={style.error}>{errorMessage.firstname}</p>
+                </label>
+              </div>
+              <div className={style.each_field}>
+                <label>
+                  <div>
+                    <p>อีเมล</p>
+                    <p className={style.tips}>{formPersonal.email?.length || 0} / 100 characters</p>
+                  </div>
+                  <input
+                    type="text"
+                    name="email"
+                    maxLength={100}
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                  <p className={style.error}>{errorMessage.email}</p>
+                </label>
+              </div>
+              <div className={style.each_field}>
+                <label>
+                  <div>
+                    <p>รหัสผ่าน</p>
+                  </div>
+                  <input
+                    type="password"
+                    name="password"
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                  <p className={style.error}>{errorMessage.password}</p>
+                </label>
+              </div>
             </div>
-            <div className={style.each_field}>
-              <label>
-                <div>
-                  <p>firstname</p>
-                  <p className={style.tips}>{formPersonal.firstname?.length || 0} / 100 characters</p>
-                </div>
-                <input
-                  type="text"
-                  name="firstname"
-                  maxLength={100}
-                  onChange={(e) => handleInputChange(e)}
-                />
-                <p className={style.error}>{errorMessage.firstname}</p>
-              </label>
-            </div>
-            <div className={style.each_field}>
-              <label>
-                <div>
-                  <p>e-mail</p>
-                  <p className={style.tips}>{formPersonal.email?.length || 0} / 100 characters</p>
-                </div>
-                <input
-                  type="text"
-                  name="email"
-                  maxLength={100}
-                  onChange={(e) => handleInputChange(e)}
-                />
-                <p className={style.error}>{errorMessage.email}</p>
-              </label>
-            </div>
-            <div className={style.each_field}>
-              <label>
-                <div>
-                  <p>password</p>
-                </div>
-                <input
-                  type="password"
-                  name="password"
-                  onChange={(e) => handleInputChange(e)}
-                />
-                <p className={style.error}>{errorMessage.password}</p>
-              </label>
+            <div className={style.right}>
+              <div className={style.each_field}>
+                <label>
+                  <div>
+                    <p>ชื่อผู้ใช้งาน</p>
+                    <p className={style.tips}>{formPersonal.username?.length || 0} / 100 characters</p>
+                  </div>
+                  <input
+                    type="text"
+                    name="username"
+                    maxLength={100}
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                  <p className={style.error}>{errorMessage.username}</p>
+                </label>
+              </div>
+              <div className={style.each_field}>
+                <label>
+                  <div>
+                    <p>นามสกุล</p>
+                    <p className={style.tips}>{formPersonal.lastname?.length || 0} / 100 characters</p>
+                  </div>
+                  <input
+                    type="text"
+                    name="lastname"
+                    maxLength={100}
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                  <p className={style.error}>{errorMessage.lastname}</p>
+                </label>
+              </div>
+              <div className={style.each_field}>
+                <label>
+                  <div>
+                    <p>เบอร์โทรศัพท์</p>
+                    <p className={style.tips}>{formPersonal.phoneNumber?.length || 0} / 10 characters</p>
+                  </div>
+                  <input
+                    type="text"
+                    name="phoneNumber"
+                    maxLength={10}
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                  <p className={style.error}>{errorMessage.phoneNumber}</p>
+                </label>
+              </div>
+              <div className={style.each_field}>
+                <label>
+                  <div>
+                    <p>ยืนยันรหัสผ่าน</p>
+                  </div>
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                  <p className={style.error}>{errorMessage.confirmPassword}</p>
+                </label>
+              </div>
             </div>
           </div>
-          <div className={style.right}>
-            <div className={style.each_field}>
-              <label>
-                <div>
-                  <p>username</p>
-                  <p className={style.tips}>{formPersonal.username?.length || 0} / 100 characters</p>
+          {roleSelected === 'freelance' && (
+            <div>
+              <div className="mb-6">
+                <label>
+                  <p>วัน เดือน ปีเกิด</p>
+                </label>
+                <div className={style.dateOfBirth}>
+                  <div className={style.date}>
+                    <select
+                      onChange={(e) => handleInputChange(e)}
+                      value={roleSelected}
+                      id="date"
+                      name="date"
+                    >
+                      {generateOptions(1, 31)}
+                    </select>
+                  </div>
+                  <div className={style.month}>
+                    <select
+                      onChange={(e) => handleInputChange(e)}
+                      value={roleSelected}
+                      id="month"
+                      name="month"
+                    >
+                      {thaiMonths.map((month, index) => {
+                        return (
+                          <option key={index} value={index + 1}>{month}</option>
+                        )
+                      })}
+                    </select>
+                  </div>
+                  <div className={style.year}>
+                    <select
+                      onChange={(e) => handleInputChange(e)}
+                      value={roleSelected}
+                      id="year"
+                      name="year"
+                    >
+                      {generateOptions(2460, 2549)}
+                    </select>
+                  </div>
                 </div>
-                <input
-                  type="text"
-                  name="username"
-                  maxLength={100}
-                  onChange={(e) => handleInputChange(e)}
-                />
-                <p className={style.error}>{errorMessage.username}</p>
-              </label>
+              </div>
+              <div>
+                <label>
+                  <div>
+                    <p>ที่อยู่ปัจจุบัน</p>
+                  </div>
+                  <textarea
+                    name="address"
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                  <p className={style.error}>{errorMessage.address}</p>
+                </label>
+
+              </div>
             </div>
-            <div className={style.each_field}>
-              <label>
-                <div>
-                  <p>lastname</p>
-                  <p className={style.tips}>{formPersonal.lastname?.length || 0} / 100 characters</p>
-                </div>
-                <input
-                  type="text"
-                  name="lastname"
-                  maxLength={100}
-                  onChange={(e) => handleInputChange(e)}
-                />
-                <p className={style.error}>{errorMessage.lastname}</p>
-              </label>
-            </div>
-            <div className={style.each_field}>
-              <label>
-                <div>
-                  <p>phone number</p>
-                  <p className={style.tips}>{formPersonal.phoneNumber?.length || 0} / 10 characters</p>
-                </div>
-                <input
-                  type="text"
-                  name="phoneNumber"
-                  maxLength={10}
-                  onChange={(e) => handleInputChange(e)}
-                />
-                <p className={style.error}>{errorMessage.phoneNumber}</p>
-              </label>
-            </div>
-            <div className={style.each_field}>
-              <label>
-                <div>
-                  <p>confirm password</p>
-                </div>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  onChange={(e) => handleInputChange(e)}
-                />
-                <p className={style.error}>{errorMessage.confirmPassword}</p>
-              </label>
-            </div>
-          </div>
+          )}
         </div>
         <div className={style.upload_image}>
           <div><img src={profileImage} alt="" /></div>
           <div className={style.input_image}>
             <label htmlFor="profile_image">
-              <p>UPLOAD PICTURE</p>
+              <p>อัปโหลดรูปโปรไฟล์</p>
             </label>
             <input
               onChange={handleInputFile}
@@ -281,9 +354,6 @@ const PersonalForm = (props: Props) => {
           </div>
         </div>
       </div>
-      {roleSelected === 'freelance' && (
-        <div></div>
-      )}
       <div className={style.button}>
         <div className="flex justify-center">
           <button className={style.submit} onClick={onSubmit}>Submit</button>

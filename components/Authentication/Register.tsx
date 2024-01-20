@@ -22,7 +22,7 @@ const Register = () => {
       value: 'education'
     },
     {
-      title: 'ประสบการ์ทำงาน',
+      title: 'ประสบการณ์ทำงาน',
       value: 'experience'
     },
     {
