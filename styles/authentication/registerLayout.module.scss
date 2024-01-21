@@ -6,7 +6,6 @@
     .side_menu {
         transition: width 0.8s ease;
         width: 20%;
-        color: #100D0D;
         &.close {
             width: 0;
             transition: width 0.8s ease;
@@ -16,7 +15,7 @@
         .itemSuccess {
             margin-bottom: 18px;
             cursor: pointer;
-            font-size: 17px;
+            color: #100D0D;
             font-weight: 0;
             &:hover {
                 color: #5A2810;
@@ -32,7 +31,6 @@
         .itemUnsuccess {
             margin-bottom: 18px;
             cursor: not-allowed;
-            font-size: 17px;
             font-weight: 0;
             color: #ACA9A9;
             &.active {
@@ -53,4 +51,25 @@
         }
     }
 
+}
+
+@media (max-width:1300px) {
+    .container {
+        width: 100vh;
+        font-size: smaller;
+    }
+}
+
+@media (max-width:1024px) {
+    .container {
+        width: 80vh;
+        font-size: 11px;
+        input, select, textarea {
+            font-size: 11px;
+            height: 38px;
+        }
+        input, select {
+            height: 38px;
+        }
+    }
 }
