@@ -2,7 +2,6 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "reac
 import PersonalForm from "./FormRegister/PersonalForm";
 import { createUser } from "@/services/user/user.api";
 import { Users } from "@/models/users";
-
 interface formDataType {
   [key: string]: any;
 }
@@ -21,7 +20,6 @@ const RegisterCustomer = (props: Props) => {
       createUser(formPersonal as unknown as Users);
     }
   }, [formPersonal])
-  
   return (
     <>
       <PersonalForm
@@ -29,6 +27,7 @@ const RegisterCustomer = (props: Props) => {
         setRoleSelected={setRoleSelected}
         saveFormRegister={setFormPersonal}
         setIsFinished={setIsFormPersonalValid}
+        defaultFormPersonal={formPersonal}
       />
     </>
   );

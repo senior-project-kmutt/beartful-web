@@ -13,3 +13,8 @@ export interface LoginUser {
   username: string;
   password: string;
 }
+
+export interface FreelanceUsers extends Users {
+  dateOfBirth: Date;
+  address: string
+}

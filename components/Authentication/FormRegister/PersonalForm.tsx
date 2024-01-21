@@ -3,7 +3,7 @@ import { createUser } from "@/services/user/user.api";
 import bcrypt from "bcryptjs";
 import style from "@/styles/authentication/form/PersonalForm.module.scss";
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
-import { errorMessageEmtryField, regexpEmail, regexpOnlyNumber, requiredFieldsCustomer } from "@/services/validation";
+import { errorMessageEmtryField, regexpEmail, regexpOnlyNumber, requiredFieldsCustomer, requiredFieldsFreelance } from "@/services/validation";
 import { uploadFileToFirebase } from "@/services/firebase/firebase-api";
 
 interface formDataType {
@@ -14,11 +14,12 @@ interface Props {
   roleSelected: string;
   setRoleSelected: Dispatch<SetStateAction<string>>;
   saveFormRegister: Dispatch<SetStateAction<any>>;
-  setIsFinished: Dispatch<SetStateAction<boolean>>
+  setIsFinished: Dispatch<SetStateAction<boolean>>;
+  defaultFormPersonal: any
 }
 const PersonalForm = (props: Props) => {
   const defaultProfileImage = "https://i.pinimg.com/564x/d8/2c/87/d82c87e21e84a3e7649d16c968105553.jpg";
-  const { roleSelected, setRoleSelected, saveFormRegister, setIsFinished } = props
+  const { roleSelected, setRoleSelected, saveFormRegister, setIsFinished, defaultFormPersonal } = props
   const [profileImage, setProfileImage] = useState<string>(defaultProfileImage);
   const [profileImageFile, setProfileImageFile] = useState<File[]>()
   const [formPersonal, setFormPersonal] = useState<formDataType>({})
@@ -30,11 +31,24 @@ const PersonalForm = (props: Props) => {
   ];
 
   useEffect(() => {
-    setFormPersonal({
-      ...formPersonal,
-      role: roleSelected,
-      profileImage: profileImage
-    })
+    if (defaultFormPersonal) {
+      defaultFormPersonal.password = ''
+      defaultFormPersonal.date = defaultFormPersonal.dateOfBirth?.getDate();
+      defaultFormPersonal.month = defaultFormPersonal.dateOfBirth?.getMonth();
+      defaultFormPersonal.year = defaultFormPersonal.dateOfBirth?.getYear();
+      delete defaultFormPersonal.dateOfBirth;
+      setFormPersonal(defaultFormPersonal);
+      setProfileImage(defaultFormPersonal.profileImage)
+    } else {
+      setFormPersonal({
+        ...formPersonal,
+        role: roleSelected,
+        profileImage: defaultProfileImage,
+        date: 1,
+        month: 0,
+        year: 4560
+      })
+    }
   }, [])
 
   const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -100,38 +114,55 @@ const PersonalForm = (props: Props) => {
   const onSubmit = async () => {
     let isValid: boolean = true;
     const newErrorMessage: formDataType = {};
+    const submitDataForm = formPersonal;
 
-    requiredFieldsCustomer.forEach(key => {
-      if (!formPersonal[key]) {
-        newErrorMessage[key] = errorMessageEmtryField[key];
-        isValid = false;
-      }
-    });
+    if (roleSelected === 'customer') {
+      requiredFieldsCustomer.forEach(key => {
+        if (!submitDataForm[key]) {
+          newErrorMessage[key] = errorMessageEmtryField[key];
+          isValid = false;
+        }
+      });
+    }
 
-    if (!regexpEmail.test(formPersonal['email'])) {
-      console.log(formPersonal['email']);
+    if (roleSelected === 'freelance') {
+      const { date, month, year } = submitDataForm;
+      const dateOfBirth = new Date(year - 543, month, date);
+      submitDataForm['dateOfBirth'] = dateOfBirth;
+      requiredFieldsFreelance.forEach(key => {
+        if (!submitDataForm[key]) {
+          newErrorMessage[key] = errorMessageEmtryField[key];
+          isValid = false;
+        }
+      });
+    }
+
+    delete submitDataForm['date'];
+    delete submitDataForm['month'];
+    delete submitDataForm['year'];
+
+    if (!regexpEmail.test(submitDataForm['email'])) {
       newErrorMessage['email'] = 'กรุณาระบุ e-mail ให้ถูกต้อง'
       isValid = false;
     }
 
-    if (!regexpOnlyNumber.test(formPersonal['phoneNumber'])) {
+    if (!regexpOnlyNumber.test(submitDataForm['phoneNumber'])) {
       newErrorMessage['phoneNumber'] = 'กรุณาระบุให้ถูกต้อง'
       isValid = false;
     }
 
-    if (formPersonal['confirmPassword'] !== formPersonal['password']) {
+    if (submitDataForm['confirmPassword'] !== submitDataForm['password']) {
       newErrorMessage['confirmPassword'] = 'รหัสผ่านไม่ตรงกัน'
       isValid = false;
     }
 
     setErrorMessage(newErrorMessage);
     if (isValid) {
-      const submitDataForm = formPersonal;
       const encryptPassword = await bcrypt.hash(submitDataForm['password'] as string, 10);
       delete submitDataForm['confirmPassword'];
-      submitDataForm['password'] = encryptPassword
+      submitDataForm['password'] = encryptPassword;
       if (profileImageFile) {
-        const imageUrls = await uploadFileToFirebase(profileImageFile, `user/profile-image`, formPersonal['username']);
+        const imageUrls = await uploadFileToFirebase(profileImageFile, `user/profile-image`, submitDataForm['username']);
         submitDataForm['profileImage'] = imageUrls[0]
       } else {
         submitDataForm['profileImage'] = defaultProfileImage;
@@ -182,6 +213,7 @@ const PersonalForm = (props: Props) => {
                     name="firstname"
                     maxLength={100}
                     onChange={(e) => handleInputChange(e)}
+                    value={formPersonal.firstname}
                   />
                   <p className={style.error}>{errorMessage.firstname}</p>
                 </label>
@@ -197,6 +229,7 @@ const PersonalForm = (props: Props) => {
                     name="email"
                     maxLength={100}
                     onChange={(e) => handleInputChange(e)}
+                    value={formPersonal.email}
                   />
                   <p className={style.error}>{errorMessage.email}</p>
                 </label>
@@ -210,6 +243,7 @@ const PersonalForm = (props: Props) => {
                     type="password"
                     name="password"
                     onChange={(e) => handleInputChange(e)}
+                    value={formPersonal.password}
                   />
                   <p className={style.error}>{errorMessage.password}</p>
                 </label>
@@ -227,6 +261,7 @@ const PersonalForm = (props: Props) => {
                     name="username"
                     maxLength={100}
                     onChange={(e) => handleInputChange(e)}
+                    value={formPersonal.username}
                   />
                   <p className={style.error}>{errorMessage.username}</p>
                 </label>
@@ -242,6 +277,7 @@ const PersonalForm = (props: Props) => {
                     name="lastname"
                     maxLength={100}
                     onChange={(e) => handleInputChange(e)}
+                    value={formPersonal.lastname}
                   />
                   <p className={style.error}>{errorMessage.lastname}</p>
                 </label>
@@ -257,6 +293,7 @@ const PersonalForm = (props: Props) => {
                     name="phoneNumber"
                     maxLength={10}
                     onChange={(e) => handleInputChange(e)}
+                    value={formPersonal.phoneNumber}
                   />
                   <p className={style.error}>{errorMessage.phoneNumber}</p>
                 </label>
@@ -270,6 +307,7 @@ const PersonalForm = (props: Props) => {
                     type="password"
                     name="confirmPassword"
                     onChange={(e) => handleInputChange(e)}
+                    value={formPersonal.confirmPassword}
                   />
                   <p className={style.error}>{errorMessage.confirmPassword}</p>
                 </label>
@@ -286,7 +324,7 @@ const PersonalForm = (props: Props) => {
                   <div className={style.date}>
                     <select
                       onChange={(e) => handleInputChange(e)}
-                      value={roleSelected}
+                      value={formPersonal.date}
                       id="date"
                       name="date"
                     >
@@ -296,13 +334,13 @@ const PersonalForm = (props: Props) => {
                   <div className={style.month}>
                     <select
                       onChange={(e) => handleInputChange(e)}
-                      value={roleSelected}
+                      value={formPersonal.month}
                       id="month"
                       name="month"
                     >
                       {thaiMonths.map((month, index) => {
                         return (
-                          <option key={index} value={index + 1}>{month}</option>
+                          <option key={index} value={index}>{month}</option>
                         )
                       })}
                     </select>
@@ -310,7 +348,7 @@ const PersonalForm = (props: Props) => {
                   <div className={style.year}>
                     <select
                       onChange={(e) => handleInputChange(e)}
-                      value={roleSelected}
+                      value={formPersonal.year}
                       id="year"
                       name="year"
                     >
@@ -327,6 +365,7 @@ const PersonalForm = (props: Props) => {
                   <textarea
                     name="address"
                     onChange={(e) => handleInputChange(e)}
+                    value={formPersonal.address}
                   />
                   <p className={style.error}>{errorMessage.address}</p>
                 </label>
@@ -356,7 +395,9 @@ const PersonalForm = (props: Props) => {
       </div>
       <div className={style.button}>
         <div className="flex justify-center">
-          <button className={style.submit} onClick={onSubmit}>Submit</button>
+          <button className={style.submit} onClick={onSubmit}>
+            {roleSelected === 'customer' ? 'Submit' : 'Save'}
+          </button>
           <button className={style.cancel}>Cancel</button>
         </div>
       </div>

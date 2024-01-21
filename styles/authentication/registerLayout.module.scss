@@ -13,8 +13,7 @@
             visibility: hidden;
         }
 
-        .item {
-            
+        .itemSuccess {
             margin-bottom: 18px;
             cursor: pointer;
             font-size: 17px;
@@ -23,6 +22,19 @@
                 color: #5A2810;
             }
 
+            &.active {
+                color: #B45020;
+                text-decoration: underline;
+            }
+
+        }
+
+        .itemUnsuccess {
+            margin-bottom: 18px;
+            cursor: not-allowed;
+            font-size: 17px;
+            font-weight: 0;
+            color: #ACA9A9;
             &.active {
                 color: #B45020;
                 text-decoration: underline;

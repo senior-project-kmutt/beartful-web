@@ -1,33 +1,39 @@
-import { Users } from "@/models/users";
-import { createUser } from "@/services/user/user.api";
-import bcrypt from "bcryptjs";
-import style from "@/styles/authentication/form/PersonalForm.module.scss";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import PersonalForm from "./FormRegister/PersonalForm";
-
-interface formDataType {
-  [key: string]: any;
-}
+import { Process } from "./Register";
 
 interface Props {
   roleSelected: string;
   setRoleSelected: Dispatch<SetStateAction<string>>
-  activeMenu: string
+  activeMenu: string;
+  setActiveMenu: Dispatch<SetStateAction<string>>
+  process: Process[];
+  setProcess: Dispatch<SetStateAction<Process[]>>
 }
 const RegisterFreelance = (props: Props) => {
-  const { roleSelected, setRoleSelected, activeMenu} = props
-  const [formPersonal, setFormPersonal] = useState<any>({})
+  const { roleSelected, setRoleSelected, activeMenu, setActiveMenu, process, setProcess } = props
+  const [formPersonal, setFormPersonal] = useState<any>()
   const [isFormPersonalValid, setIsFormPersonalValid] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (formPersonal) {
+      const duplicateProcess = process;
+      duplicateProcess[0].success = true;
+      setProcess(duplicateProcess);
+      setActiveMenu('education')
+    }
+  }, [formPersonal])
   
   return (
     <div>
       {activeMenu === "personal" ? (
         <PersonalForm
-        roleSelected={roleSelected}
-        setRoleSelected={setRoleSelected}
-        saveFormRegister={setFormPersonal}
-        setIsFinished={setIsFormPersonalValid}
-      />
+          roleSelected={roleSelected}
+          setRoleSelected={setRoleSelected}
+          saveFormRegister={setFormPersonal}
+          setIsFinished={setIsFormPersonalValid}
+          defaultFormPersonal={formPersonal}
+        />
       ) : (
         <div>{activeMenu}</div>
       )}
