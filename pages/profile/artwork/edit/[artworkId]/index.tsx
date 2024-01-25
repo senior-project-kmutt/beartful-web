@@ -25,5 +25,3 @@ const EditArtwork = () => {
 };
 
 export default EditArtwork;
-
-

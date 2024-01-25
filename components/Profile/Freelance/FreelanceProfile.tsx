@@ -1,4 +1,4 @@
-import FreelanceArtwork from "./FreelanceArtwork";
+import FreelanceArtwork from "./Artwork/FreelanceArtwork";
 
 interface Props {
     username: string

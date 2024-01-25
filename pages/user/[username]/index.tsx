@@ -1,4 +1,4 @@
-import FreelanceArtwork from "@/components/Profile/FreelanceArtwork";
+import FreelanceArtwork from "@/components/Profile/Freelance/Artwork/FreelanceArtwork";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 

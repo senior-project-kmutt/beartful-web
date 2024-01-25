@@ -11,7 +11,7 @@ import style from "@/styles/artwork/artworkForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "@/components/Layout/NavBar";
-import ProfileSelectBar from "@/components/Profile/ProfileSelectBar";
+import ProfileSelectBar from "@/components/Profile/Freelance/ProfileSelectBar";
 
 export type ArtworkFormData = {
   images: String[]

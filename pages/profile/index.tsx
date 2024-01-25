@@ -1,4 +1,4 @@
-import Freelance from "@/components/Profile/FreelanceProfile";
+import Freelance from "@/components/Profile/Freelance/FreelanceProfile";
 import { useEffect, useState } from "react";
 import { IUser } from "../chat";
 {/* เช็คใน storage ว่าที่ login ตอนนี้ role อะไร แบ่งแต่ละ role ไปตามแต่ละ component */ }

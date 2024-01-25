@@ -8,7 +8,7 @@ import { IUser } from "@/pages/chat";
 import { Artwork } from "@/models/artwork";
 import style from "@/styles/artwork/artworkForm.module.scss";
 import NavBar from "@/components/Layout/NavBar";
-import ProfileSelectBar from "@/components/Profile/ProfileSelectBar";
+import ProfileSelectBar from "@/components/Profile/Freelance/ProfileSelectBar";
 import { editArtwork } from "@/services/artwork/artwork.api";
 
 export type ArtworkFormData = {

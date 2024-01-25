@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ArtworkCategory from "../Artwork/ArtworkCategory";
-import ArtworkList from "../Artwork/ArtworkList";
+import ArtworkCategory from "../../../Artwork/ArtworkCategory";
+import ArtworkList from "../../../Artwork/ArtworkList";
 
 interface Props {
     username: string;
