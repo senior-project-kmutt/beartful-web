@@ -4,7 +4,6 @@ import ArtworkList from "../Artwork/ArtworkList";
 
 interface Props {
     username: string;
-    isProfileEditMode?: boolean;
 }
 
 const FreelanceArtwork = (props: Props) => {
@@ -13,7 +12,7 @@ const FreelanceArtwork = (props: Props) => {
     return (
         <div>
             <ArtworkCategory type={type} setType={setType} />
-            <ArtworkList from="freelance" type={type} username={props.username} isProfileEditMode={true} />
+            <ArtworkList from="freelance" type={type} username={props.username} />
         </div>
     );
 };

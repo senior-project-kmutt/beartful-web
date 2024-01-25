@@ -3,13 +3,10 @@ import style from "@/styles/artwork/artworkLayout.module.scss";
 import { Carousel, CustomFlowbiteTheme } from "flowbite-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
-import router from "next/router";
-import { deleteArtwork } from "@/services/artwork/artwork.api";
 
 interface Props {
   item: Artwork;
   onCloseDetail: () => void;
-  isProfileEditMode: boolean;
 }
 
 const carouselTheme: CustomFlowbiteTheme['carousel'] = {
@@ -27,7 +24,7 @@ const carouselTheme: CustomFlowbiteTheme['carousel'] = {
 
 const ArtworkDetail = (props: Props) => {
   const { _id, images, name, price, description, likeCount, type } = props.item;
-  const { onCloseDetail, isProfileEditMode } = props;
+  const { onCloseDetail } = props;
 
   const handleCloseDetail = () => {
     onCloseDetail();
@@ -46,10 +43,6 @@ const ArtworkDetail = (props: Props) => {
         <div onClick={handleCloseDetail} className={`${style.close}`}><span className="cursor-pointer"> X </span></div>
         <div className={style.name}>
           {name}
-          {!isProfileEditMode && <>
-            <span className={`${style.heart} cursor-pointer`}><FontAwesomeIcon icon={faHeart} className={style.heart_icon}></FontAwesomeIcon></span>
-            <span className={`${style.bookmark} cursor-pointer`}><FontAwesomeIcon icon={faBookmark} className={style.bookmark_icon}></FontAwesomeIcon></span>
-          </>}
         </div>
         <div className={style.category}>
           <span>{`Fan Art`}</span>
@@ -75,16 +68,7 @@ const ArtworkDetail = (props: Props) => {
             <p className={style.fullname}>Naphat Nuansri</p>
           </div>
           <button className={`${style.btn} justify-self-end`}>View Profile</button>
-        </div>
-
-        {/* show only when freelance account click to see own detail */}
-        {isProfileEditMode && (<>
-          <button onClick={() => router.push('/user/ariice/edit')}>edit artwork</button>
-          <button onClick={() => {
-            deleteArtwork(_id)
-            window.location.reload()
-          }}>delete artwork</button></>
-        )}
+        </div>      
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const Profile = () => {
   return (
     <>
       {username && (
-        <Freelance username={username} isProfileEditMode={true} />
+        <Freelance username={username} />
       )}
     </>
   );

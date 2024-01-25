@@ -1,15 +1,13 @@
 import { Artwork as ArtworkList } from "@/models/artwork";
-import { fetchArtworkData, getArtwork, getFreelanceArtwork } from "@/services/artwork/artwork.api";
-import { SetStateAction, useEffect, useState } from "react";
+import { getArtwork, getFreelanceArtwork } from "@/services/artwork/artwork.api";
+import { useEffect, useState } from "react";
 import style from "@/styles/artwork/artworkLayout.module.scss";
 import ArtworkItem from "./ArtworkItem";
-import ArtworkCategory from "./ArtworkCategory";
 import ArtworkDetail from "./ArtworkDetail";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 interface Props {
   username?: string;
-  isProfileEditMode?: boolean;
   from: string;
   type: string;
 }
@@ -19,7 +17,7 @@ const ArtworkList = (props: Props) => {
   const [isShowDetail, setIsShowDetail] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState(true);
-  const { isProfileEditMode = false, from, type, username } = props;
+  const { from, type, username } = props;
 
   useEffect(() => {
     const getData = async () => {
@@ -62,8 +60,6 @@ const ArtworkList = (props: Props) => {
     } catch (error) {
       console.error("Error fetching artwork:", error);
     }
-    
-    console.log(response);
     return response;
   };
 
@@ -81,7 +77,6 @@ const ArtworkList = (props: Props) => {
 
   const onCloseDetail = () => {
     setIsShowDetail(false);
-    console.log(type);
   };
   return (
     <div>
@@ -90,7 +85,7 @@ const ArtworkList = (props: Props) => {
       }
       {isShowDetail && artworkDetail && (
         <>
-          <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} isProfileEditMode={isProfileEditMode} />
+          <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
           <div className={style.text}>--------- คุณอาจชอบสิ่งนี้ ---------</div>
         </>
       )}
@@ -107,7 +102,6 @@ const ArtworkList = (props: Props) => {
                 item={item}
                 key={index}
                 onShowDetail={onShowDetail}
-                isProfileEditMode={isProfileEditMode}
               />
             );
           })}

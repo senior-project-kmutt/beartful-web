@@ -3,10 +3,7 @@ import style from "@/styles/artwork/artworkLayout.module.scss";
 import ArtworkCategory from "./ArtworkCategory";
 import ArtworkList from "./ArtworkList";
 
-interface Props {
-  isProfileEditMode?: boolean;
-}
-const Artwork = (props: Props) => {
+const Artwork = () => {
   const [type, setType] = useState<string>('hired');
 
   return (
@@ -19,7 +16,7 @@ const Artwork = (props: Props) => {
         {type === 'readyMade' &&
           <div className={style.type_header}> READY MADE </div>
         }
-        <ArtworkList from="homepage" type={type} isProfileEditMode={props.isProfileEditMode} />
+        <ArtworkList from="homepage" type={type} />
       </div>
     </div>
   );
