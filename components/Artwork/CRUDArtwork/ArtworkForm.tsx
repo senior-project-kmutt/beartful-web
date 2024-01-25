@@ -12,6 +12,7 @@ import style from "@/styles/artwork/artworkForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "@/components/Layout/NavBar";
+import ProfileSelectBar from "@/components/Profile/ProfileSelectBar";
 
 export type ArtworkFormData = {
   images: String[]
@@ -104,87 +105,94 @@ const ArtworkForm = (props: Props) => {
   return (
     <>
       <NavBar />
-      <div className="mt-8">
-        <form onSubmit={onSubmit}>
-          <div>
-            <label>เพิ่มผลงาน</label>
-            <div className={style.insertArtwork}>
-              {imageSrc?.map((item: any, index: number) => {
-                return (
-                  <div
-                    className={style.imageContainer}
-                    key={index}
-                  >
-                    <img
-                      src={item}
-                      alt="Selected Image"
-                      className={style.image}
-                    />
-                  </div>
-                )
-              })}
+      <div className="flex">
 
-              <label htmlFor="fileInput" className={style.customFileInput}>
-                <div className={style.customContainer}>
-                  <FontAwesomeIcon icon={faPlus} size="2xl" style={{ color: '#545151' }}></FontAwesomeIcon>
-                </div>
-                <input
-                  id="fileInput"
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  onChange={(e: any) => {
-                    setInputFiles([...e.target.files]);
-                    handleFileChange(e)
-                  }}
-                />
-              </label>
-            </div>
+        <div className={style.sideBar}>
+          <ProfileSelectBar />
+        </div>
 
-
-          </div>
-          <div className={style.formGrid}>
-
-            <label>ชื่อผลงาน</label>
-            <input className={style.inputField} {...register("name")} />
-
-            <label>ประเภท</label>
-            <select className={style.inputFieldSm} {...register("type")}>
-              <option value="hired">hired</option>
-              <option value="readyMade">readyMade</option>
-            </select>
-
-            <label>หมวดหมู่</label>
-            <div className={style.checkboxGrid}>
-              {categories.map((item) => (
-                <div key={item._id} className={style.checkboxItem}>
-                  <input
-                    className={style.checkboxStyle}
-                    type="checkbox"
-                    id={`category-${item._id}`}
-                    value={item._id}
-                    {...register('categoryId')}
-                  />
-                  <label className="ml-2" htmlFor={`category-${item._id}`}>{item.name}</label>
-                </div>
-              ))}
-            </div>
-
-            <label>รายละเอียด</label>
-            <input className={style.inputField} {...register("description")} />
-
-            <label>ราคา</label>
+        <div id="add_artwork" className="mt-8 ml-6">
+          <form onSubmit={onSubmit}>
             <div>
-              <input className={style.inputFieldSm} {...register("price")} /><span> บาท</span>
+              <label>เพิ่มผลงาน</label>
+              <div className={style.insertArtwork}>
+                {imageSrc?.map((item: any, index: number) => {
+                  return (
+                    <div
+                      className={style.imageContainer}
+                      key={index}
+                    >
+                      <img
+                        src={item}
+                        alt="Selected Image"
+                        className={style.image}
+                      />
+                    </div>
+                  )
+                })}
+
+                <label htmlFor="fileInput" className={style.customFileInput}>
+                  <div className={style.customContainer}>
+                    <FontAwesomeIcon icon={faPlus} size="2xl" style={{ color: '#545151' }}></FontAwesomeIcon>
+                  </div>
+                  <input
+                    id="fileInput"
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    onChange={(e: any) => {
+                      setInputFiles([...e.target.files]);
+                      handleFileChange(e)
+                    }}
+                  />
+                </label>
+              </div>
+
+
+            </div>
+            <div className={style.formGrid}>
+
+              <label>ชื่อผลงาน</label>
+              <input className={style.inputField} {...register("name")} />
+
+              <label>ประเภท</label>
+              <select className={style.inputFieldSm} {...register("type")}>
+                <option value="hired">hired</option>
+                <option value="readyMade">readyMade</option>
+              </select>
+
+              <label>หมวดหมู่</label>
+              <div className={style.checkboxGrid}>
+                {categories.map((item) => (
+                  <div key={item._id} className={style.checkboxItem}>
+                    <input
+                      className={style.checkboxStyle}
+                      type="checkbox"
+                      id={`category-${item._id}`}
+                      value={item._id}
+                      {...register('categoryId')}
+                    />
+                    <label className="ml-2" htmlFor={`category-${item._id}`}>{item.name}</label>
+                  </div>
+                ))}
+              </div>
+
+              <label>รายละเอียด</label>
+              <input className={style.inputField} {...register("description")} />
+
+              <label>ราคา</label>
+              <div>
+                <input className={style.inputFieldSm} {...register("price")} /><span> บาท</span>
+              </div>
+
+            </div>
+            <div className="flex mt-5 ml-60">
+              <input type="submit" value="SAVE" className={style.saveButton} />
+              <button className={style.cancelButton}>CANCEL</button>
             </div>
 
-          </div>
-          <div className="flex mt-5 ml-60">
-            <input type="submit" value="SAVE" className={style.saveButton} />
-            <button className={style.cancelButton}>CANCEL</button>
-          </div>
-
-        </form>
+          </form>
+        </div>
       </div>
     </>
   );
