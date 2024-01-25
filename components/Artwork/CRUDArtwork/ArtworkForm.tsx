@@ -111,7 +111,7 @@ const ArtworkForm = (props: Props) => {
           <ProfileSelectBar />
         </div>
 
-        <div id="add_artwork" className="mt-8 ml-6">
+        <div id="add_artwork" className={style.main}>
           <form onSubmit={onSubmit}>
             <div>
               <label>เพิ่มผลงาน</label>
@@ -147,8 +147,6 @@ const ArtworkForm = (props: Props) => {
                   />
                 </label>
               </div>
-
-
             </div>
             <div className={style.formGrid}>
 
