@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 import { deleteMethod, get, patch } from "../HttpClient";
 import { postPromise } from "../HttpClient";
-import { ArtworkFormData } from "@/components/Artwork/CRUDArtwork/ArtworkAddForm";
+import { ArtworkFormData } from "@/components/Profile/Freelance/Artwork/ArtworkAddForm";
 import { IncomingHttpHeaders } from "http";
 
 export const getArtwork = (page: number, pageSize: number, type: string): Observable<any> => {

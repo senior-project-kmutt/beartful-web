@@ -1,0 +1,23 @@
+.main {
+    margin-top: 45px;
+    margin-left: 32px;
+    width: 82%;
+
+    .artworkContainer {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+}
+
+.sideBar {
+    width: 18%;
+}
+
+@media (max-width:1024px) {
+    .sideBar {
+        width: 30%;
+    }
+
+}

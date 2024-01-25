@@ -1,4 +1,4 @@
-import style from "@/styles/profile/profileSelectBar.module.scss";
+import style from "@/styles/profile/freelance/profileSelectBar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faStar, faUser, faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 

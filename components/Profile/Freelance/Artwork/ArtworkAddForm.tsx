@@ -7,7 +7,7 @@ import { firebaseConfig } from '@/config/firebase.config';
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { IUser } from "@/pages/chat";
-import style from "@/styles/artwork/artworkForm.module.scss";
+import style from "@/styles/profile/freelance/artwork/artworkForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "@/components/Layout/NavBar";
@@ -102,7 +102,7 @@ const ArtworkForm = () => {
       <NavBar />
       <div className="flex">
 
-        <div className={style.sideBar}>
+      <div className={style.sideBar}>
           <ProfileSelectBar />
         </div>
 

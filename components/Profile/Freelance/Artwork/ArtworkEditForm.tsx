@@ -6,7 +6,7 @@ import { firebaseConfig } from '@/config/firebase.config';
 import { initializeApp } from "firebase/app";
 import { IUser } from "@/pages/chat";
 import { Artwork } from "@/models/artwork";
-import style from "@/styles/artwork/artworkForm.module.scss";
+import style from "@/styles/profile/freelance/artwork/artworkForm.module.scss";
 import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBar from "@/components/Profile/Freelance/ProfileSelectBar";
 import { editArtwork } from "@/services/artwork/artwork.api";

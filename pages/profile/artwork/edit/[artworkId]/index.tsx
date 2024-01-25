@@ -1,4 +1,4 @@
-import ArtworkEditForm from "@/components/Artwork/CRUDArtwork/ArtworkEditForm";
+import ArtworkEditForm from "@/components/Profile/Freelance/Artwork/ArtworkEditForm";
 import { Artwork } from "@/models/artwork";
 import { getArtworkById } from "@/services/artwork/artwork.api";
 import { useRouter } from "next/router";
