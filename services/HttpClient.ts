@@ -15,8 +15,10 @@ export const put = <T>(path: string, data: any): Observable<T> => {
   return from(Axios.put(path, data)).pipe(map(response => response as T));
 };
 
-export const patch = <T>(path: string, data: any): Observable<T> => {
-  return from(Axios.patch(path, data)).pipe(
+export const patch = <T>(path: string, data: any, headers?: IncomingHttpHeaders): Observable<T> => {
+  return from(Axios.patch(path, data, {
+    headers: headers || undefined
+  })).pipe(
     map(response => response.data as T)
   );
 };

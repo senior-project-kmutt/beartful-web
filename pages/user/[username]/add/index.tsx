@@ -1,4 +1,4 @@
-import ArtworkForm from "@/components/Artwork/CRUDArtwork/ArtworkForm";
+import ArtworkForm from "@/components/Artwork/CRUDArtwork/ArtworkAddForm";
 
 const CreateArtwork: React.FC = () => {
     return (
