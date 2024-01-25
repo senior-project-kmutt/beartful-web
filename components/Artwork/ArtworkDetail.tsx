@@ -79,7 +79,7 @@ const ArtworkDetail = (props: Props) => {
 
         {/* show only when freelance account click to see own detail */}
         {isProfileEditMode && (<>
-          <button onClick={() => router.push('/login')}>edit artwork</button>
+          <button onClick={() => router.push('/user/ariice/edit')}>edit artwork</button>
           <button onClick={() => {
             deleteArtwork(_id)
             window.location.reload()
