@@ -8,12 +8,13 @@ import ArtworkImage, {
 } from "./ArtworkStyled";
 import styled from "@/styles/artwork/artworkLayout.module.scss";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+
 interface Props {
   item: Artwork;
   onShowDetail: (item: Artwork) => void;
 }
 const ArtworkItem = (props: Props) => {
-  const { images, name, price, type } = props.item;
+  const { _id, images, name, price, type } = props.item;
   const { onShowDetail } = props;
 
   const handleClickDetail = () => {

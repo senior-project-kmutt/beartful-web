@@ -4,10 +4,10 @@ import { Dispatch, SetStateAction } from "react";
 interface Props {
   type: string
   setType: Dispatch<SetStateAction<string>>;
-  setPage: Dispatch<SetStateAction<number>>;
-  setArtwork: Dispatch<SetStateAction<Artwork[]>>;
-  setHasMore: Dispatch<SetStateAction<boolean>>;
-  setIsShowDetail: Dispatch<SetStateAction<boolean>>;
+  setPage?: Dispatch<SetStateAction<number>>;
+  setArtwork?: Dispatch<SetStateAction<Artwork[]>>;
+  setHasMore?: Dispatch<SetStateAction<boolean>>;
+  setIsShowDetail?: Dispatch<SetStateAction<boolean>>;
 }
 
 const ArtworkCategory = (props: Props) => {
@@ -15,11 +15,12 @@ const ArtworkCategory = (props: Props) => {
 
   const setTypeArtwork = (typeAW: string) => {
     if (type != typeAW) {
-      setArtwork([])
       setType(typeAW)
-      setPage(1)
-      setHasMore(true)
-      setIsShowDetail(false)
+      // อาจมาลบพวกนี้ออก
+      // setArtwork([])
+      // setPage(1)
+      // setHasMore(true)
+      // setIsShowDetail(false)
     }
   }
   return (
