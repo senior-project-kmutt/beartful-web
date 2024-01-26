@@ -1,0 +1,25 @@
+.side_bar {
+    margin: 5% auto;
+    margin-left: 2%;
+    padding: 0 12px;
+    word-wrap: break-word;
+
+    .warp {
+        display: flex;
+    }
+
+    .switch {
+        font-weight: 800;
+        font-size: 22px;
+
+        .item {
+            color: black;
+            cursor: pointer;
+        }
+
+        .item_active {
+            color: #E78353;
+            cursor: pointer;
+        }
+    }
+}
