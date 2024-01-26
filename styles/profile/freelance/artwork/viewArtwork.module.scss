@@ -1,0 +1,45 @@
+.main {
+    margin-top: 45px;
+    margin-left: 32px;
+    width: 82%;
+
+    .artworkContainer {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .imageContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 180px;
+        background-color: #D9D9D9;
+        border-radius: 10px;
+        margin-right: 10px;
+        margin-bottom: 30px;
+    }
+
+    .addButton {
+        background-color: #E16428;
+        border: 1px solid #E16428;
+        width: 200px;
+        height: 35px;
+        border-radius: 12px;
+        color: white;
+        float: right;
+        margin-right: 50px;
+    }
+}
+
+.sideBar {
+    width: 18%;
+}
+
+@media (max-width:1024px) {
+    .sideBar {
+        width: 30%;
+    }
+
+}

@@ -1,0 +1,54 @@
+.selectBar {
+    margin-left: 30px;
+    display: flex;
+}
+
+.profile {
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 3rem auto 1.5rem auto;
+
+    img {
+        margin-right: 8px;
+        border-radius: 50%;
+        width: 60px;
+    }
+
+    .name_box {
+        justify-items: start;
+        justify-content: start;
+
+        .username {
+            margin-left: 4px;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+
+        .edit {
+            margin-left: 4px;
+            font-size: 0.8rem;
+            color: #716E6E;
+        }
+    }
+}
+
+.selectOption {
+    .heading {
+        font-weight: bold;
+        margin-top: 0.5rem;
+    }
+
+    .subHeading {
+        color: #545151;
+        margin-left: 1.8rem;
+    }
+}
+
+.verticleLine {
+    border-left: 1px solid #DED4CF;
+    margin-top: 50px;
+    margin-left: 30px;
+    height: 600px;
+}
