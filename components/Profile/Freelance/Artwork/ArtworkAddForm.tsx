@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBar from "@/components/Profile/Freelance/ProfileSelectBar";
+import Router from 'next/router';
 
 export type ArtworkFormData = {
   images: String[]
@@ -181,7 +182,7 @@ const ArtworkForm = () => {
             </div>
             <div className="flex mt-5 ml-60">
               <input type="submit" value="SAVE" className={style.saveButton} />
-              <button className={style.cancelButton}>CANCEL</button>
+              <button className={style.cancelButton} onClick={() => Router.back()}>CANCEL</button>
             </div>
 
           </form>

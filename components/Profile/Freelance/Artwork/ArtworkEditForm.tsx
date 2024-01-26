@@ -10,6 +10,7 @@ import style from "@/styles/profile/freelance/artwork/artworkForm.module.scss";
 import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBar from "@/components/Profile/Freelance/ProfileSelectBar";
 import { editArtwork } from "@/services/artwork/artwork.api";
+import Router from 'next/router';
 
 export type ArtworkFormData = {
   images: String[]
@@ -128,7 +129,7 @@ const ArtworkForm = (props: Props) => {
             </div>
             <div className="flex mt-5 ml-60">
               <input type="submit" value="SAVE" className={style.saveButton} />
-              <button className={style.cancelButton}>CANCEL</button>
+              <button className={style.cancelButton} onClick={() => Router.back()}>CANCEL</button>
             </div>
 
           </form>
