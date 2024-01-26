@@ -9,8 +9,9 @@ export const getArtwork = (page: number, pageSize: number, type: string): Observ
   return get(`/artwork${params}`);
 };
 
-export const getFreelanceArtwork = (userId: string, page: number, pageSize: number, type: string): Observable<any> => {
-  const params = `/user/${userId}/artworks?page=${page}&pageSize=${pageSize}&type=${type}`
+export const getFreelanceArtwork = (userId: string, page: number, pageSize: number, type?: string): Observable<any> => {
+  const typeParam = type ? `&type=${type}` : '';
+  const params = `/user/${userId}/artworks?page=${page}&pageSize=${pageSize}${typeParam}`;
   return get(`${params}`);
 };
 

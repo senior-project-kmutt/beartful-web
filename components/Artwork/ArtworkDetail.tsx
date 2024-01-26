@@ -43,6 +43,8 @@ const ArtworkDetail = (props: Props) => {
         <div onClick={handleCloseDetail} className={`${style.close}`}><span className="cursor-pointer"> X </span></div>
         <div className={style.name}>
           {name}
+          <span className={`${style.heart} cursor-pointer`}><FontAwesomeIcon icon={faHeart} className={style.heart_icon}></FontAwesomeIcon></span>
+          <span className={`${style.bookmark} cursor-pointer`}><FontAwesomeIcon icon={faBookmark} className={style.bookmark_icon}></FontAwesomeIcon></span>
         </div>
         <div className={style.category}>
           <span>{`Fan Art`}</span>
@@ -68,7 +70,7 @@ const ArtworkDetail = (props: Props) => {
             <p className={style.fullname}>Naphat Nuansri</p>
           </div>
           <button className={`${style.btn} justify-self-end`}>View Profile</button>
-        </div>      
+        </div>
       </div>
     </div>
   );
