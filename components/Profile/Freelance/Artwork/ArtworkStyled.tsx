@@ -78,7 +78,7 @@ export const Ellipsis = styled(FontAwesomeIcon)`
   cursor: pointer;
 `;
 
-export const Drodown = styled.div`
+export const Dropdown = styled.div`
   position: absolute;
   z-index:10;
   background-color: white;

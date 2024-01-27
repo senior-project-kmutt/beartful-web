@@ -1,0 +1,89 @@
+.quotationModal {
+    .header {
+        background-color: #E16428;
+
+        p {
+            color: white;
+        }
+
+        svg {
+            display: none;
+        }
+    }
+
+    .button_box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+
+        .createButton {
+            width: 120px;
+            background-color: #E16428;
+            border-radius: 15px;
+            color: white;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .cancelButton {
+            border: 1px solid #B45020;
+            width: 120px;
+            background-color: white;
+            color: #B45020;
+            border-radius: 15px;
+            height: 30px;
+
+        }
+    }
+
+    .main {
+        margin: auto 40px;
+
+        .formGrid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 10px;
+
+            @media (min-width: 768px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        .custom_grid {
+            @media (min-width: 768px) {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+
+        .inputField {
+            width: 100%;
+            max-width: 1000px;
+            border: 1px solid #5A2810;
+            border-radius: 4px;
+            height: 30px;
+            padding: 0 8px;
+            box-sizing: border-box;
+            margin-bottom: 8px;
+
+            @media (max-width: 400px) {
+                width: 100%;
+            }
+        }
+
+        textarea {
+            width: 100%;
+            max-width: 1000px;
+            border: 1px solid #5A2810;
+            border-radius: 4px;
+            padding: 0 8px;
+            box-sizing: border-box;
+            margin-bottom: 8px;
+
+            @media (max-width: 400px) {
+                width: 100%;
+            }
+        }
+    }
+}

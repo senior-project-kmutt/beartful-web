@@ -1,0 +1,137 @@
+.purchaseStatus {
+    height: 40px;
+    background-color: #FCEFE9;
+    border-radius: 10px;
+    margin-top: 10px;
+
+    .formGrid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+
+        .item_active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #873C18;
+            font-weight: bolder;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(5, 1fr);
+            justify-content: center;
+            align-items: center;
+        }
+
+    }
+}
+
+.purchaseItem {
+    height: 150px;
+    background-color: #FCEFE9;
+    border-radius: 10px;
+    margin-top: 10px;
+
+    .profile {
+        display: flex;
+        padding-top: 15px;
+        padding-left: 25px;
+
+        .username {
+            font-weight: bolder;
+            margin-left: 8px;
+        }
+
+        .saveButton {
+            background-color: #E16428;
+            width: 120px;
+            height: 25px;
+            border-radius: 15px;
+            color: white;
+            margin-right: 7px;
+        }
+
+        .cancelButton {
+            border: 1.5px solid #B45020;
+            width: 120px;
+            height: 25px;
+            border-radius: 15px;
+            color: #B45020;
+        }
+
+        .status {
+            color: #E16428;
+            position: absolute;
+            right: 5%;
+            font-weight: bolder;
+        }
+    }
+
+    .order {
+        display: flex;
+        padding-left: 25px;
+        margin-top: 10px;
+
+        .userImage {
+            height: 80px;
+            width: 80px;
+            background-color: #F3C1A9;
+            border-radius: 10px;
+            border-color: #F3C1A9;
+        }
+
+        .detail {
+            margin-left: 20px;
+
+            .artworkName {
+                font-size: 18px;
+                font-weight: bolder;
+            }
+
+            .packageName {
+                font-size: 15px;
+                color: gray;
+            }
+
+            .amount {
+                font-size: 15px;
+                color: gray;
+                margin-left: 20px;
+            }
+
+            .price {
+                color: #873C18;
+                font-size: 22px;
+                font-weight: bolder;
+            }
+        }
+
+        .confirm {
+            display: flex;
+            position: absolute;
+            right: 5%;
+            margin-top: 45px;
+
+            .confirmButton {
+                height: 32px;
+                width: 200px;
+                background-color: #E16428;
+                color: white;
+                border-radius: 4px;
+                margin-left: 8px;
+            }
+        }
+    }
+}

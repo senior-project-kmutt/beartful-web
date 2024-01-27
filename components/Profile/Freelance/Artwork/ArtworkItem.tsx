@@ -4,7 +4,7 @@ import ArtworkImage, {
   ArtworkName,
   ShopPrice,
   Ellipsis,
-  Drodown
+  Dropdown
 } from "./ArtworkStyled";
 import styled from "@/styles/profile/freelance/artwork/artworkLayout.module.scss";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
@@ -50,7 +50,7 @@ const ArtworkItem = (props: Props) => {
         <ArtworkImageContainer>
           <Ellipsis icon={faEllipsis} onClick={handleClickEllipsis} />
           {showDropdown &&
-            <Drodown ref={dropdownRef}>
+            <Dropdown ref={dropdownRef}>
               <ul className="py-2">
                 <li>
                   <button style={{ width: '100%', height: '100%', textAlign: 'left' }} onClick={() => router.push(`/profile/artwork/edit/${_id}`)}>แก้ไขผลงาน</button>
@@ -62,8 +62,9 @@ const ArtworkItem = (props: Props) => {
                   }}>ลบ</button>
                 </li>
               </ul>
-            </Drodown>
+            </Dropdown>
           }
+
           <ArtworkName>{name}</ArtworkName>
           <ArtworkImage theme={{ src: images[0] }} />
           <ShopPrice>{type == 'hired' ? 'เรทราคา :' : 'ราคา :'} {price}</ShopPrice>

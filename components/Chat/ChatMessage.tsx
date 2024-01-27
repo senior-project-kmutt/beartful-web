@@ -5,12 +5,14 @@ import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { getMessageByChatRoomId, sendMessage } from '@/services/chat/chat.api';
 import MessageItem from './MessageItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark, faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faCircleXmark, faPaperPlane, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '@/config/firebase.config';
 import ChatProfile from './ChatProfile';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
+import { Dropdown } from 'flowbite-react';
+import QuotationModal from '../Profile/Freelance/QuotationModal';
 
 interface Props {
   selectedChatRoom?: IChatRoom
@@ -40,6 +42,7 @@ const ChatMessage = (props: Props) => {
   const [user, setUser] = useState<IUser>();
   const [interlocutor, setInterlocutor] = useState<IParticipant>();
   const chatContainerRef = useRef<HTMLDivElement>(null); // Create a ref for the chat container div
+  const [isQuotationModalOpen, setIsQuotationModalOpen] = useState<boolean>(false);
 
   initializeApp(firebaseConfig);
   socket.connect();
@@ -171,6 +174,11 @@ const ChatMessage = (props: Props) => {
     });
   };
 
+  const openQuotationModal = () => {
+    console.log(isQuotationModalOpen);
+    setIsQuotationModalOpen(!isQuotationModalOpen)
+  }
+
   return (
     <div className={styles.message_main}>
       <div className={styles.message_container}>
@@ -224,8 +232,20 @@ const ChatMessage = (props: Props) => {
             })}
           </div>
         )}
+
+        {isQuotationModalOpen && <QuotationModal openQuotationModal={openQuotationModal} />}
+
         <div className={styles.input_warp}>
           <div className={styles.input_box}>
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={<FontAwesomeIcon className={styles.icon} icon={faCirclePlus} size='lg' />}
+            >
+              <Dropdown.Item onClick={openQuotationModal}>สร้างใบเสนอราคา</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item >สร้างใบเสร็จ</Dropdown.Item>
+            </Dropdown>
             <div className={styles.input_file}>
               <label htmlFor="file-input">
                 <FontAwesomeIcon className={styles.icon} icon={faPaperclip} size='lg' />

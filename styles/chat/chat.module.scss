@@ -52,7 +52,9 @@
 
         .text {
             width: 72%;
-            h1, .latest_message {
+
+            h1,
+            .latest_message {
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -251,6 +253,12 @@
                     align-items: center;
                     padding: 0 16px;
 
+                    .icon {
+                        cursor: pointer;
+                        color: #5A2810;
+                        margin-right: 8px;
+                    }
+
                     .input_file {
                         input {
                             display: none;
@@ -258,7 +266,7 @@
 
                         .icon {
                             cursor: pointer;
-                            color: #5A2810
+                            color: #5A2810;
                         }
 
                         .icon:hover {
