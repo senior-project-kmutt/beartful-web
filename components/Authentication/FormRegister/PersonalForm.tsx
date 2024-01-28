@@ -1,10 +1,11 @@
 import { Users } from "@/models/users";
 import { createUser } from "@/services/user/user.api";
 import bcrypt from "bcryptjs";
-import style from "@/styles/authentication/form/PersonalForm.module.scss";
+import style from "@/styles/authentication/form/personalForm.module.scss";
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
 import { errorMessageEmtryField, regexpEmail, regexpOnlyNumber, requiredFieldsCustomer, requiredFieldsFreelance } from "@/services/validation";
 import { uploadFileToFirebase } from "@/services/firebase/firebase-api";
+import { thaiMonths } from "./option";
 
 interface formDataType {
   [key: string]: any;
@@ -24,11 +25,6 @@ const PersonalForm = (props: Props) => {
   const [profileImageFile, setProfileImageFile] = useState<File[]>()
   const [formPersonal, setFormPersonal] = useState<formDataType>({})
   const [errorMessage, setErrorMessage] = useState<formDataType>({})
-
-  const thaiMonths = [
-    'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
-    'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
-  ];
 
   useEffect(() => {
     if (defaultFormPersonal) {
