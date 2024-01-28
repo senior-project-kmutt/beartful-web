@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import PersonalForm from "./FormRegister/PersonalForm";
 import { Process } from "./Register";
-import EducationForm from "./FormRegister/EducationForm";
+import EducationForm, { EducationItem } from "./FormRegister/EducationForm";
 
 interface Props {
   roleSelected: string;
@@ -14,7 +14,13 @@ interface Props {
 const RegisterFreelance = (props: Props) => {
   const { roleSelected, setRoleSelected, activeMenu, setActiveMenu, process, setProcess } = props
   const [formPersonal, setFormPersonal] = useState<any>()
-  const [formEducation, setFormEducation] = useState<any>()
+  const [formEducation, setFormEducation] = useState<EducationItem[]>([
+    {
+      degree: '',
+      institution: '',
+      major: ''
+    },
+  ])
   const [isFormPersonalValid, setIsFormPersonalValid] = useState<boolean>(false)
   const [isFormEducationlValid, setIsFormEducationValid] = useState<boolean>(false)
 
@@ -26,6 +32,15 @@ const RegisterFreelance = (props: Props) => {
       setActiveMenu('education')
     }
   }, [formPersonal])
+
+  useEffect(() => {
+    if (isFormEducationlValid) {
+      const duplicateProcess = process;
+      duplicateProcess[1].success = true;
+      setProcess(duplicateProcess);
+      setActiveMenu('experience')
+    }
+  }, [formEducation])
   
   return (
     <div>
@@ -42,8 +57,8 @@ const RegisterFreelance = (props: Props) => {
       {activeMenu === "education" && (
         <EducationForm
           saveFormRegister={setFormEducation}
-          setIsFinished={setIsFormEducationValid}
-          defaultFormPersonal={formEducation}
+          defaultFormData={formEducation}
+          setIsFormValid={setIsFormEducationValid}
         />
       )}
     </div>
