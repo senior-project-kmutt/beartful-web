@@ -4,6 +4,7 @@ import { Process } from "./Register";
 import EducationForm, { EducationItem } from "./FormRegister/EducationForm";
 import ExperienceForm, { ExperienceItem } from "./FormRegister/ExperienceForm";
 import SkillLanguageForm, { SkillAndLanguageItem } from "./FormRegister/SkillLanguageForm";
+import AwardForm, { AwardItem } from "./FormRegister/AwardForm";
 
 interface Props {
   roleSelected: string;
@@ -25,10 +26,12 @@ const RegisterFreelance = (props: Props) => {
   ])
   const [formExperience, setFormExperience] = useState<ExperienceItem[]>([])
   const [formSkillAndLanguage, setFormSkillAndLanguage] = useState<SkillAndLanguageItem[]>([])
+  const [formAward, setFormAward] = useState<AwardItem[]>([])
   const [isFormPersonalValid, setIsFormPersonalValid] = useState<boolean>(false)
   const [isFormEducationlValid, setIsFormEducationValid] = useState<boolean>(false)
   const [isFormExperienceSave, setIsFormExperienceSave] = useState<boolean>(false)
   const [isFormSkillAndLanguageSave, setIsFormSkillAndLanguageSave] = useState<boolean>(false)
+  const [isFormAwardSave, setIsFormAwardSave] = useState<boolean>(false)
 
   useEffect(() => {
     if (formPersonal) {
@@ -58,13 +61,22 @@ const RegisterFreelance = (props: Props) => {
   }, [formExperience, isFormExperienceSave])
 
   useEffect(() => {
-    if (isFormExperienceSave) {
+    if (isFormSkillAndLanguageSave) {
       const duplicateProcess = process;
       duplicateProcess[3].success = true;
       setProcess(duplicateProcess);
       setActiveMenu('licenseAndAwards')
     }
   }, [formSkillAndLanguage, isFormSkillAndLanguageSave])
+
+  useEffect(() => {
+    if (isFormAwardSave) {
+      const duplicateProcess = process;
+      duplicateProcess[4].success = true;
+      setProcess(duplicateProcess);
+      setActiveMenu('accountingAndFinancial')
+    }
+  }, [formAward, isFormAwardSave])
   
   return (
     <div>
@@ -99,6 +111,14 @@ const RegisterFreelance = (props: Props) => {
           saveFormRegister={setFormSkillAndLanguage}
           defaultFormData={formSkillAndLanguage}
           setIsFormValid={setIsFormSkillAndLanguageSave}
+        />
+      )}
+
+      {activeMenu === "licenseAndAwards" && (
+        <AwardForm
+          saveFormRegister={setFormAward}
+          defaultFormData={formAward}
+          setIsFormValid={setIsFormAwardSave}
         />
       )}
     </div>
