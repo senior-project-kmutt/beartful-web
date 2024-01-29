@@ -25,3 +25,14 @@ export const thaiMonths = [
     'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
     'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
 ];
+
+export const skillAndLanguageOption = [
+    {
+        title: 'ทักษะ',
+        value: 'skill'
+    },
+    {
+        title: 'ภาษา',
+        value: 'language'
+    }
+]

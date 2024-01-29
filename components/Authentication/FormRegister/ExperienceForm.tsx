@@ -160,6 +160,7 @@ const ExperienceForm = (props: Props) => {
 
   return (
     <div>
+      <p className='text-xl font-semibold'>ประสบการณ์การทำงาน</p>
       {experiences.map((experience, index) => (
         <div key={index}>
           <div className={style.education_box}>

@@ -3,6 +3,7 @@ import PersonalForm from "./FormRegister/PersonalForm";
 import { Process } from "./Register";
 import EducationForm, { EducationItem } from "./FormRegister/EducationForm";
 import ExperienceForm, { ExperienceItem } from "./FormRegister/ExperienceForm";
+import SkillLanguageForm, { SkillAndLanguageItem } from "./FormRegister/SkillLanguageForm";
 
 interface Props {
   roleSelected: string;
@@ -23,9 +24,11 @@ const RegisterFreelance = (props: Props) => {
     },
   ])
   const [formExperience, setFormExperience] = useState<ExperienceItem[]>([])
+  const [formSkillAndLanguage, setFormSkillAndLanguage] = useState<SkillAndLanguageItem[]>([])
   const [isFormPersonalValid, setIsFormPersonalValid] = useState<boolean>(false)
   const [isFormEducationlValid, setIsFormEducationValid] = useState<boolean>(false)
   const [isFormExperienceSave, setIsFormExperienceSave] = useState<boolean>(false)
+  const [isFormSkillAndLanguageSave, setIsFormSkillAndLanguageSave] = useState<boolean>(false)
 
   useEffect(() => {
     if (formPersonal) {
@@ -53,6 +56,15 @@ const RegisterFreelance = (props: Props) => {
       setActiveMenu('skillAndLanguage')
     }
   }, [formExperience, isFormExperienceSave])
+
+  useEffect(() => {
+    if (isFormExperienceSave) {
+      const duplicateProcess = process;
+      duplicateProcess[3].success = true;
+      setProcess(duplicateProcess);
+      setActiveMenu('licenseAndAwards')
+    }
+  }, [formSkillAndLanguage, isFormSkillAndLanguageSave])
   
   return (
     <div>
@@ -79,6 +91,14 @@ const RegisterFreelance = (props: Props) => {
           saveFormRegister={setFormExperience}
           defaultFormData={formExperience}
           setIsFormValid={setIsFormExperienceSave}
+        />
+      )}
+
+      {activeMenu === "skillAndLanguage" && (
+        <SkillLanguageForm
+          saveFormRegister={setFormSkillAndLanguage}
+          defaultFormData={formSkillAndLanguage}
+          setIsFormValid={setIsFormSkillAndLanguageSave}
         />
       )}
     </div>

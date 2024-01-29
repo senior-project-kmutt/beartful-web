@@ -111,6 +111,7 @@ const EducationForm = (props: Props) => {
 
   return (
     <div>
+      <p className='text-xl font-semibold'>ข้อมูลประวัติการศึกษา</p>
       {educations.map((education, index) => (
         <div key={index}>
           <div className={style.education_box}>
