@@ -191,7 +191,7 @@ const SkillLanguageForm = (props: Props) => {
       </div>
       <div className={style.button}>
         <div className="flex justify-center">
-          <button className={style.submit} onClick={onSubmit}>
+          <button className={style.save} onClick={onSubmit}>
             Save
           </button>
           <button className={style.cancel}>Cancel</button>

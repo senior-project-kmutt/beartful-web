@@ -1,0 +1,199 @@
+import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import style from "@/styles/authentication/form/experienceForm.module.scss";
+import { bankOption } from './option';
+import { regexpOnlyNumber } from '@/services/validation';
+import { uploadFileToFirebase } from '@/services/firebase/firebase-api';
+
+export interface AccountItem {
+  bankName: string;
+  bankAccountNumber: string;
+  bankAccountImage: string;
+}
+
+interface ValidateAccounting {
+  [key: string]: any;
+}
+
+interface Props {
+  saveFormRegister: Dispatch<SetStateAction<AccountItem>>
+  defaultFormData: AccountItem;
+  setIsSubmitForm: Dispatch<SetStateAction<boolean>>
+}
+
+const AccountingForm = (props: Props) => {
+  const defaultItem = {
+    bankName: '',
+    bankAccountNumber: '',
+    bankAccountImage: ''
+  }
+  const { saveFormRegister, defaultFormData, setIsSubmitForm } = props;
+  const [accountInfo, setAccountInfo] = useState<AccountItem>(defaultItem);
+  const [errorMessage, setErrorMessage] = useState<ValidateAccounting>({});
+  const [imageUpload, setImageUpload] = useState<string>('');
+  const [imageUploadFile, setImageUploadFile] = useState<File[]>();
+
+  useEffect(() => {
+    if (defaultFormData) {
+      setAccountInfo(defaultFormData);
+      setImageUpload(defaultFormData.bankAccountImage);
+      setIsSubmitForm(false);
+    }
+  }, [])
+
+
+  const handleChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+    const inputField = event.target.name;
+    const inputValue = event.target.value;
+
+    console.log(inputField, inputValue);
+
+    setErrorMessage({
+      ...errorMessage,
+      [inputField]: ''
+    })
+
+    setAccountInfo({
+      ...accountInfo,
+      [inputField]: inputValue
+    })
+  };
+
+  const handleInputFile = (event: ChangeEvent<HTMLInputElement>) => {
+    setErrorMessage({
+      ...errorMessage,
+      bankAccountImage: ''
+    })
+    if (event.target.files) {
+      const [file] = event.target.files;
+      const imageSrc = URL.createObjectURL(file);
+      setImageUpload(imageSrc);
+      setImageUploadFile([
+        ...event.target.files
+      ]);
+    }
+  }
+
+
+  const onSubmit = async (type: string) => {
+    let isValid: boolean = true;
+    const newErrorMessage: ValidateAccounting = {};
+    const submitDataForm = accountInfo;
+    if (!accountInfo.bankName) {
+      newErrorMessage['bankName'] = 'กรุณาระบุให้ถูกต้อง'
+      isValid = false
+    }
+
+    if (!accountInfo.bankAccountNumber) {
+      newErrorMessage['bankAccountNumber'] = 'กรุณาระบุ'
+      isValid = false;
+    }
+
+    if (!regexpOnlyNumber.test(accountInfo.bankAccountNumber)) {
+      newErrorMessage['bankAccountNumber'] = 'กรุณาระบุให้ถูกต้อง'
+      isValid = false;
+    }
+
+    if (!imageUpload) {
+      newErrorMessage['bankAccountImage'] = 'กรุณาอัปโหลดรูปสมุดบัญชี'
+      isValid = false;
+    }
+
+    setErrorMessage(newErrorMessage)
+
+    if (isValid) {
+      console.log("goooo");
+      if (imageUploadFile) {
+        const fileName = imageUploadFile[0].name;
+        const imageUrls = await uploadFileToFirebase(imageUploadFile, `user/bank-account`, fileName);
+        submitDataForm['bankAccountImage'] = imageUrls[0]
+      }
+      saveFormRegister(submitDataForm);
+      if (type === 'submit') {
+        setIsSubmitForm(true)
+      }
+    }
+  };
+  
+  return (
+    <div>
+      <p className='text-xl font-semibold'>ข้อมูลบัญชีและการเงิน</p>
+      <div className={style.education_box}>
+        <div>
+          <div>
+            <label>
+              <div>
+                <p>ธนาคาร</p>
+              </div>
+              <select
+                value={accountInfo.bankName}
+                onChange={(e) => handleChange(e)}
+                name="bankName"
+                className={`${errorMessage.bankName && `${style.error}`}`}
+              >
+                <option value='' selected disabled>- กรุณาเลือก -</option>
+                {bankOption.map((bank, index) => {
+                  return (
+                    <option key={index} value={bank.value}>{bank.title}</option>
+                  )
+                })}
+
+              </select>
+            </label>
+          </div>
+          <div className='mt-4'>
+            <label>
+              <div>
+                <p>เลขบัญชีธนาคาร</p>
+              </div>
+              <input
+                value={accountInfo.bankAccountNumber}
+                type="text"
+                name="bankAccountNumber"
+                onChange={(e) => handleChange(e)}
+              />
+              <p className={style.error_message}>{errorMessage.bankAccountNumber}</p>
+              <p className='text-gray-500 mt-1' style={{ fontSize: 'smaller' }}>เลขบัญชีจะต้องตรงกับหน้าสมุดที่อัปโหลด</p>
+            </label>
+          </div>
+          <div className={style.image_upload}>
+            <p>ภาพสมุดบัญชีหน้าแรกที่มีชื่อบัญชีตรงกับชื่อจริงนามสกุล</p>
+            <div style={{ fontSize: 'smaller' }}>
+              <p className='text-gray-500 mt-1'>อัปโหลดภาพหน้าสมุดบัญชีธนาคาร ถ้าหากเป็นบัญชีเงินฝากแบบไม่มีสมุด ให้อัปโหลดหน้าข้อมูลบัญชีออนไลน์</p>
+              <p className='text-gray-500 mt-1'>ในแอปพลิเคชั่น โดยต้องเห็นรายละเอียดชื่อบัญชี เลขบัญชี และชื่อธนาคาร อย่างชัดเจน</p>
+            </div>
+            <div>
+              {imageUpload ? (
+                <img className='mt-4 rounded-md' src={imageUpload} alt="" style={{ width: '50%' }} />
+              ) : (
+                <div className={style.default}></div>
+              )}
+            </div>
+            <input
+              id='bankAccountImage'
+              type="file"
+              name="bankAccountImage"
+              accept="image/png, image/gif, image/jpeg"
+              onChange={(e) => handleInputFile(e)}
+            />
+            <p className={style.error_message}>{errorMessage.bankAccountImage}</p>
+            <label htmlFor="bankAccountImage">
+              <p>อัปโหลดรูปสมุดบัญชี</p>
+            </label>
+            <p style={{ fontSize: 'smaller' }} className='text-gray-500 mt-2'>สามารถอัปโหลดเป็นไฟล์ .png .jpg ขนาดไม่เกิน 10MB</p>
+          </div>
+        </div>
+      </div>
+      <div className={style.button}>
+        <div className="flex justify-center">
+          <button className={style.save} onClick={() => onSubmit('save')}>
+            Save
+          </button>
+          <button className={style.submit} onClick={() => onSubmit('submit')}>Submit</button>
+          <button className={style.cancel}>Cancel</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AccountingForm;

@@ -5,6 +5,7 @@ import EducationForm, { EducationItem } from "./FormRegister/EducationForm";
 import ExperienceForm, { ExperienceItem } from "./FormRegister/ExperienceForm";
 import SkillLanguageForm, { SkillAndLanguageItem } from "./FormRegister/SkillLanguageForm";
 import AwardForm, { AwardItem } from "./FormRegister/AwardForm";
+import AccountingForm from "./FormRegister/AccountingForm";
 
 interface Props {
   roleSelected: string;
@@ -27,11 +28,13 @@ const RegisterFreelance = (props: Props) => {
   const [formExperience, setFormExperience] = useState<ExperienceItem[]>([])
   const [formSkillAndLanguage, setFormSkillAndLanguage] = useState<SkillAndLanguageItem[]>([])
   const [formAward, setFormAward] = useState<AwardItem[]>([])
+  const [formBankAccount, setFormBankAccount] = useState<any>()
   const [isFormPersonalValid, setIsFormPersonalValid] = useState<boolean>(false)
   const [isFormEducationlValid, setIsFormEducationValid] = useState<boolean>(false)
   const [isFormExperienceSave, setIsFormExperienceSave] = useState<boolean>(false)
   const [isFormSkillAndLanguageSave, setIsFormSkillAndLanguageSave] = useState<boolean>(false)
   const [isFormAwardSave, setIsFormAwardSave] = useState<boolean>(false)
+  const [isSubmitForm, setIsSubmitForm] = useState<boolean>(false)
 
   useEffect(() => {
     if (formPersonal) {
@@ -77,6 +80,36 @@ const RegisterFreelance = (props: Props) => {
       setActiveMenu('accountingAndFinancial')
     }
   }, [formAward, isFormAwardSave])
+
+  useEffect(() => {
+    if (formBankAccount) {
+      const duplicateProcess = process;
+      duplicateProcess[5].success = true;
+      setProcess(duplicateProcess);
+      // setActiveMenu('accountingAndFinancial')
+      if (isSubmitForm) {
+        console.log('call api');
+        handleSubmitForm()
+      }
+    }
+  }, [formBankAccount, isSubmitForm])
+
+  const handleSubmitForm = () => {
+    const skill = formSkillAndLanguage.filter(item => item.type === 'skill');
+    const language = formSkillAndLanguage.filter(item => item.type === 'language');
+    const formRegisterData = {
+      ...formPersonal,
+      education: formEducation,
+      experience: formExperience,
+      skill: skill,
+      language: language,
+      award: formAward,
+      bankAccount: formBankAccount
+    }
+    console.log(formRegisterData, '.......');
+  }
+
+  console.log("formAccounting", formBankAccount);
   
   return (
     <div>
@@ -119,6 +152,14 @@ const RegisterFreelance = (props: Props) => {
           saveFormRegister={setFormAward}
           defaultFormData={formAward}
           setIsFormValid={setIsFormAwardSave}
+        />
+      )}
+
+      {activeMenu === "accountingAndFinancial" && (
+        <AccountingForm
+          saveFormRegister={setFormBankAccount}
+          defaultFormData={formBankAccount}
+          setIsSubmitForm={setIsSubmitForm}
         />
       )}
     </div>
