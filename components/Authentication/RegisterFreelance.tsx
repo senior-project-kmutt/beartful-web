@@ -6,6 +6,10 @@ import ExperienceForm, { ExperienceItem } from "./FormRegister/ExperienceForm";
 import SkillLanguageForm, { SkillAndLanguageItem } from "./FormRegister/SkillLanguageForm";
 import AwardForm, { AwardItem } from "./FormRegister/AwardForm";
 import AccountingForm from "./FormRegister/AccountingForm";
+import Swal from "sweetalert2";
+import { createUser } from "@/services/user/user.api";
+import { FreelanceUsers } from "@/models/users";
+import { useRouter } from "next/router";
 
 interface Props {
   roleSelected: string;
@@ -16,6 +20,7 @@ interface Props {
   setProcess: Dispatch<SetStateAction<Process[]>>
 }
 const RegisterFreelance = (props: Props) => {
+  const router = useRouter();
   const { roleSelected, setRoleSelected, activeMenu, setActiveMenu, process, setProcess } = props
   const [formPersonal, setFormPersonal] = useState<any>()
   const [formEducation, setFormEducation] = useState<EducationItem[]>([
@@ -86,7 +91,6 @@ const RegisterFreelance = (props: Props) => {
       const duplicateProcess = process;
       duplicateProcess[5].success = true;
       setProcess(duplicateProcess);
-      // setActiveMenu('accountingAndFinancial')
       if (isSubmitForm) {
         console.log('call api');
         handleSubmitForm()
@@ -95,22 +99,45 @@ const RegisterFreelance = (props: Props) => {
   }, [formBankAccount, isSubmitForm])
 
   const handleSubmitForm = () => {
-    const skill = formSkillAndLanguage.filter(item => item.type === 'skill');
-    const language = formSkillAndLanguage.filter(item => item.type === 'language');
-    const formRegisterData = {
-      ...formPersonal,
-      education: formEducation,
-      experience: formExperience,
-      skill: skill,
-      language: language,
-      award: formAward,
-      bankAccount: formBankAccount
-    }
-    console.log(formRegisterData, '.......');
+    console.log("เข้า");
+    Swal.fire({
+      title: "ยืนยันการสร้างบัญชีหรือไม่",
+      text: "โปรดตรวจสอบข้อมูลให้ถูกต้อง",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "ยืนยัน",
+      cancelButtonText: "ตรวจสอบข้อมูลอีกครั้ง"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const skill = formSkillAndLanguage.filter(item => item.type === 'skill');
+        const language = formSkillAndLanguage.filter(item => item.type === 'language');
+        const formRegisterData = {
+          ...formPersonal,
+          education: formEducation,
+          experience: formExperience,
+          skill: skill,
+          language: language,
+          award: formAward,
+          bankAccount: formBankAccount
+        }
+        createUser(formRegisterData as unknown as FreelanceUsers).subscribe(_ => {
+          Swal.fire({
+            icon: "success",
+            title: "สร้างบัญชีสำเร็จ",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        });
+        router.push("/authen/?page=login");
+        router.reload();
+      } else {
+        setIsSubmitForm(false)
+      }
+    });
   }
 
-  console.log("formAccounting", formBankAccount);
-  
   return (
     <div>
       {activeMenu === "personal" && (

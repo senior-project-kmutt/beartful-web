@@ -1,11 +1,11 @@
 import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import style from "@/styles/authentication/form/experienceForm.module.scss";
-import { skillAndLanguageOption } from './option';
+import { skillAndLanguageLevel, skillAndLanguageOption } from './option';
 
 export interface SkillAndLanguageItem {
   type: string;
   title: string;
-  level: number;
+  level: string;
 }
 
 type ValidateSkillLanguageItem = {
@@ -45,7 +45,7 @@ const SkillLanguageForm = (props: Props) => {
       {
         type: '',
         title: '',
-        level: 0
+        level: ''
       }
     ]);
 
@@ -109,15 +109,6 @@ const SkillLanguageForm = (props: Props) => {
     }
   };
 
-  function generateOptions(start: number, end: number) {
-    const options = [];
-    for (let i = start; i <= end; i++) {
-      options.push(<option key={i} value={i}>{i}</option>);
-    }
-    return options;
-  }
-
-
   return (
     <div>
       <p className='text-xl font-semibold'>ทักษะความสามารถและภาษา</p>
@@ -172,8 +163,12 @@ const SkillLanguageForm = (props: Props) => {
                     name="level"
                     className={`${!validateFields[index].level && `${style.error}`}`}
                   >
-                    <option value={0} selected disabled>- กรุณาเลือก -</option>
-                    {generateOptions(1, 10)}
+                    <option value='' selected disabled>- กรุณาเลือก -</option>
+                    {skillAndLanguageLevel.map((menu, index) => {
+                      return (
+                        <option key={index} value={menu.value}>{menu.title}</option>
+                      )
+                    })}
                   </select>
                 </label>
               </div>

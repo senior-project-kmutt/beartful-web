@@ -207,7 +207,7 @@ const ExperienceForm = (props: Props) => {
                     <option value='' selected disabled>- กรุณาเลือก -</option>
                     {thaiMonths.map((month, index) => {
                       return (
-                        <option key={index} value={index}>{month}</option>
+                        <option key={index} value={month}>{month}</option>
                       )
                     })}
                   </select>
@@ -256,7 +256,7 @@ const ExperienceForm = (props: Props) => {
                       <option value='' selected disabled>- กรุณาเลือก -</option>
                       {thaiMonths.map((month, index) => {
                         return (
-                          <option key={index} value={index}>{month}</option>
+                          <option key={index} value={month}>{month}</option>
                         )
                       })}
                     </select>

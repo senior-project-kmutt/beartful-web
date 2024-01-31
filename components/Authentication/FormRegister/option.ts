@@ -37,6 +37,21 @@ export const skillAndLanguageOption = [
     }
 ]
 
+export const skillAndLanguageLevel = [
+    {
+        title: 'พอใช้',
+        value: 'medium'
+    },
+    {
+        title: 'ดี',
+        value: 'good'
+    },
+    {
+        title: 'ดีมาก',
+        value: 'excellent'
+    }
+]
+
 export const bankOption = [
     {
         title: 'ธนาคารกรุงเทพ',

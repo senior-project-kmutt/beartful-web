@@ -29,10 +29,12 @@ const PersonalForm = (props: Props) => {
   useEffect(() => {
     if (defaultFormPersonal) {
       defaultFormPersonal.password = ''
-      defaultFormPersonal.date = defaultFormPersonal.dateOfBirth?.getDate();
+      if (defaultFormPersonal.dateOfBirth) {
+        defaultFormPersonal.date = defaultFormPersonal.dateOfBirth?.getDate();
       defaultFormPersonal.month = defaultFormPersonal.dateOfBirth?.getMonth();
       defaultFormPersonal.year = defaultFormPersonal.dateOfBirth?.getYear();
       delete defaultFormPersonal.dateOfBirth;
+      }
       setFormPersonal(defaultFormPersonal);
       setProfileImage(defaultFormPersonal.profileImage)
     } else {

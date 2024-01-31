@@ -45,8 +45,6 @@ const AccountingForm = (props: Props) => {
     const inputField = event.target.name;
     const inputValue = event.target.value;
 
-    console.log(inputField, inputValue);
-
     setErrorMessage({
       ...errorMessage,
       [inputField]: ''
@@ -101,7 +99,6 @@ const AccountingForm = (props: Props) => {
     setErrorMessage(newErrorMessage)
 
     if (isValid) {
-      console.log("goooo");
       if (imageUploadFile) {
         const fileName = imageUploadFile[0].name;
         const imageUrls = await uploadFileToFirebase(imageUploadFile, `user/bank-account`, fileName);
