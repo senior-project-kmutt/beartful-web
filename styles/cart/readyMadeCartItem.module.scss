@@ -62,15 +62,44 @@
 
         .price {
             font-weight: bolder;
-            position: absolute;
-            right: 30%;
             font-size: 20px;
+            margin-left: 40px;
+        }
+
+        .quantity {
+            margin-left: 40px;
+
+            button {
+                width: 30px;
+                height: 30px;
+                border: 1px solid #E16428;
+                background-color: #E16428;
+                border-radius: 3px;
+                color: white;
+            }
+
+            input {
+                width: 70px;
+                height: 30px;
+                border: 1px solid #E16428;
+                text-align: center;
+                justify-content: center;
+                color: #E16428;
+                margin: auto 5px;
+                border-radius: 3px;
+            }
+        }
+
+        .netAmount {
+            font-weight: bolder;
+            font-size: 20px;
+            margin-left: 40px;
         }
 
         .confirm {
             display: flex;
             position: absolute;
-            right: 5%;
+            right: 10%;
 
             .confirmButton {
                 height: 32px;
