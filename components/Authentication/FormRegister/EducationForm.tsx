@@ -37,6 +37,7 @@ const EducationForm = (props: Props) => {
   ]);
 
   useEffect(() => {
+    setIsFormValid(false)
     if(defaultFormData) {
       setEducations(defaultFormData);
       const updatedValidateFields = defaultFormData.map((item) => {

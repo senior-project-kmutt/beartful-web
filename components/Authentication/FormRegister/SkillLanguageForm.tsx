@@ -24,6 +24,7 @@ const SkillLanguageForm = (props: Props) => {
   const [validateFields, setValidateFields] = useState<ValidateSkillLanguageItem[]>([]);
 
   useEffect(() => {
+    setIsFormValid(false);
     if (defaultFormData) {
       setSkillAndLanguages(defaultFormData);
       const updatedValidateFields = defaultFormData.map((item) => {

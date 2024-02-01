@@ -2,12 +2,11 @@ import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } fro
 import style from "@/styles/authentication/form/experienceForm.module.scss";
 import { bankOption } from './option';
 import { regexpOnlyNumber } from '@/services/validation';
-import { uploadFileToFirebase } from '@/services/firebase/firebase-api';
 
 export interface AccountItem {
   bankName: string;
   bankAccountNumber: string;
-  bankAccountImage: string;
+  bankAccountImage: File | null;
 }
 
 interface ValidateAccounting {
@@ -24,19 +23,23 @@ const AccountingForm = (props: Props) => {
   const defaultItem = {
     bankName: '',
     bankAccountNumber: '',
-    bankAccountImage: ''
+    bankAccountImage: null
   }
   const { saveFormRegister, defaultFormData, setIsSubmitForm } = props;
   const [accountInfo, setAccountInfo] = useState<AccountItem>(defaultItem);
   const [errorMessage, setErrorMessage] = useState<ValidateAccounting>({});
   const [imageUpload, setImageUpload] = useState<string>('');
-  const [imageUploadFile, setImageUploadFile] = useState<File[]>();
+  const [imageUploadFile, setImageUploadFile] = useState<File | null>(null);
 
   useEffect(() => {
     if (defaultFormData) {
       setAccountInfo(defaultFormData);
-      setImageUpload(defaultFormData.bankAccountImage);
       setIsSubmitForm(false);
+      if (defaultFormData.bankAccountImage) {
+        const imageSrc = convertFileToBlob(defaultFormData.bankAccountImage);
+        setImageUpload(imageSrc);
+        setImageUploadFile(defaultFormData.bankAccountImage);
+      }
     }
   }, [])
 
@@ -63,19 +66,21 @@ const AccountingForm = (props: Props) => {
     })
     if (event.target.files) {
       const [file] = event.target.files;
-      const imageSrc = URL.createObjectURL(file);
+      const imageSrc = convertFileToBlob(file)
       setImageUpload(imageSrc);
-      setImageUploadFile([
-        ...event.target.files
-      ]);
+      setImageUploadFile(file);
     }
+  }
+
+  const convertFileToBlob = (file: File) => {
+    return URL.createObjectURL(file);
   }
 
 
   const onSubmit = async (type: string) => {
     let isValid: boolean = true;
     const newErrorMessage: ValidateAccounting = {};
-    const submitDataForm = accountInfo;
+    const submitDataForm = {...accountInfo};
     if (!accountInfo.bankName) {
       newErrorMessage['bankName'] = 'กรุณาระบุให้ถูกต้อง'
       isValid = false
@@ -99,11 +104,7 @@ const AccountingForm = (props: Props) => {
     setErrorMessage(newErrorMessage)
 
     if (isValid) {
-      if (imageUploadFile) {
-        const fileName = imageUploadFile[0].name;
-        const imageUrls = await uploadFileToFirebase(imageUploadFile, `user/bank-account`, fileName);
-        submitDataForm['bankAccountImage'] = imageUrls[0]
-      }
+      submitDataForm['bankAccountImage'] = imageUploadFile;
       saveFormRegister(submitDataForm);
       if (type === 'submit') {
         setIsSubmitForm(true)

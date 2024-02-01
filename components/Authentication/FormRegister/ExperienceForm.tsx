@@ -1,6 +1,6 @@
 import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import style from "@/styles/authentication/form/experienceForm.module.scss";
-import { educationLevel, thaiMonths } from './option';
+import { thaiMonths } from './option';
 
 export interface ExperienceItem {
   companyName: string;
@@ -28,6 +28,7 @@ const ExperienceForm = (props: Props) => {
   const [validateFields, setValidateFields] = useState<ValidateEducationItem[]>([]);
 
   useEffect(() => {
+    setIsFormValid(false);
     if (defaultFormData) {
       setExperiences(defaultFormData);
       const updatedValidateFields = defaultFormData.map((item) => {

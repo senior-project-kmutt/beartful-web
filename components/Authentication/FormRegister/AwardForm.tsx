@@ -22,6 +22,7 @@ const AwardForm = (props: Props) => {
   const [validateFields, setValidateFields] = useState<ValidateAwardItem[]>([]);
 
   useEffect(() => {
+    setIsFormValid(false);
     if (defaultFormData) {
       setAwards(defaultFormData);
       const updatedValidateFields = defaultFormData.map((item) => {

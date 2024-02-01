@@ -10,6 +10,9 @@ import Swal from "sweetalert2";
 import { createUser } from "@/services/user/user.api";
 import { FreelanceUsers } from "@/models/users";
 import { useRouter } from "next/router";
+import bcrypt from "bcryptjs";
+import { defaultProfileImage } from "@/config/constants";
+import { uploadFileToFirebase } from "@/services/firebase/firebase-api";
 
 interface Props {
   roleSelected: string;
@@ -42,13 +45,13 @@ const RegisterFreelance = (props: Props) => {
   const [isSubmitForm, setIsSubmitForm] = useState<boolean>(false)
 
   useEffect(() => {
-    if (formPersonal) {
+    if (isFormPersonalValid) {
       const duplicateProcess = process;
       duplicateProcess[0].success = true;
       setProcess(duplicateProcess);
       setActiveMenu('education')
     }
-  }, [formPersonal])
+  }, [formPersonal, isFormPersonalValid])
 
   useEffect(() => {
     if (isFormEducationlValid) {
@@ -57,7 +60,7 @@ const RegisterFreelance = (props: Props) => {
       setProcess(duplicateProcess);
       setActiveMenu('experience')
     }
-  }, [formEducation])
+  }, [formEducation, isFormEducationlValid])
 
   useEffect(() => {
     if (isFormExperienceSave) {
@@ -92,14 +95,12 @@ const RegisterFreelance = (props: Props) => {
       duplicateProcess[5].success = true;
       setProcess(duplicateProcess);
       if (isSubmitForm) {
-        console.log('call api');
         handleSubmitForm()
       }
     }
   }, [formBankAccount, isSubmitForm])
 
   const handleSubmitForm = () => {
-    console.log("เข้า");
     Swal.fire({
       title: "ยืนยันการสร้างบัญชีหรือไม่",
       text: "โปรดตรวจสอบข้อมูลให้ถูกต้อง",
@@ -109,29 +110,53 @@ const RegisterFreelance = (props: Props) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "ยืนยัน",
       cancelButtonText: "ตรวจสอบข้อมูลอีกครั้ง"
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         const skill = formSkillAndLanguage.filter(item => item.type === 'skill');
         const language = formSkillAndLanguage.filter(item => item.type === 'language');
         const formRegisterData = {
           ...formPersonal,
-          education: formEducation,
-          experience: formExperience,
-          skill: skill,
-          language: language,
-          award: formAward,
-          bankAccount: formBankAccount
+          education: [...formEducation],
+          experience: [...formExperience],
+          skill: [...skill],
+          language: [...language],
+          award: [...formAward],
+          bankAccount: {...formBankAccount}
         }
+
+        if (formRegisterData?.profileImage) {
+          const imageUrls = await uploadFileToFirebase([formPersonal.profileImage], `user/profile-image`, formPersonal['username']);
+          formRegisterData['profileImage'] = imageUrls[0];
+        } else {
+          formRegisterData['profileImage'] = defaultProfileImage;
+        }
+
+        if (formRegisterData.bankAccount.bankAccountImage) {
+          const imageUrls = await uploadFileToFirebase([formRegisterData.bankAccount.bankAccountImage], `user/bank-account`, formPersonal['username']);
+          formRegisterData['bankAccount']['bankAccountImage'] = imageUrls[0];
+        }
+
+        const encryptPassword = await bcrypt.hash(formRegisterData['password'] as string, 10);
+        delete formRegisterData['confirmPassword'];
+        formRegisterData['password'] = encryptPassword;
+
         createUser(formRegisterData as unknown as FreelanceUsers).subscribe(_ => {
-          Swal.fire({
-            icon: "success",
-            title: "สร้างบัญชีสำเร็จ",
-            showConfirmButton: false,
-            timer: 1500
-          });
+          router.push("/");
+        }, error => {
+          if (error.response.status === 409) {
+            Swal.fire({
+              title: "ชื่อผู้ใช้งานนี้ซ้ำกับในระบบ",
+              text: "โปรดเปลี่ยนชื่อผู้ใช้งาน",
+              icon: "warning"
+            })
+          } else {
+            Swal.fire({
+              title: "เกิดข้อผิดพลาด",
+              text: "โปรดลองใหม่อีกครั้ง",
+              icon: "error"
+            });
+          }
         });
-        router.push("/authen/?page=login");
-        router.reload();
       } else {
         setIsSubmitForm(false)
       }

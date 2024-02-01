@@ -1,11 +1,8 @@
-import { Users } from "@/models/users";
-import { createUser } from "@/services/user/user.api";
-import bcrypt from "bcryptjs";
 import style from "@/styles/authentication/form/personalForm.module.scss";
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
 import { errorMessageEmtryField, regexpEmail, regexpOnlyNumber, requiredFieldsCustomer, requiredFieldsFreelance } from "@/services/validation";
-import { uploadFileToFirebase } from "@/services/firebase/firebase-api";
 import { thaiMonths } from "./option";
+import { defaultProfileImage } from "@/config/constants";
 
 interface formDataType {
   [key: string]: any;
@@ -19,24 +16,29 @@ interface Props {
   defaultFormPersonal: any
 }
 const PersonalForm = (props: Props) => {
-  const defaultProfileImage = "https://i.pinimg.com/564x/d8/2c/87/d82c87e21e84a3e7649d16c968105553.jpg";
   const { roleSelected, setRoleSelected, saveFormRegister, setIsFinished, defaultFormPersonal } = props
   const [profileImage, setProfileImage] = useState<string>(defaultProfileImage);
-  const [profileImageFile, setProfileImageFile] = useState<File[]>()
+  const [profileImageFile, setProfileImageFile] = useState<File>()
   const [formPersonal, setFormPersonal] = useState<formDataType>({})
   const [errorMessage, setErrorMessage] = useState<formDataType>({})
 
   useEffect(() => {
+    setIsFinished(false);
     if (defaultFormPersonal) {
-      defaultFormPersonal.password = ''
       if (defaultFormPersonal.dateOfBirth) {
         defaultFormPersonal.date = defaultFormPersonal.dateOfBirth?.getDate();
-      defaultFormPersonal.month = defaultFormPersonal.dateOfBirth?.getMonth();
-      defaultFormPersonal.year = defaultFormPersonal.dateOfBirth?.getYear();
-      delete defaultFormPersonal.dateOfBirth;
+        defaultFormPersonal.month = defaultFormPersonal.dateOfBirth?.getMonth();
+        defaultFormPersonal.year = defaultFormPersonal.dateOfBirth?.getYear();
+        delete defaultFormPersonal.dateOfBirth;
+      }
+      if (defaultFormPersonal.profileImage) {
+        const imageSrc = convertFileToBlob(defaultFormPersonal.profileImage);
+        setProfileImage(imageSrc);
+        setProfileImageFile(defaultFormPersonal.profileImage);
+      } else {
+        setProfileImage(defaultProfileImage)
       }
       setFormPersonal(defaultFormPersonal);
-      setProfileImage(defaultFormPersonal.profileImage)
     } else {
       setFormPersonal({
         ...formPersonal,
@@ -49,33 +51,17 @@ const PersonalForm = (props: Props) => {
     }
   }, [])
 
-  const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const responseBody: formDataType = {};
-    const formData = new FormData(event.currentTarget as HTMLFormElement);
-
-    for (const [property, value] of formData) {
-      if (property === "password") {
-        responseBody[property] = await bcrypt.hash(value as string, 10);
-      } else {
-        responseBody[property] = value;
-      }
-    }
-
-    if (responseBody) {
-      createUser(responseBody as unknown as Users);
-    }
-  };
-
   const handleInputFile = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const [file] = event.target.files;
-      const imageSrc = URL.createObjectURL(file);
+      const imageSrc = convertFileToBlob(file)
       setProfileImage(imageSrc);
-      setProfileImageFile([
-        ...event.target.files
-      ]);
+      setProfileImageFile(file);
     }
+  }
+
+  const convertFileToBlob = (file: File) => {
+    return URL.createObjectURL(file);
   }
 
   const handleInputChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {
@@ -156,14 +142,10 @@ const PersonalForm = (props: Props) => {
 
     setErrorMessage(newErrorMessage);
     if (isValid) {
-      const encryptPassword = await bcrypt.hash(submitDataForm['password'] as string, 10);
-      delete submitDataForm['confirmPassword'];
-      submitDataForm['password'] = encryptPassword;
       if (profileImageFile) {
-        const imageUrls = await uploadFileToFirebase(profileImageFile, `user/profile-image`, submitDataForm['username']);
-        submitDataForm['profileImage'] = imageUrls[0]
+        submitDataForm['profileImage'] = profileImageFile
       } else {
-        submitDataForm['profileImage'] = defaultProfileImage;
+        submitDataForm['profileImage'] = null;
       }
       setIsFinished(true);
       saveFormRegister(submitDataForm);
