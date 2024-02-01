@@ -1,0 +1,37 @@
+.purchaseStatus {
+    height: 40px;
+    background-color: #FCEFE9;
+    border-radius: 10px;
+    margin-top: 10px;
+
+    .formGrid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        margin-right: 30px;
+        margin-left: 30px;
+
+        .item_active {
+            color: #873C18;
+            font-weight: bolder;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+
+        .item {
+            margin-top: 8px;
+            font-weight: bolder;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            grid-template-columns: 58% 27% 15%;
+            /* Adjusted to have three columns with lengths 50%, 25%, and 25% */
+            justify-content: center;
+            align-items: center;
+        }
+
+    }
+}
