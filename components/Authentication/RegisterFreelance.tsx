@@ -140,7 +140,20 @@ const RegisterFreelance = (props: Props) => {
         delete formRegisterData['confirmPassword'];
         formRegisterData['password'] = encryptPassword;
 
-        createUser(formRegisterData as unknown as FreelanceUsers).subscribe(_ => {
+        createUser(formRegisterData as unknown as FreelanceUsers).subscribe((res: any) => {
+          localStorage.setItem("auth", res.data.token);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          Swal.fire({
+            icon: "success",
+            title: "สร้างบัญชีสำเร็จ",
+            showConfirmButton: false,
+            timer: 1500
+          }).then((result) => {
+            if (result.isConfirmed || result.isDismissed) {
+              router.push('/')
+            }
+          });
+
           router.push("/");
         }, error => {
           if (error.response.status === 409) {

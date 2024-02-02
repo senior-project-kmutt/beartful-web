@@ -13,7 +13,7 @@ const NavBar = () => {
 
   useEffect(() => {
     const userSession = localStorage.getItem('user')
-    if(userSession) {
+    if(userSession && userSession !== "undefined") {
       const user = JSON.parse(userSession);
       setUser(user)
     }

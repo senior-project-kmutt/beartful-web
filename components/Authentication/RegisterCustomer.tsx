@@ -51,8 +51,19 @@ const RegisterCustomer = (props: Props) => {
     const encryptPassword = await bcrypt.hash(submitFromData['password'] as string, 10);
     delete submitFromData['confirmPassword'];
     submitFromData['password'] = encryptPassword;
-    createUser(submitFromData as unknown as Users).subscribe(_ => {
-      router.push('/')
+    createUser(submitFromData as unknown as Users).subscribe((res: any) => {
+      localStorage.setItem("auth", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      Swal.fire({
+        icon: "success",
+        title: "สร้างบัญชีสำเร็จ",
+        showConfirmButton: false,
+        timer: 1500
+      }).then((result) => {
+        if (result.isConfirmed || result.isDismissed) {
+          router.push('/')
+        }
+      });
     }, error => {
       if (error.response.status === 409) {
         Swal.fire({
