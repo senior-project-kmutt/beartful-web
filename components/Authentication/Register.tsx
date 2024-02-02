@@ -1,6 +1,3 @@
-import { Users } from "@/models/users";
-import { createUser } from "@/services/user/user.api";
-import bcrypt from "bcryptjs";
 import style from "@/styles/authentication/registerLayout.module.scss";
 import RegisterCustomer from "./RegisterCustomer";
 import { useState } from "react";
@@ -9,54 +6,89 @@ import RegisterFreelance from "./RegisterFreelance";
 interface formDataType {
   [key: string]: any;
 }
+
+export interface Process {
+  title: string,
+  value: string,
+  success?: boolean 
+
+}
+
+export const defaultProcessFreelance: Process[] = [
+  {
+    title: 'ข้อมูลทั่วไป',
+    value: 'personal',
+    success: false
+  },
+  {
+    title: 'ประวัติการศึกษา',
+    value: 'education',
+    success: false
+  },
+  {
+    title: 'ประสบการณ์ทำงาน',
+    value: 'experience',
+    success: false
+  },
+  {
+    title: 'ทักษะและภาษา',
+    value: 'skillAndLanguage',
+    success: false
+  },
+  {
+    title: 'ใบอนุญาติ / รางวัลที่ได้รับ',
+    value: 'licenseAndAwards',
+    success: false
+  },
+  {
+    title: 'ข้อมูลบัญชีและการเงิน',
+    value: 'accountingAndFinancial',
+    success: false
+  }
+]
+
 const Register = () => {
   const [roleSelected, setRoleSelected] = useState<string>('customer')
-  const sideBarMenu = [
-    {
-      title: 'ข้อมูลส่วนบุคคล',
-      value: 'personal'
-    },
-    {
-      title: 'ประวัติการศึกษา',
-      value: 'education'
-    }
-  ]
-  const submitForm = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const responseBody: formDataType = {};
-    const formData = new FormData(event.currentTarget as HTMLFormElement);
+  const [activeMenu, setActiveMenu] = useState<string>('personal')
+  const [processFreelance, setProcessFreelance] = useState<Process[]>(defaultProcessFreelance)
 
-    for (const [property, value] of formData) {
-      if (property === "password") {
-        responseBody[property] = await bcrypt.hash(value as string, 10);
-      } else {
-        responseBody[property] = value;
-      }
+  const handleChangeMenu = (menu: Process) => {
+    if (menu.success) {
+      setActiveMenu(menu.value)
     }
-
-    if (responseBody) {
-      createUser(responseBody as unknown as Users);
-    }
-  };
+  }
   return (
     <div>
       <div className={style.container}>
-        <div className={`${style.side_menu} ${roleSelected === 'freelance' ? '' : style.close}`}>
-          <ul>
-            {sideBarMenu.map((menu, index) => {
+        <div className={`${style.side_menu} ${roleSelected === 'customer' && style.close}`}>
+          <div>
+            {defaultProcessFreelance.map((menu, index) => {
               return (
-                <div key={index}>{menu.title}</div>
+                <div
+                  className={`${menu.success ? `${style.itemSuccess}` : `${style.itemUnsuccess}`} ${menu.value === activeMenu && style.active}`}
+                  key={index}
+                  onClick={() => handleChangeMenu(menu)}
+                >
+                  {menu.title}
+                </div>
               )
             })}
-          </ul>
+          </div>
         </div>
-        <div className={style.input_container}>
+        <div className={`${style.input_container} ${roleSelected === 'customer' && style.full}`}>
           {roleSelected === 'customer' ? (
             <>
               <RegisterCustomer roleSelected={roleSelected} setRoleSelected={setRoleSelected} />
             </>
           ) : (
-            <RegisterFreelance roleSelected={roleSelected} setRoleSelected={setRoleSelected} />
+            <RegisterFreelance
+              roleSelected={roleSelected}
+              setRoleSelected={setRoleSelected}
+              activeMenu={activeMenu}
+              setActiveMenu={setActiveMenu}
+              process={processFreelance}
+              setProcess={setProcessFreelance}
+            />
           )}
         </div>
       </div>

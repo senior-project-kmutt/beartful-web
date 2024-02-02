@@ -1,4 +1,4 @@
-import { Users } from "@/models/users";
+import { FreelanceUsers, Users } from "@/models/users";
 
 export const regexpEmail = new RegExp(/^[\w-.+]+[\w-]+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})$/);
 export const regexpOnlyNumber = new RegExp(/^[0-9]*$/);
@@ -11,6 +11,7 @@ export const errorMessageEmtryField: Record<string, string> = {
     phoneNumber: 'กรุณาระบุเบอร์โทรศัพท์',
     password: 'กรุณาระบุรหัสผ่าน',
     confirmPassword: 'กรุณายืนยันรหัสผ่าน',
+    address: 'กรุณาระบุที่อยู่'
 }
 
 export const requiredFieldsCustomer: Array<keyof Users> = [
@@ -21,4 +22,16 @@ export const requiredFieldsCustomer: Array<keyof Users> = [
     'lastname',
     'role',
     'phoneNumber'
+];
+
+export const requiredFieldsFreelance: Array<keyof FreelanceUsers> = [
+    'email',
+    'username',
+    'password',
+    'firstname',
+    'lastname',
+    'role',
+    'phoneNumber',
+    'dateOfBirth',
+    'address'
 ];
