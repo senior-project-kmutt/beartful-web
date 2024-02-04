@@ -29,3 +29,13 @@ export interface Carts {
 export interface ICartEdit {
     quantity: number
 }
+
+export interface ICartAdd {
+    type: string
+    description: string
+    amount: number
+    quantity: number
+    freelanceId: string
+    artworkId: string
+    artworkName: string
+}

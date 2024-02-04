@@ -3,6 +3,10 @@ import style from "@/styles/artwork/artworkLayout.module.scss";
 import { Carousel, CustomFlowbiteTheme } from "flowbite-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from "react";
+import { createCart } from "@/services/cart/cart.api";
+import { IUser } from "@/pages/chat";
+import { ICartAdd } from "@/models/cart";
 
 interface Props {
   item: Artwork;
@@ -23,12 +27,43 @@ const carouselTheme: CustomFlowbiteTheme['carousel'] = {
 };
 
 const ArtworkDetail = (props: Props) => {
-  const { _id, images, name, price, description, likeCount, type } = props.item;
+  const { _id, images, name, price, description, likeCount, type, freelanceId } = props.item;
+  const [user, setUser] = useState<IUser>();
+  let [quantity, setQuantity] = useState<number>(1)
   const { onCloseDetail } = props;
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user") || ""));
+  }, []);
 
   const handleCloseDetail = () => {
     onCloseDetail();
   };
+
+  const handleAddToCart = async () => {
+    const token = localStorage.getItem("auth");
+    if (token) {
+      if (user) {
+        const cart: ICartAdd = {
+          type: type,
+          description: description,
+          amount: parseInt(price),
+          quantity: quantity,
+          artworkId: _id,
+          artworkName: name,
+          freelanceId: freelanceId.toString()
+        };
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+        try {
+          await createCart(cart, headers);
+        } catch (error) {
+          console.error("Error create Cart:", error);
+        }
+      }
+    }
+  }
 
   return (
     <div className={style.artwork_detail}>
@@ -57,12 +92,25 @@ const ArtworkDetail = (props: Props) => {
         </div>
         <div className={style.price}>
           <span>{type == 'hired' ? 'เรทราคา :' : 'ราคา :'}</span>
-          <span className={style.price_tag}>{price}</span>
+          <span className={style.price_tag}>{price} บาท</span>
         </div>
         <div className={style.heart}>
-          <span>จำนวนที่ถูกใจ</span>
+          <span>จำนวน</span>
           <span className={style.heart_count}>{likeCount} ครั้ง</span>
         </div>
+        {type === 'readyMade' && <div className={style.quantity}>
+          <span>จำนวนที่ถูกใจ</span>
+          <span className={style.quantityControll}>
+            <button onClick={() => setQuantity(quantity -= 1)}>-</button>
+            <input
+              type="number"
+              value={quantity}
+              onChange={(event) => setQuantity(parseInt(event.target.value))}
+            />
+            <button onClick={() => setQuantity(quantity += 1)}>+</button>
+          </span>
+          <button className={style.addToCart} onClick={handleAddToCart}>เพิ่มลงตะกร้า</button>
+        </div>}
         <div className={style.profile}>
           <img src="../../ssi1/picture/user1.gif" />
           <div className={style.name_box}>
