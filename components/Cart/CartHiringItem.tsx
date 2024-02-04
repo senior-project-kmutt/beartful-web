@@ -21,9 +21,9 @@ const CartHiringItem = (props: Props) => {
                     <button className={style.cancelButton}>View profile</button>
                 </div>
             </div>
-            {item.cartItem.map((item) => {
+            {item.cartItem.map((item, index) => {
                 return (
-                    <div className={style.order}>
+                    <div className={style.order} key={index}>
                         <img className={style.userImage} src="../../xxxx"></img>
                         <div className={style.detail}>
                             <p className={style.artworkName}>Artwork Name</p>

@@ -90,9 +90,9 @@ const CartReadyMadeItem = (props: Props) => {
                     <button className={style.cancelButton}>View profile</button>
                 </div>
             </div>
-            {cartItems.map((item) => {
+            {cartItems.map((item, index) => {
                 return (
-                    <div className={style.order}>
+                    <div className={style.order} key={index}>
                         <img className={style.userImage} src="../../xxxx"></img>
                         <div className={style.detail}>
                             <p className={style.artworkName}>{item.artworkName}</p>

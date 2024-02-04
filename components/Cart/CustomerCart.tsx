@@ -45,9 +45,9 @@ const CustomerCart = () => {
                         <>
                             <div className={style.heading}>Cart: Hiring</div>
                             <CartHiringStatusBar />
-                            {cart.map((item) => {
+                            {cart.map((item, index) => {
                                 return (
-                                    <CartHiringItem item={item} />
+                                    <CartHiringItem item={item} key={index} />
                                 )
                             })}
                         </>
@@ -56,9 +56,9 @@ const CustomerCart = () => {
                         <>
                             <div className={style.heading}>Cart: Ready Made</div>
                             <CartReadyMadeStatusBar />
-                            {cart.map((item) => {
+                            {cart.map((item, index) => {
                                 return (
-                                    <CartReadyMadeItem data={item} />
+                                    <CartReadyMadeItem data={item} key={index} />
                                 )
                             })}
                         </>
