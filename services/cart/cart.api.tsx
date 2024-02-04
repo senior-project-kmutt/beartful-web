@@ -3,9 +3,9 @@ import { deleteMethod, get, patch } from "../HttpClient";
 import { IncomingHttpHeaders } from "http";
 import { ICartEdit } from "@/models/cart";
 
-export const getCart = (type: string): Observable<any> => {
+export const getCart = (userId: string, type: string): Observable<any> => {
     const typeParam = type ? `?type=${type}` : '';
-    return get(`/user/${'6554f09eb34656482167d023'}/carts${typeParam}`);
+    return get(`/user/${userId}/carts${typeParam}`);
 };
 
 export const editCartById = (cartId: string, body: ICartEdit, headers: IncomingHttpHeaders): Observable<any> => {

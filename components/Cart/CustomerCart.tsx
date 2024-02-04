@@ -9,16 +9,25 @@ import CartReadyMadeStatusBar from "./CartReadyMadeStatusBar";
 import { Carts } from "@/models/cart";
 import { getCart } from "@/services/cart/cart.api";
 import CartHiringItem from "./CartHiringItem";
+import { IUser } from "@/pages/chat";
+
 const CustomerCart = () => {
     const [type, setType] = useState<string>('hired')
     const [cart, setCart] = useState<Carts[]>([])
+    const [user, setUser] = useState<IUser>();
 
     useEffect(() => {
-        getCarts()
-    }, [type])
+        setUser(JSON.parse(localStorage.getItem("user") || ""));
+    }, [])
 
-    const getCarts = async () => {
-        await getCart(type).subscribe((res => {
+    useEffect(() => {
+        if (user) {
+            getCarts(user);
+        }
+    }, [type, user])
+
+    const getCarts = async (user: IUser) => {
+        await getCart(user.id, type).subscribe((res => {
             setCart(res.data as Carts[])
         }))
     }
