@@ -23,8 +23,10 @@ export const patch = <T>(path: string, data: any, headers?: IncomingHttpHeaders)
   );
 };
 
-export const deleteMethod = <T>(path: string): Observable<T> => {
-  return from(Axios.delete(path)).pipe(map(response => response as T));
+export const deleteMethod = <T>(path: string, headers?: IncomingHttpHeaders): Observable<T> => {
+  return from(Axios.delete(path, {
+    headers: headers || undefined
+  })).pipe(map(response => response as T));
 };
 
 export const getPromise = <T>(

@@ -1,6 +1,6 @@
 import { CartItem, Carts } from "@/models/cart";
 import { IUser } from "@/pages/chat";
-import { editCartById } from "@/services/cart/cart.api";
+import { deleteCartById, editCartById } from "@/services/cart/cart.api";
 import style from "@/styles/cart/readyMadeCartItem.module.scss"
 import { faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -58,9 +58,30 @@ const CartReadyMadeItem = (props: Props) => {
         setCartItems(updatedCartItems);
     };
 
+    const deleteCart = async (cartId: string) => {
+        const token = localStorage.getItem("auth");
+        if (token) {
+            if (user) {
+                const headers = {
+                    Authorization: `Bearer ${token}`,
+                };
+                try {
+                    await deleteCartById(cartId, headers);
+                    const updatedCartItems = cartItems.filter((item) => item._id !== cartId);
+                    setCartItems(updatedCartItems);
+                } catch (error) {
+                    console.error("Error delete cart:", error);
+                }
+            }
+        }
+    }
+
+    const checkHasFreelanceInCart = () => {
+        return cartItems.some(item => item.freelanceId === data.freelanceId)
+    }
 
     return (
-        <div className={style.cartItem}>
+        checkHasFreelanceInCart() && (<div className={style.cartItem}>
             <div className={style.profile}>
                 <FontAwesomeIcon icon={faUser} size="sm" style={{ marginTop: "4px" }}></FontAwesomeIcon>
                 <p className={style.username}>{data.freelanceUsername}</p>
@@ -89,12 +110,12 @@ const CartReadyMadeItem = (props: Props) => {
                         </div>
                         <div className={style.netAmount}>{item.netAmount} Baht</div>
                         <div className={style.confirm}>
-                            <FontAwesomeIcon icon={faTrash} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>
+                            <FontAwesomeIcon icon={faTrash} style={{ color: '#5A2810' }} size="2xl" onClick={() => deleteCart(item._id)}></FontAwesomeIcon>
                         </div>
                     </div>
                 )
             })}
-        </div>
+        </div>)
     );
 };
 
