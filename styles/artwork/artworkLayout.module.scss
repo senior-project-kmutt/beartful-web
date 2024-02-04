@@ -1,5 +1,6 @@
 .container {
     width: 85%;
+
     .text {
         text-align: center;
         color: #635B5B;
@@ -11,6 +12,7 @@
     padding: 0 20px;
     columns: 5;
     column-gap: 20px;
+
     .artwork_box {
         width: 100%;
         margin-bottom: 10px;
@@ -23,7 +25,7 @@
     }
 }
 
-.type_header{
+.type_header {
     text-align: center;
     font-size: 2rem;
     font-weight: 800;
@@ -56,7 +58,7 @@
     }
 }
 
-.no_artwork{
+.no_artwork {
     text-align: center;
     align-items: center;
     position: absolute;
@@ -83,162 +85,216 @@
         height: 24rem;
 
         img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                border-radius: 20px;
-            }
-        }
-    }
-
-    .detail {
-        width: 50%;
-        margin: 10px 5%;
-        height: 24rem;
-
-        .name {
-            font-weight: bold;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-        }
-
-        .category {
-            span {
-                border: solid 1px #E16428;
-                margin-right: 10px;
-                padding: 4px 20px;
-                border-radius: 15px;
-                color: #E16428;
-
-                &:hover {
-                    background-color: #E16428;
-                    color: #FFF;
-                }
-            }
-        }
-
-        .description {
-            p {
-                margin-top: 20px;
-                margin-bottom: 12px;
-            }
-
-            span {
-                margin-top: 20px;
-            }
-        }
-
-        .price {
-            margin-top: 20px;
-
-            .price_tag {
-                color: #B45020;
-                position: absolute;
-                right: 35px;
-                margin-right: 2%;
-            }
-        }
-
-        .heart {
-            margin-top: 8px;
-
-            .heart_count {
-                color: #B45020;
-                position: absolute;
-                right: 35px;
-                margin-right: 2%;
-            }
-            .heart_icon{
-                margin-left: 2%;
-                color: #EBE9E9;
-                box-shadow: '0px 4px 4px rgba(0, 0, 0, 0.25) inset';
-
-                &:hover {
-                    color: #EB3223;
-                }
-                &:active {
-                    color: #EB3223;
-                }
-            }
-        }
-
-        .bookmark {
-            margin-top: 8px;
-
-            .bookmark_icon{
-                margin-left: 2%;
-                color: #EBE9E9;
-                box-shadow: '0px 4px 4px rgba(0, 0, 0, 0.25) inset';
-
-                &:hover {
-                    color: #FFD600;
-                }
-                &:active {
-                    color: #FFD600;
-                }
-            }
-        }
-
-        .profile {
-            height: 4rem;
             width: 100%;
-            display: flex;
-            align-items: center;
-            margin: 2rem auto;
-            
-            img {
-                margin-right: 8px;
-                border-radius: 50%;
-                width: 60px;
-            }
-            .name_box {
-                justify-items: start;
-                justify-content: start;
-                
-                .username {
-                    margin-left: 4px;
-                    font-weight: 500;
-                    font-size: 1.2rem;
-                }
-                .fullname {
-                    margin-left: 4px;
-                    font-size: 0.8rem;
-                    color: #716E6E;
-                }
-            }
-            .btn {
-                background-color: #E78353;
-                padding: 4px 20px;
-                border-radius: 15px;
-                color: #fff;
-                font-weight: 500;
-                position:absolute;
-                right: 4%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 20px;
+        }
+    }
+}
 
-                &:hover {
-                    background-color: #5A2810;
-                    color: #FFFFFF;
-                }
+.detail {
+    width: 50%;
+    margin: 10px 5%;
+    height: 24rem;
+
+    .name {
+        font-weight: bold;
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .category {
+        span {
+            border: solid 1px #E16428;
+            margin-right: 10px;
+            padding: 4px 20px;
+            border-radius: 15px;
+            color: #E16428;
+
+            &:hover {
+                background-color: #E16428;
+                color: #FFF;
             }
         }
     }
-    .close {
-        margin: 2px 4px;
+
+    .description {
+        p {
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
         span {
-            background-color: #5A2810;
-            padding: 5px 15px;
-            border-radius: 50%;
-            font-weight: 500;
-            color: #FFFFFF;
+            margin-top: 20px;
+        }
+    }
+
+    .price {
+        margin-top: 20px;
+
+        .price_tag {
+            color: #B45020;
             position: absolute;
             right: 35px;
-            
+            margin-right: 2%;
+        }
+    }
+
+    .heart {
+        margin-top: 8px;
+
+        .heart_count {
+            color: #B45020;
+            position: absolute;
+            right: 35px;
+            margin-right: 2%;
+        }
+
+        .heart_icon {
+            margin-left: 2%;
+            color: #EBE9E9;
+            box-shadow: '0px 4px 4px rgba(0, 0, 0, 0.25) inset';
+
             &:hover {
-                background-color: #B45020;
-                box-shadow: 2px 2px 2px gray;
+                color: #EB3223;
+            }
+
+            &:active {
+                color: #EB3223;
             }
         }
     }
+
+    .bookmark {
+        margin-top: 8px;
+
+        .bookmark_icon {
+            margin-left: 2%;
+            color: #EBE9E9;
+            box-shadow: '0px 4px 4px rgba(0, 0, 0, 0.25) inset';
+
+            &:hover {
+                color: #FFD600;
+            }
+
+            &:active {
+                color: #FFD600;
+            }
+        }
+    }
+
+    .quantity {
+        margin-top: 12px;
+
+        .addToCart {
+            width: 150px;
+            position: absolute;
+            right: 4%;
+
+        }
+
+        .quantityControll {
+            margin-left: 100px;
+
+            button {
+                width: 30px;
+                height: 30px;
+                border: 1px solid #E16428;
+                background-color: #E16428;
+                border-radius: 3px;
+                color: white;
+            }
+
+            input {
+                width: 70px;
+                height: 30px;
+                border: 1px solid #E16428;
+                text-align: center;
+                justify-content: center;
+                color: #E16428;
+                margin: auto 5px;
+                border-radius: 3px;
+            }
+
+        }
+
+        .addToCart {
+            width: 150px;
+            position: absolute;
+            height: 30px;
+            border: 1px solid #E16428;
+            background-color: #E16428;
+            border-radius: 3px;
+            color: white;
+        }
+    }
+
+    .profile {
+        height: 4rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin: 2rem auto;
+
+        img {
+            margin-right: 8px;
+            border-radius: 50%;
+            width: 60px;
+        }
+
+        .name_box {
+            justify-items: start;
+            justify-content: start;
+
+            .username {
+                margin-left: 4px;
+                font-weight: 500;
+                font-size: 1.2rem;
+            }
+
+            .fullname {
+                margin-left: 4px;
+                font-size: 0.8rem;
+                color: #716E6E;
+            }
+        }
+
+        .btn {
+            background-color: #E78353;
+            padding: 4px 20px;
+            border-radius: 15px;
+            color: #fff;
+            font-weight: 500;
+            position: absolute;
+            right: 4%;
+
+            &:hover {
+                background-color: #5A2810;
+                color: #FFFFFF;
+            }
+        }
+    }
+}
+
+.close {
+    margin: 2px 4px;
+
+    span {
+        background-color: #5A2810;
+        padding: 5px 15px;
+        border-radius: 50%;
+        font-weight: 500;
+        color: #FFFFFF;
+        position: absolute;
+        right: 35px;
+
+        &:hover {
+            background-color: #B45020;
+            box-shadow: 2px 2px 2px gray;
+        }
+    }
+}
 
 @media (max-width:1200px) {
     .artwork_container {

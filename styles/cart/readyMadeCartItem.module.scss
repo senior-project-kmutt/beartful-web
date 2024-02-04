@@ -1,0 +1,115 @@
+.cartItem {
+    height: auto;
+    background-color: #FCEFE9;
+    border-radius: 10px;
+    margin: 10px auto;
+    padding-bottom: 15px;
+
+    .profile {
+        display: flex;
+        padding-top: 15px;
+        padding-left: 25px;
+
+        .username {
+            font-weight: bolder;
+            margin-left: 8px;
+        }
+
+        .saveButton {
+            background-color: #E16428;
+            width: 120px;
+            height: 25px;
+            border-radius: 15px;
+            color: white;
+            margin-right: 7px;
+        }
+
+        .cancelButton {
+            border: 1.5px solid #B45020;
+            width: 120px;
+            height: 25px;
+            border-radius: 15px;
+            color: #B45020;
+        }
+    }
+
+    .order {
+        display: flex;
+        padding-left: 25px;
+        margin-top: 10px;
+
+        .userImage {
+            height: 80px;
+            width: 80px;
+            background-color: #F3C1A9;
+            border-radius: 10px;
+            border-color: #F3C1A9;
+        }
+
+        .detail {
+            margin-left: 20px;
+            margin-top: 10px;
+
+            .artworkName {
+                font-size: 18px;
+                font-weight: bolder;
+            }
+
+            .description {
+                font-size: 15px;
+                color: gray;
+            }
+        }
+
+        .price {
+            font-weight: bolder;
+            font-size: 20px;
+            margin-left: 40px;
+        }
+
+        .quantity {
+            margin-left: 40px;
+
+            button {
+                width: 30px;
+                height: 30px;
+                border: 1px solid #E16428;
+                background-color: #E16428;
+                border-radius: 3px;
+                color: white;
+            }
+
+            input {
+                width: 70px;
+                height: 30px;
+                border: 1px solid #E16428;
+                text-align: center;
+                justify-content: center;
+                color: #E16428;
+                margin: auto 5px;
+                border-radius: 3px;
+            }
+        }
+
+        .netAmount {
+            font-weight: bolder;
+            font-size: 20px;
+            margin-left: 40px;
+        }
+
+        .confirm {
+            display: flex;
+            position: absolute;
+            right: 10%;
+
+            .confirmButton {
+                height: 32px;
+                width: 150px;
+                background-color: #E16428;
+                color: white;
+                border-radius: 4px;
+                margin-right: 12px;
+            }
+        }
+    }
+}

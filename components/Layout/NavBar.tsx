@@ -42,7 +42,7 @@ const NavBar = () => {
           ) : (
             <>
               <div className={style.menu}>
-                <Navbar.Link>
+                <Navbar.Link onClick={() => router.push('/cart')}>
                   <FontAwesomeIcon icon={faCartShopping} className={`${style.icon}`}></FontAwesomeIcon>
                   <span className={`${style.count} absolute-4 top-0 right-24`}>15</span>
                 </Navbar.Link>
