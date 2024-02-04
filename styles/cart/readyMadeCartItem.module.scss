@@ -53,6 +53,16 @@
         .information {
             display: flex;
 
+            .check {
+                margin-top: 30px;
+                margin-right: 15px;
+                height: 18px;
+                width: 18px;
+                border: 1px solid #D5CFCD;
+                border-radius: 3px;
+                background-color: #D5CFCD;
+            }
+
             .userImage {
                 height: 80px;
                 width: 80px;

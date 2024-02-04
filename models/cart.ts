@@ -16,6 +16,7 @@ export interface CartItem {
     freelanceId: string
     customerId: string
     artworkName: string
+    checked: boolean
     createdAt?: Date
     updatedAt?: Date
 }
