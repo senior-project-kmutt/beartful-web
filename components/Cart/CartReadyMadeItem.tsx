@@ -92,11 +92,13 @@ const CartReadyMadeItem = (props: Props) => {
             </div>
             {cartItems.map((item, index) => {
                 return (
-                    <div className={style.order} key={index}>
-                        <img className={style.userImage} src="../../xxxx"></img>
-                        <div className={style.detail}>
-                            <p className={style.artworkName}>{item.artworkName}</p>
-                            <span className={style.description}>[  คำอธิบายงานจ้าง เช่น ของที่จะได้ วันมอบงาน  ]</span>
+                    <div className={style.formGrid} key={index} >
+                        <div className={style.information}>
+                            <img className={style.userImage} src="../../xxxx"></img>
+                            <div className={style.detail}>
+                                <p className={style.artworkName}>{item.artworkName}</p>
+                                <span className={style.description}>[  คำอธิบายงานจ้าง เช่น ของที่จะได้ วันมอบงาน  ]</span>
+                            </div>
                         </div>
                         <div className={style.price}>{item.amount} Baht</div>
                         <div className={style.quantity}>

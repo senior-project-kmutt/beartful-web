@@ -33,42 +33,56 @@
         }
     }
 
-    .order {
-        display: flex;
-        padding-left: 25px;
+    .formGrid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        margin-right: 50px;
+        margin-left: 50px;
         margin-top: 10px;
 
-        .userImage {
-            height: 80px;
-            width: 80px;
-            background-color: #F3C1A9;
-            border-radius: 10px;
-            border-color: #F3C1A9;
+
+        @media (min-width: 768px) {
+            grid-template-columns: 46% 14% 18% 16% 6%;
+            justify-content: center;
+            align-items: center;
         }
 
-        .detail {
-            margin-left: 20px;
-            margin-top: 10px;
+        .information {
+            display: flex;
 
-            .artworkName {
-                font-size: 18px;
-                font-weight: bolder;
+            .userImage {
+                height: 80px;
+                width: 80px;
+                background-color: #F3C1A9;
+                border-radius: 10px;
+                border-color: #F3C1A9;
             }
 
-            .description {
-                font-size: 15px;
-                color: gray;
+            .detail {
+                margin-left: 20px;
+                margin-top: 10px;
+
+                .artworkName {
+                    font-size: 18px;
+                    font-weight: bolder;
+                }
+
+                .description {
+                    font-size: 15px;
+                    color: gray;
+                }
             }
         }
 
         .price {
             font-weight: bolder;
             font-size: 20px;
-            margin-left: 40px;
         }
 
         .quantity {
-            margin-left: 40px;
 
             button {
                 width: 30px;
@@ -94,14 +108,9 @@
         .netAmount {
             font-weight: bolder;
             font-size: 20px;
-            margin-left: 40px;
         }
 
         .confirm {
-            display: flex;
-            position: absolute;
-            right: 10%;
-
             .confirmButton {
                 height: 32px;
                 width: 150px;
@@ -111,5 +120,6 @@
                 margin-right: 12px;
             }
         }
+
     }
 }
