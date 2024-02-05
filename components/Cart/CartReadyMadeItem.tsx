@@ -4,14 +4,15 @@ import { deleteCartById, editCartById } from "@/services/cart/cart.api";
 import style from "@/styles/cart/readyMadeCartItem.module.scss"
 import { faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface Props {
-    data: Carts
+    data: Carts,
+    setNetAmount: Dispatch<SetStateAction<number>>;
 }
 
 const CartReadyMadeItem = (props: Props) => {
-    const { data } = props
+    const { data, setNetAmount } = props
 
     const [user, setUser] = useState<IUser>();
     const [cartItems, setCartItems] = useState<CartItem[]>(data.cartItem);
@@ -19,6 +20,7 @@ const CartReadyMadeItem = (props: Props) => {
     useEffect(() => {
         setCartItems(data.cartItem);
         setUser(JSON.parse(localStorage.getItem("user") || ""));
+        calculateNetAmount()
     }, [data.cartItem]);
 
     const editCartItem = async (cartId: string, quantity: number, checked: boolean) => {
@@ -36,6 +38,12 @@ const CartReadyMadeItem = (props: Props) => {
                 }
             }
         }
+    }
+
+    const calculateNetAmount = () => {
+        const checkedItems = cartItems.filter(item => item.checked);
+        const totalNetAmount = checkedItems.reduce((sum, item) => sum + item.netAmount, 0);
+        setNetAmount(totalNetAmount);
     }
 
     const handleQuantityChange = (itemId: string, operation: string, amount: number, quantity?: number) => {
@@ -56,6 +64,7 @@ const CartReadyMadeItem = (props: Props) => {
             return item;
         });
         setCartItems(updatedCartItems);
+        calculateNetAmount()
     };
 
     const handleCheck = (itemId: string) => {
@@ -67,6 +76,7 @@ const CartReadyMadeItem = (props: Props) => {
             return item;
         });
         setCartItems(updatedCartItems);
+        calculateNetAmount()
     };
 
     const deleteCart = async (cartId: string) => {

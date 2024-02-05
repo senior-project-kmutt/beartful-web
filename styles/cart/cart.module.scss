@@ -15,10 +15,35 @@
         position: absolute;
         bottom: 0;
         width: 78%;
-        height: 60px;
+        height: 65px;
         background-color: #E78353;
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
+
+        div {
+            display: flex;
+            position: absolute;
+            right: 3%;
+            font-weight: bolder;
+            font-size: larger;
+            margin-top: 15px;
+
+            .price {
+                font-size: x-large;
+                margin-right: 12px;
+                margin-left: 12px;
+            }
+
+            button {
+                width: 150px;
+                background-color: white;
+                color: #E78353;
+                border-radius: 8px;
+                font-weight: 400;
+            }
+        }
+
+
     }
 }
 
