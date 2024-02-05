@@ -22,7 +22,6 @@ const CartReadyMadeItem = (props: Props) => {
     }, [data.cartItem]);
 
     const editCartItem = async (cartId: string, quantity: number, checked: boolean) => {
-        console.log(checked);
         const token = localStorage.getItem("auth");
         if (token) {
             if (user) {

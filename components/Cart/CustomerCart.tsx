@@ -56,11 +56,13 @@ const CustomerCart = () => {
                         <>
                             <div className={style.heading}>Cart: Ready Made</div>
                             <CartReadyMadeStatusBar />
-                            {cart.map((item, index) => {
-                                return (
-                                    <CartReadyMadeItem data={item} key={index} />
-                                )
-                            })}
+                            <div className="overflow-y-scroll h-[58%] mt-2 rounded-t-lg">
+                                {cart.map((item, index) => {
+                                    return (
+                                        <CartReadyMadeItem data={item} key={index} />
+                                    )
+                                })}</div>
+                            <div className={style.order}></div>
                         </>
                     )}
                 </div>
