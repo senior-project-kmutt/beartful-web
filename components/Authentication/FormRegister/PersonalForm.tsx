@@ -1,4 +1,4 @@
-import style from "@/styles/authentication/form/personalForm.module.scss";
+import style from "@/styles/authentication/form/PersonalForm.module.scss";
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
 import { errorMessageEmtryField, regexpEmail, regexpOnlyNumber, requiredFieldsCustomer, requiredFieldsFreelance } from "@/services/validation";
 import { thaiMonths } from "./option";

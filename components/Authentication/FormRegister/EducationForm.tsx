@@ -1,5 +1,5 @@
 import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
-import style from "@/styles/authentication/form/educationForm.module.scss";
+import style from "@/styles/authentication/form/EducationForm.module.scss";
 import { educationLevel } from './option';
 
 export interface EducationItem {
