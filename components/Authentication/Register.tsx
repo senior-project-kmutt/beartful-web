@@ -86,7 +86,7 @@ const Register = () => {
               setRoleSelected={setRoleSelected}
               activeMenu={activeMenu}
               setActiveMenu={setActiveMenu}
-              process={processFreelance}
+              processes={processFreelance}
               setProcess={setProcessFreelance}
             />
           )}

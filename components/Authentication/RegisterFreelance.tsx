@@ -19,12 +19,12 @@ interface Props {
   setRoleSelected: Dispatch<SetStateAction<string>>
   activeMenu: string;
   setActiveMenu: Dispatch<SetStateAction<string>>
-  process: Process[];
+  processes: Process[];
   setProcess: Dispatch<SetStateAction<Process[]>>
 }
 const RegisterFreelance = (props: Props) => {
   const router = useRouter();
-  const { roleSelected, setRoleSelected, activeMenu, setActiveMenu, process, setProcess } = props
+  const { roleSelected, setRoleSelected, activeMenu, setActiveMenu, processes, setProcess } = props
   const [formPersonal, setFormPersonal] = useState<any>()
   const [formEducation, setFormEducation] = useState<EducationItem[]>([
     {
@@ -46,7 +46,7 @@ const RegisterFreelance = (props: Props) => {
 
   useEffect(() => {
     if (isFormPersonalValid) {
-      const duplicateProcess = process;
+      const duplicateProcess = processes;
       duplicateProcess[0].success = true;
       setProcess(duplicateProcess);
       setActiveMenu('education')
@@ -55,7 +55,7 @@ const RegisterFreelance = (props: Props) => {
 
   useEffect(() => {
     if (isFormEducationlValid) {
-      const duplicateProcess = process;
+      const duplicateProcess = processes;
       duplicateProcess[1].success = true;
       setProcess(duplicateProcess);
       setActiveMenu('experience')
@@ -64,7 +64,7 @@ const RegisterFreelance = (props: Props) => {
 
   useEffect(() => {
     if (isFormExperienceSave) {
-      const duplicateProcess = process;
+      const duplicateProcess = processes;
       duplicateProcess[2].success = true;
       setProcess(duplicateProcess);
       setActiveMenu('skillAndLanguage')
@@ -73,7 +73,7 @@ const RegisterFreelance = (props: Props) => {
 
   useEffect(() => {
     if (isFormSkillAndLanguageSave) {
-      const duplicateProcess = process;
+      const duplicateProcess = processes;
       duplicateProcess[3].success = true;
       setProcess(duplicateProcess);
       setActiveMenu('licenseAndAwards')
@@ -82,7 +82,7 @@ const RegisterFreelance = (props: Props) => {
 
   useEffect(() => {
     if (isFormAwardSave) {
-      const duplicateProcess = process;
+      const duplicateProcess = processes;
       duplicateProcess[4].success = true;
       setProcess(duplicateProcess);
       setActiveMenu('accountingAndFinancial')
@@ -91,7 +91,7 @@ const RegisterFreelance = (props: Props) => {
 
   useEffect(() => {
     if (formBankAccount) {
-      const duplicateProcess = process;
+      const duplicateProcess = processes;
       duplicateProcess[5].success = true;
       setProcess(duplicateProcess);
       if (isSubmitForm) {
