@@ -1,7 +1,7 @@
 const path = require('path');
 const nextConfig = {
   // distDir: 'build',
-  basePath: '/ssi1',
+  assetPrefix: '/ssi1/',
   trailingSlash: true,
   reactStrictMode: true,
   sassOptions: {
