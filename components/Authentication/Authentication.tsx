@@ -27,7 +27,7 @@ const Authentication = () => {
 
   const changePageParams = (params: string) => {
     setActiveMenu(params);
-    router.push(`/authen?page=${params}`);
+    router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/authen?page=${params}`);
   }
 
 

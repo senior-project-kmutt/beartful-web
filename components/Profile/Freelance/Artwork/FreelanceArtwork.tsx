@@ -54,7 +54,7 @@ const FreelanceArtwork = (props: Props) => {
 
                 <div className={style.main}>
                     <div className="mb-11">
-                        <button className={style.addButton} onClick={() => router.push('/profile/artwork/add')}>เพิ่มผลงาน</button>
+                        <button className={style.addButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/artwork/add`)}>เพิ่มผลงาน</button>
                         <p>ผลงานของฉัน</p>
                     </div>
 

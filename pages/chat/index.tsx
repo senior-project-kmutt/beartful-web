@@ -42,7 +42,7 @@ export default function Home() {
     if (userFromSession) {
       setUser(JSON.parse(userFromSession))
     } else {
-      router.push("/")
+      router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`)
     }
   }, []);
 

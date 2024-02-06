@@ -1,7 +1,8 @@
 const path = require('path');
+const prefixpath = process.env.NODE_ENV == 'production' ? '/ssi1/' : ''
 const nextConfig = {
   // distDir: 'build',
-  assetPrefix: '/ssi1/',
+  assetPrefix: prefixpath,
   trailingSlash: true,
   reactStrictMode: true,
   sassOptions: {

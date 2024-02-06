@@ -150,11 +150,11 @@ const RegisterFreelance = (props: Props) => {
             timer: 1500
           }).then((result) => {
             if (result.isConfirmed || result.isDismissed) {
-              router.push('/')
+              router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`)
             }
           });
 
-          router.push("/");
+          router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`);
         }, error => {
           if (error.response.status === 409) {
             Swal.fire({

@@ -23,7 +23,7 @@ const NavBar = () => {
     localStorage.removeItem("auth");
     localStorage.removeItem("user");
     setUser(null);
-    router.push("/");
+    router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`);
   }
 
   return (
@@ -36,17 +36,17 @@ const NavBar = () => {
         <Navbar.Collapse>
           {!user ? (
             <>
-              <Navbar.Link className={style.text_menu} onClick={() => router.push('/authen?page=login')}>SIGN IN</Navbar.Link>
-              <Navbar.Link className={`${style.text_menu} mr-4`} onClick={() => router.push('/authen?page=signup')}>SIGN UP</Navbar.Link>
+              <Navbar.Link className={style.text_menu} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/authen?page=login`)}>SIGN IN</Navbar.Link>
+              <Navbar.Link className={`${style.text_menu} mr-4`} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/authen?page=signup`)}>SIGN UP</Navbar.Link>
             </>
           ) : (
             <>
               <div className={style.menu}>
-                <Navbar.Link onClick={() => router.push('/cart')}>
+                <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>
                   <FontAwesomeIcon icon={faCartShopping} className={`${style.icon}`}></FontAwesomeIcon>
                   <span className={`${style.count} absolute-4 top-0 right-24`}>15</span>
                 </Navbar.Link>
-                <Navbar.Link onClick={() => router.push('/chat')}>
+                <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/chat`)}>
                   <FontAwesomeIcon icon={faMessage} className={style.icon}></FontAwesomeIcon>
                   <span className={`${style.count} absolute top-0 right-12`}>1</span>
                 </Navbar.Link>
