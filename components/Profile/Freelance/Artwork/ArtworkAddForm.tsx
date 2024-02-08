@@ -2,7 +2,7 @@ import { Category } from "@/models/category";
 import { createArtwork } from "@/services/artwork/artwork.api";
 import { getAllCategories } from "@/services/category/category.api";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Resolver, useForm } from "react-hook-form";
 import { firebaseConfig } from '@/config/firebase.config';
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
@@ -13,6 +13,8 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBar from "@/components/Profile/Freelance/ProfileSelectBar";
 import Router from 'next/router';
+import Swal from "sweetalert2";
+import router from "next/router";
 
 export type ArtworkFormData = {
   images: String[]
@@ -25,6 +27,7 @@ export type ArtworkFormData = {
 
 const ArtworkForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<ArtworkFormData>();
+
   const [categories, setCategories] = useState<Category[]>([]);
   const [inputFiles, setInputFiles] = useState<File[]>([]);
   const [imageSrc, setImageSrc] = useState<string[] | ArrayBuffer[] | null>([]);
@@ -90,7 +93,37 @@ const ArtworkForm = () => {
         };
 
         try {
-          await createArtwork(artwork, headers);
+          createArtwork(artwork, headers).subscribe((res: any) => {
+            Swal.fire({
+              icon: "success",
+              title: "สร้างผลงานสำเร็จ",
+              showConfirmButton: false,
+              timer: 1500
+            }).then((result) => {
+              if (result.isConfirmed || result.isDismissed) {
+                router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/artwork`)
+              }
+            });
+          }, error => {
+            if (error.response.status === 401) {
+              Swal.fire({
+                title: "ไม่มีสิทธ์เข้าถึงการดำเนินการนี้",
+                icon: "warning"
+              })
+            } else if (error.response.status === 400) {
+              Swal.fire({
+                title: "ข้อมูลผิดพลาด",
+                text: "โปรดตรวจสอบข้อมูลของคุณ",
+                icon: "warning"
+              })
+            } else {
+              Swal.fire({
+                title: "เกิดข้อผิดพลาด",
+                text: "โปรดลองใหม่อีกครั้ง",
+                icon: "error"
+              });
+            }
+          });
         } catch (error) {
           console.error("Error creating artwork:", error);
         }
@@ -103,7 +136,7 @@ const ArtworkForm = () => {
       <NavBar />
       <div className="flex">
 
-      <div className={style.sideBar}>
+        <div className={style.sideBar}>
           <ProfileSelectBar />
         </div>
 
@@ -147,7 +180,11 @@ const ArtworkForm = () => {
             <div className={style.formGrid}>
 
               <label>ชื่อผลงาน</label>
-              <input className={style.inputField} {...register("name")} />
+              <div>
+                <input className={style.inputField} {...register("name", { required: "กรุณากรอกชื่อผลงาน" })} />
+                {errors?.name && <span className={style.errorMessage}>*{errors.name.message}</span>}
+
+              </div>
 
               <label>ประเภท</label>
               <select className={style.inputFieldSm} {...register("type")}>
@@ -156,27 +193,36 @@ const ArtworkForm = () => {
               </select>
 
               <label>หมวดหมู่</label>
-              <div className={style.checkboxGrid}>
-                {categories.map((item) => (
-                  <div key={item._id} className={style.checkboxItem}>
-                    <input
-                      className={style.checkboxStyle}
-                      type="checkbox"
-                      id={`category-${item._id}`}
-                      value={item._id}
-                      {...register('categoryId')}
-                    />
-                    <label className="ml-2" htmlFor={`category-${item._id}`}>{item.name}</label>
-                  </div>
-                ))}
+              <div>
+                <div className={style.checkboxGrid}>
+                  {categories.map((item) => (
+                    <div key={item._id} className={style.checkboxItem}>
+                      <input
+                        className={style.checkboxStyle}
+                        type="checkbox"
+                        id={`category-${item._id}`}
+                        value={item._id}
+                        {...register('categoryId', { required: "กรุณาเลือกหมวดหมู่ที่ตรงกับผลงานของคุณ" })}
+                      />
+                      <label className="ml-2" htmlFor={`category-${item._id}`}>{item.name}</label>
+                    </div>
+                  ))}
+                </div>
+                {errors?.categoryId && <p className={`${style.errorMessage} mt-2`}>*{errors.categoryId.message}</p>}
               </div>
 
+
               <label>รายละเอียด</label>
-              <input className={style.inputField} {...register("description")} />
+              <div>
+                <input className={style.inputField} {...register("description", { required: "กรุณากรอกรายละเอียด" })} />
+                {errors?.description && <span className={style.errorMessage}>*{errors.description.message}</span>}
+
+              </div>
 
               <label>ราคา</label>
               <div>
-                <input className={style.inputFieldSm} {...register("price")} /><span> บาท</span>
+                <input className={style.inputFieldSm} {...register("price", { required: "กรุณากรอกราคา" })} /><span> บาท</span>
+                {errors?.price && <p className={style.errorMessage}>*{errors.price.message}</p>}
               </div>
 
             </div>

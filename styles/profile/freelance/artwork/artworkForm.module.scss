@@ -130,6 +130,11 @@
     border-radius: 10px;
 }
 
+.errorMessage {
+    color: red;
+    font-size: small;
+}
+
 @media (max-width:1024px) {
     .sideBar {
         width: 30%;

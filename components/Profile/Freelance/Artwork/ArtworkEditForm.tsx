@@ -11,6 +11,8 @@ import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBar from "@/components/Profile/Freelance/ProfileSelectBar";
 import { editArtwork } from "@/services/artwork/artwork.api";
 import Router from 'next/router';
+import Swal from "sweetalert2";
+import router from "next/router";
 
 export type ArtworkFormData = {
   images: String[]
@@ -51,7 +53,42 @@ const ArtworkForm = (props: Props) => {
           Authorization: `Bearer ${token}`,
         };
         try {
-          await editArtwork(props.data._id, artwork, headers);
+          editArtwork(props.data._id, artwork, headers).subscribe((res: any) => {
+            Swal.fire({
+              icon: "success",
+              title: "แก้ไขผลงานสำเร็จ",
+              showConfirmButton: false,
+              timer: 1500
+            }).then((result) => {
+              if (result.isConfirmed || result.isDismissed) {
+                router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/artwork`)
+              }
+            });
+          }, error => {
+            if (error.response.status === 401) {
+              Swal.fire({
+                title: "ไม่มีสิทธ์เข้าถึงการดำเนินการนี้",
+                icon: "warning"
+              })
+            } else if (error.response.status === 400) {
+              Swal.fire({
+                title: "ข้อมูลผิดพลาด",
+                text: "โปรดตรวจสอบข้อมูลของคุณ",
+                icon: "warning"
+              })
+            } else if (error.response.status === 404) {
+              Swal.fire({
+                title: "ไม่พบข้อมูล",
+                icon: "warning"
+              })
+            } else {
+              Swal.fire({
+                title: "เกิดข้อผิดพลาด",
+                text: "โปรดลองใหม่อีกครั้ง",
+                icon: "error"
+              });
+            }
+          });
         } catch (error) {
           console.error("Error edit artwork:", error);
         }
@@ -93,7 +130,10 @@ const ArtworkForm = (props: Props) => {
             <div className={style.formGrid}>
 
               <label>ชื่อผลงาน</label>
-              <input className={style.inputField} {...register('name', { required: true })} defaultValue={data.name || ''} />
+              <div>
+                <input className={style.inputField} {...register('name', { required: "กรุณากรอกชื่อผลงาน" })} defaultValue={data.name || ''} />
+                {errors?.name && <span className={style.errorMessage}>*{errors.name.message}</span>}
+              </div>
 
               <label>ประเภท</label>
               <select className={style.inputFieldSm} {...register("type", { required: true })} defaultValue={data.type || ''}>
@@ -102,28 +142,36 @@ const ArtworkForm = (props: Props) => {
               </select>
 
               <label>หมวดหมู่</label>
-              <div className={style.checkboxGrid}>
-                {categories.map((item) => (
-                  <div key={item._id} className={style.checkboxItem}>
-                    <input
-                      className={style.checkboxStyle}
-                      type="checkbox"
-                      id={`category-${item._id}`}
-                      value={item._id}
-                      defaultChecked={data.categoryId.includes(item._id)}
-                      {...register('categoryId')}
-                    />
-                    <label className="ml-2" htmlFor={`category-${item._id}`}>{item.name}</label>
-                  </div>
-                ))}
+              <div>
+                <div className={style.checkboxGrid}>
+                  {categories.map((item) => (
+                    <div key={item._id} className={style.checkboxItem}>
+                      <input
+                        className={style.checkboxStyle}
+                        type="checkbox"
+                        id={`category-${item._id}`}
+                        value={item._id}
+                        defaultChecked={data.categoryId.includes(item._id)}
+                        {...register('categoryId', { required: "กรุณาเลือกหมวดหมู่ที่ตรงกับผลงานของคุณ" })}
+                      />
+                      <label className="ml-2" htmlFor={`category-${item._id}`}>{item.name}</label>
+                    </div>
+                  ))}
+                </div>
+                {errors?.categoryId && <p className={`${style.errorMessage} mt-2`}>*{errors.categoryId.message}</p>}
               </div>
 
+
               <label>รายละเอียด</label>
-              <input className={style.inputField} {...register("description", { required: true })} defaultValue={data.description || ''} />
+              <div>
+                <input className={style.inputField} {...register("description", { required: "กรุณากรอกรายละเอียด" })} defaultValue={data.description || ''} />
+                {errors?.description && <span className={style.errorMessage}>*{errors.description.message}</span>}
+              </div>
 
               <label>ราคา</label>
               <div>
-                <input className={style.inputFieldSm} {...register("price", { required: true })} defaultValue={data.price || ''} /><span> บาท</span>
+                <input className={style.inputFieldSm} {...register("price", { required: "กรุณากรอกราคา" })} defaultValue={data.price || ''} /><span> บาท</span>
+                {errors?.price && <p className={style.errorMessage}>*{errors.price.message}</p>}
               </div>
 
             </div>

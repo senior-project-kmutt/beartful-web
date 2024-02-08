@@ -11,6 +11,8 @@ import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 import router from "next/router";
 import { deleteArtwork } from "@/services/artwork/artwork.api";
+import { IUser } from "@/pages/chat";
+import Swal from "sweetalert2";
 
 interface Props {
   item: Artwork;
@@ -21,6 +23,11 @@ const ArtworkItem = (props: Props) => {
   const { onShowDetail } = props;
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
   const dropdownRef = useRef(null);
+  const [user, setUser] = useState<IUser>();
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user") || ""));
+  }, []);
 
   const handleClickDetail = () => {
     onShowDetail(props.item);
@@ -36,6 +43,52 @@ const ArtworkItem = (props: Props) => {
       setShowDropdown(false);
     }
   };
+
+  const handleDeleteArtwork = async (artworkId: string) => {
+    const token = localStorage.getItem("auth");
+    if (token) {
+      if (user) {
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+        try {
+          deleteArtwork(artworkId, headers).subscribe((res: any) => {
+            Swal.fire({
+              icon: "success",
+              title: "สร้างผลงานสำเร็จ",
+              showConfirmButton: false,
+              timer: 1500
+            }).then((result) => {
+              if (result.isConfirmed || result.isDismissed) {
+                window.location.reload()
+              }
+            });
+          }, error => {
+            if (error.response.status === 401) {
+              Swal.fire({
+                title: "ไม่มีสิทธ์เข้าถึงการดำเนินการนี้",
+                icon: "warning"
+              })
+            } else if (error.response.status === 400) {
+              Swal.fire({
+                title: "ข้อมูลผิดพลาด",
+                text: "โปรดตรวจสอบข้อมูลของคุณ",
+                icon: "warning"
+              })
+            } else {
+              Swal.fire({
+                title: "เกิดข้อผิดพลาด",
+                text: "โปรดลองใหม่อีกครั้ง",
+                icon: "error"
+              });
+            }
+          });
+        } catch (error) {
+          console.error("Error create Cart:", error);
+        }
+      }
+    }
+  }
 
   useEffect(() => {
     document.addEventListener('click', handleOutsideClick);
@@ -57,8 +110,7 @@ const ArtworkItem = (props: Props) => {
                 </li>
                 <li>
                   <button style={{ width: '100%', height: '100%', textAlign: 'left', color: 'red' }} onClick={() => {
-                    deleteArtwork(_id)
-                    window.location.reload()
+                    handleDeleteArtwork(_id)
                   }}>ลบ</button>
                 </li>
               </ul>

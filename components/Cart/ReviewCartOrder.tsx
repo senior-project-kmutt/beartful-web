@@ -29,8 +29,17 @@ const ReviewCartOrder = () => {
         }))
     }
 
+    const sumTotalNetAmount = (carts: Carts[]): number => {
+        return carts.reduce((totalNetAmount, cart) => {
+            cart.cartItem.forEach(item => {
+                totalNetAmount += item.netAmount;
+            });
+            return totalNetAmount;
+        }, 0);
+    };
+
     return (
-        <>
+        <div className="mr-10 ml-10">
             <NavBar />
             <div className={style.container}>
                 <div className={style.heading}>ยืนยันการจัดซื้อ / จัดจ้าง</div>
@@ -44,15 +53,33 @@ const ReviewCartOrder = () => {
                     </div>
                 </div>
             </div>
-            <div className="rounded-t-lg ml-10 mr-10">
+            <div className="rounded-t-lg">
                 {cart.map((item, index) => {
                     return (
                         <ReviewCartOrderItem data={item} key={index} />
                     )
                 })}
             </div>
-
-        </>
+            <div className={style.paymentMethod}>
+                <p>วิธีการชำระเงิน</p>
+                <button>QR PromptPay</button>
+                <button>Credit / Debit Card</button>
+            </div>
+            <div className={style.amountBlock}>
+                <div className={style.payment}>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>รวมการสั่งซื้อ / จ้าง</div>
+                        <div>{sumTotalNetAmount(cart)} บาท</div>
+                        <div>ยอดชำระเงินทั้งหมด</div>
+                        <div className={style.totalAmount}>{sumTotalNetAmount(cart)} บาท</div>
+                    </div>
+                </div>
+            </div>
+            <div className={style.buttonConfirm}>
+                <button className={style.backButton}>ย้อนกลับ</button>
+                <button className={style.purchaseButton}>ชำระเงิน</button>
+            </div>
+        </div>
     );
 };
 
