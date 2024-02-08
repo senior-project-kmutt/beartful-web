@@ -6,7 +6,7 @@ import { regexpOnlyNumber } from '@/services/validation';
 export interface AccountItem {
   bankName: string;
   bankAccountNumber: string;
-  bankAccountImage: File | null;
+  bankAccountImage: File | string | null;
 }
 
 interface ValidateAccounting {
@@ -16,7 +16,7 @@ interface ValidateAccounting {
 interface Props {
   saveFormRegister: Dispatch<SetStateAction<AccountItem>>
   defaultFormData: AccountItem;
-  setIsSubmitForm: Dispatch<SetStateAction<boolean>>
+  setIsSubmitForm?: Dispatch<SetStateAction<boolean>>
 }
 
 const AccountingForm = (props: Props) => {
@@ -34,14 +34,25 @@ const AccountingForm = (props: Props) => {
   useEffect(() => {
     if (defaultFormData) {
       setAccountInfo(defaultFormData);
-      setIsSubmitForm(false);
+      if (setIsSubmitForm) {
+        setIsSubmitForm(false);
+      }
+      
       if (defaultFormData.bankAccountImage) {
-        const imageSrc = convertFileToBlob(defaultFormData.bankAccountImage);
-        setImageUpload(imageSrc);
-        setImageUploadFile(defaultFormData.bankAccountImage);
+        if (typeof defaultFormData.bankAccountImage === "object") {
+          const imageSrc = convertFileToBlob(defaultFormData.bankAccountImage);
+          setImageUpload(imageSrc);
+          setImageUploadFile(defaultFormData.bankAccountImage);
+
+        }
+        if (typeof defaultFormData.bankAccountImage === "string") {
+          setImageUpload(defaultFormData.bankAccountImage);
+          setImageUploadFile(null);
+        }
+        
       }
     }
-  }, [])
+  }, [defaultFormData])
 
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
@@ -104,9 +115,13 @@ const AccountingForm = (props: Props) => {
     setErrorMessage(newErrorMessage)
 
     if (isValid) {
-      submitDataForm['bankAccountImage'] = imageUploadFile;
+      if (imageUploadFile !== null) {
+        submitDataForm['bankAccountImage'] = imageUploadFile;
+      } else {
+        submitDataForm['bankAccountImage'] = imageUpload;
+      }
       saveFormRegister(submitDataForm);
-      if (type === 'submit') {
+      if (type === 'submit' && setIsSubmitForm) {
         setIsSubmitForm(true)
       }
     }
@@ -186,7 +201,9 @@ const AccountingForm = (props: Props) => {
           <button className={style.save} onClick={() => onSubmit('save')}>
             Save
           </button>
-          <button className={style.submit} onClick={() => onSubmit('submit')}>Submit</button>
+          {setIsSubmitForm && (
+            <button className={style.submit} onClick={() => onSubmit('submit')}>Submit</button>
+          )}
           <button className={style.cancel}>Cancel</button>
         </div>
       </div>
