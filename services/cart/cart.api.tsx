@@ -12,6 +12,11 @@ export const getCart = (userId: string, type: string): Observable<any> => {
     return get(`/user/${userId}/carts${typeParam}`);
 };
 
+export const getReviewOrderCart = (userId: string, type: string): Observable<any> => {
+    const typeParam = type ? `?type=${type}` : '';
+    return get(`/user/${userId}/carts/reviewOrder${typeParam}`);
+};
+
 export const editCartById = (cartId: string, body: ICartEdit, headers: IncomingHttpHeaders): Observable<any> => {
     return patch(`/carts/${cartId}`, body, headers);
 };

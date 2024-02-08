@@ -4,15 +4,15 @@ import { deleteCartById, editCartById } from "@/services/cart/cart.api";
 import style from "@/styles/cart/readyMadeCartItem.module.scss"
 import { faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
     data: Carts,
-    setNetAmount: Dispatch<SetStateAction<number>>;
+    updateCartWhenItemUpdated: (cartItem: CartItem) => void;
 }
 
 const CartReadyMadeItem = (props: Props) => {
-    const { data, setNetAmount } = props
+    const { data, updateCartWhenItemUpdated } = props
 
     const [user, setUser] = useState<IUser>();
     const [cartItems, setCartItems] = useState<CartItem[]>(data.cartItem);
@@ -20,7 +20,6 @@ const CartReadyMadeItem = (props: Props) => {
     useEffect(() => {
         setCartItems(data.cartItem);
         setUser(JSON.parse(localStorage.getItem("user") || ""));
-        calculateNetAmount()
     }, [data.cartItem]);
 
     const editCartItem = async (cartId: string, quantity: number, checked: boolean) => {
@@ -40,43 +39,39 @@ const CartReadyMadeItem = (props: Props) => {
         }
     }
 
-    const calculateNetAmount = () => {
-        const checkedItems = cartItems.filter(item => item.checked);
-        const totalNetAmount = checkedItems.reduce((sum, item) => sum + item.netAmount, 0);
-        setNetAmount(totalNetAmount);
-    }
-
     const handleQuantityChange = (itemId: string, operation: string, amount: number, quantity?: number) => {
         const updatedCartItems = cartItems.map((item) => {
             if (item._id === itemId) {
                 if (operation === 'increment') {
                     editCartItem(itemId, item.quantity + 1, item.checked)
+                    updateCartWhenItemUpdated({ ...item, quantity: +item.quantity + 1, netAmount: amount * (+item.quantity + 1) })
                     return { ...item, quantity: +item.quantity + 1, netAmount: amount * (+item.quantity + 1) };
                 } else if (operation === 'decrement') {
                     editCartItem(itemId, item.quantity - 1, item.checked)
+                    updateCartWhenItemUpdated({ ...item, quantity: +item.quantity - 1, netAmount: amount * (+item.quantity - 1) })
                     return { ...item, quantity: +item.quantity - 1, netAmount: amount * (+item.quantity - 1) };
                 } else if (operation === 'inputChange') {
                     const newQuantity = quantity || 0;
                     editCartItem(itemId, newQuantity, item.checked)
+                    updateCartWhenItemUpdated({ ...item, quantity: newQuantity, netAmount: amount * newQuantity })
                     return { ...item, quantity: newQuantity, netAmount: amount * newQuantity };
                 }
             }
             return item;
         });
         setCartItems(updatedCartItems);
-        calculateNetAmount()
     };
 
     const handleCheck = (itemId: string) => {
         const updatedCartItems = cartItems.map((item) => {
             if (item._id === itemId) {
                 editCartItem(itemId, item.quantity, item.checked);
+                updateCartWhenItemUpdated({ ...item, checked: !item.checked })
                 return { ...item, checked: !item.checked };
             }
             return item;
         });
         setCartItems(updatedCartItems);
-        calculateNetAmount()
     };
 
     const deleteCart = async (cartId: string) => {
