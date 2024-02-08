@@ -24,5 +24,9 @@ export const getChatRoomByUserId = (userId: string, headers: IncomingHttpHeaders
 };
 
 export const updateBankAccount = (userId: string, body: any, headers: IncomingHttpHeaders): Promise<any> => {
-  return patchPromise(`/user/${userId}/editBankAccount`, body, headers);
+  return patchPromise(`/user/${userId}/updateBankAccount`, body, headers);
+};
+
+export const updateFreelanceDetails = (userId: string, body: any, headers: IncomingHttpHeaders): Promise<any> => {
+  return patchPromise(`/user/${userId}/updateFreelanceDetails`, body, headers);
 };
