@@ -1,9 +1,17 @@
-
 import style from "@/styles/profile/purchase.module.scss"
 import { faClipboardList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
+import "react-responsive-modal/styles.css";
+import ReviewModal from '../../Profile/Component/ReviewModal';
 
 const PurchaseItem = () => {
+    const [isReviewModalOpen, setIsReviewModalOpen] = useState<boolean>(false);
+
+    const openReviewModal = () => {
+        setIsReviewModalOpen(!isReviewModalOpen)
+        console.log(isReviewModalOpen)
+    }
 
     return (
         <div className={style.purchaseItem}>
@@ -26,10 +34,11 @@ const PurchaseItem = () => {
                 <div className={style.confirm}>
                     <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>
                     <button className={style.confirmButton}>ฉันได้ส่งมอบงานแล้ว</button>
+                    {isReviewModalOpen && <ReviewModal openReviewModal={openReviewModal} />}
+                    <button className={style.toReviewButton} onClick={openReviewModal}>ให้คะแนน</button>
                 </div>
             </div>
         </div>
-
     );
 };
 

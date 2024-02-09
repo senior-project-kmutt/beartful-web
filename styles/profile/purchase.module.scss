@@ -43,6 +43,7 @@
     background-color: #FCEFE9;
     border-radius: 10px;
     margin-top: 10px;
+    margin-bottom: 10px;
 
     .profile {
         display: flex;
@@ -129,6 +130,15 @@
                 width: 200px;
                 background-color: #E16428;
                 color: white;
+                border-radius: 4px;
+                margin-left: 8px;
+            }
+            .toReviewButton {
+                height: 32px;
+                width: 120px;
+                background-color: #e1632820;
+                color: #E16428;
+                border: 1px solid #E16428;
                 border-radius: 4px;
                 margin-left: 8px;
             }
