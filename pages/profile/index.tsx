@@ -14,7 +14,7 @@ const Profile = () => {
 
     useEffect(() => {
         if (user?.role === 'freelance') {
-            router.push('/profile/personal')
+            router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/personal`)
         }
     }, [user]);
     return (

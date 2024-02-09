@@ -2,7 +2,7 @@ import { Category } from "@/models/category";
 import { createArtwork } from "@/services/artwork/artwork.api";
 import { getAllCategories } from "@/services/category/category.api";
 import { useEffect, useState } from "react";
-import { Resolver, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { firebaseConfig } from '@/config/firebase.config';
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
@@ -25,13 +25,16 @@ export type ArtworkFormData = {
   categoryId: string[];
 };
 
-const ArtworkForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<ArtworkFormData>();
+interface Props{
+  user: IUser | undefined
+}
 
+const ArtworkForm = (props: Props) => {
+  const { register, handleSubmit, formState: { errors } } = useForm<ArtworkFormData>();
+  const {user}= props
   const [categories, setCategories] = useState<Category[]>([]);
   const [inputFiles, setInputFiles] = useState<File[]>([]);
   const [imageSrc, setImageSrc] = useState<string[] | ArrayBuffer[] | null>([]);
-  const [user, setUser] = useState<IUser>();
   initializeApp(firebaseConfig);
 
   useEffect(() => {
@@ -39,10 +42,6 @@ const ArtworkForm = () => {
       setCategories(res.data as Category[])
     }))
   }, [])
-
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user") || ""));
-  }, []);
 
   const uploadFileToFirebase = async () => {
     const imagesUrl: String[] = []

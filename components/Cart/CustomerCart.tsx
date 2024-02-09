@@ -95,7 +95,7 @@ const CustomerCart = () => {
                             <div className={style.order}>
                                 <div>
                                     <span className={style.price}>ราคารวมทั้งหมด {netAmount} บาท</span>
-                                    <button onClick={() => router.push("/cart/review-order")}>จัดจ้าง</button>
+                                    <button onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart/review-order`)}>จัดจ้าง</button>
                                 </div>
                             </div>
                         </>

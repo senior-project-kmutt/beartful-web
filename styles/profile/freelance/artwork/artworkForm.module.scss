@@ -92,6 +92,7 @@
     color: white;
     font-weight: bold;
     margin-right: 7px;
+    cursor: pointer;
 }
 
 .cancelButton {
@@ -101,6 +102,13 @@
     border-radius: 15px;
     color: #B45020;
     font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+        border: 1.5px solid #E16428;
+        background-color: #E16428;
+        color: white;
+    }
 }
 
 .imageContainer {
