@@ -30,3 +30,7 @@ export const updateBankAccount = (userId: string, body: any, headers: IncomingHt
 export const updateFreelanceDetails = (userId: string, body: any, headers: IncomingHttpHeaders): Promise<any> => {
   return patchPromise(`/user/${userId}/updateFreelanceDetails`, body, headers);
 };
+
+export const updatePersonal = (userId: string, body: any, headers: IncomingHttpHeaders): Promise<any> => {
+  return patchPromise(`/user/${userId}/personal`, body, headers);
+};

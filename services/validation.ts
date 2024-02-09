@@ -24,13 +24,22 @@ export const requiredFieldsCustomer: Array<keyof Users> = [
     'phoneNumber'
 ];
 
-export const requiredFieldsFreelance: Array<keyof FreelanceUsers> = [
+export const requiredFieldsFreelancePersonal: Array<keyof FreelanceUsers> = [
     'email',
     'username',
     'password',
     'firstname',
     'lastname',
     'role',
+    'phoneNumber',
+    'dateOfBirth',
+    'address'
+];
+
+export const requiredFieldsFreelancePersonalUpdate: Array<keyof FreelanceUsers> = [
+    'email',
+    'firstname',
+    'lastname',
     'phoneNumber',
     'dateOfBirth',
     'address'

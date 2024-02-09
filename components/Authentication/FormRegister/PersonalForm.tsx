@@ -1,6 +1,6 @@
 import style from "@/styles/authentication/form/PersonalForm.module.scss";
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "react";
-import { errorMessageEmtryField, regexpEmail, regexpOnlyNumber, requiredFieldsCustomer, requiredFieldsFreelance } from "@/services/validation";
+import { errorMessageEmtryField, regexpEmail, regexpOnlyNumber, requiredFieldsCustomer, requiredFieldsFreelancePersonal } from "@/services/validation";
 import { thaiMonths } from "./option";
 import { defaultProfileImage } from "@/config/constants";
 
@@ -113,7 +113,7 @@ const PersonalForm = (props: Props) => {
       const { date, month, year } = submitDataForm;
       const dateOfBirth = new Date(year - 543, month, date);
       submitDataForm['dateOfBirth'] = dateOfBirth;
-      requiredFieldsFreelance.forEach(key => {
+      requiredFieldsFreelancePersonal.forEach(key => {
         if (!submitDataForm[key]) {
           newErrorMessage[key] = errorMessageEmtryField[key];
           isValid = false;
