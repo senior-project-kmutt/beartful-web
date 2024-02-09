@@ -17,6 +17,6 @@ export const freelanceSelectBarMenu = [
     },
     {
         title: 'เปลี่ยนรหัสผ่าน',
-        value: ''
+        value: 'changePassword'
     },
 ]
