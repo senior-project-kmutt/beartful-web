@@ -1,19 +1,24 @@
 .selectBar {
     margin-left: 30px;
     display: flex;
+    // border: #873C18 solid 1px;
 }
 
 .profile {
-    height: 4rem;
+    // width: 4rem;
+    // height: 4rem;
     width: 100%;
     display: flex;
     align-items: center;
     margin: 3rem auto 1.5rem auto;
+    // border: #873C18 solid 1px;
 
     img {
         margin-right: 8px;
         border-radius: 50%;
         width: 60px;
+        height: 60px;
+        object-fit: cover;
     }
 
     .name_box {
@@ -43,6 +48,11 @@
     .subHeading {
         color: #545151;
         margin-left: 1.8rem;
+        cursor: pointer;
+    }
+
+    .activeMenu {
+        color: #873C18;
     }
 }
 

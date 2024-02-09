@@ -101,8 +101,8 @@ const ArtworkForm = (props: Props) => {
       <NavBar />
       <div className="flex">
 
-        <div className={style.sideBar}>
-          <ProfileSelectBar />
+        <div>
+          <ProfileSelectBar activeMenu="artwork" />
         </div>
 
         <div id="edit_artwork" className={style.main}>

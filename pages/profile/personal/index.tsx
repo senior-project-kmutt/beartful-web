@@ -13,10 +13,10 @@ const ProfilePersonal = () => {
     <>
       <NavBar />
       <div className="flex">
-        <div className={style.sideBar}>
-          <ProfileSelectBar />
+        <div>
+          <ProfileSelectBar activeMenu="personal" />
         </div>
-        <div className={`my-12`} style={{ width: '80%' }}>
+        <div className={`m-12`} style={{ width: '80%' }}>
           <PersonalUpdateForm />
         </div>
       </div>

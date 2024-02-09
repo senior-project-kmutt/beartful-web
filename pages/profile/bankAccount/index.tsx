@@ -91,11 +91,11 @@ const ProfileBankAccount = () => {
       <NavBar />
       <div className="flex">
 
-        <div className={style.sideBar}>
-          <ProfileSelectBar />
+        <div>
+          <ProfileSelectBar activeMenu="bankAccount" />
         </div>
 
-        <div className={` mb-12`} style={{ width: '80%' }}>
+        <div className={`m-12`} style={{ width: '80%' }}>
           <AccountingForm saveFormRegister={setFormBankAccount} defaultFormData={formBankAccount} />
         </div>
       </div>

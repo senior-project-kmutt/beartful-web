@@ -48,8 +48,8 @@ const FreelanceArtwork = (props: Props) => {
             <NavBar />
             <div className="flex">
 
-                <div className={style.sideBar}>
-                    <ProfileSelectBar />
+                <div>
+                    <ProfileSelectBar activeMenu="artwork" />
                 </div>
 
                 <div className={style.main}>
