@@ -26,7 +26,7 @@ const CartReadyMadeItem = (props: Props) => {
         const token = localStorage.getItem("auth");
         if (token) {
             if (user) {
-                const cart = { quantity: quantity, checked: !checked };
+                const cart = { quantity: quantity, checked: checked };
                 const headers = {
                     Authorization: `Bearer ${token}`,
                 };
@@ -65,7 +65,7 @@ const CartReadyMadeItem = (props: Props) => {
     const handleCheck = (itemId: string) => {
         const updatedCartItems = cartItems.map((item) => {
             if (item._id === itemId) {
-                editCartItem(itemId, item.quantity, item.checked);
+                editCartItem(itemId, item.quantity, !item.checked);
                 updateCartWhenItemUpdated({ ...item, checked: !item.checked })
                 return { ...item, checked: !item.checked };
             }
