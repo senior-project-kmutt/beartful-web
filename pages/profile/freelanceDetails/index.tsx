@@ -44,60 +44,30 @@ const ProfileBankAccount = () => {
   }, []);
 
   useEffect(() => {
-    getEducationInfo();
-    getExperienceInfo();
-    getSkillAndLanguageInfo();
-    getAwardInfo();
+    getFreelanceDetailsInfo();
   }, [user]);
 
   useEffect(() => {
-    if (isFormEducationlValid && isFormExperiencelValid && isFormSkillAndLanguageValid) {
+    if (isFormEducationlValid && isFormExperiencelValid && isFormSkillAndLanguageValid && isFormAwardValid) {
       handleSubmitForm();
-      setIsSaveForm(false)
     }
-  }, [formEducation, isSaveForm, isFormEducationlValid]);
+    setIsSaveForm(false)
+  }, [isSaveForm, isFormEducationlValid, isFormExperiencelValid, isFormSkillAndLanguageValid, isFormAwardValid]);
 
-  const getEducationInfo = () => {
+  const getFreelanceDetailsInfo = () => {
     const headers = getHeaderRequest();
     if (user) {
       getUserById(user.id, headers).then((res) => {
         setFormEducation(res.education);
         setEducationInfo(res.education);
-      })
-        .catch(error => console.log(error));
-    }
-  }
-
-  const getExperienceInfo = () => {
-    const headers = getHeaderRequest();
-    if (user) {
-      getUserById(user.id, headers).then((res) => {
         setFormExperience(res.experience);
         setExperienceInfo(res.experience);
-      })
-        .catch(error => console.log(error));
-    }
-  }
-
-  const getSkillAndLanguageInfo = () => {
-    const headers = getHeaderRequest();
-    if (user) {
-      getUserById(user.id, headers).then((res) => {
         const data = [
           ...res.skill,
           ...res.language
         ]
         setFormSkillAndLanguage(data);
         setSkillAndLanguageInfo(data);
-      })
-        .catch(error => console.log(error));
-    }
-  }
-
-  const getAwardInfo = () => {
-    const headers = getHeaderRequest();
-    if (user) {
-      getUserById(user.id, headers).then((res) => {
         setFormAward(res.award);
         setAwardInfo(res.award);
       })
