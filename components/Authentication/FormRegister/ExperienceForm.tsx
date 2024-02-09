@@ -19,11 +19,13 @@ type ValidateEducationItem = {
 interface Props {
   saveFormRegister: Dispatch<SetStateAction<ExperienceItem[]>>
   defaultFormData: ExperienceItem[];
-  setIsFormValid: Dispatch<SetStateAction<boolean>>
+  setIsFormValid: Dispatch<SetStateAction<boolean>>;
+  isHideButton?: boolean;
+  isSaveForm?: boolean
 }
 
 const ExperienceForm = (props: Props) => {
-  const { saveFormRegister, defaultFormData, setIsFormValid } = props;
+  const { saveFormRegister, defaultFormData, setIsFormValid, isHideButton, isSaveForm } = props;
   const [experiences, setExperiences] = useState<ExperienceItem[]>([]);
   const [validateFields, setValidateFields] = useState<ValidateEducationItem[]>([]);
 
@@ -43,6 +45,12 @@ const ExperienceForm = (props: Props) => {
       setValidateFields(updatedValidateFields);
     }
   }, [defaultFormData])
+
+  useEffect(() => {
+    if (isSaveForm) {
+      onSubmit();
+    }
+  }, [isSaveForm])
 
   const addEducation = () => {
     setExperiences([
@@ -291,14 +299,16 @@ const ExperienceForm = (props: Props) => {
       <div className={style.add_button} onClick={addEducation}>
         + เพิ่มข้อมูล
       </div>
-      <div className={style.button}>
-        <div className="flex justify-center">
-          <button className={style.save} onClick={onSubmit}>
-            Save
-          </button>
-          <button className={style.cancel}>Cancel</button>
+      {!isHideButton && (
+        <div className={style.button}>
+          <div className="flex justify-center">
+            <button className={style.save} onClick={onSubmit}>
+              Save
+            </button>
+            <button className={style.cancel}>Cancel</button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

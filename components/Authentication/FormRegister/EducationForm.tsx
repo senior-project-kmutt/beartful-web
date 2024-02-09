@@ -15,11 +15,13 @@ type ValidateEducationItem = {
 interface Props {
   saveFormRegister: Dispatch<SetStateAction<EducationItem[]>>
   defaultFormData: EducationItem[];
-  setIsFormValid: Dispatch<SetStateAction<boolean>>
+  setIsFormValid: Dispatch<SetStateAction<boolean>>;
+  isHideButton?: boolean;
+  isSaveForm?: boolean
 }
 
 const EducationForm = (props: Props) => {
-  const { saveFormRegister, defaultFormData, setIsFormValid } = props
+  const { saveFormRegister, defaultFormData, setIsFormValid, isHideButton, isSaveForm } = props
   const [educations, setEducations] = useState<EducationItem[]>([
     {
       degree: '',
@@ -53,6 +55,12 @@ const EducationForm = (props: Props) => {
 
     }
   }, [defaultFormData])
+
+  useEffect(() => {
+    if (isSaveForm) {
+      onSubmit();
+    }
+  }, [isSaveForm])
 
   const addEducation = () => {
     setEducations([...educations, { degree: '', institution: '', major: '' }]);
@@ -178,14 +186,16 @@ const EducationForm = (props: Props) => {
       <div className={style.add_button} onClick={addEducation}>
         + เพิ่มข้อมูล
       </div>
-      <div className={style.button}>
-        <div className="flex justify-center">
-          <button className={style.submit} onClick={onSubmit}>
-            Save
-          </button>
-          <button className={style.cancel}>Cancel</button>
+      {!isHideButton && (
+        <div className={style.button}>
+          <div className="flex justify-center">
+            <button className={style.submit} onClick={onSubmit}>
+              Save
+            </button>
+            <button className={style.cancel}>Cancel</button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

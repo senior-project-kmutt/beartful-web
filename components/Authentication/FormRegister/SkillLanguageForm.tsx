@@ -15,11 +15,13 @@ type ValidateSkillLanguageItem = {
 interface Props {
   saveFormRegister: Dispatch<SetStateAction<SkillAndLanguageItem[]>>
   defaultFormData: SkillAndLanguageItem[];
-  setIsFormValid: Dispatch<SetStateAction<boolean>>
+  setIsFormValid: Dispatch<SetStateAction<boolean>>;
+  isHideButton?: boolean;
+  isSaveForm?: boolean
 }
 
 const SkillLanguageForm = (props: Props) => {
-  const { saveFormRegister, defaultFormData, setIsFormValid } = props;
+  const { saveFormRegister, defaultFormData, setIsFormValid, isHideButton, isSaveForm } = props;
   const [skillAndLanguages, setSkillAndLanguages] = useState<SkillAndLanguageItem[]>([]);
   const [validateFields, setValidateFields] = useState<ValidateSkillLanguageItem[]>([]);
 
@@ -39,6 +41,12 @@ const SkillLanguageForm = (props: Props) => {
       setValidateFields(updatedValidateFields);
     }
   }, [defaultFormData])
+
+  useEffect(() => {
+    if (isSaveForm) {
+      onSubmit();
+    }
+  }, [isSaveForm])
 
   const addEducation = () => {
     setSkillAndLanguages([
@@ -185,7 +193,8 @@ const SkillLanguageForm = (props: Props) => {
       <div className={style.add_button} onClick={addEducation}>
         + เพิ่มข้อมูล
       </div>
-      <div className={style.button}>
+      {!isHideButton && (
+        <div className={style.button}>
         <div className="flex justify-center">
           <button className={style.save} onClick={onSubmit}>
             Save
@@ -193,6 +202,7 @@ const SkillLanguageForm = (props: Props) => {
           <button className={style.cancel}>Cancel</button>
         </div>
       </div>
+      )}
     </div>
   );
 };

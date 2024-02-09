@@ -13,11 +13,13 @@ type ValidateAwardItem = {
 interface Props {
   saveFormRegister: Dispatch<SetStateAction<AwardItem[]>>
   defaultFormData: AwardItem[];
-  setIsFormValid: Dispatch<SetStateAction<boolean>>
+  setIsFormValid: Dispatch<SetStateAction<boolean>>;
+  isHideButton?: boolean;
+  isSaveForm?: boolean
 }
 
 const AwardForm = (props: Props) => {
-  const { saveFormRegister, defaultFormData, setIsFormValid } = props;
+  const { saveFormRegister, defaultFormData, setIsFormValid, isHideButton, isSaveForm } = props;
   const [awards, setAwards] = useState<AwardItem[]>([]);
   const [validateFields, setValidateFields] = useState<ValidateAwardItem[]>([]);
 
@@ -39,6 +41,12 @@ const AwardForm = (props: Props) => {
       setValidateFields(updatedValidateFields);
     }
   }, [defaultFormData])
+
+  useEffect(() => {
+    if (isSaveForm) {
+      onSubmit();
+    }
+  }, [isSaveForm])
 
   const addEducation = () => {
     setAwards([
@@ -155,7 +163,8 @@ const AwardForm = (props: Props) => {
       <div className={style.add_button} onClick={addEducation}>
         + เพิ่มข้อมูล
       </div>
-      <div className={style.button}>
+      {!isHideButton && (
+        <div className={style.button}>
         <div className="flex justify-center">
           <button className={style.save} onClick={onSubmit}>
             Save
@@ -163,6 +172,7 @@ const AwardForm = (props: Props) => {
           <button className={style.cancel}>Cancel</button>
         </div>
       </div>
+      )}
     </div>
   );
 };

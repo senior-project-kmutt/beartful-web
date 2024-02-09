@@ -1,7 +1,22 @@
 import NavBar from "@/components/Layout/NavBar";
+import { useEffect, useState } from "react";
+import { IUser } from "../chat";
+import { useRouter } from "next/router";
 
 
 const Profile = () => {
+    const [user, setUser] = useState<IUser>();
+    const router = useRouter()
+
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem("user") || ""));
+    }, []);
+
+    useEffect(() => {
+        if (user?.role === 'freelance') {
+            router.push('/profile/personal')
+        }
+    }, [user]);
     return (
         <>
             <NavBar />

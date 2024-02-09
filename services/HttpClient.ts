@@ -50,6 +50,16 @@ export const postPromise = <T>(
   }).then(response => response.data as T);
 };
 
+export const patchPromise = <T>(
+  path: string,
+  data: any,
+  headers?: IncomingHttpHeaders
+): Promise<T> => {
+  return Axios.patch(path, data, {
+    headers: headers || undefined
+  }).then(response => response.data as T);
+};
+
 export const deletePromise = <T>(
   path: string,
   headers: IncomingHttpHeaders
