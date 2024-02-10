@@ -2,7 +2,6 @@ import style from "@/styles/profile/purchase.module.scss"
 import { faClipboardList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import "react-responsive-modal/styles.css";
 import ReviewModal from '../../Profile/Component/ReviewModal';
 
 const PurchaseItem = () => {

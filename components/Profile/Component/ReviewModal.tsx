@@ -1,6 +1,5 @@
 import style from "@/styles/profile/reviewModal.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "react-responsive-modal/styles.css";
 import { Modal } from 'flowbite-react';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from 'react-hook-form';
