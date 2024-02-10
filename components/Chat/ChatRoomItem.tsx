@@ -5,7 +5,7 @@ import styles from "@/styles/chat/chat.module.scss";
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard, faPaperclip } from '@fortawesome/free-solid-svg-icons';
-import { socket } from "@/config/socket";
+import { socketMessage } from "@/config/socket";
 
 interface Props {
   chatRoomItem: IChatRoom
@@ -17,9 +17,9 @@ const ChatRoomItem = (props: Props) => {
   const { chatRoomItem, selectedChatRoom, setSelectedChatRoom } = props
   const [latestMessage, setLatestMessage] = useState<string>("")
   const [isFileMessage, setIsFileMessage] = useState<boolean>(false)
-  socket.connect();
+  socketMessage.connect();
 
-  socket.on("recieved_message", (newMessage) => {
+  socketMessage.on("recieved_message", (newMessage) => {
     if (newMessage.chat_room_id === chatRoomItem._id) {
       getLatestMessage();
     }

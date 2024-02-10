@@ -1,6 +1,6 @@
 import { IChatRoom, IParticipant, IUser } from '@/pages/chat';
 import styles from "@/styles/chat/chat.module.scss";
-import { socket } from "@/config/socket";
+import { socketMessage } from "@/config/socket";
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { getMessageByChatRoomId, sendMessage } from '@/services/chat/chat.api';
 import MessageItem from './MessageItem';
@@ -45,9 +45,9 @@ const ChatMessage = (props: Props) => {
   const [isQuotationModalOpen, setIsQuotationModalOpen] = useState<boolean>(false);
 
   initializeApp(firebaseConfig);
-  socket.connect();
+  socketMessage.connect();
 
-  socket.on("recieved_message", (newMessage) => {
+  socketMessage.on("recieved_message", (newMessage) => {
     if (newMessage.chat_room_id === selectedChatRoom?._id) {
       setMessages([...messages, newMessage]);
     }
@@ -123,7 +123,7 @@ const ChatMessage = (props: Props) => {
           Authorization: `Bearer ${token}`
         };
         sendMessage(cleanData, headers).then((res: any) => {
-          socket.emit("send-message", res, socket.id);
+          socketMessage.emit("send-message", res, socketMessage.id);
         });
       }
     }
