@@ -1,0 +1,63 @@
+
+.line {
+    border: 0.5px solid black;
+}
+
+.details_table {
+    width: 100%;
+    margin-top: 1rem;
+    border: 1px solid;
+}
+
+.details_table th,
+.details_table td {
+    border: 0.5px solid;
+    vertical-align: top;
+    padding: 16px 16px 34px 16px;
+}
+
+.total_price {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.total_price th,
+.total_price td {
+    vertical-align: top;
+    padding: 0 16px 16px;
+}
+
+.summary {
+    width: 100%;
+    margin-top: 1rem;
+    border-top: 1px solid;
+    border-bottom: 2px solid;
+    background-color: #E8E8E8;
+}
+
+.summary th,
+.summary td {
+    vertical-align: top;
+    padding: 0 16px 16px;
+}
+
+.list {
+    margin-left: 22px;
+    margin-top: 4px;
+    li {
+        position: relative; /* กำหนดให้เป็นตำแหน่งแบบเก็บ */
+      }
+      
+    li::before {
+        content: "\2022"; /* รหัสของ dot ใน unicode */
+        color: #000; /* สีของ dot */
+        font-size: 1.2rem; /* ขนาดของ dot */
+        position: absolute; /* กำหนดให้ dot เป็นตำแหน่งแบบเฉียง */
+        left: -12px; /* ระยะห่างจากขอบซ้ายของแต่ละรายการ */
+        top: 50%; /* ตำแหน่งที่จะวาง dot ในแนวตั้ง */
+        transform: translateY(-60%); /* ย้าย dot ให้อยู่ตรงกลางแนวตั้ง */
+    }
+}
+  
+  
+  
