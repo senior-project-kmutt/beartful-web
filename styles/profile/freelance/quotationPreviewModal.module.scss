@@ -1,0 +1,40 @@
+.quotationModal {
+    .header {
+        background-color: #E16428;
+
+        p {
+            color: white;
+        }
+
+        svg {
+            display: none;
+        }
+    }
+
+    .button_box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 28px;
+        margin-top: 24px;
+
+        .createButton {
+            width: 160px;
+            background-color: #E16428;
+            border-radius: 15px;
+            color: white;
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .cancelButton {
+            border: 1px solid #B45020;
+            width: 120px;
+            background-color: white;
+            color: #B45020;
+            border-radius: 15px;
+            height: 30px;
+
+        }
+    }
+}

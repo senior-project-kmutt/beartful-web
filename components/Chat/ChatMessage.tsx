@@ -13,6 +13,7 @@ import ChatProfile from './ChatProfile';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
 import { Dropdown } from 'flowbite-react';
 import QuotationModal from '../Profile/Freelance/QuotationModal';
+import QuotationPreviewModal from '../Profile/Freelance/QuotationPreviewModal';
 
 interface Props {
   selectedChatRoom?: IChatRoom
@@ -233,7 +234,7 @@ const ChatMessage = (props: Props) => {
           </div>
         )}
 
-        {isQuotationModalOpen && <QuotationModal openQuotationModal={openQuotationModal} />}
+        {isQuotationModalOpen && <QuotationModal openQuotationModal={openQuotationModal} sendMessage={submitSend} />}
 
         <div className={styles.input_warp}>
           <div className={styles.input_box}>

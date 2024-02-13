@@ -1,10 +1,10 @@
-import Quotation from "@/components/Quotation/QuotationImage";
+import QuotationImage from "@/components/Quotation/QuotationImage";
 
 const Html2Canvas = () => {
 
   return (
     <>
-      <Quotation />
+      {/* <QuotationImage /> */}
     </>
   )
 };

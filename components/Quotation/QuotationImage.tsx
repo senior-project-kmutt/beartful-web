@@ -1,8 +1,16 @@
 import style from "@/styles/quotation/quotation.module.scss"
-import { useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import html2canvas from 'html2canvas';
+import { Quotation } from "@/models/quotation";
 
-const Quotation = () => {
+interface Props {
+  data: Quotation;
+  saveImageData?: Dispatch<SetStateAction<File | undefined>>
+}
+
+const QuotationImage = (props: Props) => {
+  const { data, saveImageData } = props
+  const [imageObject, setImageObject] = useState<string>('')
   useEffect(() => {
     convertToImage();
     return () => {
@@ -17,21 +25,52 @@ const Quotation = () => {
     const convertContent = document.getElementById('convert-content');
     const previewContainer = document.getElementById('preview');
 
-    if (convertContent && previewContainer) {
+    if (convertContent) {
       const canvas = await html2canvas(convertContent, {
         scale: 5,
         useCORS: true,
+        scrollX: 10,
+        scrollY: 10
       });
-      const imgData = canvas.toDataURL('image/png');
-      const img = document.createElement('img');
-      img.src = imgData;
-      previewContainer.appendChild(img);
+
+      // To Preview Image
+      // const imgData = canvas.toDataURL('image/png');
+      // const img = document.createElement('img');
+      // img.src = imgData;
+      // previewContainer.appendChild(img);
+
+      if (saveImageData) {
+        canvas.toBlob(blob => {
+          if (blob) {
+            const fileName = `${data.freelanceName}_${data.customerName}_${getDateFormat(new Date())}`;
+            const file = new File([blob], fileName, { type: 'image/png' });
+            saveImageData(file);
+          }
+        }, 'image/png');
+      }
+
+
     }
   };
 
+  const getDateFormat = (dateTime: Date) => {
+    const dateObject = new Date(dateTime);
+    const date = dateObject.getDate().toString().padStart(2, '0');
+    const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+    const year = dateObject.getFullYear();
+    return `${date}/${month}/${year}`;
+  }
+
+  const getCurrentTime = () => {
+    const dateObject = new Date();
+    const hours = dateObject.getHours().toString().padStart(2, '0');
+    const minutes = dateObject.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+  }
+
   return (
-    <div className="m-12">
-      <div id="convert-content" className="p-14">
+    <div className="">
+      <div id="convert-content" className={`${style.content} p-14`}>
         <div className="flex justify-between mb-12">
           <div className="text-3xl">
             <p>ใบเสนอราคา</p>
@@ -51,8 +90,8 @@ const Quotation = () => {
                 <p><span className="font-semibold">ผู้ออก </span>/ Issuer</p>
               </div>
               <div>
-                <p className="mb-2">แมววัด อยากอยู่วัด</p>
-                <p>แมวส้ม น่ารักมากมาก</p>
+                <p className="mb-2">{data.customerName}</p>
+                <p>{data.freelanceName}</p>
               </div>
             </div>
             <div></div>
@@ -64,8 +103,8 @@ const Quotation = () => {
               </div>
               <div>
                 <p className="mb-2">MM-2345670936</p>
-                <p className="mb-2">01/01/2024</p>
-                <p>10:23:49</p>
+                <p className="mb-2">{getDateFormat(new Date())}</p>
+                <p>{getCurrentTime()}</p>
               </div>
             </div>
           </div>
@@ -96,15 +135,15 @@ const Quotation = () => {
                 <tr>
                   <td>PT-246701</td>
                   <td>
-                    <p>ชื่องาน : xxxxxxxxxx</p>
+                    <p>ชื่องาน : {data.name}</p>
                     <ul className={style.list}>
-                      <li>สิ่งที่ต้องได้รับ : xxxxxxxxxxxxxxx </li>
-                      <li>การแก้ไข : xxxxxxxxxxxxxxxxx</li>
-                      <li>ระยะเวลาการทำงาน : xx/xx/xxxx - xx/xx/xxxx</li>
+                      <li>สิ่งที่ต้องได้รับ : {data.benefits} </li>
+                      <li>การแก้ไข : {data.numberOfEdit}</li>
+                      <li>ระยะเวลาการทำงาน : {getDateFormat(data.startDate)} - {getDateFormat(data.endDate)}</li>
                     </ul>
                   </td>
-                  <td className="text-center">1</td>
-                  <td className="text-center">250.0</td>
+                  <td className="text-center">{data.quatity}</td>
+                  <td className="text-center">{data.amount}</td>
                 </tr>
               </tbody>
             </table>
@@ -114,7 +153,7 @@ const Quotation = () => {
                   <td style={{ width: "15%" }}></td>
                   <td style={{ width: "55%" }}></td>
                   <td style={{ width: "10%", textAlign: 'right' }}><p>รวม</p></td>
-                  <td style={{ width: "20%", textAlign: 'center' }}><p>250.0</p></td>
+                  <td style={{ width: "20%", textAlign: 'center' }}><p>{data.amount}</p></td>
                 </tr>
               </tbody>
             </table>
@@ -124,7 +163,7 @@ const Quotation = () => {
                 <tr>
                   <td style={{ width: "65%" }}>สองร้อยห้าสิบบาทถ้วน</td>
                   <td style={{ width: "15%", textAlign: 'right' }}><p>ยอดรวมสุทธิ</p></td>
-                  <td style={{ width: "20%", textAlign: 'center' }}><p>250.0</p></td>
+                  <td style={{ width: "20%", textAlign: 'center' }}><p>{data.amount}</p></td>
                 </tr>
               </tbody>
             </table>
@@ -137,13 +176,13 @@ const Quotation = () => {
               <p className="">ลงชื่อ</p>
               <p className="my-2">___________________________</p>
               <p>(_____________________)</p>
-              <p>วันที่ / Date : 01/01/2024</p>
+              <p>วันที่ / Date : {getDateFormat(new Date())}</p>
             </div>
             <div className="text-center leading-6">
               <p className="">ลงชื่อ</p>
               <img className="mx-auto mb-3 mt-6" src="/picture/logo.png" alt="" width={140} />
-              <p>( นายแมวส้ม น่ารักมากมาก )</p>
-              <p>วันที่ / Date : 01/01/2024</p>
+              <p>( {data.freelanceName} )</p>
+              <p>วันที่ / Date : {getDateFormat(new Date())}</p>
             </div>
           </div>
           <div>
@@ -154,12 +193,11 @@ const Quotation = () => {
 
 
       </div>
-      <p>Preview</p>
+      {/* <p>Preview</p>
       <div id="preview">
-
-      </div>
+      </div> */}
     </div>
   );
 }
 
-export default Quotation
+export default QuotationImage
