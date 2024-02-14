@@ -44,7 +44,10 @@ const ArtworkDetail = (props: Props) => {
   };
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user") || ""));
+    const user = localStorage.getItem("user") || "";
+    if(user){
+      setUser(JSON.parse(user));
+    }
   }, []);
 
   const handleCloseDetail = () => {
