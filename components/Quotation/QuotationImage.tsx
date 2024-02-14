@@ -140,6 +140,9 @@ const QuotationImage = (props: Props) => {
                       <li>สิ่งที่ต้องได้รับ : {data.benefits} </li>
                       <li>การแก้ไข : {data.numberOfEdit}</li>
                       <li>ระยะเวลาการทำงาน : {getDateFormat(data.startDate)} - {getDateFormat(data.endDate)}</li>
+                      {data.note && (
+                        <li>หมายเหตุเพิ่มเติม : {data.note}</li>
+                      )}
                     </ul>
                   </td>
                   <td className="text-center">{data.quatity}</td>

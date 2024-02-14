@@ -18,25 +18,6 @@ const QuotationModal = (props: Props) => {
     const { register, handleSubmit, formState: { errors } } = useForm<Quotation>();
 
     const onSubmit = handleSubmit(async (data) => {
-        // const token = localStorage.getItem("auth");
-        // if (token) {
-        //   if (inputFiles) {
-        //     imageUrl = await uploadFileToFirebase();
-        //   }
-
-        //   if (user) {
-        //     const artwork = { ...data, images: imageUrl };
-        //     const headers = {
-        //       Authorization: `Bearer ${token}`,
-        //     };
-
-        //     try {
-        //       await createArtwork(artwork, headers);
-        //     } catch (error) {
-        //       console.error("Error creating artwork:", error);
-        //     }
-        //   }
-        // }
         const quotationData = {
             ...data,
             quotationNumber: getQuotationNo(),
@@ -70,60 +51,60 @@ const QuotationModal = (props: Props) => {
                         <div className={style.formGrid}>
                             <div>
                                 <label>ชื่อลูกค้า</label>
-                                <input type='text' className={style.inputField} {...register("customerName")} />
+                                <input type='text' className={`${style.inputField} ${errors.customerName && `${style.error}`}`} {...register("customerName", { required: true })} />
                             </div>
 
                             <div>
                                 <label>ชื่อผู้ออก</label>
-                                <input type='text' className={style.inputField} {...register("freelanceName")} />
+                                <input type='text' className={`${style.inputField} ${errors.freelanceName && `${style.error}`}`} {...register("freelanceName", { required: true })} />
                             </div>
                         </div>
 
                         <div>
                             <label>ชื่องาน</label>
-                            <input type='text' className={style.inputField} {...register("name")} />
+                            <input type='text' className={`${style.inputField} ${errors.name && `${style.error}`}`} {...register("name", { required: true })} />
                         </div>
 
                         <label>สิ่งที่ต้องได้รับ</label>
-                        <input type='text' className={style.inputField} {...register("benefits")} />
+                        <input type='text' className={`${style.inputField} ${errors.benefits && `${style.error}`}`} {...register("benefits", { required: true })} />
 
                         <label>จำนวนการแก้ไข (ครั้ง)</label>
-                        <input type='number' className={style.inputField} {...register("numberOfEdit")} />
+                        <input type='number' className={`${style.inputField} ${errors.numberOfEdit && `${style.error}`}`} {...register("numberOfEdit", { required: true })} />
 
                         <div className={`${style.formGrid} ${style.custom_grid}`}>
                             <div>
                                 <label>วันเริ่มงาน</label>
-                                <input type='date' className={style.inputField} {...register("startDate")} />
+                                <input type='date' className={`${style.inputField} ${errors.startDate && `${style.error}`}`} {...register("startDate", { required: true })} />
                             </div>
 
                             <div>
                                 <label>วันมอบงาน</label>
-                                <input type='date' className={style.inputField} {...register("endDate")} />
+                                <input type='date' className={`${style.inputField} ${errors.endDate && `${style.error}`}`} {...register("endDate", { required: true })} />
                             </div>
 
                             <div>
                                 <label>จำนวน(วัน)</label>
-                                <input type='number' className={style.inputField} {...register("day")} />
+                                <input type='number' className={`${style.inputField} ${errors.day && `${style.error}`}`} {...register("day", { required: true })} />
                             </div>
                         </div>
 
                         <div className={style.formGrid}>
                             <div>
                                 <label>จำนวน(ชิ้น)</label>
-                                <input type='number' className={style.inputField} {...register("quatity")} />
+                                <input type='number' className={`${style.inputField} ${errors.quatity && `${style.error}`}`} {...register("quatity", { required: true })} />
                             </div>
 
                             <div>
                                 <label>ราคา(บาท)</label>
-                                <input type='number' className={style.inputField} {...register("amount")} />
+                                <input type='number' className={`${style.inputField} ${errors.amount && `${style.error}`}`} {...register("amount", { required: true })} />
                             </div>
                         </div>
 
                         <label>ยืนยันการออกใบเสนอราคา</label>
-                        <input type='text' className={style.inputField} {...register("confirmQuotation")} placeholder='พิมพ์ชื่อเพื่อยืนยัน' />
+                        <input type='text' className={`${style.inputField} ${errors.confirmQuotation && `${style.error}`}`} {...register("confirmQuotation", { required: true })} placeholder='พิมพ์ชื่อเพื่อยืนยัน' />
 
                         <label>หมายเหตุเพิ่มเติม</label>
-                        <textarea rows={4} {...register("note")} placeholder='พิมพ์ชื่อเพื่อยืนยัน' />
+                        <textarea rows={4} {...register("note")} />
 
                         <div className={style.button_box}>
                             <button className={style.createButton} onClick={() => onSubmit}>ถัดไป</button>
