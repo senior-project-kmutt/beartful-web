@@ -11,3 +11,8 @@ export const getQuotationByCustomerId = (userId: string, headers: IncomingHttpHe
     const url = `/user/${userId}/quotations`;
     return getPromise(url, headers)
 }
+
+export const getQuotationById = (quotationId: string, headers: IncomingHttpHeaders): Promise<any> => {
+    const url = `/quotations/${quotationId}`;
+    return getPromise(url, headers)
+}

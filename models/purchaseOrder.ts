@@ -16,6 +16,11 @@ export interface IPurchaseOrder {
     updatedAt?: Date
 }
 
+export interface ICreatePurchaseOrder {
+    purchaseOrder: IPurchaseOrder
+    artworkItem?: string
+}
+
 export const CustomerStatus = () => {
 
 }

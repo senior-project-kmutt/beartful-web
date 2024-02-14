@@ -22,7 +22,8 @@ const QuotationModal = (props: Props) => {
             ...data,
             quotationNumber: getQuotationNo(),
             customerUsername: customerUsername,
-            freelanceUsername: freelanceUsername
+            freelanceUsername: freelanceUsername,
+            status: 'inCart'
         }
         setQuotationData(quotationData);
         setIsOpenPreviewModal(true);

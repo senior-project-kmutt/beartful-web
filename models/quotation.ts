@@ -1,4 +1,5 @@
 export interface Quotation {
+    _id: string
     quotationNumber: string;
     customerUsername: string;
     freelanceUsername: string;

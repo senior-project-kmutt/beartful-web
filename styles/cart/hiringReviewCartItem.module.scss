@@ -1,0 +1,175 @@
+.cartItem {
+    height: auto;
+    background-color: #FCEFE9;
+    border-radius: 10px;
+    margin: 10px auto;
+    padding-bottom: 10px;
+
+    .profile {
+        display: flex;
+        padding-top: 15px;
+        padding-left: 25px;
+
+        .username {
+            font-weight: bolder;
+            margin-left: 8px;
+        }
+
+        .saveButton {
+            background-color: #E16428;
+            width: 120px;
+            height: 25px;
+            border-radius: 15px;
+            color: white;
+            margin-right: 7px;
+        }
+
+        .cancelButton {
+            border: 1.5px solid #B45020;
+            width: 120px;
+            height: 25px;
+            border-radius: 15px;
+            color: #B45020;
+        }
+    }
+
+    .formGrid {
+        display: flex;
+        justify-content: space-between;
+        margin-right: 50px;
+        margin-left: 30px;
+        padding-bottom: 10px;
+
+        .information {
+            display: flex;
+            padding-left: 25px;
+
+            .userImage {
+                height: 80px;
+                width: 80px;
+                background-color: #F3C1A9;
+                border-radius: 10px;
+                border-color: #F3C1A9;
+                margin-top: 7px;
+            }
+
+            .detail {
+                margin-left: 20px;
+
+                .artworkName {
+                    font-size: larger;
+                    font-weight: bolder;
+                    margin-bottom: 5px;
+                }
+
+                .description {
+                    font-size: small;
+                    color: gray;
+                }
+            }
+        }
+
+        .price {
+            font-weight: bolder;
+            // position: absolute;
+            right: 30%;
+            font-size: 20px;
+        }
+
+        .confirm {
+            display: flex;
+            position: absolute;
+            right: 5%;
+
+            .confirmButton {
+                height: 32px;
+                width: 150px;
+                background-color: #E16428;
+                color: white;
+                border-radius: 4px;
+                margin-right: 12px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            grid-template-columns: 58% 27% 15%;
+            // justify-content: center;
+            // align-items: center;
+        }
+    }
+
+}
+
+.paymentMethod {
+    height: 60px;
+    background-color: #FDF6F2;
+    border-radius: 5px;
+    display: flex;
+
+    p {
+        margin-left: 30px;
+        margin-top: 17px;
+        font-weight: 700;
+    }
+
+    button {
+        margin-top: 15px;
+        margin-left: 15px;
+        width: 170px;
+        height: 30px;
+        border: 1px solid #E78353;
+        color: #E78353;
+        font-weight: 500;
+        background-color: white;
+        border-radius: 10px;
+    }
+}
+
+.amountBlock {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    height: 100px;
+    background-color: #FDF6F2;
+    border-radius: 5px;
+
+    .payment {
+        display: flex;
+        position: absolute;
+        margin-top: 15px;
+        right: 5%;
+        font-weight: 600;
+        font-size: medium;
+
+        .totalAmount {
+            font-size: larger;
+        }
+    }
+}
+
+.buttonConfirm {
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: end;
+    // position: absolute;
+    right: 3%;
+
+    .backButton {
+        width: 150px;
+        height: 40px;
+        border: 1px solid #E78353;
+        color: #E78353;
+        font-weight: 500;
+        background-color: white;
+        border-radius: 10px;
+    }
+
+    .purchaseButton {
+        width: 150px;
+        height: 40px;
+        color: white;
+        font-weight: 500;
+        background-color: #E78353;
+        border-radius: 10px;
+        margin-left: 15px;
+    }
+}
