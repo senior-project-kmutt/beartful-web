@@ -8,9 +8,11 @@ import { Quotation } from '@/models/quotation';
 interface Props {
     openQuotationModal: () => void;
     sendMessage: (message: string) => void
+    customerUsername: string;
+    freelanceUsername: string;
 }
 const QuotationModal = (props: Props) => {
-    const { openQuotationModal, sendMessage } = props;
+    const { openQuotationModal, sendMessage, customerUsername, freelanceUsername } = props;
     const [isOpenPreviewModal, setIsOpenPreviewModal] = useState<boolean>(false);
     const [quotationData, setQuotationData] = useState<Quotation>();
     const { register, handleSubmit, formState: { errors } } = useForm<Quotation>();
@@ -35,9 +37,26 @@ const QuotationModal = (props: Props) => {
         //     }
         //   }
         // }
-        setQuotationData(data);
+        const quotationData = {
+            ...data,
+            quotationNumber: getQuotationNo(),
+            customerUsername: customerUsername,
+            freelanceUsername: freelanceUsername
+        }
+        setQuotationData(quotationData);
         setIsOpenPreviewModal(true);
     });
+
+    const getQuotationNo = () => {
+        const dateTime = new Date();
+        const date = dateTime.getDate();
+        const month = dateTime.getMonth();
+        const year = dateTime.getFullYear();
+        const hours = dateTime.getHours();
+        const minutes = dateTime.getMinutes();
+        const milliSecond = dateTime.getMilliseconds();
+        return `BF-${year}${month}${date}${hours}${minutes}${milliSecond}`
+    }
 
     return (
         <Modal size={'3xl'} className={style.quotationModal} show={true}>

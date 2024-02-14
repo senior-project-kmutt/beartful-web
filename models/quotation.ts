@@ -1,4 +1,7 @@
 export interface Quotation {
+    quotationNumber: string;
+    customerUsername: string;
+    freelanceUsername: string;
     customerName: string;
     freelanceName: string;
     name: string;
@@ -10,5 +13,5 @@ export interface Quotation {
     quatity: number;
     amount: number;
     note: string;
-    confirmQuotation?: string
+    confirmQuotation: string
 }

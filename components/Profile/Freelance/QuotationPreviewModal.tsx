@@ -4,6 +4,8 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import QuotationImage from '@/components/Quotation/QuotationImage';
 import { Quotation } from '@/models/quotation';
 import { uploadFileToFirebase } from '@/services/firebase/firebase-api';
+import { createQuotation } from '@/services/quotation/quotation.api';
+import Swal from 'sweetalert2';
 
 interface Props {
     setIsopenModal: Dispatch<SetStateAction<boolean>>
@@ -18,11 +20,29 @@ const QuotationPreviewModal = (props: Props) => {
 
     const onSubmit = async () => {
         if (quotationImage) {
-            const imageUrls = await uploadFileToFirebase([quotationImage], `user/quotation`, quotationImage.name);
-            sendMessage(imageUrls[0]);
-            sendMessage(messageForQuotation)
-            setIsopenModal(false);
-            openQuotationModal();
+            const token = localStorage.getItem("auth");
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            };
+            createQuotation(data, headers).then(async (res) => {
+                Swal.fire({
+                    icon: "success",
+                    title: "สร้างบัญชีสำเร็จ",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                const imageUrls = await uploadFileToFirebase([quotationImage], `user/quotation`, quotationImage.name);
+                sendMessage(imageUrls[0]);
+                sendMessage(messageForQuotation)
+                setIsopenModal(false);
+                openQuotationModal();
+            }, error => {
+                Swal.fire({
+                    title: "เกิดข้อผิดพลาด",
+                    text: "โปรดลองใหม่อีกครั้ง",
+                    icon: "error"
+                });
+            })
         }
     }
 

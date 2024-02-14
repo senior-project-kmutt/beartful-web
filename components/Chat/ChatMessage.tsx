@@ -234,7 +234,18 @@ const ChatMessage = (props: Props) => {
           </div>
         )}
 
-        {isQuotationModalOpen && <QuotationModal openQuotationModal={openQuotationModal} sendMessage={submitSend} />}
+        {isQuotationModalOpen &&
+          <>
+          {(selectedChatRoom?.participants[0].username && user?.username)  && (
+            <QuotationModal
+            openQuotationModal={openQuotationModal}
+            sendMessage={submitSend}
+            customerUsername={selectedChatRoom?.participants[0].username}
+            freelanceUsername={user?.username}
+          />
+          )}
+          </>
+        }
 
         <div className={styles.input_warp}>
           <div className={styles.input_box}>

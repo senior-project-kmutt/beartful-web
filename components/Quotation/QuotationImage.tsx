@@ -5,7 +5,7 @@ import { Quotation } from "@/models/quotation";
 
 interface Props {
   data: Quotation;
-  saveImageData?: Dispatch<SetStateAction<File | undefined>>
+  saveImageData?: Dispatch<SetStateAction<File | undefined>>;
 }
 
 const QuotationImage = (props: Props) => {
@@ -102,7 +102,7 @@ const QuotationImage = (props: Props) => {
                 <p><span className="font-semibold">เวลา</span> / Time</p>
               </div>
               <div>
-                <p className="mb-2">MM-2345670936</p>
+                <p className="mb-2">{data.quotationNumber}</p>
                 <p className="mb-2">{getDateFormat(new Date())}</p>
                 <p>{getCurrentTime()}</p>
               </div>
@@ -115,7 +115,7 @@ const QuotationImage = (props: Props) => {
             <table className={style.details_table}>
               <tbody>
                 <tr>
-                  <td style={{ width: "15%" }}>
+                  <td style={{ width: "20%" }}>
                     <h1 className="font-semibold">รหัส</h1>
                     <p>ID No.</p>
                   </td>
@@ -133,7 +133,7 @@ const QuotationImage = (props: Props) => {
                   </td>
                 </tr>
                 <tr>
-                  <td>PT-246701</td>
+                  <td>{data.quotationNumber}</td>
                   <td>
                     <p>ชื่องาน : {data.name}</p>
                     <ul className={style.list}>
@@ -150,7 +150,7 @@ const QuotationImage = (props: Props) => {
             <table className={style.total_price}>
               <tbody className="font-semibold">
                 <tr>
-                  <td style={{ width: "15%" }}></td>
+                  <td style={{ width: "20%" }}></td>
                   <td style={{ width: "55%" }}></td>
                   <td style={{ width: "10%", textAlign: 'right' }}><p>รวม</p></td>
                   <td style={{ width: "20%", textAlign: 'center' }}><p>{data.amount}</p></td>
@@ -161,7 +161,7 @@ const QuotationImage = (props: Props) => {
             <table className={`${style.summary} font-semibold`}>
               <tbody>
                 <tr>
-                  <td style={{ width: "65%" }}>สองร้อยห้าสิบบาทถ้วน</td>
+                  <td style={{ width: "70%" }}>สองร้อยห้าสิบบาทถ้วน</td>
                   <td style={{ width: "15%", textAlign: 'right' }}><p>ยอดรวมสุทธิ</p></td>
                   <td style={{ width: "20%", textAlign: 'center' }}><p>{data.amount}</p></td>
                 </tr>
@@ -169,7 +169,7 @@ const QuotationImage = (props: Props) => {
             </table>
           </div>
 
-          <p className="mt-3">ชำระเงินภายในวันที่ : xx/xx/xxxx</p>
+          {/* <p className="mt-3">ชำระเงินภายในวันที่ : xx/xx/xxxx</p> */}
 
           <div className="grid grid-col-2 grid-flow-col gap-4 my-16">
             <div className="text-center leading-7">
@@ -180,7 +180,7 @@ const QuotationImage = (props: Props) => {
             </div>
             <div className="text-center leading-6">
               <p className="">ลงชื่อ</p>
-              <img className="mx-auto mb-3 mt-6" src="/picture/logo.png" alt="" width={140} />
+              <p className="text-lg font-semibold mb-3 mt-6">{data.confirmQuotation}</p>
               <p>( {data.freelanceName} )</p>
               <p>วันที่ / Date : {getDateFormat(new Date())}</p>
             </div>
