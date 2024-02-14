@@ -10,7 +10,7 @@ const FreelanceReviewScore = () => {
             <div className="flex">
 
                 <div className={style.sideBar}>
-                    <ProfileSelectBar />
+                    <ProfileSelectBar activeMenu="" />
                 </div>
 
                 <div id="add_artwork" className={style.main}>
