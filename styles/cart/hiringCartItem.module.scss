@@ -46,6 +46,7 @@
         .information {
             display: flex;
             padding-left: 25px;
+            margin-top: 12px;
 
             .userImage {
                 height: 80px;
@@ -53,19 +54,20 @@
                 background-color: #F3C1A9;
                 border-radius: 10px;
                 border-color: #F3C1A9;
+                margin-top: 7px;
             }
 
             .detail {
                 margin-left: 20px;
-                margin-top: 10px;
 
                 .artworkName {
-                    font-size: 18px;
+                    font-size: larger;
                     font-weight: bolder;
+                    margin-bottom: 5px;
                 }
 
                 .description {
-                    font-size: 15px;
+                    font-size: small;
                     color: gray;
                 }
             }

@@ -1,3 +1,5 @@
+import { Quotation } from "./quotation";
+
 export interface Cart {
     email: string;
     name: string;
@@ -25,6 +27,12 @@ export interface Carts {
     freelanceId: string
     freelanceUsername: string
     cartItem: CartItem[]
+}
+
+export interface HiringCarts {
+    freelanceId: string
+    freelanceUsername: string
+    cartItem: Quotation[]
 }
 
 export interface ICartEdit {
