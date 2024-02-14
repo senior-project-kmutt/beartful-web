@@ -31,6 +31,17 @@ const ArtworkDetail = (props: Props) => {
   const [user, setUser] = useState<IUser>();
   let [quantity, setQuantity] = useState<number>(1)
   const { onCloseDetail } = props;
+  const [showFullScreen, setShowFullScreen] = useState(false);
+  const [imageFullScreen, setImageFullScreen] = useState("")
+
+  const handleImageClick = (image: string) => {
+    setImageFullScreen(image);
+    setShowFullScreen(true);
+  };
+
+  const handleCloseFullScreen = () => {
+    setShowFullScreen(false);
+  };
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || ""));
@@ -70,9 +81,26 @@ const ArtworkDetail = (props: Props) => {
       <div className={style.image_gallery}>
         <Carousel key={_id} theme={carouselTheme} indicators={true} slide={false}>
           {images.map((item, index) => {
-            return <img key={index} src={item} />;
+            return <img key={index} src={item} onClick={() => handleImageClick(item)} />
+
           })}
         </Carousel>
+        {showFullScreen && (
+          <div
+            className={`${style.fullscreen_overlay} active`}
+            onClick={handleCloseFullScreen}
+          >
+            <div className={style.fullscreen_image}>
+              {/* <Carousel key={_id} theme={carouselTheme} indicators={true} slide={false}> */}
+                <img
+                  className={style.image}
+                  src={imageFullScreen}
+                  alt="Full Screen"
+                />
+              {/* </Carousel> */}
+            </div>
+          </div>
+        )}
       </div>
       <div className={`${style.detail}`}>
         <div onClick={handleCloseDetail} className={`${style.close}`}><span className="cursor-pointer"> X </span></div>

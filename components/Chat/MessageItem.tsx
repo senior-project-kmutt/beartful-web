@@ -31,7 +31,15 @@ const MessageItem = (props: Props) => {
   const [user, setUser] = useState<IUser>();
   const [metaData, setMetaData] = useState<IMetaData>();
   const [isImage, setIsImage] = useState<boolean>(false);
+  const [showFullScreen, setShowFullScreen] = useState(false);
 
+  const handleImageClick = () => {
+    setShowFullScreen(true);
+  };
+
+  const handleCloseFullScreen = () => {
+    setShowFullScreen(false);
+  };
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || ""));
@@ -99,7 +107,7 @@ const MessageItem = (props: Props) => {
 
   const detectAndRenderLinks = (message: string) => {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
-  
+
     return message.split(urlRegex).map((part, index) => {
       return urlRegex.test(part) ? (
         <a className='underline text-sky-600' key={index} href={part} target="_blank" rel="noopener noreferrer">
@@ -127,8 +135,22 @@ const MessageItem = (props: Props) => {
             {isFileMessage ? (
               <div className='break-all'>
                 {isImage ? (
-                  <div>
-                    <img className={styles.image_message} src={item.message} alt="" />
+                  <div className={styles.image_message}>
+                    <img className={styles.image_message} src={item.message} alt="" onClick={handleImageClick} />
+                    {showFullScreen && (
+                      <div
+                        className={`${styles.fullscreen_overlay} active`}
+                        onClick={handleCloseFullScreen}
+                      >
+                        <div className={styles.fullscreen_image}>
+                          <img
+                            className={styles.image}
+                            src={item.message}
+                            alt="Full Screen"
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                 ) : (
