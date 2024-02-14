@@ -3,8 +3,10 @@ import { IncomingHttpHeaders } from 'http';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-export const get = <T>(path: string): Observable<T> => {
-  return from(Axios.get(path)).pipe(map(response => response as T));
+export const get = <T>(path: string, headers?: IncomingHttpHeaders): Observable<T> => {
+  return from(Axios.get(path, {
+    headers: headers || undefined
+  })).pipe(map(response => response as T));
 };
 
 export const post = <T>(path: string, data: any, headers?: IncomingHttpHeaders): Observable<T> => {

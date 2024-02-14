@@ -4,16 +4,38 @@ import style from "@/styles/profile/customer/purchase/customerPurchase.module.sc
 import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBar from "@/components/Profile/Customer/ProfileSelectBar";
 import PurchaseStatusBar from "../../Component/PurchaseStatusBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PurchaseItem from "../../Component/PurchaseItem";
+import { IPurchaseOrder } from "@/models/purchaseOrder";
+import { getCustomerPurchaseOrder } from "@/services/purchaseOrder/purchaseOrder.api";
+import { IUser } from "@/pages/chat";
+interface Props {
+    user: IUser
+}
+const CustomerPurchase = (props: Props) => {
+    const { user } = props
+    const [status, setStatus] = useState<string>('all')
+    const [order, setOrder] = useState<IPurchaseOrder[]>([])
+    useEffect(() => {
+        getOrderByStatus()
+    }, [status])
 
-const CustomerPurchase = () => {
-    const [status, setStatus] = useState<string>('ทั้งหมด')
+    const getOrderByStatus = async () => {
+        const token = localStorage.getItem("auth");
+
+        if (token) {
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            };
+            await getCustomerPurchaseOrder(user.id, status, headers).subscribe((res => {
+                setOrder(res.data as IPurchaseOrder[])
+            }))
+        }
+    }
     return (
         <>
             <NavBar />
             <div className="flex">
-
                 <div className={style.sideBar}>
                     <ProfileSelectBar />
                 </div>
@@ -21,12 +43,11 @@ const CustomerPurchase = () => {
                 <div id="add_artwork" className={style.main}>
                     <div>การซื้อและการจ้างของฉัน</div>
                     <PurchaseStatusBar role="customer" setStatus={setStatus} />
-                    <PurchaseItem />
-                    <PurchaseItem />
-                    <PurchaseItem />
-                    <PurchaseItem />
-                    <PurchaseItem />
-                    <PurchaseItem />
+                    {order.map((item, index) => {
+                        return (
+                            <PurchaseItem item={item} key={index} />
+                        )
+                    })}
                 </div>
             </div>
         </>

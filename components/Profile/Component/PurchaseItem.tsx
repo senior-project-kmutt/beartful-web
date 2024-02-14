@@ -3,13 +3,16 @@ import { faClipboardList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import ReviewModal from '../../Profile/Component/ReviewModal';
+import { IPurchaseOrder } from "@/models/purchaseOrder";
 
-const PurchaseItem = () => {
+interface Props {
+    item: IPurchaseOrder
+}
+const PurchaseItem = (props: Props) => {
+    const { item } = props
     const [isReviewModalOpen, setIsReviewModalOpen] = useState<boolean>(false);
-
     const openReviewModal = () => {
         setIsReviewModalOpen(!isReviewModalOpen)
-        console.log(isReviewModalOpen)
     }
 
     return (
@@ -27,8 +30,8 @@ const PurchaseItem = () => {
                 <img className={style.userImage} src="../../xxxx"></img>
                 <div className={style.detail}>
                     <p className={style.artworkName}>Artwork Name</p>
-                    <span className={style.packageName}>[  Package Name  ]</span><span className={style.amount}>x2</span>
-                    <p className={style.price}>XXX บาท</p>
+                    <span className={style.packageName}>[  Package Name  ]</span>
+                    <p className={style.price}>{item.netAmount} บาท</p>
                 </div>
                 <div className={style.confirm}>
                     <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>

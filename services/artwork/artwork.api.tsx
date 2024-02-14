@@ -1,6 +1,5 @@
 import { Observable } from "rxjs";
 import { deleteMethod, get, patch, post } from "../HttpClient";
-import { postPromise } from "../HttpClient";
 import { ArtworkFormData } from "@/components/Profile/Freelance/Artwork/ArtworkAddForm";
 import { IncomingHttpHeaders } from "http";
 
@@ -30,7 +29,7 @@ export const createArtwork = (body: ArtworkFormData, headers: IncomingHttpHeader
   return post(`/artwork`, body, headers);
 };
 
-export const deleteArtwork = (artworkId: string, headers:IncomingHttpHeaders) => {
+export const deleteArtwork = (artworkId: string, headers: IncomingHttpHeaders) => {
   return deleteMethod(`/artwork/${artworkId}`, headers)
 }
 
