@@ -6,15 +6,17 @@ import { useEffect, useState } from "react";
 import CartReadyMadeItem from "./CartReadyMadeItem";
 import CartHiringStatusBar from "./CartHiringStatusBar";
 import CartReadyMadeStatusBar from "./CartReadyMadeStatusBar";
-import { CartItem, Carts } from "@/models/cart";
+import { CartItem, Carts, HiringCarts } from "@/models/cart";
 import { getCart } from "@/services/cart/cart.api";
 import CartHiringItem from "./CartHiringItem";
 import { IUser } from "@/pages/chat";
 import { useRouter } from "next/router";
+import { getQuotationByCustomerId } from "@/services/quotation/quotation.api";
 
 const CustomerCart = () => {
     const [type, setType] = useState<string>('hired')
     const [cart, setCart] = useState<Carts[]>([])
+    const [hiringcart, setHiringCart] = useState<HiringCarts[]>([])
     const [user, setUser] = useState<IUser>();
     const [netAmount, setNetAmount] = useState<number>(0)
     const router = useRouter();
@@ -56,10 +58,18 @@ const CustomerCart = () => {
     };
 
     const getCarts = async (user: IUser) => {
+        const token = localStorage.getItem("auth");
+        const headers = {
+            Authorization: `Bearer ${token}`,
+          };
         await getCart(user.id, type).subscribe((res => {
             setNetAmount(sumTotalNetAmountForChecked(res.data as Carts[]))
             setCart(res.data as Carts[])
         }))
+
+        await getQuotationByCustomerId(user.id, headers).then(res => {
+            setHiringCart(res)
+        })
     }
 
     return (
@@ -75,7 +85,7 @@ const CustomerCart = () => {
                         <>
                             <div className={style.heading}>Cart: Hiring</div>
                             <CartHiringStatusBar />
-                            {cart.map((item, index) => {
+                            {hiringcart.map((item, index) => {
                                 return (
                                     <CartHiringItem item={item} key={index} />
                                 )

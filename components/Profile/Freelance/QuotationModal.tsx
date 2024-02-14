@@ -1,37 +1,44 @@
 import { Modal } from 'flowbite-react';
 import style from "@/styles/profile/freelance/quotationModal.module.scss";
 import { useForm } from 'react-hook-form';
-import { Artwork } from '@/models/artwork';
+import { useState } from 'react';
+import QuotationPreviewModal from './QuotationPreviewModal';
+import { Quotation } from '@/models/quotation';
 
 interface Props {
     openQuotationModal: () => void;
+    sendMessage: (message: string) => void
+    customerUsername: string;
+    freelanceUsername: string;
 }
 const QuotationModal = (props: Props) => {
-    const { openQuotationModal } = props
-    const { register, handleSubmit, formState: { errors } } = useForm<Artwork>();
+    const { openQuotationModal, sendMessage, customerUsername, freelanceUsername } = props;
+    const [isOpenPreviewModal, setIsOpenPreviewModal] = useState<boolean>(false);
+    const [quotationData, setQuotationData] = useState<Quotation>();
+    const { register, handleSubmit, formState: { errors } } = useForm<Quotation>();
 
     const onSubmit = handleSubmit(async (data) => {
-        // const token = localStorage.getItem("auth");
-        // if (token) {
-        //   if (inputFiles) {
-        //     imageUrl = await uploadFileToFirebase();
-        //   }
-
-        //   if (user) {
-        //     const artwork = { ...data, images: imageUrl };
-        //     const headers = {
-        //       Authorization: `Bearer ${token}`,
-        //     };
-
-        //     try {
-        //       await createArtwork(artwork, headers);
-        //     } catch (error) {
-        //       console.error("Error creating artwork:", error);
-        //     }
-        //   }
-        // }
-        console.log(data);
+        const quotationData = {
+            ...data,
+            quotationNumber: getQuotationNo(),
+            customerUsername: customerUsername,
+            freelanceUsername: freelanceUsername
+        }
+        setQuotationData(quotationData);
+        setIsOpenPreviewModal(true);
     });
+
+    const getQuotationNo = () => {
+        const dateTime = new Date();
+        const date = dateTime.getDate();
+        const month = dateTime.getMonth();
+        const year = dateTime.getFullYear();
+        const hours = dateTime.getHours();
+        const minutes = dateTime.getMinutes();
+        const milliSecond = dateTime.getMilliseconds();
+        return `BF-${year}${month}${date}${hours}${minutes}${milliSecond}`
+    }
+
     return (
         <Modal size={'3xl'} className={style.quotationModal} show={true}>
             <Modal.Header className={style.header}>
@@ -44,63 +51,63 @@ const QuotationModal = (props: Props) => {
                         <div className={style.formGrid}>
                             <div>
                                 <label>ชื่อลูกค้า</label>
-                                <input type='text' className={style.inputField} {...register("name")} />
+                                <input type='text' className={`${style.inputField} ${errors.customerName && `${style.error}`}`} {...register("customerName", { required: true })} />
                             </div>
 
                             <div>
                                 <label>ชื่อผู้ออก</label>
-                                <input type='text' className={style.inputField} {...register("type")} />
+                                <input type='text' className={`${style.inputField} ${errors.freelanceName && `${style.error}`}`} {...register("freelanceName", { required: true })} />
                             </div>
                         </div>
 
                         <div>
                             <label>ชื่องาน</label>
-                            <input type='text' className={style.inputField} {...register("type")} />
+                            <input type='text' className={`${style.inputField} ${errors.name && `${style.error}`}`} {...register("name", { required: true })} />
                         </div>
 
                         <label>สิ่งที่ต้องได้รับ</label>
-                        <input type='text' className={style.inputField} {...register("description")} />
+                        <input type='text' className={`${style.inputField} ${errors.benefits && `${style.error}`}`} {...register("benefits", { required: true })} />
 
                         <label>จำนวนการแก้ไข (ครั้ง)</label>
-                        <input type='number' className={style.inputField} {...register("price")} />
+                        <input type='number' className={`${style.inputField} ${errors.numberOfEdit && `${style.error}`}`} {...register("numberOfEdit", { required: true })} />
 
                         <div className={`${style.formGrid} ${style.custom_grid}`}>
                             <div>
                                 <label>วันเริ่มงาน</label>
-                                <input type='date' className={style.inputField} {...register("name")} />
+                                <input type='date' className={`${style.inputField} ${errors.startDate && `${style.error}`}`} {...register("startDate", { required: true })} />
                             </div>
 
                             <div>
                                 <label>วันมอบงาน</label>
-                                <input type='date' className={style.inputField} {...register("type")} />
+                                <input type='date' className={`${style.inputField} ${errors.endDate && `${style.error}`}`} {...register("endDate", { required: true })} />
                             </div>
 
                             <div>
                                 <label>จำนวน(วัน)</label>
-                                <input type='number' className={style.inputField} {...register("type")} />
+                                <input type='number' className={`${style.inputField} ${errors.day && `${style.error}`}`} {...register("day", { required: true })} />
                             </div>
                         </div>
 
                         <div className={style.formGrid}>
                             <div>
                                 <label>จำนวน(ชิ้น)</label>
-                                <input type='number' className={style.inputField} {...register("name")} />
+                                <input type='number' className={`${style.inputField} ${errors.quatity && `${style.error}`}`} {...register("quatity", { required: true })} />
                             </div>
 
                             <div>
                                 <label>ราคา(บาท)</label>
-                                <input type='number' className={style.inputField} {...register("type")} />
+                                <input type='number' className={`${style.inputField} ${errors.amount && `${style.error}`}`} {...register("amount", { required: true })} />
                             </div>
                         </div>
 
                         <label>ยืนยันการออกใบเสนอราคา</label>
-                        <input type='text' className={style.inputField} {...register("price")} placeholder='พิมพ์ชื่อเพื่อยืนยัน' />
+                        <input type='text' className={`${style.inputField} ${errors.confirmQuotation && `${style.error}`}`} {...register("confirmQuotation", { required: true })} placeholder='พิมพ์ชื่อเพื่อยืนยัน' />
 
                         <label>หมายเหตุเพิ่มเติม</label>
-                        <textarea rows={4} {...register("price")} placeholder='พิมพ์ชื่อเพื่อยืนยัน' />
+                        <textarea rows={4} {...register("note")} />
 
                         <div className={style.button_box}>
-                            <button className={style.createButton} onClick={() => onSubmit}>สร้าง</button>
+                            <button className={style.createButton} onClick={() => onSubmit}>ถัดไป</button>
                             <button className={style.cancelButton} onClick={() => openQuotationModal()}>
                                 ยกเลิก
                             </button>
@@ -109,6 +116,11 @@ const QuotationModal = (props: Props) => {
                     </form>
                 </div>
             </Modal.Body>
+            {(isOpenPreviewModal && quotationData) && (
+                <div>
+                    <QuotationPreviewModal setIsopenModal={setIsOpenPreviewModal} data={quotationData} sendMessage={sendMessage} openQuotationModal={openQuotationModal} />
+                </div>
+            )}
         </Modal>
     );
 };
