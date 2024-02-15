@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { createCart } from "@/services/cart/cart.api";
 import { IUser } from "@/pages/chat";
 import { ICartAdd } from "@/models/cart";
+import Swal from "sweetalert2";
 
 interface Props {
   item: Artwork;
@@ -71,7 +72,14 @@ const ArtworkDetail = (props: Props) => {
           Authorization: `Bearer ${token}`,
         };
         try {
-          await createCart(cart, headers);
+          await createCart(cart, headers).subscribe(res => {
+            Swal.fire({
+              icon: "success",
+              title: "เพิ่มสินค้าลงตะกร้าสำเร็จ",
+              showConfirmButton: false,
+              timer: 1500
+            })
+          });
         } catch (error) {
           console.error("Error create Cart:", error);
         }
@@ -122,16 +130,16 @@ const ArtworkDetail = (props: Props) => {
           <span className="text-primary3">{description}</span>
         </div>
         <div className={style.price}>
-          <span>{type == 'hired' ? 'เรทราคา :' : 'ราคา :'}</span>
+          <span>{type == 'hired' ? 'เรทราคา :' : 'ราคา'}</span>
           <span className={style.price_tag}>{price} บาท</span>
         </div>
         <div className={style.heart}>
-          <span>จำนวน</span>
+          <span>จำนวนที่ถูกใจ</span>
           <span className={style.heart_count}>{likeCount} ครั้ง</span>
         </div>
-        {type === 'readyMade' && <div className={style.quantity}>
-          <span>จำนวนที่ถูกใจ</span>
-          <span className={style.quantityControll}>
+        {(type === 'readyMade' && user?.role === 'customer') && <div className={style.quantity}>
+          {/* <span>จำนวนที่ถูกใจ</span> */}
+          {/* <span className={style.quantityControll}>
             <button onClick={() => setQuantity(quantity -= 1)}>-</button>
             <input
               type="number"
@@ -139,7 +147,7 @@ const ArtworkDetail = (props: Props) => {
               onChange={(event) => setQuantity(parseInt(event.target.value))}
             />
             <button onClick={() => setQuantity(quantity += 1)}>+</button>
-          </span>
+          </span> */}
           <button className={style.addToCart} onClick={handleAddToCart}>เพิ่มลงตะกร้า</button>
         </div>}
         <div className={style.profile}>

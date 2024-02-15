@@ -212,7 +212,9 @@
     }
 
     .quantity {
-        margin-top: 12px;
+        display: flex;
+        justify-content: end;
+        margin-top: 22px;
 
         .addToCart {
             width: 150px;
@@ -247,13 +249,18 @@
         }
 
         .addToCart {
+            // position: absolute;
             width: 150px;
-            position: absolute;
-            height: 30px;
+            height: 38px;
             border: 1px solid #E16428;
-            background-color: #E16428;
-            border-radius: 3px;
-            color: white;
+            background-color: #f9e0d467;
+            border-radius: 8px;
+            color: #E16428;
+            &:hover {
+                color: #FDFBFB;
+                background-color: #873C18;
+                border: 1px solid #873C18;
+            }
         }
     }
 
@@ -262,7 +269,7 @@
         width: 100%;
         display: flex;
         align-items: center;
-        margin: 2rem auto;
+        margin: 3rem auto;
 
         img {
             margin-right: 8px;
