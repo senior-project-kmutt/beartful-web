@@ -43,6 +43,7 @@ const CustomerPurchaseItem = (props: Props) => {
             {item.order.map((item, index) => {
                 return (
                     <div className={style.order} key={index}>
+                        {index != 0 && <div className={style.lineBreak}></div>}
                         <img className={style.userImage} src="../../xxxx"></img>
                         {item.purchaseOrder.type === 'hired' && <div className={style.detail}>
                             <p className={style.artworkName}>{item.quotation?.name}</p>
@@ -57,8 +58,8 @@ const CustomerPurchaseItem = (props: Props) => {
                             <p className={style.description}>{item.purchaseOrderItem?.description}</p>
                             <p className={style.price}>{item.purchaseOrder.netAmount} บาท</p>
                         </div>}
-                        <div className={style.confirm}>
-                            <div className={style.status}>{OrderStatusCustomerEnum[item.purchaseOrder.status as keyof typeof OrderStatusCustomerEnum]}</div>
+                        <div className={style.confirm} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '110px' : '60px' }} >
+                            <div className={style.status} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '-95px' : '-50px' }}>{OrderStatusCustomerEnum[item.purchaseOrder.status as keyof typeof OrderStatusCustomerEnum]}</div>
                             <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>
                             {item.purchaseOrder.status === 'success' && (
                                 <div>

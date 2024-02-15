@@ -84,11 +84,21 @@
     .order {
         display: flex;
         padding-left: 25px;
-        margin-top: 10px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+
+        .lineBreak {
+            position: absolute;
+            border-top: 1px solid #DED4CF;
+            margin-bottom: 50px;
+            height: 10px;
+            width: 73%;
+        }
 
         .userImage {
             height: 80px;
             width: 80px;
+            margin-top: 15px;
             background-color: #F3C1A9;
             border-radius: 10px;
             border-color: #F3C1A9;
@@ -96,6 +106,7 @@
 
         .detail {
             margin-left: 20px;
+            margin-top: 10px;
 
             .artworkName {
                 font-size: 18px;
@@ -124,13 +135,13 @@
             display: flex;
             position: absolute;
             right: 5%;
-            margin-top: 45px;
+            margin-top: 60px;
 
             .status {
                 color: #E16428;
                 position: absolute;
                 right: 5%;
-                top: -150%;
+                margin-top: -50px;
                 font-weight: bolder;
             }
 
