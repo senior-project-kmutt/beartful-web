@@ -22,6 +22,8 @@ export interface IPurchaseOrderItem {
     _id?: string
     purchaseOrderId: string
     artworkId: string
+    name: string
+    description: string
     price: number
     quantity: number
     createdAt?: Date

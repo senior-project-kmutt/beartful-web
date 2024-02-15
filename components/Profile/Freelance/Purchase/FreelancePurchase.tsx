@@ -5,7 +5,7 @@ import PurchaseStatusBar from "../../Component/PurchaseStatusBar";
 import { useEffect, useState } from "react";
 import { IUser } from "@/pages/chat";
 import { ICustomerPurchaseOrder, IFreelancePurchaseOrder, IPurchaseOrder } from "@/models/purchaseOrder";
-import { getFreelancePurchaseOrder } from "@/services/purchaseOrder/purchaseOrder.api";
+import { getFreelancePurchaseOrder, updatePurchaseOrderStatus } from "@/services/purchaseOrder/purchaseOrder.api";
 import FreelancePurchaseItem from "./FreelancePurchaseItem";
 import ProfileSelectBarFreelance from "../ProfileSelectBar";
 
@@ -31,6 +31,32 @@ const CustomerPurchase = (props: Props) => {
             await getFreelancePurchaseOrder(user.id, status, headers).subscribe((res => {
                 setOrder(res.data as IFreelancePurchaseOrder[])
             }))
+        }
+    }
+
+    const updateStatus = async (purchaseOrderId: string, status: string) => {
+        const token = localStorage.getItem("auth");
+        if (token) {
+            if (user) {
+                const headers = {
+                    Authorization: `Bearer ${token}`,
+                };
+                try {
+                    const updatedPurchaseOrder = order.map((item) => {
+                        const updatedOrders = item.order.map((i) => {
+                            if (i.purchaseOrder._id === purchaseOrderId) {
+                                return { ...i, purchaseOrder: { ...i.purchaseOrder, status: status } };
+                            }
+                            return i;
+                        });
+                        return { ...item, order: updatedOrders };
+                    });
+                    setOrder(updatedPurchaseOrder);
+                    await updatePurchaseOrderStatus(purchaseOrderId, status, headers);
+                } catch (error) {
+                    console.error("Error edit artwork:", error);
+                }
+            }
         }
     }
 
