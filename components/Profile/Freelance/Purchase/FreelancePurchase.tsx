@@ -74,7 +74,7 @@ const CustomerPurchase = (props: Props) => {
                     <PurchaseStatusBar role="freelance" setStatus={setStatus} />
                     {order.map((item, index) => {
                         return (
-                            <FreelancePurchaseItem item={item} key={index} />
+                            <FreelancePurchaseItem item={item} key={index} updateStatus={updateStatus} />
                         )
                     })}
                 </div>
