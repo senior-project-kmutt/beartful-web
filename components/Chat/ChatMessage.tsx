@@ -249,15 +249,17 @@ const ChatMessage = (props: Props) => {
 
         <div className={styles.input_warp}>
           <div className={styles.input_box}>
-            <Dropdown
-              arrowIcon={false}
-              inline
-              label={<FontAwesomeIcon className={styles.icon} icon={faCirclePlus} size='lg' />}
-            >
-              <Dropdown.Item onClick={openQuotationModal}>สร้างใบเสนอราคา</Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item >สร้างใบเสร็จ</Dropdown.Item>
-            </Dropdown>
+            {user?.role === 'freelance' && (
+              <Dropdown
+                arrowIcon={false}
+                inline
+                label={<FontAwesomeIcon className={styles.icon} icon={faCirclePlus} size='lg' />}
+              >
+                <Dropdown.Item onClick={openQuotationModal}>สร้างใบเสนอราคา</Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item >สร้างใบเสร็จ</Dropdown.Item>
+              </Dropdown>
+            )}
             <div className={styles.input_file}>
               <label htmlFor="file-input">
                 <FontAwesomeIcon className={styles.icon} icon={faPaperclip} size='lg' />

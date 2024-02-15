@@ -42,10 +42,12 @@ const NavBar = () => {
           ) : (
             <>
               <div className={style.menu}>
-                <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>
-                  <FontAwesomeIcon icon={faCartShopping} className={`${style.icon}`}></FontAwesomeIcon>
-                  <span className={`${style.count} absolute-4 top-0 right-24`}>15</span>
-                </Navbar.Link>
+                  {user.role === 'customer' && (
+                    <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>
+                      <FontAwesomeIcon icon={faCartShopping} className={`${style.icon}`}></FontAwesomeIcon>
+                      <span className={`${style.count} absolute-4 top-0 right-24`}>15</span>
+                    </Navbar.Link>
+                  )}
                 <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/chat`)}>
                   <FontAwesomeIcon icon={faMessage} className={style.icon}></FontAwesomeIcon>
                   <span className={`${style.count} absolute top-0 right-12`}>1</span>

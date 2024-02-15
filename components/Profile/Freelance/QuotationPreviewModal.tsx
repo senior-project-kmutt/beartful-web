@@ -15,7 +15,7 @@ interface Props {
 }
 const QuotationPreviewModal = (props: Props) => {
     const { setIsopenModal, data, sendMessage, openQuotationModal } = props
-    const messageForQuotation = `เราได้เพิ่มการจัดจ้างนี้ลงในตะกร้าของคุณแล้ว \n คุณสามารถตรวจสองเเละตกลงการจัดจ้าง/ยกเลิกได้ที่ตะกร้าของคุณ \n https://capstone23.sit.kmutt.ac.th/ssi1/cart/`
+    const messageForQuotation = `เราได้เพิ่มการจัดจ้างนี้ลงในตะกร้าของคุณแล้ว! \n คุณสามารถตรวจสอบเเละตกลงการจัดจ้าง/ยกเลิกได้ที่ตะกร้าของคุณ`
     const [quotationImage, setQuotationImage] = useState<File>();
 
     const onSubmit = async () => {
