@@ -236,14 +236,14 @@ const ChatMessage = (props: Props) => {
 
         {isQuotationModalOpen &&
           <>
-          {(selectedChatRoom?.participants[0].username && user?.username)  && (
-            <QuotationModal
-            openQuotationModal={openQuotationModal}
-            sendMessage={submitSend}
-            customerUsername={selectedChatRoom?.participants[0].username}
-            freelanceUsername={user?.username}
-          />
-          )}
+            {(selectedChatRoom?.participants[0].username && user?.username) && (
+              <QuotationModal
+                openQuotationModal={openQuotationModal}
+                sendMessage={submitSend}
+                customerUsername={selectedChatRoom?.participants[0].username}
+                freelanceId={user?.id}
+              />
+            )}
           </>
         }
 

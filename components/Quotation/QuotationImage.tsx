@@ -1,10 +1,10 @@
 import style from "@/styles/quotation/quotation.module.scss"
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import html2canvas from 'html2canvas';
-import { Quotation } from "@/models/quotation";
+import { CreateQuotation } from "@/models/quotation";
 
 interface Props {
-  data: Quotation;
+  data: CreateQuotation;
   saveImageData?: Dispatch<SetStateAction<File | undefined>>;
 }
 

@@ -3,29 +3,29 @@ import style from "@/styles/profile/freelance/quotationModal.module.scss";
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import QuotationPreviewModal from './QuotationPreviewModal';
-import { Quotation } from '@/models/quotation';
+import { CreateQuotation, Quotation } from '@/models/quotation';
 
 interface Props {
     openQuotationModal: () => void;
     sendMessage: (message: string) => void
     customerUsername: string;
-    freelanceUsername: string;
+    freelanceId: string;
 }
 const QuotationModal = (props: Props) => {
-    const { openQuotationModal, sendMessage, customerUsername, freelanceUsername } = props;
+    const { openQuotationModal, sendMessage, customerUsername, freelanceId } = props;
     const [isOpenPreviewModal, setIsOpenPreviewModal] = useState<boolean>(false);
-    const [quotationData, setQuotationData] = useState<Quotation>();
+    const [quotationData, setQuotationData] = useState<CreateQuotation>();
     const { register, handleSubmit, formState: { errors } } = useForm<Quotation>();
 
     const onSubmit = handleSubmit(async (data) => {
-        const quotationData = {
+        const quotationDataTransform = {
             ...data,
             quotationNumber: getQuotationNo(),
             customerUsername: customerUsername,
-            freelanceUsername: freelanceUsername,
+            freelanceId: freelanceId,
             status: 'inCart'
         }
-        setQuotationData(quotationData);
+        setQuotationData(quotationDataTransform);
         setIsOpenPreviewModal(true);
     });
 

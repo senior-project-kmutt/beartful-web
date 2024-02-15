@@ -1,4 +1,4 @@
-import ReviewCartOrder from "@/components/Cart/ReviewCartOrder";
+import ReviewCartOrder from "@/components/Cart/ReviewCartOrderOldVersion";
 
 const ReviewOrder = () => {
 

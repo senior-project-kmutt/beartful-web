@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { deleteMethod, get, patch, post } from "../HttpClient";
+import { deleteMethod, get, getPromise, patch, post } from "../HttpClient";
 import { IncomingHttpHeaders } from "http";
 import { ICartAdd, ICartEdit } from "@/models/cart";
 
@@ -10,6 +10,10 @@ export const createCart = (body: ICartAdd, headers: IncomingHttpHeaders): Observ
 export const getCart = (userId: string, type: string): Observable<any> => {
     const typeParam = type ? `?type=${type}` : '';
     return get(`/user/${userId}/carts${typeParam}`);
+};
+
+export const getCartById = (cartId: string, headers: IncomingHttpHeaders): Promise<any> => {
+    return getPromise(`/carts/${cartId}`, headers);
 };
 
 export const getReviewOrderCart = (userId: string, type: string): Observable<any> => {

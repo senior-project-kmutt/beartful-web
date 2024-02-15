@@ -2,7 +2,7 @@ import { Modal } from 'flowbite-react';
 import style from "@/styles/profile/freelance/quotationPreviewModal.module.scss";
 import { Dispatch, SetStateAction, useState } from 'react';
 import QuotationImage from '@/components/Quotation/QuotationImage';
-import { Quotation } from '@/models/quotation';
+import { CreateQuotation } from '@/models/quotation';
 import { uploadFileToFirebase } from '@/services/firebase/firebase-api';
 import { createQuotation } from '@/services/quotation/quotation.api';
 import Swal from 'sweetalert2';
@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 interface Props {
     setIsopenModal: Dispatch<SetStateAction<boolean>>
     openQuotationModal: () => void;
-    data: Quotation;
+    data: CreateQuotation;
     sendMessage: (message: string) => void
 }
 const QuotationPreviewModal = (props: Props) => {
@@ -24,12 +24,15 @@ const QuotationPreviewModal = (props: Props) => {
             const headers = {
                 Authorization: `Bearer ${token}`,
             };
-            createQuotation(data, headers).then(async (res) => {
+            const newDataTransform = {
+                ...data,
+            } as CreateQuotation
+            createQuotation(newDataTransform, headers).then(async (res) => {
                 Swal.fire({
                     icon: "success",
                     title: "สร้างบัญชีสำเร็จ",
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 3000
                 })
                 const imageUrls = await uploadFileToFirebase([quotationImage], `user/quotation`, quotationImage.name);
                 sendMessage(imageUrls[0]);

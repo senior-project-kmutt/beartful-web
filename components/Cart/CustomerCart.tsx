@@ -3,9 +3,8 @@ import style from "@/styles/cart/cart.module.scss"
 import NavBar from "../Layout/NavBar";
 import CartSelectBar from "./CartSelectBar";
 import { useEffect, useState } from "react";
-import CartReadyMadeItem from "./CartReadyMadeItem";
+import CartReadyMade from "./CartReadyMade";
 import CartHiringStatusBar from "./CartHiringStatusBar";
-import CartReadyMadeStatusBar from "./CartReadyMadeStatusBar";
 import { CartItem, Carts, HiringCarts } from "@/models/cart";
 import { getCart } from "@/services/cart/cart.api";
 import CartHiringItem from "./CartHiringItem";
@@ -95,19 +94,20 @@ const CustomerCart = () => {
                     {type === 'readyMade' && (
                         <>
                             <div className={style.heading}>Cart: Ready Made</div>
-                            <CartReadyMadeStatusBar />
-                            <div className="overflow-y-scroll h-[56%] mt-2 rounded-t-lg">
+                            {/* <CartReadyMadeStatusBar /> */}
+                            <CartHiringStatusBar />
+                            <div className=" mt-2 rounded-t-lg">
                                 {cart.map((item, index) => {
                                     return (
-                                        <CartReadyMadeItem data={item} key={index} updateCartWhenItemUpdated={updateCartWhenItemUpdated} />
+                                        <CartReadyMade item={item} key={index} />
                                     )
                                 })}</div>
-                            <div className={style.order}>
+                            {/* <div className={style.order}>
                                 <div>
                                     <span className={style.price}>ราคารวมทั้งหมด {netAmount} บาท</span>
                                     <button onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart/review-order`)}>จัดจ้าง</button>
                                 </div>
-                            </div>
+                            </div> */}
                         </>
                     )}
                 </div>

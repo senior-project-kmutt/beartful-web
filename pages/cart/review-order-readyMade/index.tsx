@@ -1,55 +1,45 @@
-import { Quotation } from "@/models/quotation";
-import { getQuotationById } from "@/services/quotation/quotation.api";
+
 import { useEffect, useState } from "react";
 import NavBar from "@/components/Layout/NavBar";
 import ReviewCartOrder from "@/components/Cart/ReviewCartOrder";
-import { IUser } from "@/pages/chat";
+import { CartItem } from "@/models/cart";
+import { getCartById } from "@/services/cart/cart.api";
 import { ICreatePurchaseOrder } from "@/models/purchaseOrder";
-import { createPurchaseOrder } from "@/services/purchaseOrder/purchaseOrder.api";
-import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import { OrderStatus } from "@/enums/orders";
+import { createPurchaseOrder } from "@/services/purchaseOrder/purchaseOrder.api";
+import Swal from "sweetalert2";
 
 const ReviewOrderHiring = () => {
-  const [quotationId, setQuotationId] = useState<string>('');
-  const [quotationItem, setQuotationItem] = useState<Quotation>()
-  const [user, setUser] = useState<IUser>();
+  const [cartItemId, setCartItemId] = useState<string>('');
+  const [cartItem, setCartItem] = useState<CartItem>();
   const router = useRouter();
-
-  useEffect(() => {
-    const userSession = localStorage.getItem('user')
-    if (userSession && userSession !== "undefined") {
-      const user = JSON.parse(userSession);
-      setUser(user)
-    }
-  }, []);
   
   useEffect(() => {
     const urlSearchString = window.location.search;
     const params = new URLSearchParams(urlSearchString);
     const item = params.get('item');
-    setQuotationId(item || '')
+    setCartItemId(item || '')
   }, []);
 
   useEffect(() => {
     const urlSearchString = window.location.search;
     const params = new URLSearchParams(urlSearchString);
     const item = params.get('item');
-    setQuotationId(item || '')
+    setCartItemId(item || '')
 
-    if (quotationId) {
+    if (cartItemId) {
       const token = localStorage.getItem("auth");
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      getQuotationById(quotationId, headers).then(res => {
-        setQuotationItem(res)
+      getCartById(cartItemId, headers).then(res => {
+        setCartItem(res)
       })
-
     }
-  }, [quotationId]);
+  }, [cartItemId]);
 
-  const createOrderPurchase = (data: Quotation) => {
+  const createOrderPurchase = (data: CartItem) => {
     const token = localStorage.getItem("auth");
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -58,16 +48,18 @@ const ReviewOrderHiring = () => {
       purchaseOrder: {
         freelanceId: data.freelanceId,
         customerId: data.customerId,
-        quotationId: data._id,
         status: 'pending',
         amount: data.amount,
         vat: 0,
-        netAmount: data.amount,
+        netAmount: data.netAmount,
         paymentMethod: 'promptpay',
         note: 'This is note',
-        type: OrderStatus.hired
-      }
+        type: OrderStatus.readyMade
+      },
+      artworkItem: data.artworkId
+
     } as ICreatePurchaseOrder
+    console.log(purchaseOrderData, "?????");
     createPurchaseOrder(purchaseOrderData, headers).then(res => {
       Swal.fire({
         icon: "success",
@@ -76,17 +68,19 @@ const ReviewOrderHiring = () => {
         timer: 1500
       }).then((result) => {
         if (result.isConfirmed || result.isDismissed) {
-          router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`)
+          router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase/`)
         }
       });
     })
   }
 
+  console.log(cartItem);
+
   return (
     <div>
       <NavBar />
-      {quotationItem && (
-        <ReviewCartOrder data={quotationItem} type={OrderStatus.hired} createOrderPurchase={createOrderPurchase} />
+      {cartItem && (
+        <ReviewCartOrder data={cartItem} type={OrderStatus.readyMade} createOrderPurchase={createOrderPurchase} />
       )}
     </div>
   );
