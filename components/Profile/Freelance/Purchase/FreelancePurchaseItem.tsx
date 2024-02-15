@@ -1,15 +1,15 @@
 import style from "@/styles/profile/purchase.module.scss"
 import { faClipboardList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import { IFreelancePurchaseOrder } from "@/models/purchaseOrder";
 import { OrderStatusFreelanceEnum } from "@/enums/orders";
 
 interface Props {
     item: IFreelancePurchaseOrder
+    updateStatus: (purchaseOrderId: string, status: string) => void
 }
 const FreelancePurchaseItem = (props: Props) => {
-    const { item } = props
+    const { item, updateStatus } = props
 
     const getDateFormat = (dateTime: Date | undefined) => {
         if (dateTime) {
@@ -54,7 +54,7 @@ const FreelancePurchaseItem = (props: Props) => {
                             <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>
                             {item.purchaseOrder.status === 'pending' && (
                                 <div>
-                                    <button className={style.confirmButton}>ฉันได้ส่งมอบงานแล้ว</button>
+                                    <button className={style.confirmButton} onClick={() => updateStatus(item.purchaseOrder._id!, "delivered")}>ฉันได้ส่งมอบงานแล้ว</button>
                                 </div>
                             )}
                             {item.purchaseOrder.status === 'delivered' && (
