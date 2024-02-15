@@ -6,6 +6,7 @@ import UserSideBar from "./UserSideBar";
 import style from "@/styles/user/freelanceArtwork.module.scss"
 import { FreelanceUsers } from "@/models/users";
 import { getUserByUsername } from "@/services/user/user.api";
+import FreelanceReviewList from "../Profile/Freelance/Review/FreelanceReviewList";
 
 interface Props {
     username: string;
@@ -26,11 +27,11 @@ const FreelanceArtwork = (props: Props) => {
     return (
         <>
             <NavBar />
-            <div className="flex mt-8">
-                <div className="" style={{width: "10%"}}>
+            <div className="flex mt-8 mx-5">
+                <div className="" style={{ width: "14%" }}>
                     <UserSideBar type={type} setType={setType} />
                 </div>
-                <div style={{width: "90%"}}>
+                <div style={{ width: "86%" }}>
                     <div className={style.profileDescription}>
                         <div className={style.profile}>
                             <img src={freelance?.profileImage} />
@@ -43,7 +44,12 @@ const FreelanceArtwork = (props: Props) => {
                     </div>
                     {(type == 'hired' || type == 'readyMade' || type == '') && <ArtworkList from="freelance" type={type} username={props.username} />}
                     {/* {(type == 'Package&Price') && <div>Package&Price</div>} */}
-                    {(type == 'Review') && <div>Review</div>}
+                    {(type == 'Review') && (
+                        <div style={{ width: "96%" }}>
+                            <FreelanceReviewList title='Review' />
+                        </div>
+                    )
+                    }
                 </div>
 
             </div>
