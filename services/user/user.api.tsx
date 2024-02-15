@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { getPromise, patchPromise, post } from "../HttpClient";
+import { get, getPromise, patchPromise, post } from "../HttpClient";
 import { LoginUser, Users } from "@/models/users";
 import { IncomingHttpHeaders } from "http";
 
@@ -17,6 +17,11 @@ export const login = (user: LoginUser): Observable<void> => {
 export const getUserById = (userId: string, headers: IncomingHttpHeaders): Promise<any> => {
   const url = `/user/${userId}`;
   return getPromise(url, headers);
+};
+
+export const getUserByIdNotAuthen = (userId: string): Observable<any> => {
+  const url = `/user/freelanceInfo/${userId}`;
+  return get(url);
 };
 
 export const getChatRoomByUserId = (userId: string, headers: IncomingHttpHeaders): Promise<any> => {

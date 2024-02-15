@@ -1,6 +1,6 @@
 export interface Artwork {
     _id: string
-    freelanceId: number
+    freelanceId: string
     images: Array<string>
     name: string
     description: string

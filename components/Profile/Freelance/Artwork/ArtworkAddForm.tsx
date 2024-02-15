@@ -25,13 +25,13 @@ export type ArtworkFormData = {
   categoryId: string[];
 };
 
-interface Props{
+interface Props {
   user: IUser | undefined
 }
 
 const ArtworkForm = (props: Props) => {
   const { register, handleSubmit, formState: { errors } } = useForm<ArtworkFormData>();
-  const {user}= props
+  const { user } = props
   const [categories, setCategories] = useState<Category[]>([]);
   const [inputFiles, setInputFiles] = useState<File[]>([]);
   const [imageSrc, setImageSrc] = useState<string[] | ArrayBuffer[] | null>([]);
@@ -44,18 +44,19 @@ const ArtworkForm = (props: Props) => {
   }, [])
 
   const uploadFileToFirebase = async () => {
-    const imagesUrl: String[] = []
+    const imagesUrl: string[] = [];
     const storage = getStorage();
-    await Promise.all(
-      inputFiles.map(async (file) => {
-        const storageRef = ref(storage, `artwork/${user?.username}/${file.name}`);
-        const snapshot = await uploadBytesResumable(storageRef, file);
-        const downloadURL = await getDownloadURL(snapshot.ref);
-        imagesUrl.push(downloadURL);
-      })
-    );
+
+    for (let i = 0; i < inputFiles.length; i++) {
+      const file = inputFiles[i];
+      const storageRef = ref(storage, `artwork/${user?.username}/${file.name}`);
+      const snapshot = await uploadBytesResumable(storageRef, file);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      imagesUrl.push(downloadURL);
+    }
+
     return imagesUrl;
-  }
+  };
 
 
   const handleFileChange = (e: any) => {
