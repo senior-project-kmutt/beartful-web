@@ -1,7 +1,7 @@
 import style from "@/styles/profile/purchase.module.scss"
 import { faClipboardList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReviewModal from "../../Component/ReviewModal";
 import { IFreelancePurchaseOrder, IPurchaseOrder } from "@/models/purchaseOrder";
 import { OrderStatusFreelanceEnum } from "@/enums/orders";
@@ -38,7 +38,8 @@ const FreelancePurchaseItem = (props: Props) => {
             </div>
             {item.order.map((item, index) => {
                 return (
-                    <div className={style.order} key={index}>
+                    <div className={`${style.order}`} key={index}>
+                        {index != 0 && <div className={style.lineBreak}></div>}
                         <img className={style.userImage} src="../../xxxx"></img>
                         {item.purchaseOrder.type === 'hired' && <div className={style.detail}>
                             <p className={style.artworkName}>{item.quotation?.name}</p>
@@ -53,8 +54,8 @@ const FreelancePurchaseItem = (props: Props) => {
                             <p className={style.description}>{item.purchaseOrderItem?.description}</p>
                             <p className={style.price}>{item.purchaseOrder.netAmount} บาท</p>
                         </div>}
-                        <div className={style.confirm}>
-                            <div className={style.status}>{OrderStatusFreelanceEnum[item.purchaseOrder.status as keyof typeof OrderStatusFreelanceEnum]}</div>
+                        <div className={style.confirm} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '110px' : '60px' }} >
+                            <div className={style.status} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '-95px' : '-50px' }}>{OrderStatusFreelanceEnum[item.purchaseOrder.status as keyof typeof OrderStatusFreelanceEnum]}</div>
                             <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>
                             {item.purchaseOrder.status === 'success' && (
                                 <div>
