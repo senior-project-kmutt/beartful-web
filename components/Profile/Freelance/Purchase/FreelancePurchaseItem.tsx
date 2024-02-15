@@ -2,8 +2,7 @@ import style from "@/styles/profile/purchase.module.scss"
 import { faClipboardList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import ReviewModal from "../../Component/ReviewModal";
-import { IFreelancePurchaseOrder, IPurchaseOrder } from "@/models/purchaseOrder";
+import { IFreelancePurchaseOrder } from "@/models/purchaseOrder";
 import { OrderStatusFreelanceEnum } from "@/enums/orders";
 
 interface Props {
@@ -11,10 +10,6 @@ interface Props {
 }
 const FreelancePurchaseItem = (props: Props) => {
     const { item } = props
-    const [isReviewModalOpen, setIsReviewModalOpen] = useState<boolean>(false);
-    const openReviewModal = () => {
-        setIsReviewModalOpen(!isReviewModalOpen)
-    }
 
     const getDateFormat = (dateTime: Date | undefined) => {
         if (dateTime) {
@@ -57,21 +52,15 @@ const FreelancePurchaseItem = (props: Props) => {
                         <div className={style.confirm} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '110px' : '60px' }} >
                             <div className={style.status} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '-95px' : '-50px' }}>{OrderStatusFreelanceEnum[item.purchaseOrder.status as keyof typeof OrderStatusFreelanceEnum]}</div>
                             <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>
-                            {item.purchaseOrder.status === 'success' && (
-                                <div>
-                                    <button className={style.disableConfirmButton}>ฉันได้ตรวจสอบและยอมรับงาน</button>
-                                    <button className={style.disabletoReviewButton}>ให้คะแนน</button>
-                                </div>
-                            )}
                             {item.purchaseOrder.status === 'pending' && (
                                 <div>
-                                    <button className={style.confirmButton}>ฉันได้ตรวจสอบและยอมรับงาน</button>
-                                    {isReviewModalOpen && <ReviewModal openReviewModal={openReviewModal} />}
-                                    <button className={style.toReviewButton} onClick={openReviewModal}>ให้คะแนน</button>
+                                    <button className={style.confirmButton}>ฉันได้ส่งมอบงานแล้ว</button>
                                 </div>
                             )}
-                            {item.purchaseOrder.status === 'cancelled' && (
-                                <div><button className={style.disabletoReviewButton}>ยกเลิกแล้ว</button></div>
+                            {item.purchaseOrder.status === 'delivered' && (
+                                <div>
+                                    <button className={style.disableConfirmButton}>ฉันได้ส่งมอบงานแล้ว</button>
+                                </div>
                             )}
                         </div>
                     </div>

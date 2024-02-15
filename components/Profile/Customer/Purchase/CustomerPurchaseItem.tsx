@@ -63,19 +63,21 @@ const CustomerPurchaseItem = (props: Props) => {
                             <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>
                             {item.purchaseOrder.status === 'success' && (
                                 <div>
-                                    <button className={style.disableConfirmButton}>ฉันได้ตรวจสอบและยอมรับงาน</button>
-                                    <button className={style.disabletoReviewButton}>ให้คะแนน</button>
-                                </div>
-                            )}
-                            {item.purchaseOrder.status === 'pending' && (
-                                <div>
-                                    <button className={style.confirmButton} onClick={() => updateStatus(item.purchaseOrder._id!, "success")}>ฉันได้ตรวจสอบและยอมรับงาน</button>
                                     {isReviewModalOpen && <ReviewModal openReviewModal={openReviewModal} />}
                                     <button className={style.toReviewButton} onClick={openReviewModal}>ให้คะแนน</button>
                                 </div>
                             )}
-                            {item.purchaseOrder.status === 'cancelled' && (
-                                <div><button className={style.disabletoReviewButton}>ยกเลิกแล้ว</button></div>
+                            {item.purchaseOrder.status === 'pending' && (
+                                <div>
+                                    <button className={style.disableConfirmButton}>ฉันได้ตรวจสอบและยอมรับงาน</button>
+                                    <button className={style.disabletoReviewButton}>ให้คะแนน</button>
+                                </div>
+                            )}
+                            {item.purchaseOrder.status === 'delivered' && (
+                                <div>
+                                    <button className={style.confirmButton} onClick={() => updateStatus(item.purchaseOrder._id!, "success")}>ฉันได้ตรวจสอบและยอมรับงาน</button>
+                                    <button className={style.disabletoReviewButton}>ให้คะแนน</button>
+                                </div>
                             )}
                         </div>
                     </div>
