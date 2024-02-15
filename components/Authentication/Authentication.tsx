@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Router, { useRouter } from 'next/router';
 import Swal from 'sweetalert2'
 import Register from "./Register";
+import { LOGO_IMAGE } from "@/config/constants";
 
 interface formDataType {
   [key: string]: any;
@@ -73,7 +74,7 @@ const Authentication = () => {
   return (
     <div>
       <Link href="/">
-        <img src="/ssi1/picture/logo.png" className="h-4 sm:h-6 ml-6 mt-6" alt="Beartful Logo" />
+        <img src={LOGO_IMAGE} className="h-4 sm:h-6 ml-6 mt-6" alt="Beartful Logo" />
       </Link>
       <div className={style.main}>
       <div>

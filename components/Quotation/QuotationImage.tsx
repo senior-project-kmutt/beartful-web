@@ -2,6 +2,7 @@ import style from "@/styles/quotation/quotation.module.scss"
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import html2canvas from 'html2canvas';
 import { CreateQuotation } from "@/models/quotation";
+import { LOGO_IMAGE } from "@/config/constants";
 
 interface Props {
   data: CreateQuotation;
@@ -78,7 +79,7 @@ const QuotationImage = (props: Props) => {
           </div>
           <div></div>
           <div className="mt-5">
-            <img src="/picture/logo.png" alt="" width={180} />
+            <img src={LOGO_IMAGE} alt="" width={180} />
           </div>
         </div>
 

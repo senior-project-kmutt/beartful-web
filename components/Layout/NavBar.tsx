@@ -6,6 +6,7 @@ import { faCartShopping, faMessage, faBell, faPalette } from '@fortawesome/free-
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Users } from '@/models/users';
+import { LOGO_IMAGE } from '@/config/constants';
 
 const NavBar = () => {
   const router = useRouter();
@@ -30,7 +31,7 @@ const NavBar = () => {
     <>
       <Navbar className="space-x-6 h-8 sm:h-12" fluid rounded>
         <Navbar.Brand as={Link} href="/">
-          <img src="/ssi1/picture/logo.png" className="h-4 sm:h-6 ml-4" alt="Beartful Logo" />
+          <img src={LOGO_IMAGE} className="h-4 sm:h-6 ml-4" alt="Beartful Logo" />
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>

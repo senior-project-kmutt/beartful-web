@@ -1,4 +1,5 @@
 
+import { READYMADE_IMAGE } from "@/config/constants";
 import { CartItem } from "@/models/cart";
 import { deleteCartById } from "@/services/cart/cart.api";
 import style from "@/styles/cart/hiringCartItem.module.scss"
@@ -50,7 +51,7 @@ const CartReadyMadeItem = (props: Props) => {
         <div className={style.cartItem}>
             <div className={style.formGrid}>
                 <div className={style.information}>
-                    <img className={style.userImage} src="../../xxxx"></img>
+                    <img className={style.userImage} src={READYMADE_IMAGE}></img>
                     <div className={style.detail}>
                         <p className={style.artworkName}>{item.artworkName}</p>
                         <p className={style.description}>{item.description}</p>

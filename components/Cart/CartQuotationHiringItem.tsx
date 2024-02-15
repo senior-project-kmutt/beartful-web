@@ -1,4 +1,5 @@
 
+import { HIRED_IMAGE } from "@/config/constants";
 import { Quotation } from "@/models/quotation";
 import { deleteQuotationById } from "@/services/quotation/quotation.api";
 import style from "@/styles/cart/hiringCartItem.module.scss"
@@ -59,7 +60,7 @@ const CartQuotationHiringItem = (props: Props) => {
         <div className={style.cartItem}>
             <div className={style.formGrid}>
                 <div className={style.information}>
-                    <img className={style.userImage} src="../../xxxx"></img>
+                    <img className={style.userImage} src={HIRED_IMAGE}></img>
                     <div className={style.detail}>
                         <p className={style.artworkName}>{item.name}</p>
                         <p className={style.description}>เลขที่ : {item.quotationNumber}</p>

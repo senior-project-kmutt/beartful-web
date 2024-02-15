@@ -5,6 +5,7 @@ import { Quotation } from "@/models/quotation";
 import { useRouter } from "next/router";
 import { CartItem } from "@/models/cart";
 import { OrderStatus } from "@/enums/orders";
+import { HIRED_IMAGE, READYMADE_IMAGE } from "@/config/constants";
 
 interface Props {
   data: Quotation | CartItem
@@ -14,6 +15,7 @@ interface Props {
 
 const ReviewCartOrder = (props: Props) => {
   const { data, type, createOrderPurchase } = props;
+  const imgItem = type === OrderStatus.hired ? HIRED_IMAGE : READYMADE_IMAGE
   const router = useRouter()
 
   const getDateFormat = (dateTime: Date) => {
@@ -37,7 +39,7 @@ const ReviewCartOrder = (props: Props) => {
               </div>
               <div className={style.formGrid}>
                 <div className={style.information}>
-                  <img className={style.userImage} src="../../xxxx"></img>
+                  <img className={style.userImage} src={imgItem}></img>
                   {type === OrderStatus.hired && (
                     <div className={style.detail}>
                       <p className={style.artworkName}>{(data as Quotation).name}</p>
