@@ -95,7 +95,7 @@ const PersonalUpdateForm = () => {
     if (user) {
       let isValid: boolean = true;
       const newErrorMessage: formDataType = {};
-      const submitDataForm = {...formPersonal};
+      const submitDataForm = { ...formPersonal };
 
       // if (user?.role === 'customer') {
       //   requiredFieldsCustomer.forEach(key => {
@@ -138,7 +138,6 @@ const PersonalUpdateForm = () => {
           const imageUrls = await uploadFileToFirebase([profileImageFile], `user/profile-image`, user?.username);
           submitDataForm['profileImage'] = imageUrls[0]
         }
-        console.log(submitDataForm);
         const headers = getHeaderRequest();
         updatePersonal(user?.id, submitDataForm, headers).then((res) => {
           getFreelanceDetailsInfo();
@@ -187,9 +186,9 @@ const PersonalUpdateForm = () => {
             <div className={style.form_container}>
               <div className={style.input_box}>
                 <div className="mt-8">
-                  <p>ชื่อผู้ใช้งาน<span className="ml-4 font-semibold">{user?.username}</span></p>
+                  <p>ชื่อผู้ใช้งาน<span className="ml-4 font-bold text-lg">{user?.username}</span></p>
                 </div>
-                <div className='grid grid-cols-2 gap-4 my-6'>
+                <div className='grid grid-cols-2 gap-6 my-6'>
                   <div className={style.each_field}>
                     <label htmlFor="">
                       <span>ชื่อ</span>
@@ -244,6 +243,7 @@ const PersonalUpdateForm = () => {
                         type="text"
                         name="phoneNumber"
                         id="phoneNumber"
+                        maxLength={10}
                         value={formPersonal.phoneNumber}
                         onChange={(e) => handleInputChange(e)}
                       />
@@ -251,63 +251,65 @@ const PersonalUpdateForm = () => {
                     </div>
                   </div>
                 </div>
-                <div>
-                  <div className={style.dateOfBirth}>
-                    <div className="mr-6">วัน เดือน ปี</div>
-                    <div className={style.date}>
-                      <select
-                        onChange={(e) => handleInputChange(e)}
-                        value={formPersonal.date}
-                        id="date"
-                        name="date"
-                      >
-                        {generateOptions(1, 31)}
-                      </select>
-                    </div>
-                    <div className={style.month}>
-                      <select
-                        onChange={(e) => handleInputChange(e)}
-                        value={formPersonal.month}
-                        id="month"
-                        name="month"
-                      >
-                        {thaiMonths.map((month, index) => {
-                          return (
-                            <option key={index} value={index}>{month}</option>
-                          )
-                        })}
-                      </select>
-                    </div>
-                    <div className={style.year}>
-                      <select
-                        onChange={(e) => handleInputChange(e)}
-                        value={formPersonal.year}
-                        id="year"
-                        name="year"
-                      >
-                        {generateOptions(2460, 2549)}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  {/* <label htmlFor=""> */}
-                  <div className={style.each_field}>
-                    <p className="mr-5">ที่อยู่ปัจจุบัน</p>
+                {user?.role === 'freelance' && (
+                  <>
                     <div>
-                      <textarea
-                        name="address"
-                        id="address"
-                        cols={50}
-                        rows={8}
-                        value={formPersonal.address}
-                        onChange={(e) => handleInputChange(e)}
-                      ></textarea>
-                      <p className={style.error}>{errorMessage.address}</p>
+                      <div className={style.dateOfBirth}>
+                        <div className="mr-6">วัน เดือน ปี</div>
+                        <div className={style.date}>
+                          <select
+                            onChange={(e) => handleInputChange(e)}
+                            value={formPersonal.date}
+                            id="date"
+                            name="date"
+                          >
+                            {generateOptions(1, 31)}
+                          </select>
+                        </div>
+                        <div className={style.month}>
+                          <select
+                            onChange={(e) => handleInputChange(e)}
+                            value={formPersonal.month}
+                            id="month"
+                            name="month"
+                          >
+                            {thaiMonths.map((month, index) => {
+                              return (
+                                <option key={index} value={index}>{month}</option>
+                              )
+                            })}
+                          </select>
+                        </div>
+                        <div className={style.year}>
+                          <select
+                            onChange={(e) => handleInputChange(e)}
+                            value={formPersonal.year}
+                            id="year"
+                            name="year"
+                          >
+                            {generateOptions(2460, 2549)}
+                          </select>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  {/* </label> */}
-                </div>
+                    <div className="flex items-start">
+                      <div className={style.each_field}>
+                        <p className="mr-5">ที่อยู่ปัจจุบัน</p>
+                        <div>
+                          <textarea
+                            name="address"
+                            id="address"
+                            cols={50}
+                            rows={8}
+                            value={formPersonal.address}
+                            onChange={(e) => handleInputChange(e)}
+                          ></textarea>
+                          <p className={style.error}>{errorMessage.address}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
               <div className={style.upload_image}>
                 <div><img src={profileImage} alt="" /></div>

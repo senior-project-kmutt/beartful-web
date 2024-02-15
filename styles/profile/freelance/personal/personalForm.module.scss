@@ -4,12 +4,14 @@
 
 .form_container {
     display: flex;
+    margin-top: 16px;
     .input_box {
         width: 70%;
         // border: #B45020 1px solid;
 
         .each_field {
             display: flex;
+            align-items: center;
             // border: #B45020 1px solid;
 
             label {
