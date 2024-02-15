@@ -11,7 +11,7 @@ import style from "@/styles/profile/freelance/artwork/artworkForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import NavBar from "@/components/Layout/NavBar";
-import ProfileSelectBar from "@/components/Profile/Freelance/ProfileSelectBar";
+import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import Router from 'next/router';
 import Swal from "sweetalert2";
 import router from "next/router";
@@ -136,7 +136,7 @@ const ArtworkForm = (props: Props) => {
       <div className="flex">
 
         <div>
-          <ProfileSelectBar activeMenu="artwork" />
+          <ProfileSelectBarFreelance activeMenu="artwork" />
         </div>
 
         <div id="add_artwork" className={style.main}>

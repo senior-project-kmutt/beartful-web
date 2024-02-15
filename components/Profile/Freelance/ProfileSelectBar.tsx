@@ -10,7 +10,7 @@ interface Props {
     activeMenu: string
 }
 
-const ProfileSelectBar = (props: Props) => {
+const ProfileSelectBarFreelance = (props: Props) => {
     const router = useRouter();
     const { activeMenu } = props
     const [user, setUser] = useState<IUser>();
@@ -46,10 +46,16 @@ const ProfileSelectBar = (props: Props) => {
                             })}
                         </div>
                         <div className="seller">
-                            <p className={style.heading}><FontAwesomeIcon icon={faWindowRestore} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> ประวัติการขาย/รับงาน</p>
+                            <p className={`${style.heading} ${activeMenu === 'purchase' && `${style.activeMenu}`} cursor-pointer`}
+                                onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`)}>
+                                <FontAwesomeIcon icon={faWindowRestore} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> ประวัติการขาย/รับงาน
+                            </p>
                         </div>
                         <div className="score">
-                            <p className={style.heading}><FontAwesomeIcon icon={faStar} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> คะแนนของฉัน</p>
+                            <p className={`${style.heading} ${activeMenu === 'review' && `${style.activeMenu}`} cursor-pointer cursor-pointer`}
+                                onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/review`)}>
+                                <FontAwesomeIcon icon={faStar} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> คะแนนของฉัน
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -60,4 +66,4 @@ const ProfileSelectBar = (props: Props) => {
     );
 };
 
-export default ProfileSelectBar;
+export default ProfileSelectBarFreelance;

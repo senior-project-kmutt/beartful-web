@@ -1,6 +1,6 @@
 import style from "@/styles/profile/freelance/review/freelanceReviewScore.module.scss"
 import NavBar from "@/components/Layout/NavBar";
-import ProfileSelectBar from "@/components/Profile/Freelance/ProfileSelectBar";
+import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import ReviewItem from "../Review/ReviewItem";
 
 const FreelanceReviewScore = () => {
@@ -10,7 +10,7 @@ const FreelanceReviewScore = () => {
             <div className="flex">
 
                 <div className={style.sideBar}>
-                    <ProfileSelectBar activeMenu="" />
+                    <ProfileSelectBarFreelance activeMenu="review" />
                 </div>
 
                 <div id="add_artwork" className={style.main}>

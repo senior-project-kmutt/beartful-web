@@ -20,3 +20,14 @@ export const freelanceSelectBarMenu = [
         value: 'changePassword'
     },
 ]
+
+export const customerSelectBarMenu = [
+    {
+        title: 'ข้อมูลของฉัน',
+        value: 'personal'
+    },
+    {
+        title: 'เปลี่ยนรหัสผ่าน',
+        value: 'changePassword'
+    },
+]

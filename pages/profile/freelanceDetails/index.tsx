@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IUser } from "../../chat";
 import NavBar from "@/components/Layout/NavBar";
-import ProfileSelectBar from "@/components/Profile/Freelance/ProfileSelectBar";
+import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import style from '@/styles/profile/freelance/additional/additionForm.module.scss'
 import { getUserById, updateFreelanceDetails } from "@/services/user/user.api";
 import Swal from "sweetalert2";
@@ -136,7 +136,7 @@ const ProfileBankAccount = () => {
       <div className="flex">
 
         <div>
-          <ProfileSelectBar activeMenu="freelanceDetails" />
+          <ProfileSelectBarFreelance activeMenu="freelanceDetails" />
         </div>
 
         <div className={`m-12`} style={{ width: '80%' }}>

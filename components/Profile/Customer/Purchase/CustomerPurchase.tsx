@@ -2,7 +2,7 @@
 import style from "@/styles/profile/customer/purchase/customerPurchase.module.scss"
 
 import NavBar from "@/components/Layout/NavBar";
-import ProfileSelectBar from "@/components/Profile/Customer/ProfileSelectBar";
+import ProfileSelectBarCustomer from "@/components/Profile/Customer/ProfileSelectBar";
 import PurchaseStatusBar from "../../Component/PurchaseStatusBar";
 import { useEffect, useState } from "react";
 import { ICustomerPurchaseOrder } from "@/models/purchaseOrder";
@@ -36,8 +36,8 @@ const CustomerPurchase = (props: Props) => {
         <>
             <NavBar />
             <div className="flex">
-                <div className={style.sideBar}>
-                    <ProfileSelectBar />
+                <div>
+                    <ProfileSelectBarCustomer activeMenu='purchase' />
                 </div>
 
                 <div id="add_artwork" className={style.main}>

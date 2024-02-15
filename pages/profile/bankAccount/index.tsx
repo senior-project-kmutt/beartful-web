@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { IUser } from "../../chat";
 import AccountingForm from "@/components/Authentication/FormRegister/AccountingForm";
 import NavBar from "@/components/Layout/NavBar";
-import ProfileSelectBar from "@/components/Profile/Freelance/ProfileSelectBar";
+import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import style from '@/styles/profile/freelance/artwork/viewArtwork.module.scss'
 import { getUserById, updateBankAccount } from "@/services/user/user.api";
 import Swal from "sweetalert2";
@@ -92,7 +92,7 @@ const ProfileBankAccount = () => {
       <div className="flex">
 
         <div>
-          <ProfileSelectBar activeMenu="bankAccount" />
+          <ProfileSelectBarFreelance activeMenu="bankAccount" />
         </div>
 
         <div className={`m-12`} style={{ width: '80%' }}>

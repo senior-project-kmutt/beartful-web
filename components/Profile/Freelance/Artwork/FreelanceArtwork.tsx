@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ProfileSelectBar from "../ProfileSelectBar";
+import ProfileSelectBarFreelance from "../ProfileSelectBar";
 import NavBar from "@/components/Layout/NavBar";
 import style from '@/styles/profile/freelance/artwork/viewArtwork.module.scss'
 import { Artwork } from "@/models/artwork";
@@ -49,7 +49,7 @@ const FreelanceArtwork = (props: Props) => {
             <div className="flex">
 
                 <div>
-                    <ProfileSelectBar activeMenu="artwork" />
+                    <ProfileSelectBarFreelance activeMenu="artwork" />
                 </div>
 
                 <div className={style.main}>

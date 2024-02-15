@@ -67,7 +67,7 @@ const NavBar = () => {
                     <span className="block text-md">{user.username}</span>
                     <span className="block truncate text-xs font-medium text-gray-600">{user.email}</span>
                   </Dropdown.Header>
-                  <Dropdown.Item>Profile</Dropdown.Item>
+                  <Dropdown.Item onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile`)}>Profile</Dropdown.Item>
                   <Dropdown.Item>My Shop</Dropdown.Item>
                   <Dropdown.Item>Settings</Dropdown.Item>
                   <Dropdown.Divider />
