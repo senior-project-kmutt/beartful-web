@@ -16,6 +16,16 @@ const FreelancePurchaseItem = (props: Props) => {
         setIsReviewModalOpen(!isReviewModalOpen)
     }
 
+    const getDateFormat = (dateTime: Date | undefined) => {
+        if (dateTime) {
+            const dateObject = new Date(dateTime);
+            const date = dateObject.getDate().toString().padStart(2, '0');
+            const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+            const year = dateObject.getFullYear();
+            return `${date}/${month}/${year}`;
+        }
+    }
+
     return (
         <div className={style.purchaseItem}>
             <div className={style.profile}>
@@ -30,11 +40,19 @@ const FreelancePurchaseItem = (props: Props) => {
                 return (
                     <div className={style.order} key={index}>
                         <img className={style.userImage} src="../../xxxx"></img>
-                        <div className={style.detail}>
-                            <p className={style.artworkName}>Artwork Name</p>
-                            <span className={style.packageName}>[  Package Name  ]</span>
+                        {item.purchaseOrder.type === 'hired' && <div className={style.detail}>
+                            <p className={style.artworkName}>{item.quotation?.name}</p>
+                            <p className={style.description}>เลขที่ : {item.quotation?.quotationNumber}</p>
+                            <p className={style.description}>สิ่งที่ได้รับ : {item.quotation?.benefits}</p>
+                            <p className={style.description}>การแก้ไข : {item.quotation?.numberOfEdit}</p>
+                            <p className={style.description}>ระยะเวลาการทำงาน : {getDateFormat(item.quotation?.startDate)} - {getDateFormat(item.quotation?.endDate)}</p>
                             <p className={style.price}>{item.purchaseOrder.netAmount} บาท</p>
-                        </div>
+                        </div>}
+                        {item.purchaseOrder.type === 'readyMade' && <div className={style.detail}>
+                            <p className={style.artworkName}>{item.purchaseOrderItem?.name}</p>
+                            <p className={style.description}>{item.purchaseOrderItem?.description}</p>
+                            <p className={style.price}>{item.purchaseOrder.netAmount} บาท</p>
+                        </div>}
                         <div className={style.confirm}>
                             <div className={style.status}>{OrderStatusFreelanceEnum[item.purchaseOrder.status as keyof typeof OrderStatusFreelanceEnum]}</div>
                             <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>

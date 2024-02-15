@@ -1,22 +1,34 @@
 import style from "@/styles/profile/purchase.module.scss"
 import { faClipboardList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReviewModal from "../../Component/ReviewModal";
 import { ICustomerPurchaseOrder } from "@/models/purchaseOrder";
 import { OrderStatusCustomerEnum } from "@/enums/orders";
 import router from "next/router";
+import { IUser } from "@/pages/chat";
 
 interface Props {
     item: ICustomerPurchaseOrder
+    user: IUser
+    updateStatus: (purchaseOrderId: string, status: string) => void
 }
 const CustomerPurchaseItem = (props: Props) => {
-    const { item } = props
+    const { item, user, updateStatus } = props
     const [isReviewModalOpen, setIsReviewModalOpen] = useState<boolean>(false);
     const openReviewModal = () => {
         setIsReviewModalOpen(!isReviewModalOpen)
     }
-    console.log(item);
+
+    const getDateFormat = (dateTime: Date | undefined) => {
+        if (dateTime) {
+            const dateObject = new Date(dateTime);
+            const date = dateObject.getDate().toString().padStart(2, '0');
+            const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+            const year = dateObject.getFullYear();
+            return `${date}/${month}/${year}`;
+        }
+    }
 
     return (
         <div className={style.purchaseItem}>
@@ -32,11 +44,19 @@ const CustomerPurchaseItem = (props: Props) => {
                 return (
                     <div className={style.order} key={index}>
                         <img className={style.userImage} src="../../xxxx"></img>
-                        <div className={style.detail}>
-                            <p className={style.artworkName}>Artwork Name</p>
-                            <span className={style.packageName}>[  Package Name  ]</span>
+                        {item.purchaseOrder.type === 'hired' && <div className={style.detail}>
+                            <p className={style.artworkName}>{item.quotation?.name}</p>
+                            <p className={style.description}>เลขที่ : {item.quotation?.quotationNumber}</p>
+                            <p className={style.description}>สิ่งที่ได้รับ : {item.quotation?.benefits}</p>
+                            <p className={style.description}>การแก้ไข : {item.quotation?.numberOfEdit}</p>
+                            <p className={style.description}>ระยะเวลาการทำงาน : {getDateFormat(item.quotation?.startDate)} - {getDateFormat(item.quotation?.endDate)}</p>
                             <p className={style.price}>{item.purchaseOrder.netAmount} บาท</p>
-                        </div>
+                        </div>}
+                        {item.purchaseOrder.type === 'readyMade' && <div className={style.detail}>
+                            <p className={style.artworkName}>{item.purchaseOrderItem?.name}</p>
+                            <p className={style.description}>{item.purchaseOrderItem?.description}</p>
+                            <p className={style.price}>{item.purchaseOrder.netAmount} บาท</p>
+                        </div>}
                         <div className={style.confirm}>
                             <div className={style.status}>{OrderStatusCustomerEnum[item.purchaseOrder.status as keyof typeof OrderStatusCustomerEnum]}</div>
                             <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>
@@ -48,7 +68,7 @@ const CustomerPurchaseItem = (props: Props) => {
                             )}
                             {item.purchaseOrder.status === 'pending' && (
                                 <div>
-                                    <button className={style.confirmButton}>ฉันได้ตรวจสอบและยอมรับงาน</button>
+                                    <button className={style.confirmButton} onClick={() => updateStatus(item.purchaseOrder._id!, "success")}>ฉันได้ตรวจสอบและยอมรับงาน</button>
                                     {isReviewModalOpen && <ReviewModal openReviewModal={openReviewModal} />}
                                     <button className={style.toReviewButton} onClick={openReviewModal}>ให้คะแนน</button>
                                 </div>

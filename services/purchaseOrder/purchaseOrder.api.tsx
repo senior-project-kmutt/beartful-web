@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { get, postPromise } from "../HttpClient";
+import { get, patch, postPromise } from "../HttpClient";
 import { IncomingHttpHeaders } from "http";
 import { ICreatePurchaseOrder } from "@/models/purchaseOrder";
 
@@ -13,4 +13,8 @@ export const getFreelancePurchaseOrder = (userId: string, status: string, header
 
 export const createPurchaseOrder = (purchaseOrder: ICreatePurchaseOrder, headers: IncomingHttpHeaders): Promise<any> => {
     return postPromise(`/purchaseOrders`, purchaseOrder, headers);
+};
+
+export const updatePurchaseOrderStatus = (purchaseOrderId: string, status: string, headers: IncomingHttpHeaders): Observable<any> => {
+    return patch(`/purchaseOrders/${purchaseOrderId}`, { "status": status }, headers)
 };
