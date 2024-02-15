@@ -5,17 +5,17 @@ import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBar from "@/components/Profile/Customer/ProfileSelectBar";
 import PurchaseStatusBar from "../../Component/PurchaseStatusBar";
 import { useEffect, useState } from "react";
-import PurchaseItem from "../../Component/PurchaseItem";
-import { IPurchaseOrder } from "@/models/purchaseOrder";
+import { ICustomerPurchaseOrder } from "@/models/purchaseOrder";
 import { getCustomerPurchaseOrder } from "@/services/purchaseOrder/purchaseOrder.api";
 import { IUser } from "@/pages/chat";
+import CustomerPurchaseItem from "./CustomerPurchaseItem";
 interface Props {
     user: IUser
 }
 const CustomerPurchase = (props: Props) => {
     const { user } = props
     const [status, setStatus] = useState<string>('all')
-    const [order, setOrder] = useState<IPurchaseOrder[]>([])
+    const [order, setOrder] = useState<ICustomerPurchaseOrder[]>([])
     useEffect(() => {
         getOrderByStatus()
     }, [status])
@@ -28,7 +28,7 @@ const CustomerPurchase = (props: Props) => {
                 Authorization: `Bearer ${token}`,
             };
             await getCustomerPurchaseOrder(user.id, status, headers).subscribe((res => {
-                setOrder(res.data as IPurchaseOrder[])
+                setOrder(res.data as ICustomerPurchaseOrder[])
             }))
         }
     }
@@ -45,7 +45,7 @@ const CustomerPurchase = (props: Props) => {
                     <PurchaseStatusBar role="customer" setStatus={setStatus} />
                     {order.map((item, index) => {
                         return (
-                            <PurchaseItem item={item} key={index} />
+                            <CustomerPurchaseItem item={item} key={index} />
                         )
                     })}
                 </div>
