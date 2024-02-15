@@ -30,7 +30,7 @@ const QuotationPreviewModal = (props: Props) => {
             createQuotation(newDataTransform, headers).then(async (res) => {
                 Swal.fire({
                     icon: "success",
-                    title: "สร้างบัญชีสำเร็จ",
+                    title: "สร้างใบเสนอราคาสำเร็จ",
                     showConfirmButton: false,
                     timer: 3000
                 })

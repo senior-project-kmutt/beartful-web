@@ -59,6 +59,7 @@
 
             .detail {
                 margin-left: 20px;
+                margin-top: 2px;
 
                 .artworkName {
                     font-size: larger;
@@ -84,14 +85,23 @@
             display: flex;
             position: absolute;
             right: 5%;
+            align-items: center;
 
             .confirmButton {
-                height: 32px;
-                width: 150px;
-                background-color: #E16428;
-                color: white;
-                border-radius: 4px;
+                // height: 32px;
+                // width: 150px;
+                padding: 8px 52px ;
+                background-color: #FDFBFB;
+                color: #E16428;
+                border-radius: 8px;
                 margin-right: 12px;
+                border: 1px solid #E16428
+            }
+
+            .confirmButton:hover {
+                background-color: #B45020;
+                color: #FDFBFB;
+                border: 1px solid #B45020
             }
         }
 

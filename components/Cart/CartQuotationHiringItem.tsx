@@ -1,9 +1,11 @@
 
 import { Quotation } from "@/models/quotation";
+import { deleteQuotationById } from "@/services/quotation/quotation.api";
 import style from "@/styles/cart/hiringCartItem.module.scss"
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
+import Swal from "sweetalert2";
 
 interface Props {
     item: Quotation
@@ -19,6 +21,38 @@ const CartQuotationHiringItem = (props: Props) => {
         const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
         const year = dateObject.getFullYear();
         return `${date}/${month}/${year}`;
+    }
+
+    const deleteItem = () => {
+        Swal.fire({
+            title: `ยืนยันยกเลิกการจัดจ้าง`,
+            text: `${item.name}`,
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ยืนยัน",
+            cancelButtonText: "ยกเลิก"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const token = localStorage.getItem("auth");
+                const headers = {
+                    Authorization: `Bearer ${token}`,
+                };
+                deleteQuotationById(item._id, headers).then(res => {
+                    Swal.fire({
+                        icon: "success",
+                        title: "ยกเลิกการจัดจ้่างสำเร็จ",
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then((result) => {
+                        if (result.isConfirmed || result.isDismissed) {
+                            router.reload()
+                        }
+                    });
+                })
+            }
+        });
     }
 
     return (
@@ -40,7 +74,7 @@ const CartQuotationHiringItem = (props: Props) => {
                 <div className={style.price}>{item.amount} Baht</div>
                 <div className={style.confirm}>
                     <button className={style.confirmButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart/review-order-hiring?item=${item._id}`)}>จัดจ้าง</button>
-                    <FontAwesomeIcon icon={faTrash} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faTrash} style={{ color: '#5A2810', cursor: 'pointer' }} size="xl" onClick={() => deleteItem()}></FontAwesomeIcon>
                 </div>
             </div>
         </div>

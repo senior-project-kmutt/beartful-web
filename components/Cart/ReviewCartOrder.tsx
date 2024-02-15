@@ -14,6 +14,7 @@ interface Props {
 
 const ReviewCartOrder = (props: Props) => {
   const { data, type, createOrderPurchase } = props;
+  const router = useRouter()
 
   const getDateFormat = (dateTime: Date) => {
     const dateObject = new Date(dateTime);
@@ -77,7 +78,7 @@ const ReviewCartOrder = (props: Props) => {
             </div>
           </div>
           <div className={style.buttonConfirm}>
-            <button className={style.backButton}>ย้อนกลับ</button>
+            <button className={style.backButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>ย้อนกลับ</button>
             <button className={style.purchaseButton} onClick={() => createOrderPurchase(data)}>ชำระเงิน</button>
           </div>
         </div>

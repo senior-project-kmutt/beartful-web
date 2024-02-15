@@ -161,6 +161,11 @@
         font-weight: 500;
         background-color: white;
         border-radius: 10px;
+        &:hover {
+            background-color: #873C18;
+            color: white;
+            border: 1px solid #873C18;
+        }
     }
 
     .purchaseButton {
@@ -171,5 +176,8 @@
         background-color: #E78353;
         border-radius: 10px;
         margin-left: 15px;
+        &:hover {
+            background-color: #873C18;
+        }
     }
 }
