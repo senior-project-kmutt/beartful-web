@@ -55,7 +55,7 @@ const ArtworkItem = (props: Props) => {
           deleteArtwork(artworkId, headers).subscribe((res: any) => {
             Swal.fire({
               icon: "success",
-              title: "สร้างผลงานสำเร็จ",
+              title: "ลบผลงานสำเร็จ",
               showConfirmButton: false,
               timer: 1500
             }).then((result) => {
@@ -117,7 +117,7 @@ const ArtworkItem = (props: Props) => {
             </Dropdown>
           }
 
-          <ArtworkName>{name}</ArtworkName>
+          <ArtworkName className="w-9/12">{name}</ArtworkName>
           <ArtworkImage theme={{ src: images[0] }} />
           <ShopPrice>{type == 'hired' ? 'เรทราคา :' : 'ราคา :'} {price}</ShopPrice>
         </ArtworkImageContainer>

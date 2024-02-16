@@ -22,6 +22,11 @@ export const getUserById = (userId: string, headers: IncomingHttpHeaders): Promi
 export const getUserByUsername = (username: string): Observable<any> => {
   const url = `/user/freelance/${username}`;
   return get(url);
+}
+
+export const getUserByIdNotAuthen = (userId: string): Observable<any> => {
+  const url = `/user/freelanceInfo/${userId}`;
+  return get(url);
 };
 
 export const getChatRoomByUserId = (userId: string, headers: IncomingHttpHeaders): Promise<any> => {
