@@ -47,12 +47,12 @@ const DetailsModal = (props: Props) => {
     };
 
     return (
-        <Modal size={'4xl'} dismissible className={style.detailsModal} show={true} onClick={() => openReviewModal()}>
+        <Modal size={'4xl'} dismissible className={style.detailsModal} show={true}>
             {/* <Modal.Header className={style.header}>
                 <p className="text-center">Freelance Infomation</p>
             </Modal.Header> */}
             <Modal.Body>
-                <div className="flex">
+                <div className="flex mr-8 ml-5">
                     <div className={style.left}>
                         <img src={data.profileImage} alt="" />
                         <p className='text-3xl font-bold mt-5'>{data.username}</p>
@@ -177,6 +177,9 @@ const DetailsModal = (props: Props) => {
                                 )
                             })}
                         </div>
+                    </div>
+                    <div className={style.close} onClick={() => openReviewModal()}>
+                        <p>X</p>
                     </div>
                 </div>
             </Modal.Body>

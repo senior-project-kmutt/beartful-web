@@ -6,6 +6,24 @@
         }
     }
 
+    .close {
+        font-size: smaller;
+        font-weight: 700;
+        background-color: #5A2810;
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin-top: 10px;
+        margin-right: 10px;
+        color: white;
+        padding: 8px 13px;
+        border-radius: 50%;
+        &:hover {
+            background-color: #873C18;
+            cursor: pointer;
+        }
+    }
+
     .left {
         width: 50%;
         border-radius: 16px;
