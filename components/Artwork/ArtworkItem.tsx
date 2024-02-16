@@ -53,10 +53,10 @@ const ArtworkItem = (props: Props) => {
         <ArtworkImageContainer>
           <ArtworkName>{name}</ArtworkName>
           <ArtworkImage theme={{ src: images[0] }} />
-          <ShopLinkButton onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user/${profile?.username}`)}>
+          {/* <ShopLinkButton onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user/${profile?.username}`)}>
             Maexzomeiei
             <IconArrow icon={faArrowUp} />
-          </ShopLinkButton>
+          </ShopLinkButton> */}
           <ShopPrice>{type == 'hired' ? 'เรทราคา :' : 'ราคา :'} {price}</ShopPrice>
         </ArtworkImageContainer>
       </div>
