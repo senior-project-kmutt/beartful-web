@@ -3,6 +3,7 @@ import { faClipboardList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IFreelancePurchaseOrder } from "@/models/purchaseOrder";
 import { OrderStatusFreelanceEnum } from "@/enums/orders";
+import { HIRED_IMAGE, READYMADE_IMAGE } from "@/config/constants";
 
 interface Props {
     item: IFreelancePurchaseOrder
@@ -35,7 +36,7 @@ const FreelancePurchaseItem = (props: Props) => {
                 return (
                     <div className={`${style.order}`} key={index}>
                         {index != 0 && <div className={style.lineBreak}></div>}
-                        <img className={style.userImage} src="../../xxxx"></img>
+                        <img className={style.userImage} src={item.purchaseOrder.type === 'hired' ? HIRED_IMAGE : READYMADE_IMAGE}></img>
                         {item.purchaseOrder.type === 'hired' && <div className={style.detail}>
                             <p className={style.artworkName}>{item.quotation?.name}</p>
                             <p className={style.description}>เลขที่ : {item.quotation?.quotationNumber}</p>
