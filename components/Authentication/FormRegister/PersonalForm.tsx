@@ -3,6 +3,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "reac
 import { errorMessageEmtryField, regexpEmail, regexpOnlyNumber, requiredFieldsCustomer, requiredFieldsFreelancePersonal } from "@/services/validation";
 import { thaiMonths } from "./option";
 import { defaultProfileImage } from "@/config/constants";
+import Router from 'next/router';
 
 interface formDataType {
   [key: string]: any;
@@ -378,7 +379,7 @@ const PersonalForm = (props: Props) => {
           <button className={style.submit} onClick={onSubmit}>
             {roleSelected === 'customer' ? 'Submit' : 'Save'}
           </button>
-          <button className={style.cancel}>Cancel</button>
+          <button className={style.cancel} onClick={() => Router.back()}>Cancel</button>
         </div>
       </div>
     </div>

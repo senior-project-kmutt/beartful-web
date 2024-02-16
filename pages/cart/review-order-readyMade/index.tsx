@@ -14,7 +14,7 @@ const ReviewOrderHiring = () => {
   const [cartItemId, setCartItemId] = useState<string>('');
   const [cartItem, setCartItem] = useState<CartItem>();
   const router = useRouter();
-  
+
   useEffect(() => {
     const urlSearchString = window.location.search;
     const params = new URLSearchParams(urlSearchString);
@@ -59,11 +59,10 @@ const ReviewOrderHiring = () => {
       artworkItem: data.artworkId
 
     } as ICreatePurchaseOrder
-    console.log(purchaseOrderData, "?????");
     createPurchaseOrder(purchaseOrderData, headers).then(res => {
       Swal.fire({
         icon: "success",
-        title: "สร้างบัญชีสำเร็จ",
+        title: "สร้างออเดอร์สำเร็จ",
         showConfirmButton: false,
         timer: 1500
       }).then((result) => {

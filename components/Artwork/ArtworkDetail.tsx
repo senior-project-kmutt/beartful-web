@@ -88,7 +88,7 @@ const ArtworkDetail = (props: Props) => {
         role: res.data.role,
         phoneNumber: res.data.phoneNumber,
       };
-      setProfile(profile);
+      setProfile(profile as Users);
     });
   };
   const categoryNames = categoryId.map((id) => {

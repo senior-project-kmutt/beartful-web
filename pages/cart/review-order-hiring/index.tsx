@@ -23,7 +23,7 @@ const ReviewOrderHiring = () => {
       setUser(user)
     }
   }, []);
-  
+
   useEffect(() => {
     const urlSearchString = window.location.search;
     const params = new URLSearchParams(urlSearchString);
@@ -71,7 +71,7 @@ const ReviewOrderHiring = () => {
     createPurchaseOrder(purchaseOrderData, headers).then(res => {
       Swal.fire({
         icon: "success",
-        title: "สร้างบัญชีสำเร็จ",
+        title: "สร้างออเดอร์สำเร็จ",
         showConfirmButton: false,
         timer: 1500
       }).then((result) => {
