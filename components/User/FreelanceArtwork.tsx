@@ -7,6 +7,7 @@ import style from "@/styles/user/freelanceArtwork.module.scss"
 import { FreelanceUsers } from "@/models/users";
 import { getUserByUsername } from "@/services/user/user.api";
 import FreelanceReviewList from "../Profile/Freelance/Review/FreelanceReviewList";
+import DetailsModal from "./DetailsModal";
 
 interface Props {
     username: string;
@@ -15,6 +16,7 @@ interface Props {
 const FreelanceArtwork = (props: Props) => {
     const [type, setType] = useState<string>('hired');
     const [freelance, setFreelance] = useState<FreelanceUsers>();
+    const [isOpenDetailsModal, setIsOpenDetailsModal] = useState<boolean>(false);
 
     useEffect(() => {
         getUserByUsername(props.username).subscribe(res => {
@@ -22,7 +24,9 @@ const FreelanceArtwork = (props: Props) => {
         })
     }, [])
 
-    console.log(freelance);
+    const openReviewModal = () => {
+        setIsOpenDetailsModal(!isOpenDetailsModal)
+    }
 
     return (
         <>
@@ -39,7 +43,7 @@ const FreelanceArtwork = (props: Props) => {
                                 <p className={style.username}>{freelance?.username}</p>
                                 <p className={style.name}>{freelance?.firstname} {freelance?.lastname}</p>
                             </div>
-                            <button className={style.description}>รายละเอียดเพิ่มเติม</button>
+                            <button className={style.description} onClick={() => setIsOpenDetailsModal(true)}>รายละเอียดเพิ่มเติม</button>
                         </div>
                     </div>
                     {(type == 'hired' || type == 'readyMade' || type == '') && <ArtworkList from="freelance" type={type} username={props.username} />}
@@ -51,7 +55,9 @@ const FreelanceArtwork = (props: Props) => {
                     )
                     }
                 </div>
-
+                {(isOpenDetailsModal && freelance) && (
+                    <DetailsModal openReviewModal={openReviewModal} data={freelance} />
+                )}
             </div>
         </>
     );

@@ -1,0 +1,165 @@
+.detailsModal {
+    .header {
+        p {
+            font-size: 1.6rem;
+            text-align: center;
+        }
+    }
+
+    .left {
+        width: 50%;
+        border-radius: 16px;
+        background-color: #F9E0D4;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 26px 0;
+        
+
+        img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .role {
+            font-size: 14px;
+            color: #FDFBFB;
+            background-color: #E16428;
+            padding: 4px 16px;
+            border-radius: 18px;
+            margin-top: 6px;
+            font-weight: 700;
+        }
+
+        .desc {
+            width: 84%;
+            background-color: #FDFBFB;
+            font-size: 12px;
+            padding: 12px 16px;
+            border-radius: 16px;
+        }
+
+        .education {
+            width: 84%;
+            margin-top: 20px;
+
+            .degree {
+                width: fit-content;
+                font-size: 10px;
+                color: #E78353;
+                background-color: #fdfbfbb1;
+                border: #E78353 1px solid;
+                border-radius: 16px;
+                padding: 2px 10px;
+            }
+
+            .institution {
+                color: #5A2810;
+                font-size: 14px;
+            }
+
+            .major {
+                color: #E78353;
+                font-size: 12px;
+            }
+        }
+    }
+
+    .right {
+        width: 50%;
+        border: 1px solid #B45020;
+        border-radius: 16px;
+        margin-left: 20px;
+        padding: 28px 0;
+
+        .skill {
+            margin: 0 28px;
+            border-bottom: #E78353 1px solid;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            .title {
+                width: 70%;
+                color: #5A2810
+            }
+
+            .level {
+                width: 30%;
+                text-align: center;
+                background-color: #F3C1A9;
+                color: #5A2810;
+                border-radius: 12px;
+                font-size: smaller;
+                padding-top: 2px;
+            }
+
+        }
+
+        .award {
+            margin-top: 20px;
+            margin: 0 28px;
+
+            .title {
+                color: #5A2810;
+                font-size: 14px;
+            }
+
+            .desc {
+                color: #E78353;
+                font-size: 12px;
+            }
+        }
+
+    }
+
+    .info, .experience {
+        width: 100%;
+        padding: 0 32px;
+
+        table {
+            font-size: 14px;
+            width: 100%;
+            color: #5A2810;
+            font-weight: 500;
+            margin: 24px 0;
+        }
+        td {
+            vertical-align: top;
+        }
+
+        .star {
+            color: #E16428;
+        }
+    }
+
+    .experience {
+        padding: 0 28px;
+        margin-bottom: 22px;
+        .item {
+            padding: 14px;
+            background-color: #F9E0D4;
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+        .currentJob {
+            width: fit-content;
+            font-size: 12px;
+            color: #E78353;
+            background-color: #fdfbfbb1;
+            border: #E78353 1px solid;
+            border-radius: 16px;
+            padding: 2px 16px;
+            margin-bottom: 10px;
+        }
+        table {
+            font-size: 13px;
+            width: 100%;
+            color: #5A2810;
+            font-weight: 500;
+            margin: 0;
+        }
+
+    }
+}

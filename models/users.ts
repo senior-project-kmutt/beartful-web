@@ -7,6 +7,7 @@ export interface Users {
   profileImage: string;
   role: string;
   phoneNumber: string
+  createdAt: Date
 }
 
 export interface LoginUser {
@@ -17,11 +18,11 @@ export interface LoginUser {
 export interface FreelanceUsers extends Users {
   dateOfBirth: Date;
   address: string;
-  education: Array<IUserEducation[]>;
-  experience?: Array<IUserExperience[]>;
-  skill?: Array<IUserSkillAndLanguage[]>;
-  language?: Array<IUserSkillAndLanguage[]>;
-  award?: Array<IUserAward[]>;
+  education: IUserEducation[];
+  experience?: IUserExperience[];
+  skill?: IUserSkillAndLanguage[];
+  language?: IUserSkillAndLanguage[];
+  award?: IUserAward[];
   bankAccount: IUserBankAccount;
 }
 
