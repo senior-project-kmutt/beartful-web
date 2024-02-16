@@ -1,34 +1,14 @@
-import style from "@/styles/profile/freelance/review/freelanceReviewScore.module.scss"
-import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
-import ReviewItem from "../Review/ReviewItem";
+import FreelanceReviewList from "./FreelanceReviewList";
 
 const FreelanceReviewScore = () => {
     return (
         <>
-            <NavBar />
             <div className="flex">
-
-                <div className={style.sideBar}>
+                <div>
                     <ProfileSelectBarFreelance activeMenu="review" />
                 </div>
-
-                <div id="add_artwork" className={style.main}>
-                    <h1 className="text-xl font-semibold mb-1">คะแนนของฉัน</h1>
-                    <div className={style.overallScore}>
-                        <span className="text-3xl font-bold"> 4.8 </span>
-                        <span> จาก 5 คะแนน </span>
-                    </div>
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
-                    <ReviewItem />
-                </div>
+                <FreelanceReviewList title='คะแนนของฉัน' />
             </div>
         </>
     );

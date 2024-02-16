@@ -19,6 +19,11 @@ export const getUserById = (userId: string, headers: IncomingHttpHeaders): Promi
   return getPromise(url, headers);
 };
 
+export const getUserByUsername = (username: string): Observable<any> => {
+  const url = `/user/freelance/${username}`;
+  return get(url);
+}
+
 export const getUserByIdNotAuthen = (userId: string): Observable<any> => {
   const url = `/user/freelanceInfo/${userId}`;
   return get(url);

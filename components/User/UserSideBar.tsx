@@ -25,7 +25,7 @@ const UserSideBar = (props: Props) => {
             <div className={type === '' ? `${style.item_active}` : `${style.item}`} onClick={() => setTypeArtwork('')}>Portfolio</div>
           <div className={type === 'hired' ? `${style.item_active}` : `${style.item}`} onClick={() => setTypeArtwork('hired')}>Hiring</div>
           <div className={type === 'readyMade' ? `${style.item_active}` : `${style.item}`} onClick={() => setTypeArtwork('readyMade')}>Ready Made</div>
-          <div className={type === 'Package&Price' ? `${style.item_active}` : `${style.item}`} onClick={() => setTypeArtwork('Package&Price')}>Package & Price</div>
+          {/* <div className={type === 'Package&Price' ? `${style.item_active}` : `${style.item}`} onClick={() => setTypeArtwork('Package&Price')}>Package & Price</div> */}
           <div className={type === 'Review' ? `${style.item_active}` : `${style.item}`} onClick={() => setTypeArtwork('Review')}>Review</div>
         </div>
       </div>

@@ -1,9 +1,13 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ArtworkList from "../Artwork/ArtworkList";
 import NavBar from "../Layout/NavBar";
 import UserSideBar from "./UserSideBar";
 import style from "@/styles/user/freelanceArtwork.module.scss"
+import { FreelanceUsers } from "@/models/users";
+import { getUserByUsername } from "@/services/user/user.api";
+import FreelanceReviewList from "../Profile/Freelance/Review/FreelanceReviewList";
+import DetailsModal from "./DetailsModal";
 
 interface Props {
     username: string;
@@ -11,30 +15,49 @@ interface Props {
 
 const FreelanceArtwork = (props: Props) => {
     const [type, setType] = useState<string>('hired');
+    const [freelance, setFreelance] = useState<FreelanceUsers>();
+    const [isOpenDetailsModal, setIsOpenDetailsModal] = useState<boolean>(false);
+
+    useEffect(() => {
+        getUserByUsername(props.username).subscribe(res => {
+            setFreelance(res.data);
+        })
+    }, [])
+
+    const openReviewModal = () => {
+        setIsOpenDetailsModal(!isOpenDetailsModal)
+    }
 
     return (
         <>
             <NavBar />
-            <div className="flex mt-8">
-                <div className="w-4/6">
+            <div className="flex mt-8 mx-5">
+                <div className="" style={{ width: "14%" }}>
                     <UserSideBar type={type} setType={setType} />
                 </div>
-                <div>
+                <div style={{ width: "86%" }}>
                     <div className={style.profileDescription}>
                         <div className={style.profile}>
-                            <img src="../../../../ssi1/picture/user1.gif" />
+                            <img src={freelance?.profileImage} />
                             <div className={style.name_box}>
-                                <p className={style.username}>mottdy</p>
-                                <p className={style.name}>Chananya Sinphichit</p>
+                                <p className={style.username}>{freelance?.username}</p>
+                                <p className={style.name}>{freelance?.firstname} {freelance?.lastname}</p>
                             </div>
-                            <button className={style.description}>รายละเอียดเพิ่มเติม</button>
+                            <button className={style.description} onClick={() => setIsOpenDetailsModal(true)}>รายละเอียดเพิ่มเติม</button>
                         </div>
                     </div>
                     {(type == 'hired' || type == 'readyMade' || type == '') && <ArtworkList from="freelance" type={type} username={props.username} />}
-                    {(type == 'Package&Price') && <div>Package&Price</div>}
-                    {(type == 'Review') && <div>Review</div>}
+                    {/* {(type == 'Package&Price') && <div>Package&Price</div>} */}
+                    {(type == 'Review') && (
+                        <div style={{ width: "96%" }}>
+                            <FreelanceReviewList title='Review' />
+                        </div>
+                    )
+                    }
                 </div>
-
+                {(isOpenDetailsModal && freelance) && (
+                    <DetailsModal openReviewModal={openReviewModal} data={freelance} />
+                )}
             </div>
         </>
     );
