@@ -5,7 +5,7 @@ const FreelanceReviewScore = () => {
     return (
         <>
             <div className="flex">
-                <div>
+                <div style={{width: '22%'}}>
                     <ProfileSelectBarFreelance activeMenu="review" />
                 </div>
                 <FreelanceReviewList title='คะแนนของฉัน' />
