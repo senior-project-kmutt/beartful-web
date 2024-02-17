@@ -3,6 +3,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from "reac
 import { errorMessageEmtryField, regexpEmail, regexpOnlyNumber, requiredFieldsCustomer, requiredFieldsFreelancePersonal } from "@/services/validation";
 import { thaiMonths } from "./option";
 import { defaultProfileImage } from "@/config/constants";
+import Link from "next/link";
 import Router from 'next/router';
 
 interface formDataType {
@@ -367,10 +368,10 @@ const PersonalForm = (props: Props) => {
               type="file"
               accept="image/png, image/gif, image/jpeg"
             />
-            <div className={style.tips}>
+            {/* <div className={style.tips}>
               <p>File size: maximum 1MB</p>
               <p>File extension: .JPEG, .PNG, .GIF</p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

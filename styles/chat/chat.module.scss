@@ -376,10 +376,9 @@
     display: flex;
     justify-content: center;
     .image {
-        width: 85% !important;
-        height: 85% !important;
-        object-fit: contain;
-        justify-content: center;
+        max-height: 95vh;
+        width: 100% !important;
+        height: auto !important;
         border-radius: 0px !important;
     }
 } 
