@@ -323,10 +323,10 @@ const PersonalUpdateForm = () => {
                     type="file"
                     accept="image/png, image/gif, image/jpeg"
                   />
-                  {/* <div className={style.tips}>
-                    <p>File size: maximum 1MB</p>
+                  <div className={style.tips}>
+                    {/* <p>File size: maximum 1MB</p> */}
                     <p>File extension: .JPEG, .PNG, .GIF</p>
-                  </div> */}
+                  </div>
                 </div>
               </div>
 

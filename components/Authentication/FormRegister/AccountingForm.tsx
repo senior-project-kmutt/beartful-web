@@ -192,7 +192,7 @@ const AccountingForm = (props: Props) => {
             <label htmlFor="bankAccountImage">
               <p>อัปโหลดรูปสมุดบัญชี</p>
             </label>
-            <p style={{ fontSize: 'smaller' }} className='text-gray-500 mt-2'>สามารถอัปโหลดเป็นไฟล์ .png .jpg ขนาดไม่เกิน 10MB</p>
+            <p style={{ fontSize: 'smaller' }} className='text-gray-500 mt-2'>สามารถอัปโหลดเป็นไฟล์ .png .jpg</p>
           </div>
         </div>
       </div>
