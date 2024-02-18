@@ -1,5 +1,6 @@
 
 import { READYMADE_IMAGE } from "@/config/constants";
+import { formattedPrice } from "@/core/tranform";
 import { CartItem } from "@/models/cart";
 import { deleteCartById } from "@/services/cart/cart.api";
 import style from "@/styles/cart/hiringCartItem.module.scss"
@@ -57,7 +58,7 @@ const CartReadyMadeItem = (props: Props) => {
                         <p className={style.description}>{item.description}</p>
                     </div>
                 </div>
-                <div className={style.price}>{item.amount} Baht</div>
+                <div className={style.price}>{formattedPrice(item.amount)} Baht</div>
                 <div className={style.confirm}>
                     <button className={style.confirmButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart/review-order-readyMade?item=${item._id}`)}>จัดจ้าง</button>
                     <FontAwesomeIcon icon={faTrash} style={{ color: '#5A2810', cursor: 'pointer' }} size="xl" onClick={() => deleteItem()}></FontAwesomeIcon>

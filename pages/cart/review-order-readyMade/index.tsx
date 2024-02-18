@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import NavBar from "@/components/Layout/NavBar";
 import ReviewCartOrder from "@/components/Cart/ReviewCartOrder";
 import { CartItem } from "@/models/cart";
-import { getCartById } from "@/services/cart/cart.api";
+import { deleteCartById, getCartById } from "@/services/cart/cart.api";
 import { ICreatePurchaseOrder } from "@/models/purchaseOrder";
 import { useRouter } from "next/router";
 import { OrderStatus } from "@/enums/orders";
@@ -67,6 +67,7 @@ const ReviewOrderHiring = () => {
         timer: 1500
       }).then((result) => {
         if (result.isConfirmed || result.isDismissed) {
+          deleteCartById(cartItemId, headers)
           router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase/`)
         }
       });

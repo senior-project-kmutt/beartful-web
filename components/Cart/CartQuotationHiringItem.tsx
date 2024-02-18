@@ -1,5 +1,6 @@
 
 import { HIRED_IMAGE } from "@/config/constants";
+import { formattedPrice } from "@/core/tranform";
 import { Quotation } from "@/models/quotation";
 import { deleteQuotationById } from "@/services/quotation/quotation.api";
 import style from "@/styles/cart/hiringCartItem.module.scss"
@@ -72,7 +73,7 @@ const CartQuotationHiringItem = (props: Props) => {
                         )}
                     </div>
                 </div>
-                <div className={style.price}>{item.amount} Baht</div>
+                <div className={style.price}>{formattedPrice(item.amount)} Baht</div>
                 <div className={style.confirm}>
                     <button className={style.confirmButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart/review-order-hiring?item=${item._id}`)}>จัดจ้าง</button>
                     <FontAwesomeIcon icon={faTrash} style={{ color: '#5A2810', cursor: 'pointer' }} size="xl" onClick={() => deleteItem()}></FontAwesomeIcon>

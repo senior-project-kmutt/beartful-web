@@ -1,3 +1,4 @@
+import { formattedPrice } from "@/core/tranform";
 import { CartItem, Carts } from "@/models/cart";
 import { IUser } from "@/pages/chat";
 import { deleteCartById, editCartById } from "@/services/cart/cart.api";
@@ -118,7 +119,7 @@ const CartReadyMadeItem = (props: Props) => {
                                     <span className={style.description}>[  คำอธิบายงานจ้าง เช่น ของที่จะได้ วันมอบงาน  ]</span>
                                 </div>
                             </div>
-                            <div className={style.price}>{item.amount} Baht</div>
+                            <div className={style.price}>{formattedPrice(item.amount)} Baht</div>
                             <div className={style.quantity}>
                                 <button onClick={() => handleQuantityChange(item._id, 'decrement', item.amount)}>-</button>
                                 <input
@@ -128,7 +129,7 @@ const CartReadyMadeItem = (props: Props) => {
                                 />
                                 <button onClick={() => handleQuantityChange(item._id, 'increment', item.amount)}>+</button>
                             </div>
-                            <div className={style.netAmount}>{item.netAmount} Baht</div>
+                            <div className={style.netAmount}>{formattedPrice(item.netAmount)} Baht</div>
                             <div className={style.confirm}>
                                 <FontAwesomeIcon icon={faTrash} style={{ color: '#5A2810' }} size="2xl" onClick={() => deleteCart(item._id)}></FontAwesomeIcon>
                             </div>

@@ -1,3 +1,4 @@
+import { formattedPrice } from "@/core/tranform";
 import { CartItem, Carts } from "@/models/cart";
 import style from "@/styles/cart/reviewOrder.module.scss";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -55,18 +56,18 @@ const ReviewCartOrderItem = (props: Props) => {
                                     </span>
                                 </div>
                             </div>
-                            <div className={style.price}>{item.amount} Baht</div>
+                            <div className={style.price}>{formattedPrice(item.amount)} Baht</div>
                             <div className={style.quantity}>
                                 <p>{item.quantity}</p>
                             </div>
-                            <div className={style.netAmount}>{item.netAmount} Baht</div>
+                            <div className={style.netAmount}>{formattedPrice(item.netAmount)} Baht</div>
                         </div>
                     );
                 })}
                 <div className={`${style.amount} rounded-b-lg`}>
                     <div className={style.block}>
                         <span>คำสั่งซื้อ/จ้างทั้งหมด ({cartItems.length} ชิ้น)</span>
-                        <span className={style.price}>{totalAmount} บาท</span>
+                        <span className={style.price}>{formattedPrice(totalAmount)} บาท</span>
                     </div>
                 </div>
             </div>

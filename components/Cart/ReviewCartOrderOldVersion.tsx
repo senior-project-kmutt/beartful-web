@@ -5,6 +5,7 @@ import { Carts } from "@/models/cart";
 import { IUser } from "@/pages/chat";
 import { getReviewOrderCart } from "@/services/cart/cart.api";
 import ReviewCartOrderItem from "./ReviewCartOrderItem";
+import { formattedPrice } from "@/core/tranform";
 
 const ReviewCartOrder = () => {
     const label = ['ผลงานที่จัดซื้อ/จัดจ้าง', 'ราคาต่อหน่วย', 'จำนวน', 'รายการย่อย']
@@ -69,9 +70,9 @@ const ReviewCartOrder = () => {
                 <div className={style.payment}>
                     <div className="grid grid-cols-2 gap-4">
                         <div>รวมการสั่งซื้อ / จ้าง</div>
-                        <div>{sumTotalNetAmount(cart)} บาท</div>
+                        <div>{formattedPrice(sumTotalNetAmount(cart))} บาท</div>
                         <div>ยอดชำระเงินทั้งหมด</div>
-                        <div className={style.totalAmount}>{sumTotalNetAmount(cart)} บาท</div>
+                        <div className={style.totalAmount}>{formattedPrice(sumTotalNetAmount(cart))} บาท</div>
                     </div>
                 </div>
             </div>

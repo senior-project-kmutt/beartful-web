@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { CartItem } from "@/models/cart";
 import { OrderStatus } from "@/enums/orders";
 import { HIRED_IMAGE, READYMADE_IMAGE } from "@/config/constants";
+import { formattedPrice } from "@/core/tranform";
 
 interface Props {
   data: Quotation | CartItem
@@ -60,7 +61,7 @@ const ReviewCartOrder = (props: Props) => {
                     </div>
                   )}
                 </div>
-                <div className={style.price}>{data.amount} Baht</div>
+                <div className={style.price}>{formattedPrice(data.amount)} Baht</div>
               </div>
             </div>
           </div>
@@ -73,9 +74,9 @@ const ReviewCartOrder = (props: Props) => {
             <div className={style.payment}>
               <div className="grid grid-cols-2 gap-4">
                 <div>รวมการสั่งซื้อ / จ้าง</div>
-                <div>{data.amount} บาท</div>
+                <div>{formattedPrice(data.amount)} บาท</div>
                 <div>ยอดชำระเงินทั้งหมด</div>
-                <div className={style.totalAmount}>{data.amount} บาท</div>
+                <div className={style.totalAmount}>{formattedPrice(data.amount)} บาท</div>
               </div>
             </div>
           </div>
