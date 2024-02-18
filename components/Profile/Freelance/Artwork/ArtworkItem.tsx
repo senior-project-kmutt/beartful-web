@@ -106,7 +106,7 @@ const ArtworkItem = (props: Props) => {
             <Dropdown ref={dropdownRef}>
               <ul className="py-2">
                 <li>
-                  <button style={{ width: '100%', height: '100%', textAlign: 'left' }} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/artwork/edit/${_id}`)}>แก้ไขผลงาน</button>
+                  <button style={{ width: '100%', height: '100%', textAlign: 'left' }} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/artwork/edit?artworkId=${_id}`)}>แก้ไขผลงาน</button>
                 </li>
                 <li>
                   <button style={{ width: '100%', height: '100%', textAlign: 'left', color: 'red' }} onClick={() => {
