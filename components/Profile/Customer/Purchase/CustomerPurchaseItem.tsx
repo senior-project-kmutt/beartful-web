@@ -39,7 +39,7 @@ const CustomerPurchaseItem = (props: Props) => {
                 <p className={style.username}>{item.freelanceUsername}</p>
                 <div className="ml-8">
                     {/* <button className={style.saveButton}>Chat</button> */}
-                    <button className={style.cancelButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user/${item.freelanceUsername}`)}>View profile</button>
+                    <button className={style.cancelButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${item.freelanceUsername}`)}>View profile</button>
                 </div>
             </div>
             {item.order.map((item, index) => {

@@ -230,7 +230,7 @@ const ArtworkDetail = (props: Props) => {
               className={`${style.btn} justify-self-end`}
               onClick={() =>
                 router.push(
-                  `${process.env.NEXT_PUBLIC_BASEPATH}/user/${profile?.username}`
+                  `${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${profile?.username}`
                 )
               }
             >

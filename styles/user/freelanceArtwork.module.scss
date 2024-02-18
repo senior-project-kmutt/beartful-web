@@ -1,12 +1,14 @@
 .profileDescription {
-    height: 120px;
+    // height: 120px;
     background-color: #F9E0D4;
     border-radius: 10px;
-    margin: 3px 18px;
+    padding-top: 3px;
+    padding-bottom: 1px;
+    // margin: 3px 18px;
 }
 
 .profile {
-    height: 4rem;
+    // height: 4rem;
     width: 100%;
     display: flex;
     align-items: center;
@@ -14,10 +16,12 @@
 
     img {
         margin-left: 5%;
-        margin-top: 50px;
+        // margin-top: 50px;
         margin-right: 3%;
         border-radius: 50%;
-        width: 95px;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
     }
 
     .name_box {
@@ -26,7 +30,7 @@
 
         .username {
             margin-left: 4px;
-            margin-top: 25%;
+            // margin-top: 25%;
             font-weight: 900;
             font-size: 1.3rem;
         }
@@ -47,6 +51,6 @@
         width: 230px;
         border-radius: 20px;
         color: #E16428;
-        margin-top: 50px;
+        // margin-top: 50px;
     }
 }
