@@ -293,7 +293,7 @@ const PersonalUpdateForm = () => {
                       </div>
                     </div>
                     <div className="flex items-start">
-                      <div className={style.each_field}>
+                      <div className={style.each_field} style={{alignItems: 'start'}}>
                         <p className="mr-5">ที่อยู่ปัจจุบัน</p>
                         <div>
                           <textarea

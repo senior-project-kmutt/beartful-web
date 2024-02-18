@@ -136,7 +136,7 @@ const ArtworkForm = (props: Props) => {
       <NavBar />
       <div className="flex">
 
-        <div>
+        <div style={{width: '18%'}}>
           <ProfileSelectBarFreelance activeMenu="artwork" />
         </div>
 

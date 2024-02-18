@@ -135,11 +135,11 @@ const ProfileBankAccount = () => {
       <NavBar />
       <div className="flex">
 
-        <div>
+        <div style={{width: "18%"}}>
           <ProfileSelectBarFreelance activeMenu="freelanceDetails" />
         </div>
 
-        <div className={`m-12`} style={{ width: '80%' }}>
+        <div className={`my-12 mx-4`} style={{ width: '82%' }}>
           <div className='mb-8'>
             <EducationForm
               defaultFormData={formEducation}

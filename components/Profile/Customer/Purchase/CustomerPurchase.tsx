@@ -61,7 +61,7 @@ const CustomerPurchase = (props: Props) => {
         <>
             <NavBar />
             <div className="flex">
-                <div>
+                <div style={{width: "18%"}}>
                     <ProfileSelectBarCustomer activeMenu='purchase' />
                 </div>
 

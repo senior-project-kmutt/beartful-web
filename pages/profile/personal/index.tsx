@@ -19,12 +19,12 @@ const ProfilePersonal = () => {
       <NavBar />
       <div className="flex">
         {user?.role === 'freelance' && (
-          <div>
+          <div style={{width: "18%"}}>
             <ProfileSelectBarFreelance activeMenu="personal" />
           </div>
         )}
         {user?.role === 'customer' && (
-          <div>
+          <div style={{width: "18%"}}>
             <ProfileSelectBarCustomer activeMenu="personal" />
           </div>
         )}
