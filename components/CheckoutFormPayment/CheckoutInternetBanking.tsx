@@ -1,20 +1,36 @@
-import { Cart } from "@/models/cart";
+import { Cart, CartItem } from "@/models/cart";
 import { CreditCardPayment } from "@/models/payment";
 import { createIternetBankingCharge } from "@/services/payment/checkout.api";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import style from "@/styles/payment/checkout.module.scss"
 import Script from 'next/script';
+import { Quotation } from "@/models/quotation";
+import Swal from "sweetalert2";
+declare global {
+  interface Window {
+    OmiseCard: {
+      configure: (options: { defaultPaymentMethod: string }) => void;
+      configureButton: (selector: string) => void;
+      attach: () => void;
+      open: (options: {
+        frameDescription: string;
+        amount: number;
+        onCreateTokenSuccess: (token: any) => void;
+        onFormClosed: () => void;
+      }) => void;
+    };
+  }
+}
 
 interface Props {
-  cart: Cart
+  cart: Quotation | CartItem
+  createOrderPurchase: (data: any) => void
 }
 
 const CheckoutInternetBanking = (props: Props) => {
-
-  // const publicKey = process.env.OMISE_PUBLIC_KEY;
+  // const publicKey = `${process.env.REACT_APP_OMISE_PUBLIC_KEY}`;
   const publicKey = 'pkey_test_5x1jqlva0xb31kk0ubw';
-  const { cart } = props;
-
+  const { cart, createOrderPurchase } = props;
   let OmiseCard: any;
   const handleScriptLoad = () => {
     OmiseCard = (window as any).OmiseCard;
@@ -27,34 +43,35 @@ const CheckoutInternetBanking = (props: Props) => {
   };
 
   const internetBankingConfigure = () => {
-        OmiseCard.configure({
-      defaultPaymentMethod: "internet_banking",
-      otherPaymentMethods: [
-        // "bill_payment_tesco_lotus",
-        // "alipay",
-        "promptpay",
-        "pay_easy",
-        "net_banking",
-        "convenience_store"
-      ]
-    })
-    OmiseCard.configureButton("#internet-banking");
-    OmiseCard.attach();
+    window.OmiseCard.configure({
+      defaultPaymentMethod: 'promptpay',
+    });
+    window.OmiseCard.configureButton('#internet-banking');
+    window.OmiseCard.attach();
   };
 
   const omiseCardHandler = () => {
-    console.log(cart);
-    OmiseCard.open({
+    window.OmiseCard.open({
       frameDescription: "Invoice #3847",
       amount: cart.amount,
       onCreateTokenSuccess: (token: any) => {
         const charge: CreditCardPayment = {
-          email: cart.email,
-          name: cart.name,
           amount: cart.amount,
           token: token
         }
-        createIternetBankingCharge(charge);
+        createIternetBankingCharge(charge).subscribe(res => {
+          if (res.status == 200) {
+            createOrderPurchase(cart)
+          }
+        }, error => {
+          if (error.response.status == 400) {
+            Swal.fire({
+              title: "เกิดข้อผิดพลาด",
+              text: error.response.data.error,
+              icon: "warning"
+            })
+          }
+        });
       },
       onFormClosed: () => { }
     });
@@ -70,19 +87,19 @@ const CheckoutInternetBanking = (props: Props) => {
     const script = document.createElement('script');
     script.onload = omiseCardHandler;
   }, [handleClick]);
+
   return (
     <div className={style.own_form}>
       <Script src="https://cdn.omise.co/omise.js" onLoad={handleScriptLoad} />
       <form>
-      <button
-            id="internet-banking"
-            className="btn internet-banking"
-            type="button"
-            disabled={cart.amount === 0}
-            onClick={handleClick}
-          >
-            Pay with Internet Banking / Others
-          </button>
+        <button
+          id="internet-banking"
+          className={style.purchaseButton}
+          type="button"
+          onClick={handleClick}
+        >
+          ชำระเงิน
+        </button>
       </form>
     </div>
   )

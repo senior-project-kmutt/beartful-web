@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "@/styles/cart/hiringReviewCartItem.module.scss"
-import { IUser } from "@/pages/chat";
 import { Quotation } from "@/models/quotation";
 import { useRouter } from "next/router";
 import { CartItem } from "@/models/cart";
 import { OrderStatus } from "@/enums/orders";
 import { HIRED_IMAGE, READYMADE_IMAGE } from "@/config/constants";
 import { formattedPrice } from "@/core/tranform";
+import CheckoutCreditCard from "@/components/CheckoutFormPayment/CheckoutCreditCard";
+import CheckoutInternetBanking from "@/components/CheckoutFormPayment/CheckoutInternetBanking";
 
 interface Props {
   data: Quotation | CartItem
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const ReviewCartOrder = (props: Props) => {
+  const [paymentMethod, setPaymentMethod] = useState('promptpay')
   const { data, type, createOrderPurchase } = props;
   const imgItem = type === OrderStatus.hired ? HIRED_IMAGE : READYMADE_IMAGE
   const router = useRouter()
@@ -67,8 +69,8 @@ const ReviewCartOrder = (props: Props) => {
           </div>
           <div className={style.paymentMethod}>
             <p>วิธีการชำระเงิน</p>
-            <button>QR PromptPay</button>
-            <button>Credit / Debit Card</button>
+            <button onClick={() => { setPaymentMethod('promptpay') }}>QR PromptPay</button>
+            <button onClick={() => { setPaymentMethod('creditCard') }}>Credit / Debit Card</button>
           </div>
           <div className={style.amountBlock}>
             <div className={style.payment}>
@@ -82,7 +84,7 @@ const ReviewCartOrder = (props: Props) => {
           </div>
           <div className={style.buttonConfirm}>
             <button className={style.backButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>ย้อนกลับ</button>
-            <button className={style.purchaseButton} onClick={() => createOrderPurchase(data)}>ชำระเงิน</button>
+            {paymentMethod === 'creditCart' ? <CheckoutCreditCard cart={data} createOrderPurchase={createOrderPurchase} /> : <CheckoutInternetBanking cart={data} createOrderPurchase={createOrderPurchase} />}
           </div>
         </div>
       )}

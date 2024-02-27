@@ -7,7 +7,7 @@ export const createCreditCardCharge = (charge:CreditCardPayment): Observable<voi
     return post(url,charge);
 }
 
-export const createIternetBankingCharge = (charge:CreditCardPayment): Observable<void> => {
+export const createIternetBankingCharge = (charge:CreditCardPayment): Observable<any> => {
     const url = `/checkout/prompt-pay`;
     return post(url,charge);
 }

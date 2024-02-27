@@ -1,17 +1,19 @@
-import { Cart } from "@/models/cart";
+import { Cart, CartItem } from "@/models/cart";
 import { CreditCardPayment } from "@/models/payment";
 import { createCreditCardCharge } from "@/services/payment/checkout.api";
 import { useEffect } from "react";
 import style from "@/styles/payment/checkout.module.scss"
 import Script from 'next/script';
+import { Quotation } from "@/models/quotation";
+
 
 interface Props {
-  cart: Cart
+  cart: Quotation | CartItem
+  createOrderPurchase: (data: any) => void
 }
 
 const CheckoutCreditCard = (props: Props) => {
-
-  // const publicKey = process.env.OMISE_PUBLIC_KEY;
+  // const publicKey =`${process.env.OMISE_PUBLIC_KEY}`;
   const publicKey = 'pkey_test_5x1jqlva0xb31kk0ubw';
   const { cart } = props;
 
@@ -42,8 +44,8 @@ const CheckoutCreditCard = (props: Props) => {
       amount: cart.amount,
       onCreateTokenSuccess: (token: any) => {
         const charge: CreditCardPayment = {
-          email: cart.email,
-          name: cart.name,
+          // email: cart.email,
+          // name: cart.name,
           amount: cart.amount,
           token: token
         }
@@ -69,12 +71,12 @@ const CheckoutCreditCard = (props: Props) => {
       <form>
         <button
           id="credit-card"
-          className="btn"
+          className={style.purchaseButton}
           type="button"
           disabled={cart.amount === 0}
           onClick={handleClick}
         >
-          Pay with Credit Card
+          ชำระเงิน
         </button>
       </form>
     </div>
