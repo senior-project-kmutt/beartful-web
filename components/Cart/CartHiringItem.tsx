@@ -5,6 +5,9 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import CartQuotationHiringItem from "./CartQuotationHiringItem";
+import { useEffect, useState } from "react";
+import { IUser } from "@/pages/chat";
+import { createChatRoom } from "@/services/chat/chat.api";
 
 interface Props {
     item: HiringCarts
@@ -13,13 +16,31 @@ interface Props {
 const CartHiringItem = (props: Props) => {
     const router = useRouter()
     const { item } = props
+    const [user, setUser] = useState<IUser>();
 
-    const getDateFormat = (dateTime: Date) => {
-        const dateObject = new Date(dateTime);
-        const date = dateObject.getDate().toString().padStart(2, '0');
-        const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-        const year = dateObject.getFullYear();
-        return `${date}/${month}/${year}`;
+    useEffect(() => {
+        const user = localStorage.getItem("user") || "";
+        if (user) {
+            setUser(JSON.parse(user));
+        }
+    }, []);
+
+    const handleGoToChat = () => {
+        if (user) {
+            const token = localStorage.getItem("auth");
+            const headers = {
+                Authorization: `Bearer ${token}`,
+            };
+            const body = {
+                paticipants: [
+                    user.username,
+                    item.freelanceUsername
+                ]
+            }
+            createChatRoom(body, headers).then(res => {
+                router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/chat?chatRoom=${res._id}`);
+            })
+        }
     }
 
     return (
@@ -28,7 +49,7 @@ const CartHiringItem = (props: Props) => {
                 <FontAwesomeIcon icon={faUser} size="sm" style={{ marginTop: "4px" }}></FontAwesomeIcon>
                 <p className={style.username}>{item.freelanceUsername}</p>
                 <div className="ml-8">
-                    {/* <button className={style.saveButton}>Chat</button> */}
+                    <button className={style.saveButton} onClick={handleGoToChat}>Chat</button>
                     <button className={style.cancelButton}>View profile</button>
                 </div>
             </div>
