@@ -45,13 +45,11 @@ export default function Home() {
     } else {
       router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`)
     }
-
     const urlSearchString = window.location.search;
     const params = new URLSearchParams(urlSearchString);
     const chatRoomId = params.get('chatRoom');
     if (chatRoomId) {
       setChatRoomId(chatRoomId)
-      console.log(chatRoomId);
     } 
   }, []);
 
