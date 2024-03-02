@@ -12,7 +12,7 @@ import CheckoutInternetBanking from "@/components/CheckoutFormPayment/CheckoutIn
 interface Props {
   data: Quotation | CartItem
   type: string;
-  createOrderPurchase: (data: any) => void
+  createOrderPurchase: (data: any, transactionId: string, paymentMethod: string) => void
 }
 
 const ReviewCartOrder = (props: Props) => {
@@ -27,6 +27,14 @@ const ReviewCartOrder = (props: Props) => {
     const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
     const year = dateObject.getFullYear();
     return `${date}/${month}/${year}`;
+  }
+
+  const showModalForPayment = () => {
+    return (
+      paymentMethod === 'creditCard' ?
+        <CheckoutCreditCard cart={data} createOrderPurchase={createOrderPurchase} /> :
+        <CheckoutInternetBanking cart={data} createOrderPurchase={createOrderPurchase} />
+    );
   }
 
   return (
@@ -69,8 +77,8 @@ const ReviewCartOrder = (props: Props) => {
           </div>
           <div className={style.paymentMethod}>
             <p>วิธีการชำระเงิน</p>
-            <button onClick={() => { setPaymentMethod('promptpay') }}>QR PromptPay</button>
-            <button onClick={() => { setPaymentMethod('creditCard') }}>Credit / Debit Card</button>
+            <button onClick={() => { setPaymentMethod('promptpay') }} className={paymentMethod === 'promptpay' ? `${style.purchaseButtonActive}` : `${style.purchaseButton}`}>QR PromptPay</button>
+            <button onClick={() => { setPaymentMethod('creditCard') }} className={paymentMethod === 'creditCard' ? `${style.purchaseButtonActive}` : `${style.purchaseButton}`}>Credit / Debit Card</button>
           </div>
           <div className={style.amountBlock}>
             <div className={style.payment}>
@@ -84,7 +92,7 @@ const ReviewCartOrder = (props: Props) => {
           </div>
           <div className={style.buttonConfirm}>
             <button className={style.backButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>ย้อนกลับ</button>
-            {paymentMethod === 'creditCart' ? <CheckoutCreditCard cart={data} createOrderPurchase={createOrderPurchase} /> : <CheckoutInternetBanking cart={data} createOrderPurchase={createOrderPurchase} />}
+            {showModalForPayment()}
           </div>
         </div>
       )}

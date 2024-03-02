@@ -1,7 +1,7 @@
-import { Cart, CartItem } from "@/models/cart";
+import { CartItem } from "@/models/cart";
 import { CreditCardPayment } from "@/models/payment";
 import { createIternetBankingCharge } from "@/services/payment/checkout.api";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import style from "@/styles/payment/checkout.module.scss"
 import Script from 'next/script';
 import { Quotation } from "@/models/quotation";
@@ -24,11 +24,10 @@ declare global {
 
 interface Props {
   cart: Quotation | CartItem
-  createOrderPurchase: (data: any) => void
+  createOrderPurchase: (data: any, transactionId: string, paymentMethod: string) => void
 }
 
 const CheckoutInternetBanking = (props: Props) => {
-  // const publicKey = `${process.env.REACT_APP_OMISE_PUBLIC_KEY}`;
   const publicKey = 'pkey_test_5x1jqlva0xb31kk0ubw';
   const { cart, createOrderPurchase } = props;
   let OmiseCard: any;
@@ -45,6 +44,7 @@ const CheckoutInternetBanking = (props: Props) => {
   const internetBankingConfigure = () => {
     window.OmiseCard.configure({
       defaultPaymentMethod: 'promptpay',
+      // defaultPaymentMethod: "internet_banking",
     });
     window.OmiseCard.configureButton('#internet-banking');
     window.OmiseCard.attach();
@@ -53,15 +53,15 @@ const CheckoutInternetBanking = (props: Props) => {
   const omiseCardHandler = () => {
     window.OmiseCard.open({
       frameDescription: "Invoice #3847",
-      amount: cart.amount,
+      amount: cart.amount * 100,
       onCreateTokenSuccess: (token: any) => {
         const charge: CreditCardPayment = {
-          amount: cart.amount,
-          token: token
+          amount: cart.amount * 100,
+          token: token,
         }
-        createIternetBankingCharge(charge).subscribe(res => {
+        createIternetBankingCharge(charge).subscribe(async res => {
           if (res.status == 200) {
-            createOrderPurchase(cart)
+            createOrderPurchase(cart, res.data.id, 'promptpay')
           }
         }, error => {
           if (error.response.status == 400) {

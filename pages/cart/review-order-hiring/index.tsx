@@ -49,7 +49,7 @@ const ReviewOrderHiring = () => {
     }
   }, [quotationId]);
 
-  const createOrderPurchase = (data: Quotation) => {
+  const createOrderPurchase = (data: Quotation, transactionId: string, paymentMethod: string) => {
     const token = localStorage.getItem("auth");
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -63,9 +63,10 @@ const ReviewOrderHiring = () => {
         amount: data.amount,
         vat: 0,
         netAmount: data.amount,
-        paymentMethod: 'promptpay',
+        paymentMethod: paymentMethod,
         note: 'This is note',
-        type: OrderStatus.hired
+        type: OrderStatus.hired,
+        chargeId: transactionId
       }
     } as ICreatePurchaseOrder
     createPurchaseOrder(purchaseOrderData, headers).then(res => {

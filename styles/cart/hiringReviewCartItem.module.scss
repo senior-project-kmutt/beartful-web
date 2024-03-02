@@ -112,7 +112,7 @@
         font-weight: 700;
     }
 
-    button {
+    .purchaseButton {
         margin-top: 15px;
         margin-left: 15px;
         width: 170px;
@@ -121,6 +121,18 @@
         color: #E78353;
         font-weight: 500;
         background-color: white;
+        border-radius: 10px;
+    }
+
+    .purchaseButtonActive {
+        margin-top: 15px;
+        margin-left: 15px;
+        width: 170px;
+        height: 30px;
+        border: 1px solid #E78353;
+        color: white;
+        font-weight: 500;
+        background-color: #E78353;
         border-radius: 10px;
     }
 }
@@ -161,6 +173,7 @@
         font-weight: 500;
         background-color: white;
         border-radius: 10px;
+
         &:hover {
             background-color: #873C18;
             color: white;
@@ -176,8 +189,10 @@
         background-color: #E78353;
         border-radius: 10px;
         margin-left: 15px;
+
         &:hover {
             background-color: #873C18;
         }
     }
+
 }

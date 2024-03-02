@@ -14,6 +14,7 @@ export interface IPurchaseOrder {
     estimateTimeFinished?: Date
     note: string
     type: string
+    chargeId?: string
     createdAt?: Date
     updatedAt?: Date
 }
