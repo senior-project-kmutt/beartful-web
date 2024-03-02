@@ -36,6 +36,7 @@ export default function Home() {
   const [chatRoom, setChatRoom] = useState<IChatRoom[]>([])
   const [user, setUser] = useState<IUser>()
   const [selectedChatRoom, setSelectedChatRoom] = useState<IChatRoom>()
+  const [chatRoomId, setChatRoomId] = useState<string>()
 
   useEffect(() => {
     const userFromSession = localStorage.getItem('user');
@@ -44,7 +45,24 @@ export default function Home() {
     } else {
       router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`)
     }
+
+    const urlSearchString = window.location.search;
+    const params = new URLSearchParams(urlSearchString);
+    const chatRoomId = params.get('chatRoom');
+    if (chatRoomId) {
+      setChatRoomId(chatRoomId)
+      console.log(chatRoomId);
+    } 
   }, []);
+
+  useEffect(() => {
+    if (chatRoomId && chatRoom) {
+      const filterChatRoom = chatRoom.filter(item => item._id === chatRoomId)
+      if (filterChatRoom) {
+        setSelectedChatRoom(filterChatRoom[0])
+      }
+    }
+  }, [chatRoomId, chatRoom]);
 
   useEffect(() => {
     const token = localStorage.getItem('auth');
@@ -85,7 +103,7 @@ export default function Home() {
                   <ChatRoomItem
                     chatRoomItem={item}
                     selectedChatRoom={selectedChatRoom}
-                    setSelectedChatRoom={setSelectedChatRoom}
+                    setChatRoomId={setChatRoomId}
                   />
                 </>
               )

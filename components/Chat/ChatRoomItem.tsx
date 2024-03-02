@@ -6,17 +6,19 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClipboard, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { socketMessage } from "@/config/socket";
+import { useRouter } from 'next/router';
 
 interface Props {
   chatRoomItem: IChatRoom
   selectedChatRoom?: IChatRoom
-  setSelectedChatRoom: Dispatch<SetStateAction<IChatRoom | undefined>>
+  setChatRoomId: Dispatch<SetStateAction<string | undefined>>
 }
 
 const ChatRoomItem = (props: Props) => {
-  const { chatRoomItem, selectedChatRoom, setSelectedChatRoom } = props
+  const { chatRoomItem, selectedChatRoom, setChatRoomId } = props
   const [latestMessage, setLatestMessage] = useState<string>("")
   const [isFileMessage, setIsFileMessage] = useState<boolean>(false)
+  const router = useRouter();
   socketMessage.connect();
 
   socketMessage.on("recieved_message", (newMessage) => {
@@ -46,9 +48,14 @@ const ChatRoomItem = (props: Props) => {
       })
     }
   }
+
+  const handleClickChatRoom = () => {
+    setChatRoomId(chatRoomItem._id)
+    router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/chat?chatRoom=${chatRoomItem._id}`);
+  }
   return (
     <div
-      onClick={() => setSelectedChatRoom(chatRoomItem)}
+      onClick={handleClickChatRoom}
       className={`${styles.chat_room_main} ${chatRoomItem._id === selectedChatRoom?._id && `${styles.active}`}`}
     >
       <div className={styles.image}>

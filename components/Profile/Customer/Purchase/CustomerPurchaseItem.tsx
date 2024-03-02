@@ -5,10 +5,11 @@ import { useState } from "react";
 import ReviewModal from "../../Component/ReviewModal";
 import { ICustomerPurchaseOrder } from "@/models/purchaseOrder";
 import { OrderStatusCustomerEnum } from "@/enums/orders";
-import router from "next/router";
+import { useRouter } from "next/router";
 import { IUser } from "@/pages/chat";
 import { HIRED_IMAGE, READYMADE_IMAGE } from "@/config/constants";
 import { formattedPrice } from "@/core/tranform";
+import { createChatRoom } from "@/services/chat/chat.api";
 
 interface Props {
     item: ICustomerPurchaseOrder
@@ -21,6 +22,7 @@ const CustomerPurchaseItem = (props: Props) => {
     const openReviewModal = () => {
         setIsReviewModalOpen(!isReviewModalOpen)
     }
+    const router = useRouter();
 
     const getDateFormat = (dateTime: Date | undefined) => {
         if (dateTime) {
@@ -32,13 +34,29 @@ const CustomerPurchaseItem = (props: Props) => {
         }
     }
 
+    const handleGoToChat = () => {
+        const token = localStorage.getItem("auth");
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+        const body = {
+            paticipants: [
+                user.username,
+                item.freelanceUsername
+            ]
+        }
+        createChatRoom(body, headers).then(res => {
+            router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/chat?chatRoom=${res._id}`);
+        })
+    }
+
     return (
         <div className={style.purchaseItem}>
             <div className={style.profile}>
                 <FontAwesomeIcon icon={faUser} size="sm" style={{ marginTop: "4px" }}></FontAwesomeIcon>
                 <p className={style.username}>{item.freelanceUsername}</p>
                 <div className="ml-8">
-                    {/* <button className={style.saveButton}>Chat</button> */}
+                    <button className={style.saveButton} onClick={handleGoToChat}>Chat</button>
                     <button className={style.cancelButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${item.freelanceUsername}`)}>View profile</button>
                 </div>
             </div>
