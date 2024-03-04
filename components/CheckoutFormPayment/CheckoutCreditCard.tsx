@@ -7,7 +7,6 @@ import Script from 'next/script';
 import { Quotation } from "@/models/quotation";
 import Swal from "sweetalert2";
 
-
 interface Props {
   cart: Quotation | CartItem
   createOrderPurchase: (data: any, transactionId: string, paymentMethod: string) => void
@@ -92,6 +91,7 @@ const CheckoutCreditCard = (props: Props) => {
     const script = document.createElement('script');
     script.onload = omiseCardHandler;
   }, [handleClick]);
+  
   return (
     <div className={style.own_form}>
       <Script src="https://cdn.omise.co/omise.js" onLoad={handleScriptLoad} />
@@ -102,7 +102,7 @@ const CheckoutCreditCard = (props: Props) => {
           type="button"
           onClick={handleClick}
         >
-          ชำระเงิน
+          ชำระเงินC
         </button>
       </form>
     </div>

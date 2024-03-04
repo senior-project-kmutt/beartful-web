@@ -88,6 +88,7 @@ const CheckoutInternetBanking = (props: Props) => {
     script.onload = omiseCardHandler;
   }, [handleClick]);
 
+
   return (
     <div className={style.own_form}>
       <Script src="https://cdn.omise.co/omise.js" onLoad={handleScriptLoad} />
@@ -98,7 +99,7 @@ const CheckoutInternetBanking = (props: Props) => {
           type="button"
           onClick={handleClick}
         >
-          ชำระเงิน
+          ชำระเงินP
         </button>
       </form>
     </div>

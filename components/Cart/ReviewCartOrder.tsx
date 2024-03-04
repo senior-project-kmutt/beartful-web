@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "@/styles/cart/hiringReviewCartItem.module.scss"
 import { Quotation } from "@/models/quotation";
 import { useRouter } from "next/router";
@@ -8,6 +8,7 @@ import { HIRED_IMAGE, READYMADE_IMAGE } from "@/config/constants";
 import { formattedPrice } from "@/core/tranform";
 import CheckoutCreditCard from "@/components/CheckoutFormPayment/CheckoutCreditCard";
 import CheckoutInternetBanking from "@/components/CheckoutFormPayment/CheckoutInternetBanking";
+import Checkout from "../CheckoutFormPayment/Checkout";
 
 interface Props {
   data: Quotation | CartItem
@@ -31,11 +32,20 @@ const ReviewCartOrder = (props: Props) => {
 
   const showModalForPayment = () => {
     return (
+      // <Checkout cart={data} paymentMethod={paymentMethod} createOrderPurchase={createOrderPurchase}></Checkout>
       paymentMethod === 'creditCard' ?
         <CheckoutCreditCard cart={data} createOrderPurchase={createOrderPurchase} /> :
         <CheckoutInternetBanking cart={data} createOrderPurchase={createOrderPurchase} />
     );
   }
+
+  useEffect(() => {
+    showModalForPayment();
+  }, [paymentMethod]);
+
+  const handlePaymentMethodChange = (method: string) => {
+    setPaymentMethod(method);
+  };
 
   return (
     <div className="px-20 py-16">
@@ -77,8 +87,8 @@ const ReviewCartOrder = (props: Props) => {
           </div>
           <div className={style.paymentMethod}>
             <p>วิธีการชำระเงิน</p>
-            <button onClick={() => { setPaymentMethod('promptpay') }} className={paymentMethod === 'promptpay' ? `${style.purchaseButtonActive}` : `${style.purchaseButton}`}>QR PromptPay</button>
-            <button onClick={() => { setPaymentMethod('creditCard') }} className={paymentMethod === 'creditCard' ? `${style.purchaseButtonActive}` : `${style.purchaseButton}`}>Credit / Debit Card</button>
+            <button onClick={() => { handlePaymentMethodChange('promptpay') }} className={paymentMethod === 'promptpay' ? `${style.purchaseButtonActive}` : `${style.purchaseButton}`}>QR PromptPay</button>
+            <button onClick={() => { handlePaymentMethodChange('creditCard') }} className={paymentMethod === 'creditCard' ? `${style.purchaseButtonActive}` : `${style.purchaseButton}`}>Credit / Debit Card</button>
           </div>
           <div className={style.amountBlock}>
             <div className={style.payment}>
