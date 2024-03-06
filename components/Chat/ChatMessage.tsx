@@ -13,7 +13,7 @@ import ChatProfile from './ChatProfile';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
 import { Dropdown } from 'flowbite-react';
 import QuotationModal from '../Profile/Freelance/QuotationModal';
-import QuotationPreviewModal from '../Profile/Freelance/QuotationPreviewModal';
+import ReceiptModal from '../Profile/Freelance/ReceiptModal';
 
 interface Props {
   selectedChatRoom?: IChatRoom
@@ -44,6 +44,7 @@ const ChatMessage = (props: Props) => {
   const [interlocutor, setInterlocutor] = useState<IParticipant>();
   const chatContainerRef = useRef<HTMLDivElement>(null); // Create a ref for the chat container div
   const [isQuotationModalOpen, setIsQuotationModalOpen] = useState<boolean>(false);
+  const [isReceiptModalOpen, setIsReceiptModalOpen] = useState<boolean>(false);
 
   initializeApp(firebaseConfig);
   socketMessage.connect();
@@ -176,8 +177,11 @@ const ChatMessage = (props: Props) => {
   };
 
   const openQuotationModal = () => {
-    console.log(isQuotationModalOpen);
     setIsQuotationModalOpen(!isQuotationModalOpen)
+  }
+
+  const openReceiptModal = () => {
+    setIsReceiptModalOpen(!isReceiptModalOpen)
   }
 
   return (
@@ -247,6 +251,19 @@ const ChatMessage = (props: Props) => {
           </>
         }
 
+        {isReceiptModalOpen &&
+          <>
+            {(selectedChatRoom?.participants[0].username && user?.username) && (
+              <ReceiptModal
+                openReceiptModal={openReceiptModal}
+                sendMessage={submitSend}
+                customerUsername={selectedChatRoom?.participants[0].username}
+                freelanceId={user?.id}
+              />
+            )}
+          </>
+        }
+
         <div className={styles.input_warp}>
           <div className={styles.input_box}>
             {user?.role === 'freelance' && (
@@ -257,7 +274,7 @@ const ChatMessage = (props: Props) => {
               >
                 <Dropdown.Item onClick={openQuotationModal}>สร้างใบเสนอราคา</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item >สร้างใบเสร็จ</Dropdown.Item>
+                <Dropdown.Item onClick={openReceiptModal}>สร้างใบเสร็จ</Dropdown.Item>
               </Dropdown>
             )}
             <div className={styles.input_file}>
