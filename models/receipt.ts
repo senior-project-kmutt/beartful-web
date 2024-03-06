@@ -8,9 +8,10 @@ export interface Receipt {
     freelanceName: string;
     freelanceAddress: string;
     workName: string;
+    description: string;
     benefits: string;
-    startDate: Date;
-    endDate: Date;
+    startDate: Date | string;
+    endDate: Date | string;
     day: number;
     quatity: number;
     numberOfEdit: number;
