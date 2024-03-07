@@ -9,6 +9,7 @@ import { formattedPrice } from "@/core/tranform";
 import CheckoutCreditCard from "@/components/CheckoutFormPayment/CheckoutCreditCard";
 import CheckoutInternetBanking from "@/components/CheckoutFormPayment/CheckoutInternetBanking";
 import Checkout from "../CheckoutFormPayment/Checkout";
+import CheckoutOmise from "../CheckoutFormPayment/CheckoutOmise";
 
 interface Props {
   data: Quotation | CartItem
@@ -102,7 +103,8 @@ const ReviewCartOrder = (props: Props) => {
           </div>
           <div className={style.buttonConfirm}>
             <button className={style.backButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>ย้อนกลับ</button>
-            {showModalForPayment()}
+            {/* {showModalForPayment()} */}
+            <CheckoutOmise cart={data} createOrderPurchase={createOrderPurchase} paymentMethod={paymentMethod} />
           </div>
         </div>
       )}
