@@ -1,6 +1,6 @@
 import { CartItem } from "@/models/cart";
 import { CreditCardPayment } from "@/models/payment";
-import { createCreditCardCharge, createIternetBankingCharge } from "@/services/payment/checkout.api";
+import { createCharge } from "@/services/payment/checkout.api";
 import { useEffect } from "react";
 import style from "@/styles/payment/checkout.module.scss"
 import Script from 'next/script';
@@ -60,23 +60,11 @@ const CheckoutOmise = (props: Props) => {
           amount: cart.amount,
           token: token,
         }
-        // createIternetBankingCharge(charge).subscribe(async res => {
-        //   if (res.status == 200) {
-        //     createOrderPurchase(cart, res.data.id, 'promptpay')
-        //   }
-        // }, error => {
-        //   if (error.response.status == 400) {
-        //     Swal.fire({
-        //       title: "เกิดข้อผิดพลาด",
-        //       text: error.response.data.error,
-        //       icon: "warning"
-        //     })
-        //   }
-        // });
 
-        createCreditCardCharge(charge).subscribe(res => {
+        createCharge(charge, paymentMethod).subscribe(async res => {
           if (res.status == 200) {
-            createOrderPurchase(cart, res.data.charge.id, 'creditCard')
+            const chargeId = paymentMethod==='promptpay'? res.data.id: res.data.charge.id
+            createOrderPurchase(cart, chargeId, paymentMethod)
           }
         }, error => {
           if (error.response.status == 400) {
@@ -106,7 +94,6 @@ const CheckoutOmise = (props: Props) => {
         return 'credit_card'
       default:
         return 'promptpay'
-
     }
   }
 
@@ -125,7 +112,7 @@ const CheckoutOmise = (props: Props) => {
           type="button"
           onClick={handleClick}
         >
-          ชำระเงินP
+          ชำระเงิน
         </button>
       </form>
     </div>

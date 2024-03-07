@@ -31,19 +31,6 @@ const ReviewCartOrder = (props: Props) => {
     return `${date}/${month}/${year}`;
   }
 
-  const showModalForPayment = () => {
-    return (
-      // <Checkout cart={data} paymentMethod={paymentMethod} createOrderPurchase={createOrderPurchase}></Checkout>
-      paymentMethod === 'creditCard' ?
-        <CheckoutCreditCard cart={data} createOrderPurchase={createOrderPurchase} /> :
-        <CheckoutInternetBanking cart={data} createOrderPurchase={createOrderPurchase} />
-    );
-  }
-
-  useEffect(() => {
-    showModalForPayment();
-  }, [paymentMethod]);
-
   const handlePaymentMethodChange = (method: string) => {
     setPaymentMethod(method);
   };
@@ -103,7 +90,6 @@ const ReviewCartOrder = (props: Props) => {
           </div>
           <div className={style.buttonConfirm}>
             <button className={style.backButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>ย้อนกลับ</button>
-            {/* {showModalForPayment()} */}
             <CheckoutOmise cart={data} createOrderPurchase={createOrderPurchase} paymentMethod={paymentMethod} />
           </div>
         </div>
