@@ -18,3 +18,7 @@ export const createPurchaseOrder = (purchaseOrder: ICreatePurchaseOrder, headers
 export const updatePurchaseOrderStatus = (purchaseOrderId: string, status: string, headers: IncomingHttpHeaders): Observable<any> => {
     return patch(`/purchaseOrders/${purchaseOrderId}`, { "status": status }, headers)
 };
+
+export const getPurchaseOrderDetail = (purchaseOrderId: string, headers: IncomingHttpHeaders): Observable<any> => {
+    return get(`/purchaseOrders/${purchaseOrderId}`, headers)
+};

@@ -54,8 +54,27 @@ export interface IFreelancePurchaseOrder {
     order: IGetOrder[]
 }
 
+export interface IPurchaseOrderDetail {
+    freelance: IFreelance
+    customer: ICustomer
+    order: IGetOrder
+}
+
+export interface IFreelance {
+    firstname: string
+    lastname: string
+    address: string
+}
+
+export interface ICustomer {
+    firstname: string
+    lastname: string
+}
+
 export interface PayAmount {
     net: number,
     fee: number,
     vat: number
 }
+
+export const CustomerStatus = () => {}
