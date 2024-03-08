@@ -273,8 +273,8 @@ const ChatMessage = (props: Props) => {
                 label={<FontAwesomeIcon className={styles.icon} icon={faCirclePlus} size='lg' />}
               >
                 <Dropdown.Item onClick={openQuotationModal}>สร้างใบเสนอราคา</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item onClick={openReceiptModal}>สร้างใบเสร็จ</Dropdown.Item>
+                {/* <Dropdown.Divider /> */}
+                {/* <Dropdown.Item onClick={openReceiptModal}>สร้างใบเสร็จ</Dropdown.Item> */}
               </Dropdown>
             )}
             <div className={styles.input_file}>
