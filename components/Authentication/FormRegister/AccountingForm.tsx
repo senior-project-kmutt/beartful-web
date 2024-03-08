@@ -7,6 +7,7 @@ export interface AccountItem {
   bankName: string;
   bankAccountNumber: string;
   bankAccountImage: File | string | null;
+  bankAccountName: string;
 }
 
 interface ValidateAccounting {
@@ -23,7 +24,8 @@ const AccountingForm = (props: Props) => {
   const defaultItem = {
     bankName: '',
     bankAccountNumber: '',
-    bankAccountImage: null
+    bankAccountImage: null,
+    bankAccountName: ''
   }
   const { saveFormRegister, defaultFormData, setIsSubmitForm } = props;
   const [accountInfo, setAccountInfo] = useState<AccountItem>(defaultItem);
@@ -37,7 +39,7 @@ const AccountingForm = (props: Props) => {
       if (setIsSubmitForm) {
         setIsSubmitForm(false);
       }
-      
+
       if (defaultFormData.bankAccountImage) {
         if (typeof defaultFormData.bankAccountImage === "object") {
           const imageSrc = convertFileToBlob(defaultFormData.bankAccountImage);
@@ -49,7 +51,7 @@ const AccountingForm = (props: Props) => {
           setImageUpload(defaultFormData.bankAccountImage);
           setImageUploadFile(null);
         }
-        
+
       }
     }
   }, [defaultFormData])
@@ -91,7 +93,7 @@ const AccountingForm = (props: Props) => {
   const onSubmit = async (type: string) => {
     let isValid: boolean = true;
     const newErrorMessage: ValidateAccounting = {};
-    const submitDataForm = {...accountInfo};
+    const submitDataForm = { ...accountInfo };
     if (!accountInfo.bankName) {
       newErrorMessage['bankName'] = 'กรุณาระบุให้ถูกต้อง'
       isValid = false
@@ -99,6 +101,11 @@ const AccountingForm = (props: Props) => {
 
     if (!accountInfo.bankAccountNumber) {
       newErrorMessage['bankAccountNumber'] = 'กรุณาระบุ'
+      isValid = false;
+    }
+
+    if (!accountInfo.bankAccountName) {
+      newErrorMessage['bankAccountName'] = 'กรุณาระบุ'
       isValid = false;
     }
 
@@ -126,7 +133,7 @@ const AccountingForm = (props: Props) => {
       }
     }
   };
-  
+
   return (
     <div>
       <p className='text-xl font-semibold'>ข้อมูลบัญชีและการเงิน</p>
@@ -166,6 +173,21 @@ const AccountingForm = (props: Props) => {
               />
               <p className={style.error_message}>{errorMessage.bankAccountNumber}</p>
               <p className='text-gray-500 mt-1' style={{ fontSize: 'smaller' }}>เลขบัญชีจะต้องตรงกับหน้าสมุดที่อัปโหลด</p>
+            </label>
+          </div>
+          <div className='mt-4'>
+            <label>
+              <div>
+                <p>ชื่อเจ้าของบัญชี</p>
+              </div>
+              <input
+                value={accountInfo.bankAccountName}
+                type="text"
+                name="bankAccountName"
+                onChange={(e) => handleChange(e)}
+              />
+              <p className={style.error_message}>{errorMessage.bankAccountName}</p>
+              <p className='text-gray-500 mt-1' style={{ fontSize: 'smaller' }}>ชื่อเจ้าของบัญชีจะต้องตรงกับหน้าสมุดที่อัปโหลด</p>
             </label>
           </div>
           <div className={style.image_upload}>

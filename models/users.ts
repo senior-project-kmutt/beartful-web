@@ -56,5 +56,6 @@ interface IUserAward {
 interface IUserBankAccount {
   bankName: string;
   bankAccountNumber: string;
-  bankAccountImage: string
+  bankAccountImage: string;
+  bankAccoutName: string;
 }

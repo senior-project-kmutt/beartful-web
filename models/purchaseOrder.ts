@@ -8,12 +8,14 @@ export interface IPurchaseOrder {
     status: string
     amount: number
     vat?: number
+    fee?: number
     netAmount?: number
     confirmedDate?: Date
     paymentMethod: string
     estimateTimeFinished?: Date
     note: string
     type: string
+    chargeId?: string
     createdAt?: Date
     updatedAt?: Date
 }
@@ -52,6 +54,8 @@ export interface IFreelancePurchaseOrder {
     order: IGetOrder[]
 }
 
-export const CustomerStatus = () => {
-
+export interface PayAmount {
+    net: number,
+    fee: number,
+    vat: number
 }

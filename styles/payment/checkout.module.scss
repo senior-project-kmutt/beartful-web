@@ -28,3 +28,17 @@
   transition: all 0.4s;
   width: 100%;
 }
+
+.purchaseButton {
+  width: 150px;
+  height: 40px;
+  color: white;
+  font-weight: 500;
+  background-color: #E78353;
+  border-radius: 10px;
+  margin-left: 15px;
+
+  &:hover {
+    background-color: #873C18;
+  }
+}

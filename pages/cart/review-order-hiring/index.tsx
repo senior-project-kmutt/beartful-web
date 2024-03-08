@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import NavBar from "@/components/Layout/NavBar";
 import ReviewCartOrder from "@/components/Cart/ReviewCartOrder";
 import { IUser } from "@/pages/chat";
-import { ICreatePurchaseOrder } from "@/models/purchaseOrder";
+import { ICreatePurchaseOrder, PayAmount } from "@/models/purchaseOrder";
 import { createPurchaseOrder } from "@/services/purchaseOrder/purchaseOrder.api";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
@@ -49,7 +49,7 @@ const ReviewOrderHiring = () => {
     }
   }, [quotationId]);
 
-  const createOrderPurchase = (data: Quotation) => {
+  const createOrderPurchase = (data: Quotation, transactionId: string, payAmount: PayAmount, paymentMethod: string) => {
     const token = localStorage.getItem("auth");
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -61,11 +61,13 @@ const ReviewOrderHiring = () => {
         quotationId: data._id,
         status: 'pending',
         amount: data.amount,
-        vat: 0,
-        netAmount: data.amount,
-        paymentMethod: 'promptpay',
+        vat: payAmount.vat,
+        fee: payAmount.fee,
+        netAmount: payAmount.net,
+        paymentMethod: paymentMethod,
         note: 'This is note',
-        type: OrderStatus.hired
+        type: OrderStatus.hired,
+        chargeId: transactionId
       }
     } as ICreatePurchaseOrder
     createPurchaseOrder(purchaseOrderData, headers).then(res => {
