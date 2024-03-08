@@ -1,7 +1,5 @@
 
-import { getCustomerPurchaseOrder, updatePurchaseOrderStatus } from "@/services/purchaseOrder/purchaseOrder.api";
-import { IUser } from "@/pages/chat";
-import { IGetOrder, IPurchaseOrderDetail } from "@/models/purchaseOrder";
+import { IPurchaseOrderDetail } from "@/models/purchaseOrder";
 import ReceiptPreviewModal from "../Customer/Receipt/ReceiptPreviewModal";
 import { useState } from "react";
 interface Props {
@@ -10,9 +8,6 @@ interface Props {
 const PurchaseOrderDetail = (props: Props) => {
     const { purchaseOrder } = props
     const [isOpenReceiptModal, setIsOpenReceiptModal] = useState<boolean>(false)
-    const openReceiptModal = () => {
-        setIsOpenReceiptModal(!isOpenReceiptModal)
-      }
     
     return (
         <>

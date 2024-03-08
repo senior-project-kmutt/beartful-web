@@ -1,9 +1,8 @@
 import style from "@/styles/quotation/quotation.module.scss"
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import html2canvas from 'html2canvas';
-import { CreateQuotation } from "@/models/quotation";
 import { LOGO_IMAGE } from "@/config/constants";
-import { IGetOrder, IPurchaseOrderDetail } from "@/models/purchaseOrder";
+import { IPurchaseOrderDetail } from "@/models/purchaseOrder";
 
 interface Props {
   data: IPurchaseOrderDetail;
@@ -12,7 +11,6 @@ interface Props {
 
 const ReceiptImage = (props: Props) => {
   const { data, saveImageData } = props
-  const [imageObject, setImageObject] = useState<string>('')
   useEffect(() => {
     convertToImage();
     return () => {
@@ -25,7 +23,6 @@ const ReceiptImage = (props: Props) => {
 
   const convertToImage = async () => {
     const convertContent = document.getElementById('convert-content');
-    const previewContainer = document.getElementById('preview');
 
     if (convertContent) {
       const canvas = await html2canvas(convertContent, {
@@ -35,21 +32,21 @@ const ReceiptImage = (props: Props) => {
         scrollY: 10
       });
 
-      // To Preview Image
-      // const imgData = canvas.toDataURL('image/png');
-      // const img = document.createElement('img');
-      // img.src = imgData;
-      // previewContainer.appendChild(img);
-
-      // if (saveImageData) {
-      //   canvas.toBlob(blob => {
-      //     if (blob) {
-      //       const fileName = `${data.freelanceName}_${data.customerName}_${getDateFormat(new Date())}`;
-      //       const file = new File([blob], fileName, { type: 'image/png' });
-      //       saveImageData(file);
-      //     }
-      //   }, 'image/png');
-      // }
+      if (saveImageData) {
+        canvas.toBlob(blob => {
+          if (blob) {
+            let fileName = `Receipt.png`;
+            if (data.order.purchaseOrder.type === 'hired') {
+              fileName = `${data.order.quotation?.name}_receipt.png`;
+            }
+            if (data.order.purchaseOrder.type === 'readyMade') {
+              fileName = `${data.order.purchaseOrderItem?.name}_receipt.png`;
+            }
+            const file = new File([blob], fileName, { type: 'image/png' });
+            saveImageData(file);
+          }
+        }, 'image/png');
+      }
 
 
     }
@@ -69,8 +66,6 @@ const ReceiptImage = (props: Props) => {
     const minutes = dateObject.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
   }
-
-  console.log(data, "/////");
 
   return (
     <div className="">
@@ -234,13 +229,8 @@ const ReceiptImage = (props: Props) => {
 
               </div>
             </div>
-
-
           </div>
           <hr className={`${style.line} mt-6`} />
-
-          {/* <p className="mt-3">ชำระเงินภายในวันที่ : xx/xx/xxxx</p> */}
-
           <div className="flex justify-between mt-6">
             <div className=" leading-7">
               <p>การชำระเงิน / Payment</p>

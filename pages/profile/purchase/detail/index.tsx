@@ -1,13 +1,10 @@
 import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBarCustomer from "@/components/Profile/Customer/ProfileSelectBar";
-import CustomerPurchase from "@/components/Profile/Customer/Purchase/CustomerPurchase";
 import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
-import FreelancePurchase from "@/components/Profile/Freelance/Purchase/FreelancePurchase";
-import { IGetOrder, IPurchaseOrderDetail } from "@/models/purchaseOrder";
+import { IPurchaseOrderDetail } from "@/models/purchaseOrder";
 import { IUser } from "@/pages/chat";
 import { getPurchaseOrderDetail } from "@/services/purchaseOrder/purchaseOrder.api";
 import { useEffect, useState } from "react";
-import Purchase from "..";
 import PurchaseOrderDetail from "@/components/Profile/Component/PurchaseOrderDetail";
 
 const OrderDetail = () => {
@@ -25,17 +22,6 @@ const OrderDetail = () => {
         const params = new URLSearchParams(urlSearchString);
         const order = params.get('order');
         setOrderId(order || '')
-
-        const token = localStorage.getItem("auth");
-        const headers = {
-            Authorization: `Bearer ${token}`,
-        };
-
-        if (orderId) {
-            getPurchaseOrderDetail(orderId, headers).subscribe(res => {
-                console.log(res);
-            })
-        }
     }, []);
 
     useEffect(() => {
@@ -49,8 +35,6 @@ const OrderDetail = () => {
             })
         }
     }, [orderId]);
-
-    console.log(purchaseOrder, "?????");
 
     return (
         <>
