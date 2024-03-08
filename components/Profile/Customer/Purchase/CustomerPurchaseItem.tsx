@@ -50,6 +50,10 @@ const CustomerPurchaseItem = (props: Props) => {
         })
     }
 
+    const handleGoToDetail = (orderId: string) => {
+        router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase/detail/?order=${orderId}`)
+    }
+
     return (
         <div className={style.purchaseItem}>
             <div className={style.profile}>
@@ -80,7 +84,7 @@ const CustomerPurchaseItem = (props: Props) => {
                         </div>}
                         <div className={style.confirm} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '110px' : '60px' }} >
                             <div className={style.status} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '-95px' : '-50px' }}>{OrderStatusCustomerEnum[item.purchaseOrder.status as keyof typeof OrderStatusCustomerEnum]}</div>
-                            <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>
+                            <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl" onClick={() => handleGoToDetail(item.purchaseOrder._id || '')}></FontAwesomeIcon>
                             {item.purchaseOrder.status === 'success' && (
                                 <div>
                                     {isReviewModalOpen && <ReviewModal openReviewModal={openReviewModal} />}
