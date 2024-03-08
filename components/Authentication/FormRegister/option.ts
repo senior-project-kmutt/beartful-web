@@ -55,70 +55,66 @@ export const skillAndLanguageLevel = [
 export const bankOption = [
     {
         title: 'ธนาคารกรุงเทพ',
-        value: 'BBL'
+        value: 'bbl'
     },
     {
         title: 'ธนาคารกสิกรไทย',
-        value: 'KBANK'
+        value: 'kbank'
     },
     {
         title: 'ธนาคารกรุงไทย',
-        value: 'KTB'
-    },
-    {
-        title: 'ธนาคารทหารไทย',
-        value: 'TMB'
+        value: 'ktb'
     },
     {
         title: 'ธนาคารไทยพาณิชย์',
-        value: 'SCB'
+        value: 'scb'
     },
     {
         title: 'ธนาคารกรุงศรีอยุธยา',
-        value: 'BAY'
+        value: 'bay'
     },
     {
         title: 'ธนาคารเกียรตินาคิน',
-        value: 'KKP'
+        value: 'kk'
     },
     {
         title: 'ธนาคารซีไอเอ็มบีไทย',
-        value: 'CIMBT'
+        value: 'cimb'
     },
     {
         title: 'ธนาคารทิสโก้',
-        value: 'TISCO'
+        value: 'tisco'
     },
     {
         title: 'ธนาคารทหารไทยธนชาต',
-        value: 'TTB'
+        value: 'ttb'
     },
     {
         title: 'ธนาคารยูโอบี',
-        value: 'UOB'
+        value: 'uob'
     },
     {
         title: 'ธนาคารแลนด์ แอนด์ เฮาส์',
-        value: 'LHBANK'
+        value: 'lhb'
     },
     {
         title: 'ธนาคารไอซีบีซี (ไทย)',
-        value: 'ICBC'
+        value: 'icbc'
     },
     {
         title: 'ธ.ก.ส.',
-        value: 'BAAC'
+        value: 'baac'
     },
     {
         title: 'ธนาคารออมสิน',
-        value: 'GSB'
+        value: 'gsb'
     },
     {
         title: 'ธนาคารอาคารสงเคราะห์',
-        value: 'GHB'
+        value: 'ghb'
     },
     {
         title: 'ธนาคารอิสลามแห่งประเทศไทย',
-        value: 'ISBT'
+        value: 'ibank'
     },
 ]

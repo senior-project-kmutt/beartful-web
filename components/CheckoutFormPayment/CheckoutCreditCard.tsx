@@ -1,19 +1,37 @@
-import { Cart } from "@/models/cart";
+import { Cart, CartItem } from "@/models/cart";
 import { CreditCardPayment } from "@/models/payment";
 import { createCreditCardCharge } from "@/services/payment/checkout.api";
 import { useEffect } from "react";
 import style from "@/styles/payment/checkout.module.scss"
 import Script from 'next/script';
+import { Quotation } from "@/models/quotation";
+import Swal from "sweetalert2";
 
 interface Props {
-  cart: Cart
+  cart: Quotation | CartItem
+  createOrderPurchase: (data: any, transactionId: string, paymentMethod: string) => void
+}
+
+declare global {
+  interface Window {
+    OmiseCard: {
+      configure: (options: { defaultPaymentMethod: string }) => void;
+      configureButton: (selector: string) => void;
+      attach: () => void;
+      open: (options: {
+        frameDescription: string;
+        amount: number;
+        onCreateTokenSuccess: (token: any) => void;
+        onFormClosed: () => void;
+      }) => void;
+    };
+  }
 }
 
 const CheckoutCreditCard = (props: Props) => {
-
-  // const publicKey = process.env.OMISE_PUBLIC_KEY;
+  // const publicKey =`${process.env.OMISE_PUBLIC_KEY}`;
   const publicKey = 'pkey_test_5x1jqlva0xb31kk0ubw';
-  const { cart } = props;
+  const { cart, createOrderPurchase } = props;
 
   let OmiseCard: any;
   const handleScriptLoad = () => {
@@ -27,27 +45,37 @@ const CheckoutCreditCard = (props: Props) => {
   };
 
   const creditCardConfigure = () => {
-    OmiseCard.configure({
+    window.OmiseCard.configure({
       defaultPaymentMethod: "credit_card",
-      otherPaymentMethods: []
     });
-    OmiseCard.configureButton("#credit-card");
-    OmiseCard.attach();
+    window.OmiseCard.configureButton("#credit-card");
+    window.OmiseCard.attach();
   };
 
   const omiseCardHandler = () => {
-    console.log(cart);
-    OmiseCard.open({
+    window.OmiseCard.open({
       frameDescription: "Invoice #3847",
-      amount: cart.amount,
+      amount: cart.amount * 100,
       onCreateTokenSuccess: (token: any) => {
         const charge: CreditCardPayment = {
-          email: cart.email,
-          name: cart.name,
+          // email: cart.email,
+          // name: cart.name,
           amount: cart.amount,
           token: token
         }
-        createCreditCardCharge(charge);
+        createCreditCardCharge(charge).subscribe(res => {
+          if (res.status == 200) {
+            createOrderPurchase(cart, res.data.charge.id, 'creditCard')
+          }
+        }, error => {
+          if (error.response.status == 400) {
+            Swal.fire({
+              title: "เกิดข้อผิดพลาด",
+              text: error.response.data.error,
+              icon: "warning"
+            })
+          }
+        });
       },
       onFormClosed: () => { }
     });
@@ -63,18 +91,18 @@ const CheckoutCreditCard = (props: Props) => {
     const script = document.createElement('script');
     script.onload = omiseCardHandler;
   }, [handleClick]);
+  
   return (
     <div className={style.own_form}>
       <Script src="https://cdn.omise.co/omise.js" onLoad={handleScriptLoad} />
       <form>
         <button
           id="credit-card"
-          className="btn"
+          className={style.purchaseButton}
           type="button"
-          disabled={cart.amount === 0}
           onClick={handleClick}
         >
-          Pay with Credit Card
+          ชำระเงินC
         </button>
       </form>
     </div>

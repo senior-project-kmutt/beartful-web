@@ -1,11 +1,12 @@
 import { CartItem } from "@/models/cart";
 import { CreditCardPayment } from "@/models/payment";
-import { createIternetBankingCharge } from "@/services/payment/checkout.api";
+import { createCharge } from "@/services/payment/checkout.api";
 import { useEffect } from "react";
 import style from "@/styles/payment/checkout.module.scss"
 import Script from 'next/script';
 import { Quotation } from "@/models/quotation";
 import Swal from "sweetalert2";
+import { PayAmount } from "@/models/purchaseOrder";
 declare global {
   interface Window {
     OmiseCard: {
@@ -23,13 +24,14 @@ declare global {
 }
 
 interface Props {
-  cart: Quotation | CartItem
-  createOrderPurchase: (data: any, transactionId: string, paymentMethod: string) => void
+  cart: Quotation | CartItem;
+  paymentMethod: string;
+  createOrderPurchase: (data: any, transactionId: string, payAmount: PayAmount, paymentMethod: string) => void
 }
 
-const CheckoutInternetBanking = (props: Props) => {
+const CheckoutOmise = (props: Props) => {
   const publicKey = 'pkey_test_5x1jqlva0xb31kk0ubw';
-  const { cart, createOrderPurchase } = props;
+  const { cart, createOrderPurchase, paymentMethod } = props;
   let OmiseCard: any;
   const handleScriptLoad = () => {
     OmiseCard = (window as any).OmiseCard;
@@ -43,8 +45,7 @@ const CheckoutInternetBanking = (props: Props) => {
 
   const internetBankingConfigure = () => {
     window.OmiseCard.configure({
-      defaultPaymentMethod: 'promptpay',
-      // defaultPaymentMethod: "internet_banking",
+      defaultPaymentMethod: getMethodName(),
     });
     window.OmiseCard.configureButton('#internet-banking');
     window.OmiseCard.attach();
@@ -56,12 +57,19 @@ const CheckoutInternetBanking = (props: Props) => {
       amount: cart.amount * 100,
       onCreateTokenSuccess: (token: any) => {
         const charge: CreditCardPayment = {
-          amount: cart.amount * 100,
+          amount: cart.amount,
           token: token,
         }
-        createIternetBankingCharge(charge).subscribe(async res => {
+
+        createCharge(charge, paymentMethod).subscribe(async res => {
           if (res.status == 200) {
-            createOrderPurchase(cart, res.data.id, 'promptpay')
+            const chargeId = paymentMethod === 'promptpay' ? res.data.id : res.data.charge.id
+            const payAmount: PayAmount = {
+              net: res.data.net / 100,
+              fee: res.data.fee / 100,
+              vat: res.data.fee_vat / 100
+            }
+            createOrderPurchase(cart, chargeId, payAmount, paymentMethod)
           }
         }, error => {
           if (error.response.status == 400) {
@@ -83,11 +91,21 @@ const CheckoutInternetBanking = (props: Props) => {
     omiseCardHandler();
   };
 
+  const getMethodName = () => {
+    switch (paymentMethod) {
+      case 'promptpay':
+        return 'promptpay'
+      case 'creditCard':
+        return 'credit_card'
+      default:
+        return 'promptpay'
+    }
+  }
+
   useEffect(() => {
     const script = document.createElement('script');
     script.onload = omiseCardHandler;
-  }, [handleClick]);
-
+  }, []);
 
   return (
     <div className={style.own_form}>
@@ -99,7 +117,7 @@ const CheckoutInternetBanking = (props: Props) => {
           type="button"
           onClick={handleClick}
         >
-          ชำระเงินP
+          ชำระเงิน
         </button>
       </form>
     </div>
@@ -107,4 +125,4 @@ const CheckoutInternetBanking = (props: Props) => {
 
 }
 
-export default CheckoutInternetBanking;
+export default CheckoutOmise;

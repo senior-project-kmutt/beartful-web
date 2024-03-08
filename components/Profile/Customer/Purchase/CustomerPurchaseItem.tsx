@@ -75,12 +75,12 @@ const CustomerPurchaseItem = (props: Props) => {
                             <p className={style.description}>สิ่งที่ได้รับ : {item.quotation?.benefits}</p>
                             <p className={style.description}>การแก้ไข : {item.quotation?.numberOfEdit}</p>
                             <p className={style.description}>ระยะเวลาการทำงาน : {getDateFormat(item.quotation?.startDate)} - {getDateFormat(item.quotation?.endDate)}</p>
-                            <p className={style.price}>{formattedPrice(item.purchaseOrder.netAmount!)} บาท</p>
+                            <p className={style.price}>{formattedPrice(item.purchaseOrder.amount!)} บาท</p>
                         </div>}
                         {item.purchaseOrder.type === 'readyMade' && <div className={style.detail}>
                             <p className={style.artworkName}>{item.purchaseOrderItem?.name}</p>
                             <p className={style.description}>{item.purchaseOrderItem?.description}</p>
-                            <p className={style.price}>{formattedPrice(item.purchaseOrder.netAmount!)} บาท</p>
+                            <p className={style.price}>{formattedPrice(item.purchaseOrder.amount!)} บาท</p>
                         </div>}
                         <div className={style.confirm} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '110px' : '60px' }} >
                             <div className={style.status} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '-95px' : '-50px' }}>{OrderStatusCustomerEnum[item.purchaseOrder.status as keyof typeof OrderStatusCustomerEnum]}</div>
