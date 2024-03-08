@@ -6,6 +6,7 @@ import style from "@/styles/payment/checkout.module.scss"
 import Script from 'next/script';
 import { Quotation } from "@/models/quotation";
 import Swal from "sweetalert2";
+import { PayAmount } from "@/models/purchaseOrder";
 declare global {
   interface Window {
     OmiseCard: {
@@ -25,7 +26,7 @@ declare global {
 interface Props {
   cart: Quotation | CartItem;
   paymentMethod: string;
-  createOrderPurchase: (data: any, transactionId: string, paymentMethod: string) => void
+  createOrderPurchase: (data: any, transactionId: string, payAmount: PayAmount, paymentMethod: string) => void
 }
 
 const CheckoutOmise = (props: Props) => {
@@ -45,7 +46,6 @@ const CheckoutOmise = (props: Props) => {
   const internetBankingConfigure = () => {
     window.OmiseCard.configure({
       defaultPaymentMethod: getMethodName(),
-      // defaultPaymentMethod: "internet_banking",
     });
     window.OmiseCard.configureButton('#internet-banking');
     window.OmiseCard.attach();
@@ -63,8 +63,13 @@ const CheckoutOmise = (props: Props) => {
 
         createCharge(charge, paymentMethod).subscribe(async res => {
           if (res.status == 200) {
-            const chargeId = paymentMethod==='promptpay'? res.data.id: res.data.charge.id
-            createOrderPurchase(cart, chargeId, paymentMethod)
+            const chargeId = paymentMethod === 'promptpay' ? res.data.id : res.data.charge.id
+            const payAmount: PayAmount = {
+              net: res.data.net / 100,
+              fee: res.data.fee / 100,
+              vat: res.data.fee_vat / 100
+            }
+            createOrderPurchase(cart, chargeId, payAmount, paymentMethod)
           }
         }, error => {
           if (error.response.status == 400) {

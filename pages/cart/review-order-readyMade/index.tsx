@@ -4,7 +4,7 @@ import NavBar from "@/components/Layout/NavBar";
 import ReviewCartOrder from "@/components/Cart/ReviewCartOrder";
 import { CartItem } from "@/models/cart";
 import { deleteCartById, getCartById } from "@/services/cart/cart.api";
-import { ICreatePurchaseOrder } from "@/models/purchaseOrder";
+import { ICreatePurchaseOrder, PayAmount } from "@/models/purchaseOrder";
 import { useRouter } from "next/router";
 import { OrderStatus } from "@/enums/orders";
 import { createPurchaseOrder } from "@/services/purchaseOrder/purchaseOrder.api";
@@ -39,7 +39,7 @@ const ReviewOrderHiring = () => {
     }
   }, [cartItemId]);
 
-  const createOrderPurchase = (data: CartItem, transactionId: string, paymentMethod: string) => {
+  const createOrderPurchase = (data: CartItem, transactionId: string, payAmount: PayAmount, paymentMethod: string) => {
     const token = localStorage.getItem("auth");
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -50,8 +50,9 @@ const ReviewOrderHiring = () => {
         customerId: data.customerId,
         status: 'pending',
         amount: data.amount,
-        vat: 0,
-        netAmount: data.netAmount,
+        vat: payAmount.vat,
+        fee: payAmount.fee,
+        netAmount: payAmount.net,
         paymentMethod: paymentMethod,
         note: 'This is note',
         type: OrderStatus.readyMade,
@@ -74,8 +75,6 @@ const ReviewOrderHiring = () => {
       });
     })
   }
-
-  console.log(cartItem);
 
   return (
     <div>

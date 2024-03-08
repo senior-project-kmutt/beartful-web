@@ -6,15 +6,13 @@ import { CartItem } from "@/models/cart";
 import { OrderStatus } from "@/enums/orders";
 import { HIRED_IMAGE, READYMADE_IMAGE } from "@/config/constants";
 import { formattedPrice } from "@/core/tranform";
-import CheckoutCreditCard from "@/components/CheckoutFormPayment/CheckoutCreditCard";
-import CheckoutInternetBanking from "@/components/CheckoutFormPayment/CheckoutInternetBanking";
-import Checkout from "../CheckoutFormPayment/Checkout";
 import CheckoutOmise from "../CheckoutFormPayment/CheckoutOmise";
+import { PayAmount } from "@/models/purchaseOrder";
 
 interface Props {
   data: Quotation | CartItem
   type: string;
-  createOrderPurchase: (data: any, transactionId: string, paymentMethod: string) => void
+  createOrderPurchase: (data: any, transactionId: string, payAmount: PayAmount, paymentMethod: string) => void
 }
 
 const ReviewCartOrder = (props: Props) => {
