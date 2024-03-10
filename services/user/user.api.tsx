@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { get, getPromise, patchPromise, post } from "../HttpClient";
+import { deletePromise, get, getPromise, patchPromise, post } from "../HttpClient";
 import { LoginUser, Users } from "@/models/users";
 import { IncomingHttpHeaders } from "http";
 
@@ -43,4 +43,8 @@ export const updateFreelanceDetails = (userId: string, body: any, headers: Incom
 
 export const updatePersonal = (userId: string, body: any, headers: IncomingHttpHeaders): Promise<any> => {
   return patchPromise(`/user/${userId}/personal`, body, headers);
+};
+
+export const deleteUser = (userId: string, headers: IncomingHttpHeaders): Promise<any> => {
+  return deletePromise(`/user/${userId}`, headers);
 };
