@@ -11,6 +11,7 @@ export const errorMessageEmtryField: Record<string, string> = {
     phoneNumber: 'กรุณาระบุเบอร์โทรศัพท์',
     password: 'กรุณาระบุรหัสผ่าน',
     confirmPassword: 'กรุณายืนยันรหัสผ่าน',
+    dateOfBirth: 'กรุณาเลือก วันที่ เดือน ปี ให้ครบ',
     address: 'กรุณาระบุที่อยู่'
 }
 

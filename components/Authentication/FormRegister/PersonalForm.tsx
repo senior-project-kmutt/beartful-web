@@ -46,9 +46,9 @@ const PersonalForm = (props: Props) => {
         ...formPersonal,
         role: roleSelected,
         profileImage: defaultProfileImage,
-        date: 1,
-        month: 0,
-        year: 4560
+        date: "",
+        month: "",
+        year: ""
       })
     }
   }, [])
@@ -73,6 +73,14 @@ const PersonalForm = (props: Props) => {
       ...errorMessage,
       [inputName]: ''
     })
+
+    if ((inputName === 'date' || inputName === 'month' || inputName === 'year')) {
+      setErrorMessage({
+        ...errorMessage,
+        dateOfBirth: ''
+      })
+
+    }
 
     if (inputName === 'role') {
       setRoleSelected(inputValue);
@@ -100,7 +108,7 @@ const PersonalForm = (props: Props) => {
   const onSubmit = async () => {
     let isValid: boolean = true;
     const newErrorMessage: formDataType = {};
-    const submitDataForm = formPersonal;
+    const submitDataForm = { ...formPersonal };
 
     if (roleSelected === 'customer') {
       requiredFieldsCustomer.forEach(key => {
@@ -113,8 +121,10 @@ const PersonalForm = (props: Props) => {
 
     if (roleSelected === 'freelance') {
       const { date, month, year } = submitDataForm;
-      const dateOfBirth = new Date(year - 543, month, date);
-      submitDataForm['dateOfBirth'] = dateOfBirth;
+      if ((date && month && year)) {
+        const dateOfBirth = new Date(year - 543, month, date);
+        submitDataForm['dateOfBirth'] = dateOfBirth;
+      }
       requiredFieldsFreelancePersonal.forEach(key => {
         if (!submitDataForm[key]) {
           newErrorMessage[key] = errorMessageEmtryField[key];
@@ -122,10 +132,6 @@ const PersonalForm = (props: Props) => {
         }
       });
     }
-
-    delete submitDataForm['date'];
-    delete submitDataForm['month'];
-    delete submitDataForm['year'];
 
     if (!regexpEmail.test(submitDataForm['email'])) {
       newErrorMessage['email'] = 'กรุณาระบุ e-mail ให้ถูกต้อง'
@@ -144,6 +150,9 @@ const PersonalForm = (props: Props) => {
 
     setErrorMessage(newErrorMessage);
     if (isValid) {
+      delete submitDataForm['date'];
+      delete submitDataForm['month'];
+      delete submitDataForm['year'];
       if (profileImageFile) {
         submitDataForm['profileImage'] = profileImageFile
       } else {
@@ -310,6 +319,7 @@ const PersonalForm = (props: Props) => {
                       id="date"
                       name="date"
                     >
+                      <option value="" disabled selected>- เลือกวันที่ -</option>
                       {generateOptions(1, 31)}
                     </select>
                   </div>
@@ -320,6 +330,7 @@ const PersonalForm = (props: Props) => {
                       id="month"
                       name="month"
                     >
+                      <option value="" disabled selected>- เลือกเดือน -</option>
                       {thaiMonths.map((month, index) => {
                         return (
                           <option key={index} value={index}>{month}</option>
@@ -334,10 +345,12 @@ const PersonalForm = (props: Props) => {
                       id="year"
                       name="year"
                     >
+                      <option value="" disabled selected>- เลือกปี -</option>
                       {generateOptions(2460, 2549)}
                     </select>
                   </div>
                 </div>
+                <p className={`${style.error} pt-1`}>{errorMessage.dateOfBirth}</p>
               </div>
               <div>
                 <label>
