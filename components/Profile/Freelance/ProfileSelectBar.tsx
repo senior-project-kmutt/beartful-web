@@ -1,6 +1,6 @@
 import style from "@/styles/profile/freelance/profileSelectBar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faStar, faUser, faWindowRestore } from "@fortawesome/free-solid-svg-icons";
+import { faDonate, faPenToSquare, faStar, faUser, faWindowRestore } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
 import { freelanceSelectBarMenu } from "./selectBarMenu";
 import { useEffect, useState } from "react";
@@ -52,9 +52,15 @@ const ProfileSelectBarFreelance = (props: Props) => {
                             </p>
                         </div>
                         <div className="score">
-                            <p className={`${style.heading} ${activeMenu === 'review' && `${style.activeMenu}`} cursor-pointer cursor-pointer`}
+                            <p className={`${style.heading} ${activeMenu === 'review' && `${style.activeMenu}`} cursor-pointer`}
                                 onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/review`)}>
                                 <FontAwesomeIcon icon={faStar} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> คะแนนของฉัน
+                            </p>
+                        </div>
+                        <div className="transfer">
+                            <p className={`${style.heading} ${activeMenu === 'transfer' && `${style.activeMenu}`} cursor-pointer`}
+                                onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/transfer`)}>
+                                <FontAwesomeIcon icon={faDonate} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> เงินในบัญชีของฉัน
                             </p>
                         </div>
                     </div>
