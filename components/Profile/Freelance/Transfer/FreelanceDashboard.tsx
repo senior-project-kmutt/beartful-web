@@ -1,4 +1,5 @@
 import { formattedPrice } from "@/core/tranform";
+import { UserDashboard } from "@/models/users";
 import style from "@/styles/profile/freelance/transfer/freelanceTransfer.module.scss"
 import { Dispatch, SetStateAction } from "react";
 
@@ -6,10 +7,11 @@ import { Dispatch, SetStateAction } from "react";
 interface Props {
     title: string
     setSlug: Dispatch<SetStateAction<string>>;
+    data: UserDashboard
 }
 
 const FreelanceDashboard = (props: Props) => {
-    const { title, setSlug } = props
+    const { title, setSlug, data } = props
     return (
         <>
             <div className={style.main}>
@@ -19,7 +21,7 @@ const FreelanceDashboard = (props: Props) => {
                         <div className={style.blockLabel}>.</div>
                         <div className={style.group}>
                             <p className={style.balanceText}>My balance</p>
-                            <p className={style.amount}>{formattedPrice(1500)} บาท</p>
+                            <p className={style.amount}>{formattedPrice(data.amount)} บาท</p>
                         </div>
                     </div>
                     <div className={style.block2}>

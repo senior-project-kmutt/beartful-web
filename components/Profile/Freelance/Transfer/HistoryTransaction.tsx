@@ -1,19 +1,33 @@
 import style from "@/styles/profile/freelance/transfer/freelanceTransfer.module.scss"
 import TransactionItem from "./TransactionItem";
+import { ITransaction } from "@/models/users";
+import { useState } from "react";
 
-const HistoryTransaction = () => {
+interface Props {
+    data: ITransaction[]
+}
+
+const HistoryTransaction = (props: Props) => {
+    const { data } = props
+    const [showAll, setShowAll] = useState(false);
+
+    const limitedData = showAll ? data : data.slice(0, 5);
+
+    const toggleShowAll = () => {
+        setShowAll(!showAll);
+    };
+
     return (
         <>
-            <div id="add_artwork" className={style.main}>
+            <div className={style.main}>
                 <div className={style.transaction}>
                     <div className={style.transaction_content}>
                         <p className={style.content1}>History Transactions</p>
-                        <p className={style.content2}>Show more</p>
+                        {data.length > 5 && <p className={style.content2} onClick={toggleShowAll}>{showAll ? 'Show less' : 'Show more'}</p>}
                     </div>
-                    <TransactionItem />
-                    <TransactionItem />
-                    <TransactionItem />
-                    <TransactionItem />
+                    {limitedData.map((item, index) => (
+                        <TransactionItem key={index} data={item} />
+                    ))}
                 </div>
             </div>
         </>

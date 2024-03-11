@@ -1,17 +1,25 @@
 import { formattedPrice } from "@/core/tranform";
+import { UserDashboard } from "@/models/users";
 import style from "@/styles/profile/freelance/transfer/freelanceTransfer.module.scss"
 import { faCircleDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, SetStateAction } from "react";
-
+import { bankOption } from "@/components/Authentication/FormRegister/option";
 
 interface Props {
     title: string
     setSlug: Dispatch<SetStateAction<string>>;
+    data: UserDashboard
 }
 
 const FreelanceWithdraw = (props: Props) => {
-    const { title, setSlug } = props
+    const { title, setSlug, data } = props
+
+    const findBankTitle = (value: string) => {
+        const bank = bankOption.find(option => option.value === value);
+        return bank ? bank.title : '';
+    };
+
     return (
         <>
             <div className={style.main}>
@@ -21,14 +29,14 @@ const FreelanceWithdraw = (props: Props) => {
                         <FontAwesomeIcon icon={faCircleDot} size="lg" style={{ color: '#E16428' }} />
                     </div>
                     <div className={style.bankAccount}>
-                        <img src="https://picsum.photos/200" />
-                        <div className="grid grid-cols-2 gap-2 mt-4">
-                            <div className="font-bold">เลขบัญชี</div>
-                            <div>XXXXXXXX</div>
-                            <div className="font-bold">ธนาคาร</div>
-                            <div>ไทยพาณิชย์</div>
-                            <div className="font-bold">ชื่อเจ้าของบัญชี</div>
-                            <div>ชนัญญา สินพิชิต</div>
+                        <img src={data.bankAccount.bankAccountImage} />
+                        <div className="grid grid-cols-10 gap-2 mt-4">
+                            <div className="col-span-4 font-bold">เลขบัญชี</div>
+                            <div className="col-span-6">{data.bankAccount.bankAccountNumber}</div>
+                            <div className="col-span-4 font-bold">ธนาคาร</div>
+                            <div className="col-span-6">{findBankTitle(data.bankAccount.bankName)}</div>
+                            <div className="col-span-4 font-bold">ชื่อเจ้าของบัญชี</div>
+                            <div className="col-span-6">{data.bankAccount.bankAccountName}</div>
                         </div>
                     </div>
                     <div className={style.transferSection}>

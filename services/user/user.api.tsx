@@ -48,3 +48,8 @@ export const updatePersonal = (userId: string, body: any, headers: IncomingHttpH
 export const deleteUser = (userId: string, headers: IncomingHttpHeaders): Promise<any> => {
   return deletePromise(`/user/${userId}`, headers);
 };
+
+export const getFreelanceDashboardById = (userId: string, headers: IncomingHttpHeaders): Promise<any> => {
+  const url = `/user/${userId}/dashboard`;
+  return getPromise(url, headers);
+};

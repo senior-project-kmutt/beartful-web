@@ -57,5 +57,21 @@ interface IUserBankAccount {
   bankName: string;
   bankAccountNumber: string;
   bankAccountImage: string;
-  bankAccoutName: string;
+  bankAccountName: string;
+}
+
+export interface ITransaction {
+  _id: string;
+  type: string;
+  omiseTransactionId: string;
+  amount: number;
+  freelanceId: string;
+  createdAt: Date;
+}
+
+export interface UserDashboard {
+  recipientId: string;
+  amount: number;
+  bankAccount: IUserBankAccount;
+  transaction: ITransaction[];
 }
