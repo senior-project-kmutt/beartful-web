@@ -53,3 +53,8 @@ export const getFreelanceDashboardById = (userId: string, headers: IncomingHttpH
   const url = `/user/${userId}/dashboard`;
   return getPromise(url, headers);
 };
+
+export const freelanceTransfer = (amount: number, headers: IncomingHttpHeaders): Observable<any> => {
+  const url = `/freelance/transfer`;
+  return post(url, {amount: amount}, headers);
+};

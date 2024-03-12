@@ -5,9 +5,9 @@ import { Dispatch, SetStateAction } from "react";
 
 
 interface Props {
-    title: string
+    title: string;
     setSlug: Dispatch<SetStateAction<string>>;
-    data: UserDashboard
+    data: UserDashboard;
 }
 
 const FreelanceDashboard = (props: Props) => {

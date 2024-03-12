@@ -1,7 +1,7 @@
 import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import FreelanceDashboard from "./FreelanceDashboard";
 import HistoryTransaction from "./HistoryTransaction";
-import style from "@/styles/profile/freelance/transfer/freelanceTransfer.module.scss"
+import style from "@/styles/profile/freelance/transfer/freelanceTransfer.module.scss";
 import { useEffect, useState } from "react";
 import FreelanceWithdraw from "./FreelanceWithdraw";
 import { IUser } from "@/pages/chat";
@@ -27,7 +27,6 @@ const FreelanceTransfer = () => {
         const headers = getHeaderRequest();
         if (user) {
             getFreelanceDashboardById(user.id, headers).then((res) => {
-                console.log(res);
                 setData(res);
 
             }).catch(error => console.log(error));
@@ -56,7 +55,7 @@ const FreelanceTransfer = () => {
                         </>}
                     {slug === 'transfer' &&
                         <>
-                            <FreelanceWithdraw setSlug={setSlug} data={data} title='ถอนเงินเข้าบัญชีธนาคารของฉัน' />
+                            <FreelanceWithdraw setSlug={setSlug} data={data} user={user} title='ถอนเงินเข้าบัญชีธนาคารของฉัน' />
                         </>}
                 </div>}
 
@@ -66,7 +65,3 @@ const FreelanceTransfer = () => {
 };
 
 export default FreelanceTransfer;
-
-function getHeaderRequest() {
-    throw new Error("Function not implemented.");
-}
