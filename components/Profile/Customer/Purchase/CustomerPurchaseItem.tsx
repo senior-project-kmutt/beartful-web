@@ -1,15 +1,17 @@
 import style from "@/styles/profile/purchase.module.scss"
 import { faClipboardList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReviewModal from "../../Component/ReviewModal";
-import { ICustomerPurchaseOrder } from "@/models/purchaseOrder";
+import { ICustomerPurchaseOrder, IPurchaseOrderDetail } from "@/models/purchaseOrder";
 import { OrderStatusCustomerEnum } from "@/enums/orders";
 import { useRouter } from "next/router";
 import { IUser } from "@/pages/chat";
 import { HIRED_IMAGE, READYMADE_IMAGE } from "@/config/constants";
 import { formattedPrice } from "@/core/tranform";
 import { createChatRoom } from "@/services/chat/chat.api";
+import ReceiptPreviewModal from "../Receipt/ReceiptPreviewModal";
+import { getPurchaseOrderDetail } from "@/services/purchaseOrder/purchaseOrder.api";
 
 interface Props {
     item: ICustomerPurchaseOrder
@@ -19,6 +21,8 @@ interface Props {
 const CustomerPurchaseItem = (props: Props) => {
     const { item, user, updateStatus } = props
     const [isReviewModalOpen, setIsReviewModalOpen] = useState<boolean>(false);
+    const [isOpenReceiptModal, setIsOpenReceiptModal] = useState<boolean>(false);
+    const [receiptData, setReceiptData] = useState<IPurchaseOrderDetail>();
     const openReviewModal = () => {
         setIsReviewModalOpen(!isReviewModalOpen)
     }
@@ -54,6 +58,17 @@ const CustomerPurchaseItem = (props: Props) => {
         router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase/detail/?order=${orderId}`)
     }
 
+    const handleOpenReceipt = (orderId: string) => {
+        const token = localStorage.getItem("auth");
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+        getPurchaseOrderDetail(orderId, headers).subscribe(res => {
+            setReceiptData(res.data);
+            setIsOpenReceiptModal(true)
+        })
+    }
+
     return (
         <div className={style.purchaseItem}>
             <div className={style.profile}>
@@ -84,7 +99,7 @@ const CustomerPurchaseItem = (props: Props) => {
                         </div>}
                         <div className={style.confirm} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '110px' : '60px' }} >
                             <div className={style.status} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '-95px' : '-50px' }}>{OrderStatusCustomerEnum[item.purchaseOrder.status as keyof typeof OrderStatusCustomerEnum]}</div>
-                            <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl" onClick={() => handleGoToDetail(item.purchaseOrder._id || '')}></FontAwesomeIcon>
+                            {/* <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl" onClick={() => handleGoToDetail(item.purchaseOrder._id || '')}></FontAwesomeIcon> */}
                             {item.purchaseOrder.status === 'success' && (
                                 <div>
                                     {isReviewModalOpen && <ReviewModal openReviewModal={openReviewModal} />}
@@ -103,10 +118,16 @@ const CustomerPurchaseItem = (props: Props) => {
                                     <button className={style.disabletoReviewButton}>ให้คะแนน</button>
                                 </div>
                             )}
+                            <div>
+                                <button className={style.toReviewButton} onClick={() => handleOpenReceipt(item.purchaseOrder._id!)}>ดูใบเสร็จ</button>
+                            </div>
                         </div>
                     </div>
                 )
             })}
+            {(isOpenReceiptModal && receiptData) && (
+                <ReceiptPreviewModal setIsopenModal={setIsOpenReceiptModal} data={receiptData} />
+            )}
         </div>
     );
 };
