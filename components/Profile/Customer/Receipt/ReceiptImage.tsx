@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import html2canvas from 'html2canvas';
 import { LOGO_IMAGE } from "@/config/constants";
 import { IPurchaseOrderDetail } from "@/models/purchaseOrder";
+import jsPDF from 'jspdf';
 
 interface Props {
   data: IPurchaseOrderDetail;
@@ -12,7 +13,8 @@ interface Props {
 const ReceiptImage = (props: Props) => {
   const { data, saveImageData } = props
   useEffect(() => {
-    convertToImage();
+    // convertToImage();
+    convertToPDF();
     return () => {
       const previewContainer = document.getElementById('preview');
       if (previewContainer) {
@@ -20,6 +22,43 @@ const ReceiptImage = (props: Props) => {
       }
     };
   }, []);
+
+  const convertToPDF = async () => {
+    const convertContent = document.getElementById('convert-content');
+
+    if (convertContent && saveImageData) {
+      // Create a new jsPDF instance
+      const pdf = new jsPDF('p', 'pt', 'a4');
+
+      // Convert HTML element to canvas
+      const canvas = await html2canvas(convertContent, {
+        scale: 6,
+        windowWidth: convertContent.offsetWidth * 2,
+        windowHeight: convertContent.offsetHeight * 2,
+        scrollX: 0,
+        scrollY: 0,
+      });
+
+      // Add canvas to PDF
+      const imgData = canvas.toDataURL('image/png');
+      pdf.addImage(imgData, 'PNG', 0, 0, 595, 595); // Assuming A4 size, adjust width and height as needed
+
+      // Save the PDF as Blob
+      const pdfBlob = pdf.output('blob');
+
+      let fileName = `Receipt.pdf`;
+      if (data.order.purchaseOrder.type === 'hired') {
+        fileName = `${data.order.quotation?.name}_receipt.pdf`;
+      }
+      if (data.order.purchaseOrder.type === 'readyMade') {
+        fileName = `${data.order.purchaseOrderItem?.name}_receipt.pdf`;
+      }
+
+      // Create a File object from Blob
+      const file = new File([pdfBlob], fileName, { type: 'application/pdf' });
+      saveImageData(file);
+    }
+  };
 
   const convertToImage = async () => {
     const convertContent = document.getElementById('convert-content');
@@ -47,8 +86,6 @@ const ReceiptImage = (props: Props) => {
           }
         }, 'image/png');
       }
-
-
     }
   };
 
