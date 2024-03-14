@@ -5,7 +5,7 @@ import { IPurchaseOrderDetail } from "@/models/purchaseOrder";
 import { IUser } from "@/pages/chat";
 import { getPurchaseOrderDetail } from "@/services/purchaseOrder/purchaseOrder.api";
 import { useEffect, useState } from "react";
-import PurchaseOrderDetail from "@/components/Profile/Component/PurchaseOrderDetail";
+import PurchaseOrderDetail from "@/components/Profile/Customer/Purchase/PurchaseOrderDetail";
 
 const OrderDetail = () => {
     const [user, setUser] = useState<IUser>();
@@ -41,12 +41,12 @@ const OrderDetail = () => {
             <NavBar />
             <div className="flex">
                 {user?.role === 'freelance' && (
-                    <div style={{ width: "18%" }}>
+                    <div style={{ width: "16%" }}>
                         <ProfileSelectBarFreelance activeMenu="purchase" />
                     </div>
                 )}
                 {user?.role === 'customer' && (
-                    <div style={{ width: "18%" }}>
+                    <div style={{ width: "16%" }}>
                         <ProfileSelectBarCustomer activeMenu="purchase" />
                     </div>
                 )}
