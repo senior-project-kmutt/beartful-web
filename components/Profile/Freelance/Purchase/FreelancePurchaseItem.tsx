@@ -1,10 +1,13 @@
 import style from "@/styles/profile/purchase.module.scss"
 import { faClipboardList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IFreelancePurchaseOrder } from "@/models/purchaseOrder";
+import { IFreelancePurchaseOrder, IPurchaseOrderDetail } from "@/models/purchaseOrder";
 import { OrderStatusFreelanceEnum } from "@/enums/orders";
 import { HIRED_IMAGE, READYMADE_IMAGE } from "@/config/constants";
 import { formattedPrice } from "@/core/tranform";
+import { useState } from "react";
+import { getPurchaseOrderDetail } from "@/services/purchaseOrder/purchaseOrder.api";
+import ReceiptPreviewModal from "../../Customer/Receipt/ReceiptPreviewModal";
 
 interface Props {
     item: IFreelancePurchaseOrder
@@ -12,6 +15,8 @@ interface Props {
 }
 const FreelancePurchaseItem = (props: Props) => {
     const { item, updateStatus } = props
+    const [isOpenReceiptModal, setIsOpenReceiptModal] = useState<boolean>(false);
+    const [receiptData, setReceiptData] = useState<IPurchaseOrderDetail>();
 
     const getDateFormat = (dateTime: Date | undefined) => {
         if (dateTime) {
@@ -21,6 +26,17 @@ const FreelancePurchaseItem = (props: Props) => {
             const year = dateObject.getFullYear();
             return `${date}/${month}/${year}`;
         }
+    }
+
+    const handleOpenReceipt = (orderId: string) => {
+        const token = localStorage.getItem("auth");
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+        getPurchaseOrderDetail(orderId, headers).subscribe(res => {
+            setReceiptData(res.data);
+            setIsOpenReceiptModal(true)
+        })
     }
 
     return (
@@ -53,7 +69,7 @@ const FreelancePurchaseItem = (props: Props) => {
                         </div>}
                         <div className={style.confirm} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '110px' : '60px' }} >
                             <div className={style.status} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '-95px' : '-50px' }}>{OrderStatusFreelanceEnum[item.purchaseOrder.status as keyof typeof OrderStatusFreelanceEnum]}</div>
-                            <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon>
+                            {/* <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon> */}
                             {item.purchaseOrder.status === 'pending' && (
                                 <div>
                                     <button className={style.confirmButton} onClick={() => updateStatus(item.purchaseOrder._id!, "delivered")}>ฉันได้ส่งมอบงานแล้ว</button>
@@ -64,10 +80,16 @@ const FreelancePurchaseItem = (props: Props) => {
                                     <button className={style.disableConfirmButton}>ฉันได้ส่งมอบงานแล้ว</button>
                                 </div>
                             )}
+                            <div>
+                                <button className={style.toReviewButton} onClick={() => handleOpenReceipt(item.purchaseOrder._id!)}>ดูใบเสร็จ</button>
+                            </div>
                         </div>
                     </div>
                 )
             })}
+            {(isOpenReceiptModal && receiptData) && (
+                <ReceiptPreviewModal setIsopenModal={setIsOpenReceiptModal} data={receiptData} />
+            )}
         </div>
     );
 };
