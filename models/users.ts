@@ -67,6 +67,7 @@ export interface ITransaction {
   amount: number;
   freelanceId: string;
   createdAt: Date;
+  from: string;
 }
 
 export interface UserDashboard {

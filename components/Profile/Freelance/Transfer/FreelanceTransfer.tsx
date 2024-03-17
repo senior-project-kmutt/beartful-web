@@ -51,7 +51,7 @@ const FreelanceTransfer = () => {
                     {slug === 'dashboard' &&
                         <>
                             <FreelanceDashboard setSlug={setSlug} data={data} title='เงินในบัญชีของฉัน' />
-                            <HistoryTransaction data={data.transaction} />
+                            <HistoryTransaction data={data.transaction} dashboard={data} />
                         </>}
                     {slug === 'transfer' &&
                         <>
