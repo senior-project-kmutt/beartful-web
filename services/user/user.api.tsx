@@ -45,6 +45,10 @@ export const updatePersonal = (userId: string, body: any, headers: IncomingHttpH
   return patchPromise(`/user/${userId}/personal`, body, headers);
 };
 
+export const updatePassword = (userId: string, body: any, headers: IncomingHttpHeaders): Promise<any> => {
+  return patchPromise(`/user/${userId}/password`, body, headers);
+};
+
 export const deleteUser = (userId: string, headers: IncomingHttpHeaders): Promise<any> => {
   return deletePromise(`/user/${userId}`, headers);
 };
