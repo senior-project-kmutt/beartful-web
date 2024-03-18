@@ -16,6 +16,7 @@ const QuotationModal = (props: Props) => {
     const [isOpenPreviewModal, setIsOpenPreviewModal] = useState<boolean>(false);
     const [quotationData, setQuotationData] = useState<CreateQuotation>();
     const { register, handleSubmit, formState: { errors } } = useForm<Quotation>();
+    const [priceInputValue, setPriceInputValue] = useState<number>();
 
     const onSubmit = handleSubmit(async (data) => {
         const quotationDataTransform = {
@@ -39,6 +40,13 @@ const QuotationModal = (props: Props) => {
         const milliSecond = dateTime.getMilliseconds();
         return `BF-${year}${month}${date}${hours}${minutes}${milliSecond}`
     }
+
+    const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const price = e.target.value;
+        const calculatedValue = parseFloat(price) * 0.9;
+        const formattedValue = calculatedValue.toFixed(2);
+        setPriceInputValue(parseFloat(formattedValue));
+      };
 
     return (
         <Modal size={'3xl'} className={style.quotationModal} show={true}>
@@ -89,7 +97,7 @@ const QuotationModal = (props: Props) => {
                             </div>
                         </div>
 
-                        <div className={style.formGrid}>
+                        <div className={`${style.formGrid} ${style.custom_grid}`}>
                             <div>
                                 <label>จำนวน(ชิ้น)</label>
                                 <input type='number' className={`${style.inputField} ${errors.quatity && `${style.error}`}`} {...register("quatity", { required: true })} />
@@ -97,7 +105,12 @@ const QuotationModal = (props: Props) => {
 
                             <div>
                                 <label>ราคา(บาท)</label>
-                                <input type='number' className={`${style.inputField} ${errors.amount && `${style.error}`}`} {...register("amount", { required: true })} />
+                                <input type='number' className={`${style.inputField} ${errors.amount && `${style.error}`}`} {...register("amount", { required: true })} onChange={handlePriceChange} />
+                            </div>
+
+                            <div>
+                                <label>จำนวนเงินที่จะได้รับ(บาท)</label>
+                                <input type='number' disabled={true} className={`${style.inputField} bg-gray-200`} value={priceInputValue} />
                             </div>
                         </div>
 

@@ -48,6 +48,15 @@ const ArtworkForm = (props: Props) => {
     const token = localStorage.getItem("auth");
     if (token) {
       if (user) {
+        const price = parseFloat(data.price);
+        if (price < 20 || price > 150000) {
+          Swal.fire({
+            title: "ข้อมูลผิดพลาด",
+            text: "ราคาต้องอยู่ในช่วง 20-150,000 บาท",
+            icon: "warning"
+          });
+          return;
+        }
         const artwork = { ...data };
         const headers = {
           Authorization: `Bearer ${token}`,

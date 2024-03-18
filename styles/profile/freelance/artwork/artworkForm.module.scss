@@ -21,6 +21,16 @@
     padding: 0 8px;
 }
 
+.inputFieldSmall {
+    width: 100px;
+    border: 1.5px solid #5A2810;
+    border-radius: 4px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 8px;
+    background-color: lightgray;
+}
+
 .sideBar {
     width: 18%;
 }
@@ -142,6 +152,11 @@
 .errorMessage {
     color: red;
     font-size: small;
+}
+
+.information {
+    font-size: small;
+    color: gray;
 }
 
 @media (max-width:1024px) {

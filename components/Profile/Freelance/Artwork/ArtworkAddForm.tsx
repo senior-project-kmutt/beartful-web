@@ -35,6 +35,8 @@ const ArtworkForm = (props: Props) => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [inputFiles, setInputFiles] = useState<File[]>([]);
   const [imageSrc, setImageSrc] = useState<string[] | ArrayBuffer[] | null>([]);
+  const [priceInputValue, setPriceInputValue] = useState<number>();
+
   initializeApp(firebaseConfig);
 
   useEffect(() => {
@@ -58,6 +60,12 @@ const ArtworkForm = (props: Props) => {
     return imagesUrl;
   };
 
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const price = e.target.value;
+    const calculatedValue = parseFloat(price) * 0.9;
+    const formattedValue = calculatedValue.toFixed(2);
+    setPriceInputValue(parseFloat(formattedValue));
+  };
 
   const handleFileChange = (e: any) => {
     const files = e.target.files;
@@ -87,6 +95,15 @@ const ArtworkForm = (props: Props) => {
       }
 
       if (user) {
+        const price = parseFloat(data.price);
+        if (price < 20 || price > 150000) {
+          Swal.fire({
+            title: "ข้อมูลผิดพลาด",
+            text: "ราคาต้องอยู่ในช่วง 20-150,000 บาท",
+            icon: "warning"
+          });
+          return;
+        }
         const artwork = { ...data, images: imageUrl };
         const headers = {
           Authorization: `Bearer ${token}`,
@@ -136,7 +153,7 @@ const ArtworkForm = (props: Props) => {
       <NavBar />
       <div className="flex">
 
-        <div style={{width: '18%'}}>
+        <div style={{ width: '18%' }}>
           <ProfileSelectBarFreelance activeMenu="artwork" />
         </div>
 
@@ -221,7 +238,15 @@ const ArtworkForm = (props: Props) => {
 
               <label>ราคา</label>
               <div>
-                <input className={style.inputFieldSm} {...register("price", { required: "กรุณากรอกราคา" })} /><span> บาท</span>
+                <input className={style.inputFieldSm} {...register("price", { required: "กรุณากรอกราคา" })} onChange={handlePriceChange} /><span> บาท</span>
+                <span className="ml-5 mr-2">จำนวนเงินที่จะได้รับ</span>
+                <input
+                  className={style.inputFieldSmall}
+                  disabled={true}
+                  value={priceInputValue}
+                />
+                <span> บาท</span>
+                <p className={style.information}>*มีการหักค่าบริการระบบ</p>
                 {errors?.price && <p className={style.errorMessage}>*{errors.price.message}</p>}
               </div>
 
