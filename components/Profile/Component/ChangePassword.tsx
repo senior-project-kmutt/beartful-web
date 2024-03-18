@@ -19,7 +19,7 @@ interface IUpdatePassword {
 const ChangePassword = (props: Props) => {
     const { userId } = props
     const router = useRouter()
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm<IUpdatePassword>();
+    const { register, handleSubmit, formState: { errors }, setValue, clearErrors } = useForm<IUpdatePassword>();
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
     const [showErrorNotMatch, setShowErrorNotMatch] = useState(false);
@@ -70,8 +70,11 @@ const ChangePassword = (props: Props) => {
         }
     });
 
-    const handleOnInputChange = () => {
-        setShowErrorNotMatch(false)
+    const handleOnInputChange = (fieldName: string) => {
+        if (fieldName === "newPassword" || fieldName === "confirmNewPassword") {
+            setShowErrorNotMatch(false);
+            clearErrors(fieldName);
+        }
     }
 
     return (
@@ -87,7 +90,7 @@ const ChangePassword = (props: Props) => {
                             id="newPassword"
                             {...register("newPassword", { required: true })}
                             className={`${style.input} ${errors.newPassword && `${style.error_input}`}`}
-                            onChange={handleOnInputChange}
+                            onChange={() => handleOnInputChange('newPassword')}
                         />
                         {showNewPassword ? (
                             <FontAwesomeIcon className='cursor-pointer' icon={faEye} onClick={toggleShowNewPassword} />
@@ -102,7 +105,7 @@ const ChangePassword = (props: Props) => {
                             id="confirmNewPassword"
                             {...register("confirmNewPassword", { required: true })}
                             className={`${style.input} ${errors.confirmNewPassword && `${style.error_input}`}`}
-                            onChange={handleOnInputChange}
+                            onChange={() => handleOnInputChange('confirmNewPassword')}
                         />
                         {showConfirmNewPassword ? (
                             <FontAwesomeIcon className='cursor-pointer' icon={faEye} onClick={toggleConfirmNewPassword} />
