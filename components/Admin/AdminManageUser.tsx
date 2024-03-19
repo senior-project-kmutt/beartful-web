@@ -1,15 +1,18 @@
 import { formatDateTime } from "@/core/tranform";
-import { UserPagination } from "@/models/users";
+import { FreelanceUsers, UserPagination } from "@/models/users";
 import { getUsers } from "@/services/user/user.api";
 import style from "@/styles/admin/adminManageUser.module.scss";
 import { faBarsStaggered, faChevronDown, faFilter, faReply, faUsersGear } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
+import AdminUserDetailModal from "./AdminUserDetailModal";
 const AdminManageUser = () => {
     const [role, setRole] = useState<string>('')
     const [user, setUser] = useState<UserPagination>()
     const [page, setPage] = useState<number>(1)
     const [totalPage, setTotalPage] = useState<number>(5)
+    const [openDetailModal, setOpenDetailModal] = useState<boolean>(false)
+    const [item, setItem] = useState<FreelanceUsers>()
 
     const columnName = ['Username', 'Email', 'Last Updated', 'Type', 'Action']
     const roleSelect = ['ทั้งหมด', 'customer', 'freelance', 'admin']
@@ -70,7 +73,7 @@ const AdminManageUser = () => {
                             </thead>
                             <tbody>
                                 {user?.users.map((item, index) => (
-                                    <tr key={index} className="odd:bg-white even:bg-[#FFFAF7] border-b">
+                                    <tr key={index} onClick={()=>{setItem(item); setOpenDetailModal(true)}} className="odd:bg-white even:bg-[#FFFAF7] border-b" style={{cursor: 'pointer'}}>
                                         <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                             {item.username}
                                         </td>
@@ -100,6 +103,7 @@ const AdminManageUser = () => {
                         }
                         <FontAwesomeIcon icon={faChevronDown} rotation={270} className="w-1/4 mt-2" color="white" onClick={() => setPage(Math.min(page + 1, totalPage))} />
                     </div>
+                    {(openDetailModal && item) && <AdminUserDetailModal setOpenDetailModal={setOpenDetailModal} data={item} />}
                 </div>
             </div>
         </div>

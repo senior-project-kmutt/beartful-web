@@ -117,3 +117,65 @@
     }
 
 }
+
+.detailTransactionModal {
+    .header {
+        background-color: #E16428;
+
+        h1 {
+            color: white;
+        }
+
+        svg {
+            color: white;
+        }
+    }
+
+    p {
+        font-weight: 500;
+        color: dimgray;
+        font-size: small;
+        margin-top: 8px;
+    }
+
+    .group {
+        display: flex;
+
+        .profileImg {
+            width: 20%;
+            margin-left: 30px;
+
+            img {
+                width: 180px;
+                border-radius: 15px;
+            }
+        }
+
+        .personal {
+            width: 30%;
+            margin-left: 30px;
+        }
+
+        .contact {
+            width: 30%;
+        }
+
+        .role {
+            width: 20%;
+            margin-top: 20px;
+
+            .buttonRole {
+                width: 120px;
+                background-color: #E16428;
+                height: 40px;
+                color: white;
+                font-weight: 500;
+                justify-content: center;
+                text-align: center;
+                padding: 8px;
+                border-radius: 10px;
+            }
+        }
+    }
+
+}

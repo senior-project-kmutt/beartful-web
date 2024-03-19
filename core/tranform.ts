@@ -21,3 +21,25 @@ export const formatDateTime = (dateString: Date) => {
 
     return `${thaiWeekday}, ${day} ${thaiMonth} พ.ศ. ${year}, ${hour}:${minute}`;
 };
+
+export const formatBirthDate = (dateString: Date) => {
+    const thaiMonths = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+    const date = new Date(dateString);
+
+    const day = date.getDate();
+    const thaiMonth = thaiMonths[date.getMonth()];
+    const year = date.getFullYear() + 543;
+
+    return `${day} ${thaiMonth} พ.ศ. ${year}`;
+};
+
+export const formatDateDetailUser = (dateString: Date) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const thaiMonth = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hour = date.getHours().toString().padStart(2, '0');
+    const minute = date.getMinutes().toString().padStart(2, '0');
+
+    return `${day}/${thaiMonth}/${year} ${hour}:${minute}`;
+};
