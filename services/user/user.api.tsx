@@ -60,5 +60,10 @@ export const getFreelanceDashboardById = (userId: string, headers: IncomingHttpH
 
 export const freelanceTransfer = (amount: number, headers: IncomingHttpHeaders): Observable<any> => {
   const url = `/freelance/transfer`;
-  return post(url, {amount: amount}, headers);
+  return post(url, { amount: amount }, headers);
+};
+
+export const getUsers = (page: number, pageSize: number, role: string): Observable<any> => {
+  const params = `?page=${page}&pageSize=${pageSize}&role=${role}`
+  return get(`/user${params}`);
 };

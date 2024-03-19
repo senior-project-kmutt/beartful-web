@@ -1,0 +1,119 @@
+.container {
+
+    .heading {
+        font-size: x-large;
+        text-align: center;
+        justify-content: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        font-weight: 500;
+    }
+
+    .box {
+        display: flex;
+
+        .sidebar {
+            width: 17%;
+            height: 60px;
+            margin-left: 3%;
+            display: flex;
+
+            .bar {
+                background-color: #E16428;
+                width: 3%;
+                margin-right: 12px;
+                color: #E16428;
+                border-top-right-radius: 6px;
+                border-bottom-right-radius: 6px;
+            }
+
+            .icon {
+                background-color: #E16428;
+                border-radius: 6px;
+                padding: 10px;
+                padding-top: 17px;
+                width: 100%;
+                display: flex;
+
+                .title {
+                    padding-left: 10px;
+                    color: white;
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .user {
+            width: 83%;
+            margin-left: 3%;
+            margin-right: 3%;
+
+            .filterUser {
+                display: flex;
+                background-color: #E16428;
+                width: 35%;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                cursor: pointer;
+
+
+                select {
+                    cursor: pointer;
+                    background-color: #E16428;
+                    border-color: #ffffff;
+                    border-top: none;
+                    border-right: none;
+                    border-bottom: none;
+                    color: white;
+                    appearance: none;
+                    -moz-appearance: none;
+                    -webkit-appearance: none;
+                    padding-right: 30px;
+                    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="white" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>');
+                    background-repeat: no-repeat;
+                    background-position: right center;
+                }
+
+                .reset {
+                    display: flex;
+                    margin-left: 15px;
+                    border: 1px solid #ffffff;
+                    border-top: none;
+                    border-right: none;
+                    border-bottom: none;
+                }
+            }
+
+            .paginate {
+                display: flex;
+                position: absolute;
+                right: 3%;
+                cursor: pointer;
+                margin-top: -15px;
+                background-color: #E16428;
+                width: 100px;
+                border-radius: 8px;
+                height: 32px;
+
+                select {
+                    border: 1px solid #E16428;
+                    color: #E16428;
+                    appearance: none;
+                    -moz-appearance: none;
+                    -webkit-appearance: none;
+                    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>');
+
+                    option {
+                        color: #E16428;
+                    }
+                }
+
+                input {
+                    border: 1px solid #E16428;
+                    color: #E16428;
+                }
+            }
+        }
+    }
+
+}

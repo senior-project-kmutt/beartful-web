@@ -6,8 +6,9 @@ export interface Users {
   lastname: string;
   profileImage: string;
   role: string;
-  phoneNumber: string
-  createdAt: Date
+  phoneNumber: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface LoginUser {
@@ -75,4 +76,11 @@ export interface UserDashboard {
   amount: number;
   bankAccount: IUserBankAccount;
   transaction: ITransaction[];
+}
+
+export interface UserPagination {
+  users: FreelanceUsers[];
+  totalPages: number;
+  currentPage: number;
+  count: number;
 }
