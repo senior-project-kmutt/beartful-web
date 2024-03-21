@@ -13,12 +13,24 @@ const ReviewItem = (props: Props) => {
 
     return (
         <div className={style.reviewItem}>
-            <div className={style.profile}>
-                <img src={data.reviewerInfo.profileImage} />
+            <div>
                 <div className="flex w-25 justify-between">
-                    <div>
-                        <p className={style.username}>{data.reviewerInfo.username}</p>
-                        <p className={style.date}>{formatDateDetailUser(data.createdAt)} น.</p>
+                    <div className={style.profile}>
+                        <div className="flex items-center">
+                            <div className={style.profile_image}>
+                                <img src={data.reviewerInfo.profileImage} />
+                            </div>
+                            <div>
+                                <p className={style.username}>{data.reviewerInfo.username}</p>
+                                <p className={style.date}>{formatDateDetailUser(data.createdAt)} น.</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center">
+                            <div className={style.profile_image}></div>
+                            <div>
+                                <p>{data.comment}</p>
+                            </div>
+                        </div>
                     </div>
                     <div className={style.score}>
                         <FontAwesomeIcon icon={faStar} size="xl" style={{ color: '#E16428' }}></FontAwesomeIcon>
@@ -26,7 +38,6 @@ const ReviewItem = (props: Props) => {
                     </div>
                 </div>
             </div>
-            <p className={style.message}>{data.comment}</p>
         </div>
     );
 };
