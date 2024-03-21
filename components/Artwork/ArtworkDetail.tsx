@@ -122,7 +122,7 @@ const ArtworkDetail = (props: Props) => {
             });
           });
         } catch (error) {
-          console.error("Error create Cart:", error);
+          console.error("เพิ่มสินค้าลงตะกร้าไม่สำเร็จ", error);
         }
       }
     }

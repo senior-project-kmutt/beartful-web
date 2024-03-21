@@ -82,7 +82,7 @@ const ChatProfile = (props: Props) => {
         </table>
       </div>
       <div className={styles.view_profile}>
-        VIEW PROFILE
+        ดูโปรไฟล์
       </div>
     </div>
   );

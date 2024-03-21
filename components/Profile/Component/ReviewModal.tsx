@@ -19,14 +19,14 @@ const ReviewModal = (props: Props) => {
     return (
         <Modal size={'4xl'} dismissible className={style.reviewModal} show={true} onClick={() => openReviewModal()}>
             <Modal.Header className={style.header}>
-                <p className="text-center">ให้คะแนน Artwork</p>
+                <p className="text-center">ให้คะแนน ผลงานที่ได้รับ</p>
             </Modal.Header>
             <Modal.Body>
                 <div className={style.order}>
                     <img className={style.userImage} src="../../xxxx"></img>
                     <div className={style.detail}>
-                        <p className={style.artworkName}>Artwork Name</p>
-                        <span className={style.packageName}>[  Package Name  ]</span>
+                        <p className={style.artworkName}>ชื่อผลงาน</p>
+                        <span className={style.packageName}>[  ชื่อแพคเกจ  ]</span>
                     </div>
                 </div>
                 <div id="information" className={style.main}>

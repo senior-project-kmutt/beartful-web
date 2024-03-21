@@ -183,9 +183,9 @@ const ProfileBankAccount = () => {
             <div className={style.button}>
               <div className="flex justify-center">
                 <button className={style.submit} onClick={() => setIsSaveForm(true)}>
-                  Save
+                  บันทึก
                 </button>
-                <button className={style.cancel}>Cancel</button>
+                <button className={style.cancel}>ยกเลิก</button>
               </div>
             </div>
 

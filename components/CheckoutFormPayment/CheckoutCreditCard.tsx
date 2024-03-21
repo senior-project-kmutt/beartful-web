@@ -102,7 +102,7 @@ const CheckoutCreditCard = (props: Props) => {
           type="button"
           onClick={handleClick}
         >
-          ชำระเงินC
+          ชำระเงิน
         </button>
       </form>
     </div>

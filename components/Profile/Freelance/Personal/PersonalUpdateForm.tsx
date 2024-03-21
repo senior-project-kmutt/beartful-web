@@ -255,7 +255,7 @@ const PersonalUpdateForm = () => {
                   <>
                     <div>
                       <div className={style.dateOfBirth}>
-                        <div className="mr-6">วัน เดือน ปี</div>
+                        <div className="mr-6">วัน เดือน ปีเกิด</div>
                         <div className={style.date}>
                           <select
                             onChange={(e) => handleInputChange(e)}
@@ -325,7 +325,7 @@ const PersonalUpdateForm = () => {
                   />
                   <div className={style.tips}>
                     {/* <p>File size: maximum 1MB</p> */}
-                    <p>File extension: .JPEG, .PNG, .GIF</p>
+                    <p>รองรับไฟล์: .JPEG, .PNG, .GIF เท่านั้น</p>
                   </div>
                 </div>
               </div>
@@ -335,9 +335,9 @@ const PersonalUpdateForm = () => {
               <div className={style.button}>
                 <div className="flex justify-center">
                   <button className={style.submit} onClick={() => onSubmit()}>
-                    Save
+                    บันทึก
                   </button>
-                  <button className={style.cancel}>Cancel</button>
+                  <button className={style.cancel}>ยกเลิก</button>
                 </div>
               </div>
 

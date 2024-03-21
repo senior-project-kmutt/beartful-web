@@ -146,8 +146,8 @@ const ArtworkForm = (props: Props) => {
 
               <label>ประเภท</label>
               <select className={style.inputFieldSm} {...register("type", { required: true })} defaultValue={data.type || ''}>
-                <option value="hired">hired</option>
-                <option value="readyMade">readyMade</option>
+                <option value="hired">Hired</option>
+                <option value="readyMade">Ready Made</option>
               </select>
 
               <label>หมวดหมู่</label>
@@ -185,8 +185,8 @@ const ArtworkForm = (props: Props) => {
 
             </div>
             <div className="flex mt-5 ml-60">
-              <input type="submit" value="SAVE" className={style.saveButton} />
-              <div className={style.cancelButton} onClick={() => Router.back()}>CANCEL</div>
+              <input type="submit" value="บันทึก" className={style.saveButton} />
+              <div className={style.cancelButton} onClick={() => Router.back()}>ยกเลิก</div>
             </div>
 
           </form>

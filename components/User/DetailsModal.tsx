@@ -59,7 +59,7 @@ const DetailsModal = (props: Props) => {
                         <p className='text-xl font-bold text-stone-500 py-2'>{data.firstname} {data.lastname}</p>
                         <div className={style.role}>
                             <FontAwesomeIcon className='mr-1' icon={faUserCheck} size='sm' />
-                            verified {data.role}
+                            ตรวจสอบแล้ว {data.role}
                         </div>
                         <div className={style.info}>
                             <table>
