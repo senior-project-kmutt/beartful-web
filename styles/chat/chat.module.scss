@@ -324,6 +324,11 @@
 
                     .star {
                         color: #E16428;
+                        display: flex;
+                        justify-content: end;
+                        div {
+                            width: 85px;
+                        }
                     }
                 }
 

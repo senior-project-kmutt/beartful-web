@@ -43,3 +43,23 @@ export const formatDateDetailUser = (dateString: Date) => {
 
     return `${day}/${thaiMonth}/${year} ${hour}:${minute}`;
 };
+
+export const formatOnlyDate = (dateTime: Date) => {
+    const dateObject = new Date(dateTime);
+    const date = dateObject.getDate().toString().padStart(2, '0');
+    const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+    const year = dateObject.getFullYear();
+    return `${date}/${month}/${year}`;
+}
+
+export function calculatePercentage(fullScore: number, receivedScore: number): number {
+    // ตรวจสอบว่าคะแนนเต็มต้องมากกว่า 0 และคะแนนที่ได้รับต้องไม่น้อยกว่า 0
+    if (fullScore <= 0 || receivedScore < 0) {
+      throw new Error('Invalid input. Full score must be greater than 0 and received score must be non-negative.');
+    }
+  
+    // คำนวณเปอร์เซ็นต์โดยหารคะแนนที่ได้รับด้วยคะแนนเต็มแล้วคูณด้วย 100
+    const percentage: number = (receivedScore / fullScore) * 100;
+  
+    return percentage;
+  }

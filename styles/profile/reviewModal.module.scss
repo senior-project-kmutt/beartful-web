@@ -48,7 +48,7 @@
             color: white;
             height: 32px;
         }
-        
+
         .cancelButton {
             border: 1px solid #8F8C8C;
             width: 120px;
@@ -67,55 +67,35 @@
         .label {
             margin-right: 20px;
         }
+
         .starWrapper {
-            transform: translate(-56%, -90%);
-            direction: rtl;
-            .s1:hover ~ a {
-                color: gold;
+            display: flex;
+            align-items: center;
+            .star {
+                font-size: 1.6em;
+                color: #8F8C8C;
+                text-decoration: none;
+                transition: all 0.5s;
+                margin: 4px;
+                cursor: pointer;
+    
+                
             }
-            .s2:hover ~ a {
+            .star_selected {
+                font-size: 1.6em;
                 color: gold;
-            }
-            .s3:hover ~ a {
-                color: gold;
-            }
-            .s4:hover ~ a {
-                color: gold;
-            }
-            .s5:hover ~ a {
-                color: gold;
+                text-decoration: none;
+                transition: all 0.5s;
+                margin: 4px;
+                cursor: pointer;
             }
         }
-        .starWrapper a {
-            font-size: 1.6em;
-            color: #8F8C8C;
-            text-decoration: none;
-            transition: all 0.5s;
-            margin: 4px;
-        }
+
         .starWrapper a:hover {
             color: gold;
             transform: scale(1);
         }
 
-        .formGrid {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 10px;
-
-            @media (min-width: 768px) {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .custom_grid {
-            @media (min-width: 768px) {
-                grid-template-columns: repeat(3, 1fr) !important;
-            }
-        }
-        .label {
-            margin-right: 10px;
-        }
         textarea {
             width: 80%;
             max-width: 1000px;

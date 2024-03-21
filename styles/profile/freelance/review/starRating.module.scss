@@ -1,0 +1,18 @@
+.rating_svg {
+    svg {
+        margin-bottom: 2em;
+    }
+  
+    .rating__background {
+        fill: #979797;
+        // stroke: red;
+        stroke-width: 1;
+        height: 100%;
+        width: 100%;
+    }
+  
+    .rating__value {
+        fill: #E16428;
+        height: 100%;
+    }
+}

@@ -16,6 +16,7 @@ export interface IPurchaseOrder {
     note: string
     type: string
     chargeId?: string
+    isReview: boolean
     createdAt?: Date
     updatedAt?: Date
 }
