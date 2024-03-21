@@ -61,8 +61,8 @@ const Authentication = () => {
         if (error.response?.status === 401) {
           Swal.fire({
             icon: "error",
-            title: "Please Try Again!",
-            text: " username or password not correct"
+            title: "กรุณาลองใหม่อีกครั้ง!",
+            text: "ชื่อผู้ใช้งาน หรือ รหัสผ่าน ไม่ถูกต้อง"
           });
         } else {
           console.log(error);
@@ -81,16 +81,16 @@ const Authentication = () => {
         <div className={style.welcome}>
             {activeMenu === "login" && (
               <>
-                <h1>WELCOME</h1>
-                <p>We are really happy to see you again !</p>
+                <h1>ยินดีต้อนรับ</h1>
+                <p>พวกเราดีใจที่คุณกลับมา !</p>
               </>
             )}
 
             {activeMenu === "signup" && (
               <div className={style.sign_in}>
-                <h1>GET STARTED WITH <span className="">BEARTFUL</span> </h1>
-                <p>Please fill in this form to create an account !</p>
-                <p>Already have an account? <span onClick={() => changePageParams('login')} className="font-extrabold cursor-pointer underline">SIGN IN</span></p>
+                <h1>สมัครสมาชิก <span className="">BEARTFUL</span> </h1>
+                <p>กรอกข้อมูลในฟอร์มเพื่อสมัครเป็นสมาชิก</p>
+                <p>เป็นสมาชิกยู่แล้ว ? <span onClick={() => changePageParams('login')} className="font-extrabold cursor-pointer underline">เข้าสู่ระบบ</span></p>
               </div>
             )}
         </div>
@@ -100,13 +100,13 @@ const Authentication = () => {
               onClick={() => changePageParams('login')}
               className={activeMenu === 'login' ? `${style.item_active}` : `${style.item}`}
             >
-              SIGN IN
+              เข้าสู่ระบบ
             </div>
             <div
               onClick={() => changePageParams('signup')}
               className={activeMenu === 'signup' ? `${style.item_active}` : `${style.item}`}
             >
-              SIGN UP
+              สมัครสมาชิก
             </div>
           </div>
         </div>
@@ -116,20 +116,20 @@ const Authentication = () => {
             <div className={`${style.warp} mt-14`}>
               <form onSubmit={submitForm}>
                 <div className={style.input_form}>
-                  <label htmlFor='username'> USERNAME </label>
+                  <label htmlFor='username'> ชื่อผู้ใช้งาน </label>
                   <div><input onChange={() => setUsernameErr('')} id="username" name="username" type="text" /></div>
                   <p></p><p className={style.error_message}>{usernameErr}</p>
                 </div>
                 <div className={style.input_form}>
-                  <label htmlFor="password"> PASSWORD </label>
+                  <label htmlFor="password"> รหัสผ่าน </label>
                   <div><input onChange={() => setPasswordErr('')} id="password" name="password" type="password" /></div>
                   <p></p><p className={style.error_message}>{passwordErr}</p>
                 </div>
                 <div className={style.input_button}>
-                  <input className={`${style.submit_button} mr-4`} type="submit" value="SIGN IN" />
-                  <Link className={style.cancel_button} href="/">CANCEL</Link>
-                  <p className="text-xs pt-3 pl-2 font-medium">New to BeArtFul?&nbsp;
-                    <span onClick={() => changePageParams('signup')} className="underline cursor-pointer">Create an account</span>
+                  <input className={`${style.submit_button} mr-4`} type="submit" value="เข้าสู่ระบบ" />
+                  <Link className={style.cancel_button} href="/">ยกเลิก</Link>
+                  <p className="text-xs pt-3 pl-2 font-medium">ยังไม่ได้เป็นสมาชิก?&nbsp;
+                    <span onClick={() => changePageParams('signup')} className="font-semibold underline cursor-pointer">คลิกเพื่อสมัครสมาชิก</span>
                   </p>
                 </div>
               </form>

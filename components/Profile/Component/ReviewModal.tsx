@@ -80,7 +80,7 @@ const ReviewModal = (props: Props) => {
     return (
         <Modal size={'4xl'} dismissible className={style.reviewModal} show={true} onClose={openReviewModal}>
             <Modal.Header className={style.header}>
-                <p className="text-center">ให้คะแนน Artwork</p>
+                <p className="text-center">ให้คะแนน ผลงานที่ได้รับ</p>
             </Modal.Header>
             <Modal.Body>
                 <div className={style.order}>

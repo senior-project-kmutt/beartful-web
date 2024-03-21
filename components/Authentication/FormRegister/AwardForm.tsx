@@ -167,9 +167,9 @@ const AwardForm = (props: Props) => {
         <div className={style.button}>
         <div className="flex justify-center">
           <button className={style.save} onClick={onSubmit}>
-            Save
+            บันทึก
           </button>
-          <button className={style.cancel}>Cancel</button>
+          <button className={style.cancel}>ยกเลิก</button>
         </div>
       </div>
       )}

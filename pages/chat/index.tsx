@@ -93,7 +93,7 @@ export default function Home() {
       <NavBar />
       <div className={styles.container}>
         <div className={styles.chat_room}>
-          <h1 className="font-extrabold underline underline-offset-2 p-3 mb-4">CHAT</h1>
+          <h1 className="font-extrabold underline underline-offset-2 p-3 mb-4">แชท</h1>
           <div>
             {chatRoom.map((item) => {
               return (
@@ -119,7 +119,7 @@ export default function Home() {
           <div className={styles.chat_messages}>
             <div className={styles.no_message}>
               <div className={styles.icon}><FontAwesomeIcon icon={faMessage} size="lg" /></div>
-              <p className={styles.text}>CHOOSE CHAT TO READ</p>
+              <p className={styles.text}>เลือกห้องแชทเพื่ออ่านข้อความ</p>
               <p>. . .</p>
             </div>
           </div>

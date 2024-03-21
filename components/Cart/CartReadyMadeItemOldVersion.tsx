@@ -5,6 +5,7 @@ import { deleteCartById, editCartById } from "@/services/cart/cart.api";
 import style from "@/styles/cart/readyMadeCartItem.module.scss"
 import { faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -17,6 +18,7 @@ const CartReadyMadeItem = (props: Props) => {
 
     const [user, setUser] = useState<IUser>();
     const [cartItems, setCartItems] = useState<CartItem[]>(data.cartItem);
+    const router = useRouter();
 
     useEffect(() => {
         setCartItems(data.cartItem);
@@ -104,8 +106,8 @@ const CartReadyMadeItem = (props: Props) => {
                     <FontAwesomeIcon icon={faUser} size="sm" style={{ marginTop: "4px" }}></FontAwesomeIcon>
                     <p className={style.username}>{data.freelanceUsername}</p>
                     <div className="ml-8">
-                        <button className={style.saveButton}>Chat</button>
-                        <button className={style.cancelButton}>View profile</button>
+                        <button className={style.saveButton}>แชท</button>
+                        <button className={style.cancelButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${data.freelanceUsername}`)}>ดูโปรไฟล์</button>
                     </div>
                 </div>
                 {cartItems.map((item, index) => {
@@ -119,7 +121,7 @@ const CartReadyMadeItem = (props: Props) => {
                                     <span className={style.description}>[  คำอธิบายงานจ้าง เช่น ของที่จะได้ วันมอบงาน  ]</span>
                                 </div>
                             </div>
-                            <div className={style.price}>{formattedPrice(item.amount)} Baht</div>
+                            <div className={style.price}>{formattedPrice(item.amount)} บาท </div>
                             <div className={style.quantity}>
                                 <button onClick={() => handleQuantityChange(item._id, 'decrement', item.amount)}>-</button>
                                 <input
@@ -129,7 +131,7 @@ const CartReadyMadeItem = (props: Props) => {
                                 />
                                 <button onClick={() => handleQuantityChange(item._id, 'increment', item.amount)}>+</button>
                             </div>
-                            <div className={style.netAmount}>{formattedPrice(item.netAmount)} Baht</div>
+                            <div className={style.netAmount}>{formattedPrice(item.netAmount)} บาท</div>
                             <div className={style.confirm}>
                                 <FontAwesomeIcon icon={faTrash} style={{ color: '#5A2810' }} size="2xl" onClick={() => deleteCart(item._id)}></FontAwesomeIcon>
                             </div>

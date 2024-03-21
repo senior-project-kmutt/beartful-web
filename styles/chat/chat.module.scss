@@ -345,19 +345,20 @@
                 }
 
                 .view_profile {
-                    background-color: #EDA27E;
+                    background-color: #E16428;
                     color: #FAF2F2;
                     border-radius: 20px;
                     font-size: 12px;
                     font-weight: 700;
                     padding: 6px 18px;
+                    cursor: pointer;
                 }
             }
         }
     }
 }
 
-  /* Styles for the fullscreen overlay */
+/* Styles for the fullscreen overlay */
 .fullscreen_overlay {
     position: fixed;
     top: 0;
@@ -372,16 +373,17 @@
     cursor: pointer;
 }
 
-.fullscreen_image{
+.fullscreen_image {
     display: flex;
     justify-content: center;
+
     .image {
         max-height: 95vh;
         width: 100% !important;
         height: auto !important;
         border-radius: 0px !important;
     }
-} 
+}
 
 @media (max-width:1500px) {
     .container .no_message .icon {

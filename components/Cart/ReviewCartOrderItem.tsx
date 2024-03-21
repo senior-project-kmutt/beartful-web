@@ -41,7 +41,7 @@ const ReviewCartOrderItem = (props: Props) => {
                     ></FontAwesomeIcon>
                     <p className={style.username}>{data.freelanceUsername}</p>
                     <div className="ml-8">
-                        <button className={style.saveButton}>Chat</button>
+                        <button className={style.saveButton}>แชท</button>
                     </div>
                 </div>
                 {cartItems.map((item, index) => {
@@ -56,11 +56,11 @@ const ReviewCartOrderItem = (props: Props) => {
                                     </span>
                                 </div>
                             </div>
-                            <div className={style.price}>{formattedPrice(item.amount)} Baht</div>
+                            <div className={style.price}>{formattedPrice(item.amount)} บาท</div>
                             <div className={style.quantity}>
                                 <p>{item.quantity}</p>
                             </div>
-                            <div className={style.netAmount}>{formattedPrice(item.netAmount)} Baht</div>
+                            <div className={style.netAmount}>{formattedPrice(item.netAmount)} บาท</div>
                         </div>
                     );
                 })}

@@ -25,15 +25,15 @@ const ArtworkForm = (props: Props) => {
     <>
       <div>
       <form onSubmit={onSubmit}>
-      <label>Name</label>
+      <label>ชื่อผลงาน</label>
       <input {...register("name")} />
-      <label>Description</label>
+      <label>รายละเอียด</label>
       <input {...register("description")} />
-      <label>Price</label>
+      <label>ราคา</label>
       <input {...register("price")} />
       <select {...register("type")}>
-        <option value="hired">hired</option>
-        <option value="readyMade">readyMade</option>
+        <option value="hired">Hired</option>
+        <option value="readyMade">Ready Made</option>
       </select>
       {/* <button
         type="button"

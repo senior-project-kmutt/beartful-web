@@ -60,7 +60,7 @@ const CustomerCart = () => {
         const token = localStorage.getItem("auth");
         const headers = {
             Authorization: `Bearer ${token}`,
-          };
+        };
         await getCart(user.id, type).subscribe((res => {
             setNetAmount(sumTotalNetAmountForChecked(res.data as Carts[]))
             setCart(res.data as Carts[])

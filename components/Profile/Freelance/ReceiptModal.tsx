@@ -172,7 +172,7 @@ const ReceiptModal = (props: Props) => {
                                                 <input type='date' className={`bg-slate-200 ${style.inputField} ${errors.endDate && `${style.error}`}`} {...register("endDate", { required: false })} disabled />
                                             </div>
                                             <div>
-                                                <label>ระยะเวลา (วัน)</label>
+                                                <label>ระยะเวลา(วัน)</label>
                                                 <input type='number' className={`bg-slate-200 ${style.inputField} ${errors.day && `${style.error}`}`} {...register("day", { required: false })} disabled />
                                             </div>
                                         </div>
@@ -183,7 +183,7 @@ const ReceiptModal = (props: Props) => {
                                                 <input type='number' className={`bg-slate-200 ${style.inputField} ${errors.quatity && `${style.error}`}`} {...register("quatity", { required: true })} disabled />
                                             </div>
                                             <div>
-                                                <label>จำนวนการแก้ไข (ครั้ง)</label>
+                                                <label>จำนวนการแก้ไข(ครั้ง)</label>
                                                 <input type='number' className={`bg-slate-200 ${style.inputField} ${errors.numberOfEdit && `${style.error}`}`} {...register("numberOfEdit", { required: false })} disabled />
                                             </div>
                                             <div>
