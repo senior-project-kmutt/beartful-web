@@ -2,8 +2,6 @@ import style from "@/styles/profile/reviewModal.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal } from 'flowbite-react';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { useForm } from 'react-hook-form';
-import { Artwork } from '@/models/artwork';
 import { ChangeEvent, useState } from "react";
 import { IGetOrder } from "@/models/purchaseOrder";
 import { Review } from "@/models/review";
@@ -12,10 +10,11 @@ import { createNewReview } from "@/services/review/review.api";
 
 interface Props {
     openReviewModal: () => void;
-    data: IGetOrder
+    data: IGetOrder;
+    updateReviewStatus?: (purchaseOrderId: string, status: boolean) => void
 }
 const ReviewModal = (props: Props) => {
-    const { openReviewModal, data } = props
+    const { openReviewModal, data, updateReviewStatus } = props
     const [score, setScore] = useState<number>(0);
     const [comment, setComment] = useState<string>('');
     const [showErrorScoreEmpyt, setShowErrorScoreEmpyt] = useState<boolean>(false);
@@ -61,6 +60,9 @@ const ReviewModal = (props: Props) => {
                 } as Review
 
                 createNewReview(body, headers).then(_ => {
+                    if (updateReviewStatus && data.purchaseOrder._id) {
+                        updateReviewStatus(data?.purchaseOrder?._id, true)
+                    }
                     openReviewModal()
                     Swal.fire({
                         icon: "success",
@@ -69,14 +71,10 @@ const ReviewModal = (props: Props) => {
                         timer: 1500,
                     });
                 })
-
             }
         });
-
-
-
     };
-
+    
     return (
         <Modal size={'4xl'} dismissible className={style.reviewModal} show={true}>
             <Modal.Header className={style.header}>
@@ -86,7 +84,12 @@ const ReviewModal = (props: Props) => {
                 <div className={style.order}>
                     <img className={style.userImage} src="../../xxxx"></img>
                     <div className={style.detail}>
-                        <p className={style.artworkName}>Artwork Name</p>
+                        {data.purchaseOrder.type === 'hired' && (
+                            <p className={style.artworkName}>{data.quotation?.name}</p>
+                        )}
+                        {data.purchaseOrder.type === 'readyMade' && (
+                            <p className={style.artworkName}>{data.purchaseOrderItem?.name}</p>
+                        )}
                         <span className={style.packageName}>[  Package Name  ]</span>
                     </div>
                 </div>

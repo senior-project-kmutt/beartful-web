@@ -57,6 +57,31 @@ const CustomerPurchase = (props: Props) => {
             }
         }
     }
+
+    const updateReviewStatus = async (purchaseOrderId: string, status: boolean) => {
+        const token = localStorage.getItem("auth");
+        if (token) {
+            if (user) {
+                const headers = {
+                    Authorization: `Bearer ${token}`,
+                };
+                try {
+                    const updatedPurchaseOrder = order.map((item) => {
+                        const updatedOrders = item.order.map((i) => {
+                            if (i.purchaseOrder._id === purchaseOrderId) {
+                                return { ...i, purchaseOrder: { ...i.purchaseOrder, isReview: status } };
+                            }
+                            return i;
+                        });
+                        return { ...item, order: updatedOrders };
+                    });
+                    setOrder(updatedPurchaseOrder);
+                } catch (error) {
+                    console.error("Error edit artwork:", error);
+                }
+            }
+        }
+    }
     return (
         <>
             <NavBar />
@@ -70,7 +95,7 @@ const CustomerPurchase = (props: Props) => {
                     <PurchaseStatusBar role="customer" setStatus={setStatus} />
                     {order.map((item, index) => {
                         return (
-                            <CustomerPurchaseItem item={item} key={index} user={user} updateStatus={updateStatus} />
+                            <CustomerPurchaseItem item={item} key={index} user={user} updateStatus={updateStatus} updateReviewStatus={updateReviewStatus} />
                         )
                     })}
                 </div>

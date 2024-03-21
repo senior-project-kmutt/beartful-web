@@ -3,7 +3,7 @@ import { faClipboardList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import ReviewModal from "../../Component/ReviewModal";
-import { ICustomerPurchaseOrder, IPurchaseOrderDetail } from "@/models/purchaseOrder";
+import { ICustomerPurchaseOrder, IGetOrder, IPurchaseOrderDetail } from "@/models/purchaseOrder";
 import { OrderStatusCustomerEnum } from "@/enums/orders";
 import { useRouter } from "next/router";
 import { IUser } from "@/pages/chat";
@@ -17,9 +17,11 @@ interface Props {
     item: ICustomerPurchaseOrder
     user: IUser
     updateStatus: (purchaseOrderId: string, status: string) => void
+    updateReviewStatus: (purchaseOrderId: string, status: boolean) => void
 }
 const CustomerPurchaseItem = (props: Props) => {
     const { item, user, updateStatus } = props
+    const [orderSelected, setOrderSelected] = useState<IGetOrder>();
     const [isReviewModalOpen, setIsReviewModalOpen] = useState<boolean>(false);
     const [isOpenReceiptModal, setIsOpenReceiptModal] = useState<boolean>(false);
     const [receiptData, setReceiptData] = useState<IPurchaseOrderDetail>();
@@ -69,6 +71,11 @@ const CustomerPurchaseItem = (props: Props) => {
         })
     }
 
+    const handleOpenReviewModal = (itemSelected: IGetOrder) => {
+        setOrderSelected(itemSelected);
+        openReviewModal();
+    }
+
     return (
         <div className={style.purchaseItem}>
             <div className={style.profile}>
@@ -102,20 +109,19 @@ const CustomerPurchaseItem = (props: Props) => {
                             {/* <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl" onClick={() => handleGoToDetail(item.purchaseOrder._id || '')}></FontAwesomeIcon> */}
                             {item.purchaseOrder.status === 'success' && (
                                 <div>
-                                    {isReviewModalOpen && <ReviewModal openReviewModal={openReviewModal} data={item} />}
-                                    <button className={style.toReviewButton} onClick={openReviewModal}>ให้คะแนน</button>
+                                    <button className={`${item.purchaseOrder.isReview ? `${style.disabletoReviewButton}` : `${style.toReviewButton}`}`} onClick={() => handleOpenReviewModal(item)} disabled={item.purchaseOrder.isReview}>ให้คะแนน</button>
                                 </div>
                             )}
                             {item.purchaseOrder.status === 'pending' && (
                                 <div>
-                                    <button className={style.disableConfirmButton}>ฉันได้ตรวจสอบและยอมรับงาน</button>
-                                    <button className={style.disabletoReviewButton}>ให้คะแนน</button>
+                                    <button className={style.disableConfirmButton} disabled>ฉันได้ตรวจสอบและยอมรับงาน</button>
+                                    <button className={style.disabletoReviewButton} disabled>ให้คะแนน</button>
                                 </div>
                             )}
                             {item.purchaseOrder.status === 'delivered' && (
                                 <div>
                                     <button className={style.confirmButton} onClick={() => updateStatus(item.purchaseOrder._id!, "success")}>ฉันได้ตรวจสอบและยอมรับงาน</button>
-                                    <button className={style.disabletoReviewButton}>ให้คะแนน</button>
+                                    <button className={style.disabletoReviewButton} disabled>ให้คะแนน</button>
                                 </div>
                             )}
                             <div>
@@ -128,6 +134,7 @@ const CustomerPurchaseItem = (props: Props) => {
             {(isOpenReceiptModal && receiptData) && (
                 <ReceiptPreviewModal setIsopenModal={setIsOpenReceiptModal} data={receiptData} />
             )}
+            {(isReviewModalOpen && orderSelected) && <ReviewModal openReviewModal={openReviewModal} data={orderSelected} updateReviewStatus={props.updateReviewStatus} />}
         </div>
     );
 };
