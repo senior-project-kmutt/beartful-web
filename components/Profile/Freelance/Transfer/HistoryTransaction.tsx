@@ -34,7 +34,7 @@ const HistoryTransaction = (props: Props) => {
                         {data.length > 5 && <p className={style.content2} onClick={toggleShowAll}>{showAll ? 'Show less' : 'Show more'}</p>}
                     </div>
                     {limitedData.map((item, index) => (
-                        <div onClick={() => toggleDetailModal(item)}>
+                        <div key={index} onClick={() => toggleDetailModal(item)}>
                             {/* {openDetailModal && <FreelanceDetailModal setOpenDetailModal={setOpenDetailModal} data={item} />} */}
                             <TransactionItem key={index} data={item} />
                         </div>
