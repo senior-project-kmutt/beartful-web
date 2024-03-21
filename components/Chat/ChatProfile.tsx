@@ -2,6 +2,7 @@ import { IParticipant } from '@/pages/chat';
 import styles from "@/styles/chat/chat.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faUserCheck } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/router';
 
 
 interface Props {
@@ -11,6 +12,7 @@ interface Props {
 const ChatProfile = (props: Props) => {
   const { profile } = props
   const rate = 5;
+  const router = useRouter();
 
   const getDate = (dateTime?: Date) => {
     const months = [
@@ -53,17 +55,21 @@ const ChatProfile = (props: Props) => {
           </tr>
           {profile.role === 'freelance' && (
             <>
-              <tr>
+              {/* <tr>
                 <td>ขายงานแล้ว</td>
                 <td className='text-right'>0 ครั้ง</td>
               </tr>
               <tr>
                 <td>อัตราการทำงานสำเร็จ</td>
                 <td className='text-right'>0 %</td>
+              </tr> */}
+              <tr>
+                <td>คะแนนรีวิว</td>
+                <td className={`${styles.star} text-right`}>{renderStars()}</td>
               </tr>
             </>
           )}
-          {profile.role === 'customer' && (
+          {/* {profile.role === 'customer' && (
             <>
               <tr>
                 <td>อัตราการจ้างงานสำเร็จ</td>
@@ -74,16 +80,12 @@ const ChatProfile = (props: Props) => {
                 <td className='text-right'>0 %</td>
               </tr>
             </>
-          )}
-          <tr>
-            <td>คะแนนรีวิว</td>
-            <td className={`${styles.star} text-right`}>{renderStars()}</td>
-          </tr>
+          )} */}
         </table>
       </div>
-      <div className={styles.view_profile}>
+      {profile.role === 'freelance' && (<div className={styles.view_profile} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${profile.username}`)}>
         ดูโปรไฟล์
-      </div>
+      </div>)}
     </div>
   );
 }

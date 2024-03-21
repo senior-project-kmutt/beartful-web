@@ -50,7 +50,7 @@ const CartReadyMade = (props: Props) => {
                     <p className={style.username}>{item.freelanceUsername}</p>
                     <div className="ml-8">
                         <button className={style.saveButton} onClick={handleGoToChat}>แชท</button>
-                        <button className={style.cancelButton}>ดูโปรไฟล์</button>
+                        <button className={style.cancelButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${item.freelanceUsername}`)}>ดูโปรไฟล์</button>
                     </div>
                 </div>
                 {item.cartItem.map((item) => {

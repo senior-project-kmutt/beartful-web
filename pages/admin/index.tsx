@@ -3,23 +3,25 @@ import { useEffect, useState } from "react";
 import { IUser } from "../chat";
 import { useRouter } from "next/router";
 import AdminManageUser from "@/components/Admin/AdminManageUser";
-
-
 const Admin = () => {
     const [user, setUser] = useState<IUser>();
     const router = useRouter()
 
     useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem("user") || ""));
+        const userData = localStorage.getItem("user");
+        if (userData) {
+            try {
+                setUser(JSON.parse(userData));
+            } catch (error) {
+                console.error("Error parsing user data:", error);
+            }
+        }
     }, []);
 
-    useEffect(() => {
-        router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/admin`)
-    }, [user]);
     return (
         <>
-            <NavBar />
-            <AdminManageUser />
+            {user && user.role === 'admin' && <> <NavBar />
+                <AdminManageUser /></>}
         </>
     );
 };

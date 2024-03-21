@@ -5,6 +5,7 @@ import { deleteCartById, editCartById } from "@/services/cart/cart.api";
 import style from "@/styles/cart/readyMadeCartItem.module.scss"
 import { faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 interface Props {
@@ -17,6 +18,7 @@ const CartReadyMadeItem = (props: Props) => {
 
     const [user, setUser] = useState<IUser>();
     const [cartItems, setCartItems] = useState<CartItem[]>(data.cartItem);
+    const router = useRouter();
 
     useEffect(() => {
         setCartItems(data.cartItem);
@@ -105,7 +107,7 @@ const CartReadyMadeItem = (props: Props) => {
                     <p className={style.username}>{data.freelanceUsername}</p>
                     <div className="ml-8">
                         <button className={style.saveButton}>แชท</button>
-                        <button className={style.cancelButton}>ดูโปรไฟล์</button>
+                        <button className={style.cancelButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${data.freelanceUsername}`)}>ดูโปรไฟล์</button>
                     </div>
                 </div>
                 {cartItems.map((item, index) => {

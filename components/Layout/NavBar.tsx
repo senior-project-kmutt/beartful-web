@@ -14,7 +14,7 @@ const NavBar = () => {
 
   useEffect(() => {
     const userSession = localStorage.getItem('user')
-    if(userSession && userSession !== "undefined") {
+    if (userSession && userSession !== "undefined") {
       const user = JSON.parse(userSession);
       setUser(user)
     }
@@ -43,19 +43,23 @@ const NavBar = () => {
           ) : (
             <>
               <div className={style.menu}>
-                  {user.role === 'customer' && (
-                    <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>
-                      <FontAwesomeIcon icon={faCartShopping} className={`${style.icon}`}></FontAwesomeIcon>
-                      <span className={`${style.count} absolute-4 top-0 right-24`}>15</span>
+                {user.role === 'customer' && (
+                  <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>
+                    <FontAwesomeIcon icon={faCartShopping} className={`${style.icon}`}></FontAwesomeIcon>
+                    <span className={`${style.count} absolute-4 top-0 right-24`}>15</span>
+                  </Navbar.Link>
+                )}
+                {user.role !== 'admin' && (
+                  <>
+                    <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/chat`)}>
+                      <FontAwesomeIcon icon={faMessage} className={style.icon}></FontAwesomeIcon>
                     </Navbar.Link>
-                  )}
-                <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/chat`)}>
-                  <FontAwesomeIcon icon={faMessage} className={style.icon}></FontAwesomeIcon>
-                </Navbar.Link>
-                <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`)}>
-                  <FontAwesomeIcon icon={faHistory} className={style.icon}></FontAwesomeIcon>
-                  {/* <span className={`${style.count} absolute top-0 right-12`}>1</span> */}
-                </Navbar.Link>
+                    <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`)}>
+                      <FontAwesomeIcon icon={faHistory} className={style.icon}></FontAwesomeIcon>
+                      {/* <span className={`${style.count} absolute top-0 right-12`}>1</span> */}
+                    </Navbar.Link>
+                  </>
+                )}
               </div>
               <div className="flex md:order-2 right-0">
                 <Dropdown
@@ -73,7 +77,7 @@ const NavBar = () => {
                   {/* customer */}
                   {user.role === 'customer' && (
                     <Dropdown.Item onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`)}>การซื้อและการจ้างของฉัน</Dropdown.Item>
-                  // {/* <Dropdown.Item onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/purchase`)}>การกดถูกใจและบันทึก</Dropdown.Item> */}
+                    // {/* <Dropdown.Item onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/purchase`)}>การกดถูกใจและบันทึก</Dropdown.Item> */}
                   )}
                   {/* freelance */}
                   {user.role === 'freelance' && (
