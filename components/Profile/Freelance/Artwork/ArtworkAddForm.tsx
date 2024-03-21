@@ -227,8 +227,8 @@ const ArtworkForm = (props: Props) => {
 
             </div>
             <div className="flex mt-5 ml-60">
-              <input type="submit" value="SAVE" className={style.saveButton} />
-              <button className={style.cancelButton} onClick={() => Router.back()}>CANCEL</button>
+              <input type="submit" value="ยืนยัน" className={style.saveButton} />
+              <button className={style.cancelButton} onClick={() => Router.back()}>ยกเลิก</button>
             </div>
 
           </form>

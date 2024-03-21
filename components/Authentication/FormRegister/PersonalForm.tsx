@@ -197,7 +197,7 @@ const PersonalForm = (props: Props) => {
                 <label>
                   <div>
                     <p>ชื่อ</p>
-                    <p className={style.tips}>{formPersonal.firstname?.length || 0} / 100 characters</p>
+                    <p className={style.tips}>{formPersonal.firstname?.length || 0} / 100 ตัวอักษร</p>
                   </div>
                   <input
                     type="text"
@@ -213,7 +213,7 @@ const PersonalForm = (props: Props) => {
                 <label>
                   <div>
                     <p>อีเมล</p>
-                    <p className={style.tips}>{formPersonal.email?.length || 0} / 100 characters</p>
+                    <p className={style.tips}>{formPersonal.email?.length || 0} / 100 ตัวอักษร</p>
                   </div>
                   <input
                     type="text"
@@ -245,7 +245,7 @@ const PersonalForm = (props: Props) => {
                 <label>
                   <div>
                     <p>ชื่อผู้ใช้งาน</p>
-                    <p className={style.tips}>{formPersonal.username?.length || 0} / 100 characters</p>
+                    <p className={style.tips}>{formPersonal.username?.length || 0} / 100 ตัวอักษร</p>
                   </div>
                   <input
                     type="text"
@@ -261,7 +261,7 @@ const PersonalForm = (props: Props) => {
                 <label>
                   <div>
                     <p>นามสกุล</p>
-                    <p className={style.tips}>{formPersonal.lastname?.length || 0} / 100 characters</p>
+                    <p className={style.tips}>{formPersonal.lastname?.length || 0} / 100 ตัวอักษร</p>
                   </div>
                   <input
                     type="text"
@@ -277,7 +277,7 @@ const PersonalForm = (props: Props) => {
                 <label>
                   <div>
                     <p>เบอร์โทรศัพท์</p>
-                    <p className={style.tips}>{formPersonal.phoneNumber?.length || 0} / 10 characters</p>
+                    <p className={style.tips}>{formPersonal.phoneNumber?.length || 0} / 10 ตัวอักษร</p>
                   </div>
                   <input
                     type="text"
@@ -383,7 +383,7 @@ const PersonalForm = (props: Props) => {
             />
             <div className={style.tips}>
               {/* <p>File size: maximum 1MB</p> */}
-              <p>File extension: .JPEG, .PNG, .GIF</p>
+              <p>รองรับไฟล์: .JPEG, .PNG, .GIF เท่านั้น</p>
             </div>
           </div>
         </div>
@@ -391,9 +391,9 @@ const PersonalForm = (props: Props) => {
       <div className={style.button}>
         <div className="flex justify-center">
           <button className={style.submit} onClick={onSubmit}>
-            {roleSelected === 'customer' ? 'Submit' : 'Save'}
+            {roleSelected === 'customer' ? 'ยืนยัน' : 'บันทึก'}
           </button>
-          <button className={style.cancel} onClick={() => Router.back()}>Cancel</button>
+          <button className={style.cancel} onClick={() => Router.back()}>ยกเลิก</button>
         </div>
       </div>
     </div>

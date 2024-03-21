@@ -67,7 +67,7 @@ const ReviewCartOrder = (props: Props) => {
                     </div>
                   )}
                 </div>
-                <div className={style.price}>{formattedPrice(data.amount)} Baht</div>
+                <div className={style.price}>{formattedPrice(data.amount)} บาท</div>
               </div>
             </div>
           </div>

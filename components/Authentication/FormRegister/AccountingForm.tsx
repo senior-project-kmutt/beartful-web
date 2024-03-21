@@ -224,9 +224,9 @@ const AccountingForm = (props: Props) => {
             Save
           </button>
           {setIsSubmitForm && (
-            <button className={style.submit} onClick={() => onSubmit('submit')}>Submit</button>
+            <button className={style.submit} onClick={() => onSubmit('submit')}>ยืนยัน</button>
           )}
-          <button className={style.cancel}>Cancel</button>
+          <button className={style.cancel}>ยกเลิก</button>
         </div>
       </div>
     </div>

@@ -99,7 +99,7 @@ const CheckoutInternetBanking = (props: Props) => {
           type="button"
           onClick={handleClick}
         >
-          ชำระเงินP
+          ชำระเงิน
         </button>
       </form>
     </div>

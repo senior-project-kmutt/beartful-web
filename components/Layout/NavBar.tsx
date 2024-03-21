@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import style from "@/styles/navbar/navbarLayout.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faMessage, faBell, faPalette } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faMessage, faHistory, faBell, faPalette } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Users } from '@/models/users';
@@ -37,8 +37,8 @@ const NavBar = () => {
         <Navbar.Collapse>
           {!user ? (
             <>
-              <Navbar.Link className={style.text_menu} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/authen?page=login`)}>SIGN IN</Navbar.Link>
-              <Navbar.Link className={`${style.text_menu} mr-4`} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/authen?page=signup`)}>SIGN UP</Navbar.Link>
+              <Navbar.Link className={style.text_menu} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/authen?page=login`)}>เข้าสู่ระบบ</Navbar.Link>
+              <Navbar.Link className={`${style.text_menu} mr-4`} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/authen?page=signup`)}>สมัครสมาชิก</Navbar.Link>
             </>
           ) : (
             <>
@@ -51,11 +51,10 @@ const NavBar = () => {
                   )}
                 <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/chat`)}>
                   <FontAwesomeIcon icon={faMessage} className={style.icon}></FontAwesomeIcon>
-                  <span className={`${style.count} absolute top-0 right-12`}>1</span>
                 </Navbar.Link>
-                <Navbar.Link>
-                  <FontAwesomeIcon icon={faBell} className={`${style.icon}`}></FontAwesomeIcon>
-                  <span className={`${style.count} absolute top-0 -right-2`}>21</span>
+                <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`)}>
+                  <FontAwesomeIcon icon={faHistory} className={style.icon}></FontAwesomeIcon>
+                  {/* <span className={`${style.count} absolute top-0 right-12`}>1</span> */}
                 </Navbar.Link>
               </div>
               <div className="flex md:order-2 right-0">
@@ -70,11 +69,22 @@ const NavBar = () => {
                     <span className="block text-md">{user.username}</span>
                     <span className="block truncate text-xs font-medium text-gray-600">{user.email}</span>
                   </Dropdown.Header>
-                  <Dropdown.Item onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile`)}>Profile</Dropdown.Item>
-                  <Dropdown.Item>My Shop</Dropdown.Item>
-                  <Dropdown.Item>Settings</Dropdown.Item>
+                  <Dropdown.Item onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile`)}>บัญชีของฉัน</Dropdown.Item>
+                  {/* customer */}
+                  {user.role === 'customer' && (
+                    <Dropdown.Item onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`)}>การซื้อและการจ้างของฉัน</Dropdown.Item>
+                  // {/* <Dropdown.Item onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/purchase`)}>การกดถูกใจและบันทึก</Dropdown.Item> */}
+                  )}
+                  {/* freelance */}
+                  {user.role === 'freelance' && (
+                    <>
+                      <Dropdown.Item onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`)}>ประวัติการขาย/รับงานของฉัน</Dropdown.Item>
+                      <Dropdown.Item onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/review`)}>คะแนนของฉัน</Dropdown.Item>
+                      <Dropdown.Item onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/transfer`)}>เงินในบัญชีของฉัน</Dropdown.Item>
+                    </>
+                  )}
                   <Dropdown.Divider />
-                  <Dropdown.Item onClick={logout}>Sign out</Dropdown.Item>
+                  <Dropdown.Item onClick={logout}>ออกจากระบบ</Dropdown.Item>
                 </Dropdown>
                 <Navbar.Toggle />
               </div>

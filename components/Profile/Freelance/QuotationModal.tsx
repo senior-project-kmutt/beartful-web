@@ -69,7 +69,7 @@ const QuotationModal = (props: Props) => {
                         <label>สิ่งที่ต้องได้รับ</label>
                         <input type='text' className={`${style.inputField} ${errors.benefits && `${style.error}`}`} {...register("benefits", { required: true })} />
 
-                        <label>จำนวนการแก้ไข (ครั้ง)</label>
+                        <label>จำนวนการแก้ไข(ครั้ง)</label>
                         <input type='number' className={`${style.inputField} ${errors.numberOfEdit && `${style.error}`}`} {...register("numberOfEdit", { required: true })} />
 
                         <div className={`${style.formGrid} ${style.custom_grid}`}>

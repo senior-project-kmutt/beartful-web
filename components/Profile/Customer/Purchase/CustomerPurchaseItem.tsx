@@ -60,8 +60,8 @@ const CustomerPurchaseItem = (props: Props) => {
                 <FontAwesomeIcon icon={faUser} size="sm" style={{ marginTop: "4px" }}></FontAwesomeIcon>
                 <p className={style.username}>{item.freelanceUsername}</p>
                 <div className="ml-8">
-                    <button className={style.saveButton} onClick={handleGoToChat}>Chat</button>
-                    <button className={style.cancelButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${item.freelanceUsername}`)}>View profile</button>
+                    <button className={style.saveButton} onClick={handleGoToChat}>แชท</button>
+                    <button className={style.cancelButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${item.freelanceUsername}`)}>ดูโปรโฟล์</button>
                 </div>
             </div>
             {item.order.map((item, index) => {
