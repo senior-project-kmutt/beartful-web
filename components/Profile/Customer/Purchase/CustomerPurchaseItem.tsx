@@ -102,7 +102,7 @@ const CustomerPurchaseItem = (props: Props) => {
                             {/* <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl" onClick={() => handleGoToDetail(item.purchaseOrder._id || '')}></FontAwesomeIcon> */}
                             {item.purchaseOrder.status === 'success' && (
                                 <div>
-                                    {isReviewModalOpen && <ReviewModal openReviewModal={openReviewModal} />}
+                                    {isReviewModalOpen && <ReviewModal openReviewModal={openReviewModal} data={item} />}
                                     <button className={style.toReviewButton} onClick={openReviewModal}>ให้คะแนน</button>
                                 </div>
                             )}

@@ -69,6 +69,8 @@
         }
 
         .starWrapper {
+            display: flex;
+            align-items: center;
             .star {
                 font-size: 1.6em;
                 color: #8F8C8C;
