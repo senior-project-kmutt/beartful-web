@@ -43,3 +43,11 @@ export const formatDateDetailUser = (dateString: Date) => {
 
     return `${day}/${thaiMonth}/${year} ${hour}:${minute}`;
 };
+
+export const formatOnlyDate = (dateTime: Date) => {
+    const dateObject = new Date(dateTime);
+    const date = dateObject.getDate().toString().padStart(2, '0');
+    const month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+    const year = dateObject.getFullYear();
+    return `${date}/${month}/${year}`;
+}

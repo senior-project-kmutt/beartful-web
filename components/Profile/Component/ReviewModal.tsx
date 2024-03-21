@@ -7,6 +7,8 @@ import { IGetOrder } from "@/models/purchaseOrder";
 import { Review } from "@/models/review";
 import Swal from "sweetalert2";
 import { createNewReview } from "@/services/review/review.api";
+import { HIRED_IMAGE, READYMADE_IMAGE } from "@/config/constants";
+import { formatOnlyDate, formattedPrice } from "@/core/tranform";
 
 interface Props {
     openReviewModal: () => void;
@@ -74,15 +76,15 @@ const ReviewModal = (props: Props) => {
             }
         });
     };
-    
+
     return (
-        <Modal size={'4xl'} dismissible className={style.reviewModal} show={true}>
+        <Modal size={'4xl'} dismissible className={style.reviewModal} show={true} onClose={openReviewModal}>
             <Modal.Header className={style.header}>
                 <p className="text-center">ให้คะแนน Artwork</p>
             </Modal.Header>
             <Modal.Body>
                 <div className={style.order}>
-                    <img className={style.userImage} src="../../xxxx"></img>
+                    <img className={style.userImage} src={data.purchaseOrder.type === 'hired' ? HIRED_IMAGE : READYMADE_IMAGE}></img>
                     <div className={style.detail}>
                         {data.purchaseOrder.type === 'hired' && (
                             <p className={style.artworkName}>{data.quotation?.name}</p>
@@ -90,7 +92,23 @@ const ReviewModal = (props: Props) => {
                         {data.purchaseOrder.type === 'readyMade' && (
                             <p className={style.artworkName}>{data.purchaseOrderItem?.name}</p>
                         )}
-                        <span className={style.packageName}>[  Package Name  ]</span>
+                        {data.purchaseOrder.type === 'hired' && (
+                            <div>
+                                <p className={style.packageName}>เลขที่ : {data.quotation?.quotationNumber}</p>
+                                <p className={style.packageName}>สิ่งที่ได้รับ : {data.quotation?.benefits}</p>
+                                <p className={style.packageName}>การแก้ไข : {data.quotation?.numberOfEdit}</p>
+                                {(data.quotation?.startDate && data.quotation.endDate) && (
+                                    <p className={style.packageName}>ระยะเวลาการทำงาน : {formatOnlyDate(data.quotation?.startDate)} - {formatOnlyDate(data.quotation?.endDate)}</p>
+                                )}
+                                <p className={style.price}>{formattedPrice(data.purchaseOrder.amount!)} บาท</p>
+                            </div>
+                        )}
+                        {data.purchaseOrder.type === 'readyMade' && (
+                            <div>
+                                <p className={style.packageName}>{data.purchaseOrderItem?.description}</p>
+                                <p className={style.price}>{formattedPrice(data.purchaseOrder.amount!)} บาท</p>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div id="information" className={style.main}>
