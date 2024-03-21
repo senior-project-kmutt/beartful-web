@@ -3,10 +3,11 @@ import FreelanceReviewList from "./FreelanceReviewList";
 import { useEffect, useState } from "react";
 import { IGetFreelanceReview } from "@/models/review";
 import { IUser } from "@/pages/chat";
-import { getFreelanceReviews } from "@/services/review/review.api";
+import { getFreelanceAverageScore, getFreelanceReviews } from "@/services/review/review.api";
 
 const FreelanceReviewScore = () => {
     const [freelanceReviews, setFreelanceReviews] = useState<IGetFreelanceReview[]>();
+    const [freelanceAverageScore, setFreelanceAverageScore] = useState<number>(0);
     const [user, setUser] = useState<IUser>()
 
     useEffect(() => {
@@ -21,6 +22,9 @@ const FreelanceReviewScore = () => {
             getFreelanceReviews(user.username).subscribe((res: any) => {
                 setFreelanceReviews(res.data);
             })
+            getFreelanceAverageScore(user.username).subscribe((res: any) => {
+                setFreelanceAverageScore(res.data);
+            })
         }
     }, [user])
     return (
@@ -30,7 +34,7 @@ const FreelanceReviewScore = () => {
                     <ProfileSelectBarFreelance activeMenu="review" />
                 </div>
                 {freelanceReviews && (
-                    <FreelanceReviewList title='คะแนนของฉัน' reviewsData={freelanceReviews} />
+                    <FreelanceReviewList title='คะแนนของฉัน' reviewsData={freelanceReviews} averageScore={freelanceAverageScore} />
                 )}
             </div>
         </>

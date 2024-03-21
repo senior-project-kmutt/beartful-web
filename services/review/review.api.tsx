@@ -11,3 +11,8 @@ export const getFreelanceReviews = (username: string) => {
   const url = `/user/freelance/${username}/reviews`;
   return get(url)
 }
+
+export const getFreelanceAverageScore = (username: string) => {
+  const url = `/user/freelance/${username}/reviews/averageScore`;
+  return get(url)
+}

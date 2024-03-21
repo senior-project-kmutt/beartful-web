@@ -9,7 +9,7 @@ import { getUserByUsername } from "@/services/user/user.api";
 import FreelanceReviewList from "../Profile/Freelance/Review/FreelanceReviewList";
 import DetailsModal from "./DetailsModal";
 import { IGetFreelanceReview } from "@/models/review";
-import { getFreelanceReviews } from "@/services/review/review.api";
+import { getFreelanceAverageScore, getFreelanceReviews } from "@/services/review/review.api";
 
 interface Props {
     username: string;
@@ -19,11 +19,16 @@ const FreelanceArtwork = (props: Props) => {
     const [type, setType] = useState<string>('hired');
     const [freelance, setFreelance] = useState<FreelanceUsers>();
     const [freelanceReviews, setFreelanceReviews] = useState<IGetFreelanceReview[]>();
+    const [freelanceAverageScore, setFreelanceAverageScore] = useState<number>(0);
     const [isOpenDetailsModal, setIsOpenDetailsModal] = useState<boolean>(false);
 
     useEffect(() => {
         getUserByUsername(props.username).subscribe(res => {
             setFreelance(res.data);
+        })
+
+        getFreelanceAverageScore(props.username).subscribe((res: any) => {
+            setFreelanceAverageScore(res.data)
         })
     }, [])
 
@@ -62,7 +67,7 @@ const FreelanceArtwork = (props: Props) => {
                     {(type == 'Review') && (
                         <div style={{ width: "96%" }}>
                             {freelanceReviews && (
-                                <FreelanceReviewList title='Review' reviewsData={freelanceReviews} />
+                                <FreelanceReviewList title='Review' reviewsData={freelanceReviews} averageScore={freelanceAverageScore} />
                             )}
                         </div>
                     )
