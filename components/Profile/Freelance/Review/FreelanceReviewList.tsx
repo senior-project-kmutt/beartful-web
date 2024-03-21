@@ -20,7 +20,9 @@ const FreelanceReviewList = (props: Props) => {
                     <span className="text-3xl font-bold">{averageScore}</span>
                     <span> จาก 5 คะแนน </span>
                 </div>
-                <StarRating percent={calculatePercentage(5, averageScore)}></StarRating>
+                <div style={{ width: '110px' }}>
+                    <StarRating percent={calculatePercentage(5, averageScore)}></StarRating>
+                </div>
                 {reviewsData.map(item => (
                     <>
                         <ReviewItem data={item} />
