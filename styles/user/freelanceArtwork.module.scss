@@ -1,56 +1,55 @@
 .profileDescription {
-    // height: 120px;
     background-color: #F9E0D4;
     border-radius: 10px;
-    padding-top: 3px;
-    padding-bottom: 1px;
-    // margin: 3px 18px;
-}
-
-.profile {
-    // height: 4rem;
-    width: 100%;
+    padding: 1.5rem 3rem;
     display: flex;
     align-items: center;
-    margin: 1rem auto 1.5rem auto;
 
-    img {
-        margin-left: 5%;
-        // margin-top: 50px;
-        margin-right: 3%;
-        border-radius: 50%;
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
+
+    .profile {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    
+        img {
+            margin-right: 3%;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+    
+        .name_box {
+            justify-items: start;
+            justify-content: start;
+    
+            .username {
+                margin-left: 4px;
+                font-weight: 900;
+                font-size: 1.3rem;
+            }
+    
+            .name {
+                margin-left: 4px;
+                font-size: 1rem;
+                font-weight: 800;
+                color: #716E6E;
+            }
+        }
     }
 
-    .name_box {
-        justify-items: start;
-        justify-content: start;
-
-        .username {
-            margin-left: 4px;
-            // margin-top: 25%;
-            font-weight: 900;
-            font-size: 1.3rem;
-        }
-
-        .name {
-            margin-left: 4px;
-            font-size: 1rem;
-            font-weight: 800;
-            color: #716E6E;
-        }
-    }
-
-    .description {
-        position: absolute;
-        right: 5%;
-        background-color: white;
-        height: 35px;
-        width: 230px;
-        border-radius: 20px;
+    .button_container {
+        display: flex;
+        align-items: center;
         color: #E16428;
-        // margin-top: 50px;
+        .description {
+            background-color: white;
+            height: 35px;
+            width: 230px;
+            border-radius: 20px;
+            color: #E16428;
+            margin-right: 20px;
+        }
+
     }
 }
