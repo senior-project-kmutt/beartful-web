@@ -92,7 +92,9 @@ const FreelanceArtwork = (props: Props) => {
                         </div>
                         <div className={style.button_container}>
                             <button className={style.description} onClick={() => setIsOpenDetailsModal(true)}>รายละเอียดเพิ่มเติม</button>
-                            <FontAwesomeIcon icon={faCommentDots} className='cursor-pointer' size="2xl" onClick={handleGoToChat} />
+                            {user && (
+                                <FontAwesomeIcon icon={faCommentDots} className='cursor-pointer' size="2xl" onClick={handleGoToChat} />
+                            )}
                         </div>
                     </div>
                     {(type == 'hired' || type == 'readyMade' || type == '') && <ArtworkList from="freelance" type={type} username={props.username} />}
