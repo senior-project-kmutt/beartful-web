@@ -55,11 +55,51 @@ export const formatOnlyDate = (dateTime: Date) => {
 export function calculatePercentage(fullScore: number, receivedScore: number): number {
     // ตรวจสอบว่าคะแนนเต็มต้องมากกว่า 0 และคะแนนที่ได้รับต้องไม่น้อยกว่า 0
     if (fullScore <= 0 || receivedScore < 0) {
-      throw new Error('Invalid input. Full score must be greater than 0 and received score must be non-negative.');
+        throw new Error('Invalid input. Full score must be greater than 0 and received score must be non-negative.');
     }
-  
+
     // คำนวณเปอร์เซ็นต์โดยหารคะแนนที่ได้รับด้วยคะแนนเต็มแล้วคูณด้วย 100
     const percentage: number = (receivedScore / fullScore) * 100;
-  
+
     return percentage;
-  }
+}
+
+export function numberToThaiWords(num: number): string {
+    const THAI_DIGITS = ['ศูนย์', 'หนึ่ง', 'สอง', 'สาม', 'สี่', 'ห้า', 'หก', 'เจ็ด', 'แปด', 'เก้า'];
+    const THAI_UNITS = ['', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน', 'ล้าน'];
+
+    // เตรียมตัวเลขเป็นอาร์เรย์ของหลัก
+    const digits = num.toString().split('').map(Number);
+
+    // คำนวณจำนวนหลักของตัวเลข
+    const numDigits = digits.length;
+
+    // เช็คว่าตัวเลขเป็นศูนย์หรือไม่
+    if (num === 0) {
+        return THAI_DIGITS[0];
+    }
+
+    let thaiWords = '';
+
+    // วนลูปเพื่อเปลี่ยนตัวเลขเป็นคำศัพท์
+    for (let i = 0; i < numDigits; i++) {
+        const digit = digits[i];
+        const unit = THAI_UNITS[numDigits - i - 1];
+
+        if (digit !== 0) {
+            if (digit === 1 && i === numDigits - 1 && num >= 10) {
+                thaiWords += 'เอ็ด';
+            } else if (digit === 2 && unit === 'สิบ') {
+                thaiWords += 'ยี่';
+            } else if (digit === 2 && i === numDigits - 2 && num >= 20) {
+                thaiWords += 'ยี่';
+            } else {
+                thaiWords += THAI_DIGITS[digit];
+            }
+
+            thaiWords += unit;
+        }
+    }
+
+    return thaiWords;
+}

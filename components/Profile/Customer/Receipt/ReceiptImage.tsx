@@ -4,6 +4,7 @@ import html2canvas from 'html2canvas';
 import { LOGO_IMAGE } from "@/config/constants";
 import { IPurchaseOrderDetail } from "@/models/purchaseOrder";
 import jsPDF from 'jspdf';
+import { formattedPrice, numberToThaiWords } from "@/core/tranform";
 
 interface Props {
   data: IPurchaseOrderDetail;
@@ -215,16 +216,16 @@ const ReceiptImage = (props: Props) => {
                   {data.order.purchaseOrder.type === 'hired' && (
                     <>
                       <td className="text-center">{data.order.quotation?.quatity}</td>
-                      <td className="text-center">{data.order.quotation?.amount}</td>
-                      <td className="text-center">{data.order.quotation?.amount}</td>
+                      <td className="text-center">{formattedPrice(data.order.quotation?.amount || 0)}</td>
+                      <td className="text-center">{formattedPrice(data.order.quotation?.amount || 0)}</td>
                     </>
                   )}
 
                   {data.order.purchaseOrder.type === 'readyMade' && (
                     <>
                       <td className="text-center">{data.order.purchaseOrderItem?.quantity}</td>
-                      <td className="text-center">{data.order.purchaseOrderItem?.price}</td>
-                      <td className="text-center">{data.order.purchaseOrderItem?.price}</td>
+                      <td className="text-center">{formattedPrice(data.order.purchaseOrderItem?.price || 0)}</td>
+                      <td className="text-center">{formattedPrice(data.order.purchaseOrderItem?.price || 0)}</td>
                     </>
                   )}
                 </tr>
@@ -245,10 +246,10 @@ const ReceiptImage = (props: Props) => {
                       <td style={{ width: "70%", textAlign: 'right' }}><p>จำนวนเงินรวมทั้งสิ้น (บาท) / Grand Total</p></td>
                       <td style={{ width: "30%", textAlign: 'right' }}>
                         {data.order.purchaseOrder.type === 'hired' && (
-                          <p>{data.order.quotation?.amount}</p>
+                          <p>{formattedPrice(data.order.quotation?.amount || 0)}</p>
                         )}
                         {data.order.purchaseOrder.type === 'readyMade' && (
-                          <p>{data.order.purchaseOrderItem?.price}</p>
+                          <p>{formattedPrice(data.order.purchaseOrderItem?.price || 0)}</p>
                         )}
                       </td>
                     </tr>
@@ -258,8 +259,15 @@ const ReceiptImage = (props: Props) => {
                 <table className={`${style.summary} font-semibold`}>
                   <tbody>
                     <tr className="mt-2">
-                      <td style={{ width: "50%", paddingTop: '6px' }}>สองร้อยห้าสิบบาทถ้วน</td>
-                      <td style={{ width: "50%", textAlign: 'right', paddingTop: '6px' }}><p>สองร้อยห้าสิบบาทถ้วน</p></td>
+                      <td style={{ width: "50%", paddingTop: '6px' }}>จำนวนเงินรวมทั้งสิ้น</td>
+                      <td style={{ width: "50%", textAlign: 'right', paddingTop: '6px' }}>
+                        {data.order.purchaseOrder.type === 'hired' && (
+                          <p>{numberToThaiWords(data.order.quotation?.amount || 0)}บาทถ้วน</p>
+                        )}
+                        {data.order.purchaseOrder.type === 'readyMade' && (
+                          <p>{numberToThaiWords(data.order.purchaseOrderItem?.price || 0)}บาทถ้วน</p>
+                        )}
+                        </td>
                     </tr>
                   </tbody>
                 </table>
