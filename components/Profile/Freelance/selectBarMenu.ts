@@ -19,10 +19,10 @@ export const freelanceSelectBarMenu = [
         title: 'เปลี่ยนรหัสผ่าน',
         value: 'changePassword'
     },
-    {
-        title: 'ลบบัญชี',
-        value: 'deleteAccount'
-    }
+    // {
+    //     title: 'ลบบัญชี',
+    //     value: 'deleteAccount'
+    // }
 ]
 
 export const customerSelectBarMenu = [
@@ -34,8 +34,8 @@ export const customerSelectBarMenu = [
         title: 'เปลี่ยนรหัสผ่าน',
         value: 'changePassword'
     },
-    {
-        title: 'ลบบัญชี',
-        value: 'deleteAccount'
-    }
+    // {
+    //     title: 'ลบบัญชี',
+    //     value: 'deleteAccount'
+    // }
 ]

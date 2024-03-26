@@ -20,7 +20,7 @@ const FreelanceDashboard = (props: Props) => {
                     <div className={style.block1}>
                         <div className={style.blockLabel}>.</div>
                         <div className={style.group}>
-                            <p className={style.balanceText}>My balance</p>
+                            <p className={style.balanceText}>ยอดเงินคงเหลือ</p>
                             <p className={style.amount}>{formattedPrice(data.amount)} บาท</p>
                         </div>
                     </div>

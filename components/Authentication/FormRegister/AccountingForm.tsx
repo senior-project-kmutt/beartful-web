@@ -221,7 +221,7 @@ const AccountingForm = (props: Props) => {
       <div className={style.button}>
         <div className="flex justify-center">
           <button className={style.save} onClick={() => onSubmit('save')}>
-            Save
+            บันทึก
           </button>
           {setIsSubmitForm && (
             <button className={style.submit} onClick={() => onSubmit('submit')}>ยืนยัน</button>
