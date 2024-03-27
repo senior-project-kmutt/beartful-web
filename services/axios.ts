@@ -1,6 +1,7 @@
-import { API_URL } from '@/config/constants';
 import axios from 'axios';
 
+console.log(process.env.NEXT_PUBLIC_API_URL);
+console.log(process.env.NEXT_PUBLIC_BASEPATH);
 export default axios.create({
-  baseURL: API_URL
+  baseURL: process.env.NEXT_PUBLIC_API_URL
 });

@@ -1,14 +1,9 @@
-import axios from "axios";
-import { API_URL } from "@/config/constants";
 import Artwork from "@/components/Artwork/Artwork";
 import NavBar from "@/components/Layout/NavBar";
 import { useEffect, useState } from "react";
 import { IUser } from "./chat";
 import { useRouter } from "next/router";
 
-const client = axios.create({
-  baseURL: API_URL
-});
 
 export default function Home() {
   const [user, setUser] = useState<IUser>();

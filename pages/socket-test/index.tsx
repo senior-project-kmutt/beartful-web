@@ -1,4 +1,4 @@
-import { SOCKET_CONNECT_URL } from "@/config/constants";
+// import { SOCKET_CONNECT_URL } from "@/config/constants";
 import { ChangeEvent, useState } from "react";
 import { Manager } from "socket.io-client";
 
@@ -6,7 +6,7 @@ const Socket = () => {
   const [message, setMessage] = useState<string>('')
   const [showMessage, setShowMessage] = useState<string>('')
 
-  const manager = new Manager(SOCKET_CONNECT_URL, {
+  const manager = new Manager('SOCKET_CONNECT_URL', {
     path: '/ssi1-socket',
     forceNew: true,
   })
