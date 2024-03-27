@@ -31,7 +31,7 @@ const ReceiptPreviewModal = (props: Props) => {
             <Modal.Body>
                 <ReceiptImage data={data} saveImageData={setReceiptImage} />
                 <div className={style.button_box}>
-                    <button className={style.createButton} onClick={() => handleDownload()}>Download</button>
+                    <button className={style.createButton} onClick={() => handleDownload()}>ดาวน์โหลด</button>
                     <button className={style.cancelButton} onClick={() => setIsopenModal(false)}>
                         ปิด
                     </button>

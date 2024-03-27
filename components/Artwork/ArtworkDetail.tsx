@@ -2,7 +2,7 @@ import { Artwork } from "@/models/artwork";
 import style from "@/styles/artwork/artworkLayout.module.scss";
 import { Carousel, CustomFlowbiteTheme } from "flowbite-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faBookmark, faCommentDots } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { createCart } from "@/services/cart/cart.api";
 import { IUser } from "@/pages/chat";
@@ -13,6 +13,7 @@ import { getAllCategories } from "@/services/category/category.api";
 import { getUserByIdNotAuthen } from "@/services/user/user.api";
 import { Users } from "@/models/users";
 import router from "next/router";
+import { createChatRoom } from "@/services/chat/chat.api";
 
 interface Props {
   item: Artwork;
@@ -128,6 +129,24 @@ const ArtworkDetail = (props: Props) => {
     }
   };
 
+  const handleGoToChat = () => {
+    if (user && profile) {
+      const token = localStorage.getItem("auth");
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      const body = {
+        paticipants: [
+          user.username,
+          profile.username
+        ]
+      }
+      createChatRoom(body, headers).then(res => {
+        router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/chat?chatRoom=${res._id}`);
+      })
+    }
+  }
+
   return (
     <div className={style.artwork_detail}>
       <div className={style.image_gallery}>
@@ -218,24 +237,30 @@ const ArtworkDetail = (props: Props) => {
           </div>
         )}
         {user?.role === "customer" && (
-          <div className={style.profile}>
-            <img src={profile?.profileImage} />
-            <div className={style.name_box}>
-              <p className={style.username}>{profile?.username}</p>
-              <p className={style.fullname}>
-                {profile?.firstname} {profile?.lastname}
-              </p>
+          <div className={style.freelance_profile}>
+            <div className={style.profile}>
+              <img src={profile?.profileImage} />
+              <div className={style.name_box}>
+                <p className={style.username}>{profile?.username}</p>
+                <p className={style.fullname}>
+                  {profile?.firstname} {profile?.lastname}
+                </p>
+              </div>
+
             </div>
-            <button
-              className={`${style.btn} justify-self-end`}
-              onClick={() =>
-                router.push(
-                  `${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${profile?.username}`
-                )
-              }
-            >
-              View Profile
-            </button>
+            <div className={style.button_container}>
+              <FontAwesomeIcon icon={faCommentDots} className='cursor-pointer' size="2xl" onClick={handleGoToChat} />
+              <button
+                className={`${style.view_profile} justify-self-end`}
+                onClick={() =>
+                  router.push(
+                    `${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${profile?.username}`
+                  )
+                }
+              >
+                View Profile
+              </button>
+            </div>
           </div>
         )}
       </div>

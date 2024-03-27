@@ -13,20 +13,25 @@
 .reviewItem {
     border-radius: 0.6rem;
     margin: 1rem 0rem;
+    padding: 1.2rem 1rem;
     background-color: #F8EDED;
 
     .profile {
-        padding: 0.8rem 2%;
         width: 100%;
-        display: flex;
-        
-        img {
-            margin-right: 8px;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            background-color: #545151;
+
+        .profile_image {
+            width: 6%;
+            display: flex;
+            justify-content: center;
+            margin-right: 12px;
+            img {
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                background-color: #545151;
+            }
         }
+        
         .username{
             font-size: 1.1rem;
             font-weight: bold;
@@ -35,22 +40,18 @@
             font-size: 0.8rem;
             color: #545151;
         }
-        .score {
-            display: flex;
-            position: absolute;
-            right: 4.2%;
-            .scoreText {
-                margin-left: 0.4rem;
-                font-size: 1.2rem;
-                font-weight: 900;
-                justify-content: center;
-            }
-        }
     }
 
-    .message {
-        padding: 0.4rem 5.4rem;
-        padding-bottom: 1rem;
+    .score {
+        display: flex;
+        position: absolute;
+        right: 4.2%;
+        .scoreText {
+            margin-left: 0.4rem;
+            font-size: 1.2rem;
+            font-weight: 900;
+            justify-content: center;
+        }
     }
 }
 

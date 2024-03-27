@@ -19,7 +19,7 @@ const TransactionItem = (props: Props) => {
                 </div>
                 <div className="flex w-25 justify-between">
                     <div>
-                        <p className={style.description}>{data.type == 'paid' ? 'Order Revenue' : 'transfer to my Bank Account'}</p>
+                        <p className={style.description}>{data.type == 'paid' ? 'รายการเงินเข้า' : 'รายการถอนเงิน'}</p>
                         <p className={style.date}>{formatDateTime(data.createdAt)}</p>
                     </div>
                     <div className={style.price}>

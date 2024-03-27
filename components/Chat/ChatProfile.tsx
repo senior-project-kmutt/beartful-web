@@ -3,6 +3,10 @@ import styles from "@/styles/chat/chat.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faUserCheck } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { getFreelanceAverageScore } from '@/services/review/review.api';
+import StarRating from '../Profile/Freelance/Review/StarRating';
+import { calculatePercentage } from '@/core/tranform';
 
 
 interface Props {
@@ -13,6 +17,7 @@ const ChatProfile = (props: Props) => {
   const { profile } = props
   const rate = 5;
   const router = useRouter();
+  const [freelanceAverageScore, setFreelanceAverageScore] = useState<number>(0)
 
   const getDate = (dateTime?: Date) => {
     const months = [
@@ -37,6 +42,12 @@ const ChatProfile = (props: Props) => {
     }
     return stars;
   };
+
+  useEffect(() => {
+    getFreelanceAverageScore(profile.username).subscribe((res: any) => {
+      setFreelanceAverageScore(res.data)
+    })
+  }, [profile])
 
   return (
     <div className={styles.profile_warp}>
@@ -65,7 +76,9 @@ const ChatProfile = (props: Props) => {
               </tr> */}
               <tr>
                 <td>คะแนนรีวิว</td>
-                <td className={`${styles.star} text-right`}>{renderStars()}</td>
+                <td className={`${styles.star}`}>
+                  <div><StarRating percent={calculatePercentage(5, freelanceAverageScore)} /></div>
+                </td>
               </tr>
             </>
           )}

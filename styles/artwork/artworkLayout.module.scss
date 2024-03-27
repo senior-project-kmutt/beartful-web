@@ -264,50 +264,61 @@
         }
     }
 
-    .profile {
-        height: 4rem;
-        width: 100%;
+    .freelance_profile {
+        width: 108%;
         display: flex;
-        align-items: center;
-        margin: 3rem auto;
-
-        img {
-            margin-right: 8px;
-            border-radius: 50%;
-            width: 60px;
+        .profile {
+            height: 4rem;
+            width: 70%;
+            display: flex;
+            align-items: center;
+            margin: 3rem auto;
+    
+            img {
+                margin-right: 8px;
+                border-radius: 50%;
+                width: 60px;
+            }
+    
+            .name_box {
+                justify-items: start;
+                justify-content: start;
+    
+                .username {
+                    margin-left: 4px;
+                    font-weight: 500;
+                    font-size: 1.2rem;
+                }
+    
+                .fullname {
+                    margin-left: 4px;
+                    font-size: 0.8rem;
+                    color: #716E6E;
+                }
+            }
         }
 
-        .name_box {
-            justify-items: start;
-            justify-content: start;
-
-            .username {
-                margin-left: 4px;
+        .button_container {
+            width: 30%;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            color: #873C18;
+            .view_profile {
+                background-color: #E78353;
+                padding: 4px 20px;
+                border-radius: 15px;
+                color: #fff;
                 font-weight: 500;
-                font-size: 1.2rem;
-            }
-
-            .fullname {
-                margin-left: 4px;
-                font-size: 0.8rem;
-                color: #716E6E;
-            }
-        }
-
-        .btn {
-            background-color: #E78353;
-            padding: 4px 20px;
-            border-radius: 15px;
-            color: #fff;
-            font-weight: 500;
-            position: absolute;
-            right: 4%;
-
-            &:hover {
-                background-color: #5A2810;
-                color: #FFFFFF;
+                margin-left: 8px;
+    
+                &:hover {
+                    background-color: #5A2810;
+                    color: #FFFFFF;
+                }
             }
         }
+        
     }
 }
 

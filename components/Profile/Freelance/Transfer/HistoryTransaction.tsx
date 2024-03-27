@@ -30,8 +30,8 @@ const HistoryTransaction = (props: Props) => {
             <div className={style.main}>
                 <div className={style.transaction}>
                     <div className={style.transaction_content}>
-                        <p className={style.content1}>History Transactions</p>
-                        {data.length > 5 && <p className={style.content2} onClick={toggleShowAll}>{showAll ? 'Show less' : 'Show more'}</p>}
+                        <p className={style.content1}>ประวัติเงินเข้า-ออก</p>
+                        {data.length > 5 && <p className={style.content2} onClick={toggleShowAll}>{showAll ? 'แสดงน้อยลง' : 'แสดงเพิ่มเติม'}</p>}
                     </div>
                     {limitedData.map((item, index) => (
                         <div key={index} onClick={() => toggleDetailModal(item)}>

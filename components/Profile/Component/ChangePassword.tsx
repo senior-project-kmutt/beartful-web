@@ -120,8 +120,8 @@ const ChangePassword = (props: Props) => {
                         )}
                     </div>
                     <div className={style.button}>
-                        <button className={style.submit} onClick={onSubmit}>save</button>
-                        <button className={style.cancel}>cancel</button>
+                        <button className={style.submit} onClick={onSubmit}>บันทึก</button>
+                        <button className={style.cancel}>ยกเลิก</button>
                     </div>
                 </div>
             </form>

@@ -78,9 +78,9 @@ const QuotationImage = (props: Props) => {
             <p className="ml-1 mt-1">Quotation</p>
           </div>
           <div></div>
-          <div className="mt-5">
+          {/* <div className="mt-5">
             <img src={LOGO_IMAGE} alt="" width={180} />
-          </div>
+          </div> */}
         </div>
 
         <div className="text-sm">
