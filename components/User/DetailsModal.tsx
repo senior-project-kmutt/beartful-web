@@ -3,6 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Modal } from 'flowbite-react';
 import { faStar, faUserCheck } from '@fortawesome/free-solid-svg-icons';
 import { FreelanceUsers } from "@/models/users";
+import { useEffect, useState } from "react";
+import { getFreelanceAverageScore } from "@/services/review/review.api";
+import StarRating from "../Profile/Freelance/Review/StarRating";
+import { calculatePercentage } from "@/core/tranform";
 
 interface Props {
     openReviewModal: () => void;
@@ -10,12 +14,20 @@ interface Props {
 }
 const DetailsModal = (props: Props) => {
     const { openReviewModal, data } = props
+    const [freelanceAverageScore, setFreelanceAverageScore] = useState<number>(0);
     // const desc = `Lorem Ipsum is simply dummy text of the
     // printing and typesetting industry. Lorem Ipsum
     // has been the industry's standard dummy text
     // ever since the 1500s, when an unknown printer
     // took a galley of type and scrambled it to make
     // a type specimen book.`
+
+    useEffect(() => {
+        getFreelanceAverageScore(data.username).subscribe((res: any) => {
+            setFreelanceAverageScore(res.data)
+        })
+    }, [])
+
     const mapNameSkillLevel: any = {
         excellent: 'ดีมาก',
         good: 'ดี',
@@ -45,6 +57,8 @@ const DetailsModal = (props: Props) => {
         }
         return stars;
     };
+
+    console.log(freelanceAverageScore);
 
     return (
         <Modal size={'4xl'} dismissible className={style.detailsModal} show={true}>
@@ -77,7 +91,9 @@ const DetailsModal = (props: Props) => {
                                 </tr> */}
                                 <tr>
                                     <td>คะแนนรีวิว</td>
-                                    <td className={`${style.star} text-right`}>{renderStars()}</td>
+                                    <td className={`${style.star} text-right`}>
+                                        <StarRating percent={calculatePercentage(5, freelanceAverageScore)}></StarRating>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
