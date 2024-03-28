@@ -258,7 +258,7 @@ const ArtworkDetail = (props: Props) => {
                   )
                 }
               >
-                View Profile
+                ดูโปรไฟล์
               </button>
             </div>
           </div>

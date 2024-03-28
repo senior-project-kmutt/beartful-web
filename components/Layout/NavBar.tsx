@@ -30,7 +30,7 @@ const NavBar = () => {
   return (
     <>
       <Navbar className="space-x-6 h-8 sm:h-12" fluid rounded>
-        <Navbar.Brand as={Link} href="/">
+        <Navbar.Brand as={Link} href={`${process.env.NEXT_PUBLIC_BASEPATH}/`} >
           <img src={LOGO_IMAGE} className="h-4 sm:h-6 ml-4" alt="Beartful Logo" />
         </Navbar.Brand>
         <Navbar.Toggle />
