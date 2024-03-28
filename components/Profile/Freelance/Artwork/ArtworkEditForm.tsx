@@ -32,9 +32,11 @@ const ArtworkForm = (props: Props) => {
   const { register, handleSubmit, formState: { errors } } = useForm<ArtworkFormData>();
   const [categories, setCategories] = useState<Category[]>([]);
   const [user, setUser] = useState<IUser>();
+  const [priceInputValue, setPriceInputValue] = useState<number>();
   initializeApp(firebaseConfig);
 
   useEffect(() => {
+    calCulateInitialPrice()
     getAllCategories().subscribe((res => {
       setCategories(res.data as Category[])
     }))
@@ -43,6 +45,19 @@ const ArtworkForm = (props: Props) => {
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("user") || ""));
   }, []);
+
+  const calCulateInitialPrice = () => {
+    const calculatedValue = parseFloat(data.price) * 0.9;
+    const formattedValue = calculatedValue.toFixed(2);
+    setPriceInputValue(parseFloat(formattedValue));
+  };
+
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const price = e.target.value;
+    const calculatedValue = parseFloat(price) * 0.9;
+    const formattedValue = calculatedValue.toFixed(2);
+    setPriceInputValue(parseFloat(formattedValue));
+  };
 
   const onSubmit = handleSubmit(async (data) => {
     const token = localStorage.getItem("auth");
@@ -177,9 +192,31 @@ const ArtworkForm = (props: Props) => {
                 {errors?.description && <span className={style.errorMessage}>*{errors.description.message}</span>}
               </div>
 
+              {/* <label>ราคา</label>
+              <div>
+                <input className={style.inputFieldSm} {...register("price", { required: "กรุณากรอกราคา" })} /><span> บาท</span>
+                <span className="ml-5 mr-2">จำนวนเงินที่จะได้รับ</span>
+                <input
+                  className={style.inputFieldSmall}
+                  disabled={true}
+                  value={handlePriceChange(data.price)}
+                />
+                <span> บาท</span>
+                <p className={style.information}>*มีการหักค่าบริการระบบ</p>
+                {errors?.price && <p className={style.errorMessage}>*{errors.price.message}</p>}
+              </div> */}
+
               <label>ราคา</label>
               <div>
-                <input className={style.inputFieldSm} {...register("price", { required: "กรุณากรอกราคา" })} defaultValue={data.price || ''} /><span> บาท</span>
+                <input className={style.inputFieldSm} {...register("price", { required: "กรุณากรอกราคา" })} defaultValue={data.price || ''} onChange={handlePriceChange} /><span> บาท</span>
+                <span className="ml-5 mr-2">จำนวนเงินที่จะได้รับ</span>
+                <input
+                  className={style.inputFieldSmall}
+                  disabled={true}
+                  value={priceInputValue}
+                />
+                <span> บาท</span>
+                <p className={style.information}>*มีการหักค่าบริการระบบ</p>
                 {errors?.price && <p className={style.errorMessage}>*{errors.price.message}</p>}
               </div>
 
