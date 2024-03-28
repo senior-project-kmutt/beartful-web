@@ -33,7 +33,6 @@ const PurchaseStatusBar = (props: Props) => {
     }
     return (
         <div className={style.purchaseStatus}>
-            <div className={style.formGrid}>
                 {statusOption.map((item, index) => {
                     return (
                         <div key={index}>
@@ -44,7 +43,6 @@ const PurchaseStatusBar = (props: Props) => {
                         </div>
                     )
                 })}
-            </div>
         </div>
 
     );

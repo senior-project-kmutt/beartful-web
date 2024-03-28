@@ -1,23 +1,25 @@
 .selectBar {
-    margin-left: 30px;
     display: flex;
-    // border: #873C18 solid 1px;
+    width: 100%;
+    min-width: 300px;
+    border-top-right-radius: 30px;
+    height: 100vh;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .profile {
-    // width: 4rem;
-    // height: 4rem;
     width: 100%;
     display: flex;
     align-items: center;
-    margin: 3rem auto 1.5rem auto;
-    // border: #873C18 solid 1px;
+    margin-top: 3rem;
+    padding-left: 35px;
+    cursor: pointer;
 
     img {
         margin-right: 8px;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
+        border-radius: 15%;
+        width: 80px;
+        height: 80px;
         object-fit: cover;
     }
 
@@ -27,38 +29,82 @@
 
         .username {
             margin-left: 4px;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 1.2rem;
+            cursor: default;
         }
 
+
         .edit {
-            margin-left: 4px;
-            font-size: 0.8rem;
-            color: #716E6E;
+            background: #E16428;
+            border-radius: 10px;
+            box-shadow: #E16428 0 5px 20px -10px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 24px;
+            opacity: 1;
+            outline: 0 solid transparent;
+            padding: 2px 8px;
+            user-select: none;
+            border: 0;
         }
     }
 }
 
 .selectOption {
+    margin-top: 2rem;
+
+    svg {
+        padding-right: 10px;
+    }
+
     .heading {
         font-weight: bold;
-        margin-top: 0.5rem;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        padding-left: 35px;
+    }
+    .heading:hover,
+    .heading:active {
+        background-color: #E16428;
+        background-position: 0 0;
+        color: white;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        margin-left: 20px;
     }
 
     .subHeading {
         color: #545151;
+        padding-left: 35px;
         margin-left: 1.8rem;
+        margin-top: 0.2rem;
         cursor: pointer;
+    }
+    .subHeading:hover,
+    .subHeading:active {
+        background-color: #E16428;
+        background-position: 0 0;
+        color: white;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        margin-left: 20px;
     }
 
     .activeMenu {
-        color: #873C18;
+        color: white;
+        background-color: #E16428;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        margin-left: 20px;
     }
-}
-
-.verticleLine {
-    border-left: 1px solid #DED4CF;
-    margin-top: 50px;
-    margin-left: 30px;
-    height: 600px;
 }
