@@ -157,8 +157,8 @@ const ChatMessage = (props: Props) => {
 
   const getDate = (dateTime?: Date) => {
     const months = [
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+      "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤษจิกายน", "ธันวาคม"
     ];
     if (dateTime) {
       const convertToDate = new Date(dateTime)
@@ -285,7 +285,7 @@ const ChatMessage = (props: Props) => {
             </div>
             <input
               type="text"
-              placeholder='Type Something ...'
+              placeholder='พิมพ์ข้อความ ...'
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyDown={handleKeyDown}

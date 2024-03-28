@@ -41,7 +41,7 @@ const ChatRoomItem = (props: Props) => {
         const isFileMessage = res.message?.includes(BUGKET_STORAGE);
         setIsFileMessage(isFileMessage)
         if (isFileMessage) {
-          setLatestMessage("File Attach");
+          setLatestMessage("ไฟล์แนบ");
         } else {
           setLatestMessage(res.message)
         }

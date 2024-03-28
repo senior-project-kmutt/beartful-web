@@ -189,7 +189,7 @@ const ArtworkDetail = (props: Props) => {
         </div>
         <div className={style.name}>
           {name}
-          <span className={`${style.heart} cursor-pointer`}>
+          {/* <span className={`${style.heart} cursor-pointer`}>
             <FontAwesomeIcon
               icon={faHeart}
               className={style.heart_icon}
@@ -200,7 +200,7 @@ const ArtworkDetail = (props: Props) => {
               icon={faBookmark}
               className={style.bookmark_icon}
             ></FontAwesomeIcon>
-          </span>
+          </span> */}
         </div>
         <div className={style.category}>
           {categoryNames.map((name, index) => (

@@ -10,12 +10,12 @@ interface Props {
 }
 const DetailsModal = (props: Props) => {
     const { openReviewModal, data } = props
-    const desc = `Lorem Ipsum is simply dummy text of the
-    printing and typesetting industry. Lorem Ipsum
-    has been the industry's standard dummy text
-    ever since the 1500s, when an unknown printer
-    took a galley of type and scrambled it to make
-    a type specimen book.`
+    // const desc = `Lorem Ipsum is simply dummy text of the
+    // printing and typesetting industry. Lorem Ipsum
+    // has been the industry's standard dummy text
+    // ever since the 1500s, when an unknown printer
+    // took a galley of type and scrambled it to make
+    // a type specimen book.`
     const mapNameSkillLevel: any = {
         excellent: 'ดีมาก',
         good: 'ดี',
@@ -67,23 +67,23 @@ const DetailsModal = (props: Props) => {
                                     <td>เป็นสมาชิกเมื่อ</td>
                                     <td className='text-right'>{getDate(data.createdAt)}</td>
                                 </tr>
-                                <tr>
+                                {/* <tr>
                                     <td>ขายงานแล้ว</td>
                                     <td className='text-right'>0 ครั้ง</td>
                                 </tr>
                                 <tr>
                                     <td>อัตราการทำงานสำเร็จ</td>
                                     <td className='text-right'>0 %</td>
-                                </tr>
+                                </tr> */}
                                 <tr>
                                     <td>คะแนนรีวิว</td>
                                     <td className={`${style.star} text-right`}>{renderStars()}</td>
                                 </tr>
                             </table>
                         </div>
-                        <div className={style.desc}>
+                        {/* <div className={style.desc}>
                             {desc}
-                        </div>
+                        </div> */}
                         <div className={style.education}>
                             <p className="font-bold">ประวัติการศึกษา</p>
                             {data.education.map((item) => {

@@ -46,7 +46,7 @@ const NavBar = () => {
                 {user.role === 'customer' && (
                   <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>
                     <FontAwesomeIcon icon={faCartShopping} className={`${style.icon}`}></FontAwesomeIcon>
-                    <span className={`${style.count} absolute-4 top-0 right-24`}>15</span>
+                    {/* <span className={`${style.count} absolute-4 top-0 right-24`}>15</span> */}
                   </Navbar.Link>
                 )}
                 {user.role !== 'admin' && (
