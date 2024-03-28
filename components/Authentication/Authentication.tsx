@@ -55,9 +55,10 @@ const Authentication = () => {
       login(responseBody as unknown as LoginUser).subscribe((res: any) => {
         localStorage.setItem("auth", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-        router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`)
+        router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`).then(() => {
+          router.reload();
+        });
       }, error => {
-        console.log(error);
         if (error.response?.status === 401) {
           Swal.fire({
             icon: "error",
