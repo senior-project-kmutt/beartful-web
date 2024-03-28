@@ -55,7 +55,7 @@ const Authentication = () => {
       login(responseBody as unknown as LoginUser).subscribe((res: any) => {
         localStorage.setItem("auth", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-        Router.back();
+        router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`)
       }, error => {
         console.log(error);
         if (error.response?.status === 401) {
