@@ -119,7 +119,7 @@ const AwardForm = (props: Props) => {
 
   return (
     <div>
-      <p className='text-xl font-semibold'>ใบอนุญาติ / รางวัลที่ได้รับ</p>
+      <p className='text-xl font-semibold'>ใบอนุญาต / รางวัลที่ได้รับ</p>
       {awards.map((item, index) => (
         <div key={index}>
           <div className={style.education_box}>

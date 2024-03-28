@@ -36,7 +36,7 @@ export const defaultProcessFreelance: Process[] = [
     success: false
   },
   {
-    title: 'ใบอนุญาติ / รางวัลที่ได้รับ',
+    title: 'ใบอนุญาต / รางวัลที่ได้รับ',
     value: 'licenseAndAwards',
     success: false
   },
