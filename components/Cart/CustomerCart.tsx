@@ -74,41 +74,34 @@ const CustomerCart = () => {
     return (
         <>
             <NavBar />
-            <div className="flex">
+            <div>
                 <div className={style.sideBar}>
                     <CartSelectBar type={type} setType={setType} />
                 </div>
 
                 <div id="cart_item" className={style.main}>
                     {type === 'hired' && (
-                        <>
-                            <div className={style.heading}>Cart: Hiring</div>
-                            <CartHiringStatusBar />
+                        <div className="overflow-y-auto h-screen">
                             {hiringcart.map((item, index) => {
                                 return (
-                                    <CartHiringItem item={item} key={index} />
+                                    <div style={{ position: 'relative' }} key={index}>
+                                        <CartHiringItem item={item} />
+                                    </div>
                                 )
                             })}
-                        </>
+                        </div>
                     )}
                     {type === 'readyMade' && (
-                        <>
-                            <div className={style.heading}>Cart: Ready Made</div>
-                            {/* <CartReadyMadeStatusBar /> */}
-                            <CartHiringStatusBar />
+                        <div className="overflow-y-auto h-screen">
                             <div className=" mt-2 rounded-t-lg">
                                 {cart.map((item, index) => {
                                     return (
-                                        <CartReadyMade item={item} key={index} />
+                                        <div style={{ position: 'relative' }} key={index}>
+                                            <CartReadyMade item={item} />
+                                        </div>
                                     )
                                 })}</div>
-                            {/* <div className={style.order}>
-                                <div>
-                                    <span className={style.price}>ราคารวมทั้งหมด {netAmount} บาท</span>
-                                    <button onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart/review-order`)}>จัดจ้าง</button>
-                                </div>
-                            </div> */}
-                        </>
+                        </div>
                     )}
                 </div>
             </div>
@@ -117,3 +110,13 @@ const CustomerCart = () => {
 };
 
 export default CustomerCart;
+
+{/* <div className="overflow-y-auto h-screen">
+                        {order.map((item, index) => {
+                            return (
+                                <div style={{ position: 'relative' }} key={index}>
+                                    <FreelancePurchaseItem item={item} updateStatus={updateStatus} />
+                                </div>
+                            )
+                        })}
+                    </div> */}

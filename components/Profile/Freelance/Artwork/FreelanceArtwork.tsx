@@ -48,14 +48,14 @@ const FreelanceArtwork = (props: Props) => {
             <NavBar />
             <div className="flex">
 
-                <div style={{width: "18%"}}>
+                <div style={{width: "22%"}}>
                     <ProfileSelectBarFreelance activeMenu="artwork" />
                 </div>
 
                 <div className={style.main}>
                     <div className="mb-11">
                         <button className={style.addButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/artwork/add`)}>เพิ่มผลงาน</button>
-                        <p>ผลงานของฉัน</p>
+                        <p className="text-xl font-bold">ผลงานของฉัน</p>
                     </div>
 
 
@@ -64,7 +64,7 @@ const FreelanceArtwork = (props: Props) => {
                             <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
                         </div>
                     )}
-                    <div className={style.artworkContainer}>
+                    <div className={`${style.artworkContainer} overflow-y-auto h-screen`}>
                         {artworks?.map((item: Artwork, index: number) => {
                             return (
                                 <div

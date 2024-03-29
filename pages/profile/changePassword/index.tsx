@@ -18,12 +18,12 @@ const ProfilePassword = () => {
       <NavBar />
       <div className="flex">
         {user?.role === 'freelance' && (
-          <div style={{ width: "18%" }}>
+          <div style={{ width: "22%" }}>
             <ProfileSelectBarFreelance activeMenu="changePassword" />
           </div>
         )}
         {user?.role === 'customer' && (
-          <div style={{ width: "18%" }}>
+          <div style={{ width: "22%" }}>
             <ProfileSelectBarCustomer activeMenu="changePassword" />
           </div>
         )}

@@ -93,7 +93,7 @@ export default function Home() {
       <NavBar />
       <div className={styles.container}>
         <div className={styles.chat_room}>
-          <h1 className="font-extrabold underline underline-offset-2 p-3 mb-4">แชท</h1>
+          <h1 className="font-extrabold text-xl underline-offset-2 p-3 mb-4">ข้อความ</h1>
           <div>
             {chatRoom.map((item) => {
               return (

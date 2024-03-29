@@ -1,9 +1,9 @@
 .cartItem {
     height: auto;
-    background-color: #FCEFE9;
+    background-color: #FFFAF8;
     border-radius: 10px;
-    margin: 10px auto;
     padding-bottom: 10px;
+    width: 100%;
 
     .profile {
         display: flex;
@@ -16,20 +16,54 @@
         }
 
         .saveButton {
-            background-color: #E16428;
             width: 120px;
-            height: 25px;
+            height: 20px;
             border-radius: 15px;
             color: white;
+            color: #E16428;
+            background-color: #FFFFFF;
             margin-right: 7px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 30px;
+            outline: 0;
+            padding: 8px 4px;
         }
 
+        .saveButton:hover,
+        .saveButton:active {
+            background-color: #E16428;
+            background-position: 0 0;
+            color: white;
+        }
+
+
         .cancelButton {
-            border: 1.5px solid #B45020;
             width: 120px;
             height: 25px;
             border-radius: 15px;
-            color: #B45020;
+            background-color: #FFFFFF;
+            box-sizing: border-box;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            color: #E16428;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 30px;
+            outline: 0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        .cancelButton:hover,
+        .cancelButton:active {
+            background-color: #E16428;
+            background-position: 0 0;
+            color: white;
         }
     }
 
@@ -39,8 +73,12 @@
         gap: 10px;
         justify-content: center;
         align-items: center;
+        margin-top: 20px;
         margin-right: 30px;
         margin-left: 30px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        background-color: white;
+        border-radius: 15px;
         padding-bottom: 10px;
 
         .information {
@@ -49,8 +87,8 @@
             margin-top: 12px;
 
             .userImage {
-                height: 90px;
-                width: 90px;
+                height: 100%;
+                width: 120px;
                 object-fit: cover;
                 background-color: #F3C1A9;
                 border-radius: 10px;
@@ -85,24 +123,34 @@
         .confirm {
             display: flex;
             position: absolute;
-            right: 5%;
+            right: 7%;
             align-items: center;
 
             .confirmButton {
-                // height: 32px;
-                // width: 150px;
-                padding: 8px 52px ;
-                background-color: #FDFBFB;
-                color: #E16428;
+                padding: 8px 52px;
+                background: #E16428;
+                color: white;
                 border-radius: 8px;
                 margin-right: 12px;
-                border: 1px solid #E16428
+                border: 1px solid #E16428;
+                box-sizing: border-box;
+                box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+                display: inline-block;
+                font-size: 16px;
+                font-weight: 800;
+                line-height: 16px;
+                min-height: 40px;
+                min-width: 120px;
+                outline: 0;
+                padding: 8px 12px;
+                text-align: center;
             }
 
-            .confirmButton:hover {
-                background-color: #B45020;
-                color: #FDFBFB;
-                border: 1px solid #B45020
+            .confirmButton:hover,
+            .confirmButton:active {
+                background-color: initial;
+                background-position: 0 0;
+                color: #FF4742;
             }
         }
 

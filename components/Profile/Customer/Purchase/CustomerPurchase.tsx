@@ -86,18 +86,22 @@ const CustomerPurchase = (props: Props) => {
         <>
             <NavBar />
             <div className="flex">
-                <div style={{width: "18%"}}>
+                <div style={{ width: "22%" }}>
                     <ProfileSelectBarCustomer activeMenu='purchase' />
                 </div>
 
-                <div id="add_artwork" className={style.main}>
-                    <div>การซื้อและการจ้างของฉัน</div>
+                <div className={style.main}>
+                    <div className="text-xl font-bold">การซื้อและการจ้างของฉัน</div>
                     <PurchaseStatusBar role="customer" setStatus={setStatus} />
-                    {order.map((item, index) => {
-                        return (
-                            <CustomerPurchaseItem item={item} key={index} user={user} updateStatus={updateStatus} updateReviewStatus={updateReviewStatus} />
-                        )
-                    })}
+                    <div className="overflow-y-auto h-screen">
+                        {order.map((item, index) => {
+                            return (
+                                <div style={{ position: 'relative' }} key={index}>
+                                    <CustomerPurchaseItem item={item} user={user} updateStatus={updateStatus} updateReviewStatus={updateReviewStatus} />
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </>

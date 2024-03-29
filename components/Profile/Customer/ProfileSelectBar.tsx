@@ -21,18 +21,18 @@ const ProfileSelectBarCustomer = (props: Props) => {
     return (
         <>
             <div className={style.selectBar}>
-                <div>
+                <div style={{width: '100%'}}>
                     <div className={style.profile}>
                         <img src={user?.profileImage} />
                         <div className={style.name_box}>
                             <p className={style.username}>{user?.username}</p>
                             <p className={style.edit}>
-                                <FontAwesomeIcon icon={faPenToSquare} size="xs" style={{ color: '#8F8C8C' }}></FontAwesomeIcon> แก้ไขข้อมูลส่วนตัว</p>
+                                <FontAwesomeIcon icon={faPenToSquare} size="xs" style={{ color: 'white' }}></FontAwesomeIcon> แก้ไขข้อมูลส่วนตัว</p>
                         </div>
                     </div>
                     <div className={style.selectOption}>
                         <div className="account">
-                            <p className={style.heading}><FontAwesomeIcon icon={faUser} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> บัญชีของฉัน</p>
+                            <p className={style.heading} style={{ pointerEvents: 'none' }}><FontAwesomeIcon icon={faUser} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> บัญชีของฉัน</p>
                             {customerSelectBarMenu?.map((menu) => {
                                 return (
                                     <>
@@ -55,7 +55,7 @@ const ProfileSelectBarCustomer = (props: Props) => {
                     </div>
                 </div>
 
-                <div className={style.verticleLine}></div>
+                {/* <div className={style.verticleLine}></div> */}
             </div>
         </>
     );

@@ -96,9 +96,13 @@ const ChatProfile = (props: Props) => {
           )} */}
         </table>
       </div>
-      {profile.role === 'freelance' && (<div className={styles.view_profile} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${profile.username}`)}>
+      {profile.role === 'freelance' && (<div className='flex mt-3'>
+        <div className={styles.view_review} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${profile.username}`)}>
+        ดูรีวิว
+      </div>
+      <div className={styles.view_profile} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${profile.username}`)}>
         ดูโปรไฟล์
-      </div>)}
+      </div></div>)}
     </div>
   );
 }
