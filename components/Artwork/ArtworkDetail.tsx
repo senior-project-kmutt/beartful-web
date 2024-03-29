@@ -71,7 +71,7 @@ const ArtworkDetail = (props: Props) => {
     getAllCategories().subscribe((res) => {
       setCategories(res.data as Category[]);
     });
-  }, []);
+  }, [props.item]);
 
   const handleCloseDetail = () => {
     onCloseDetail();
