@@ -72,9 +72,9 @@ const Authentication = () => {
 
   return (
     <div>
-      <Link href="/">
+      <div onClick={()=>router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`)}>
         <img src={LOGO_IMAGE} className="h-4 sm:h-6 ml-6 mt-6" alt="Beartful Logo" />
-      </Link>
+      </div>
       <div className={style.main}>
       <div>
         <div className={style.welcome}>
@@ -126,7 +126,7 @@ const Authentication = () => {
                 </div>
                 <div className={style.input_button}>
                   <input className={`${style.submit_button} mr-4`} type="submit" value="เข้าสู่ระบบ" />
-                  <Link className={style.cancel_button} href="/">ยกเลิก</Link>
+                  <Link className={style.cancel_button} onClick={()=>router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`)}>ยกเลิก</Link>
                   <p className="text-xs pt-3 pl-2 font-medium">ยังไม่ได้เป็นสมาชิก?&nbsp;
                     <span onClick={() => changePageParams('signup')} className="font-semibold underline cursor-pointer">คลิกเพื่อสมัครสมาชิก</span>
                   </p>
