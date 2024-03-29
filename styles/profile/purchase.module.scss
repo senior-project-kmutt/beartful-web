@@ -115,9 +115,6 @@
             color: white;
         }
 
-        .saveButton:active {
-            opacity: .5;
-        }
 
         .cancelButton {
             width: 120px;
@@ -144,9 +141,6 @@
             color: white;
         }
 
-        .cancelButton:active {
-            opacity: .5;
-        }
     }
 
     .order {
@@ -240,10 +234,6 @@
                 background-position: 0 0;
                 color: #FF4742;
             }
-
-            .confirmButton:active {
-                opacity: .5;
-            }
         }
 
         .disableConfirmButton {
@@ -290,10 +280,6 @@
             background-color: #E16428;
             background-position: 0 0;
             color: white;
-        }
-
-        .toReviewButton:active {
-            opacity: .5;
         }
 
         .disabletoReviewButton {
