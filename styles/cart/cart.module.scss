@@ -1,8 +1,8 @@
 .main {
-    margin-top: 45px;
-    margin-left: 32px;
-    margin-right: 32px;
-    width: 82%;
+    margin-top: 20px;
+    padding-left: 32px;
+    padding-right: 32px;
+    width: 100%;
 
     .heading {
         text-align: center;
@@ -48,33 +48,78 @@
 }
 
 .sideBar {
-    width: 18%;
-}
+    display: flex;
+    text-align: center;
+    justify-content: center;
 
-.artwork_category {
-    margin: 5% auto;
-    margin-left: 2%;
-    margin-top: 100px;
-    padding: 0 12px;
-    width: 100%;
-    word-wrap: break-word;
+    .artwork_category {
+        margin-top: 25px;
+        margin-left: 2%;
+        margin-right: 2%;
+        width: 100%;
+        word-wrap: break-word;
+        justify-content: center;
 
-    .warp {
-        display: flex;
-    }
-
-    .switch {
-        font-weight: 800;
-        font-size: 22px;
-
-        .item {
-            color: black;
-            cursor: pointer;
+        .warp {
+            display: block;
         }
 
-        .item_active {
-            color: #E78353;
-            cursor: pointer;
+        .switch {
+            font-weight: 800;
+            font-size: 22px;
+
+            .item {
+                color: black;
+                cursor: pointer;
+                border-radius: 15px;
+                color: black;
+                cursor: pointer;
+                font-size: 1rem;
+                font-weight: 600;
+                margin-left: 35px;
+                line-height: 24px;
+                margin-right: 35px;
+            }
+
+            .item_active {
+                color: #E78353;
+                cursor: pointer;
+                background: #E16428;
+                border-radius: 15px;
+                box-shadow: #E16428 0 5px 20px -10px;
+                box-sizing: border-box;
+                color: #FFFFFF;
+                cursor: pointer;
+                font-size: 1rem;
+                font-weight: 600;
+                line-height: 24px;
+                opacity: 1;
+                outline: 0 solid transparent;
+                padding: 5px 20px;
+            }
+
+            .item:hover {
+                align-items: center;
+                justify-content: center;
+                background: #E16428;
+                border-radius: 15px;
+                box-shadow: #E16428 0 5px 20px -10px;
+                box-sizing: border-box;
+                color: #FFFFFF;
+                cursor: pointer;
+                font-size: 1rem;
+                font-weight: 600;
+                line-height: 24px;
+                opacity: 1;
+                outline: 0 solid transparent;
+                padding: 5px 20px;
+                user-select: none;
+                -webkit-user-select: none;
+                touch-action: manipulation;
+                width: fit-content;
+                word-break: break-word;
+                border: 0;
+            }
         }
     }
 }

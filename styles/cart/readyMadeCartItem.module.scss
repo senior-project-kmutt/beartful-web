@@ -1,6 +1,6 @@
 .cartItem {
     height: auto;
-    background-color: #FCEFE9;
+    background-color: #FFFAF8;
     border-radius: 10px;
     margin: 10px auto;
     padding-bottom: 15px;
@@ -16,26 +16,60 @@
         }
 
         .saveButton {
-            background-color: #E16428;
             width: 120px;
-            height: 25px;
+            height: 20px;
             border-radius: 15px;
             color: white;
+            color: #E16428;
+            background-color: #FFFFFF;
             margin-right: 7px;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 30px;
+            outline: 0;
+            padding: 8px 4px;
         }
 
+        .saveButton:hover,
+        .saveButton:active {
+            background-color: #E16428;
+            background-position: 0 0;
+            color: white;
+        }
+
+
         .cancelButton {
-            border: 1.5px solid #B45020;
             width: 120px;
             height: 25px;
             border-radius: 15px;
-            color: #B45020;
+            background-color: #FFFFFF;
+            box-sizing: border-box;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+            color: #E16428;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 16px;
+            min-height: 30px;
+            outline: 0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        .cancelButton:hover,
+        .cancelButton:active {
+            background-color: #E16428;
+            background-position: 0 0;
+            color: white;
         }
     }
 
     .formGrid {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
+        // display: grid;
+        // grid-template-columns: repeat(1, 1fr);
         gap: 10px;
         justify-content: center;
         align-items: center;
@@ -45,7 +79,7 @@
 
 
         @media (min-width: 768px) {
-            grid-template-columns: 46% 14% 18% 16% 6%;
+            // grid-template-columns: 46% 14% 18% 16% 6%;
             justify-content: center;
             align-items: center;
         }
