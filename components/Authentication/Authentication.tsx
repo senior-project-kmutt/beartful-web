@@ -126,7 +126,7 @@ const Authentication = () => {
                 </div>
                 <div className={style.input_button}>
                   <input className={`${style.submit_button} mr-4`} type="submit" value="เข้าสู่ระบบ" />
-                  <Link className={style.cancel_button} onClick={()=>router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`)}>ยกเลิก</Link>
+                  <div className={style.cancel_button} onClick={()=>router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`)}>ยกเลิก</div>
                   <p className="text-xs pt-3 pl-2 font-medium">ยังไม่ได้เป็นสมาชิก?&nbsp;
                     <span onClick={() => changePageParams('signup')} className="font-semibold underline cursor-pointer">คลิกเพื่อสมัครสมาชิก</span>
                   </p>
