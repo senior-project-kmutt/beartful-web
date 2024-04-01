@@ -27,7 +27,7 @@ const ProfileSelectBarFreelance = (props: Props) => {
                         <div className={style.name_box}>
                             <p className={style.username}>{user?.username}</p>
                             <p className={style.edit}>
-                                <FontAwesomeIcon icon={faPenToSquare} size="xs" style={{ color: 'white' }}></FontAwesomeIcon> แก้ไขข้อมูลส่วนตัว</p>
+                                <FontAwesomeIcon icon={faPenToSquare} size="xs" style={{ color: '#545151' }}></FontAwesomeIcon> แก้ไขข้อมูลส่วนตัว</p>
                         </div>
                     </div>
                     <div className={style.selectOption}>

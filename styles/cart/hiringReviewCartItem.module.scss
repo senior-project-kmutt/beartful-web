@@ -30,6 +30,14 @@
             height: 25px;
             border-radius: 15px;
             color: #B45020;
+            transition: all .3s ease-in-out;
+
+            &:hover {
+                background-color: #E16428;
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+                // transform: scale(1.05);
+                transform: translateY(-2px);
+            }
         }
     }
 
@@ -122,6 +130,17 @@
         font-weight: 500;
         background-color: white;
         border-radius: 10px;
+        transition: all .3s ease-in-out;
+
+        &:hover{
+        border: 1px solid #E16428;
+        color: white;
+        font-weight: 500;
+        background-color: #E16428;
+        border-radius: 10px;
+        filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+        transform: translateY(-2px);
+        }
     }
 
     .purchaseButtonActive {
@@ -129,11 +148,12 @@
         margin-left: 15px;
         width: 170px;
         height: 30px;
-        border: 1px solid #E78353;
+        border: 1px solid #E16428;
         color: white;
         font-weight: 500;
-        background-color: #E78353;
+        background-color: #E16428;
         border-radius: 10px;
+        filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
     }
 }
 
@@ -173,11 +193,14 @@
         font-weight: 500;
         background-color: white;
         border-radius: 10px;
+        transition: all .3s ease-in-out;
 
         &:hover {
-            background-color: #873C18;
+            background-color: #E16428;
             color: white;
-            border: 1px solid #873C18;
+            filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+            // transform: scale(1.05);
+            transform: translateY(-2px);
         }
     }
 

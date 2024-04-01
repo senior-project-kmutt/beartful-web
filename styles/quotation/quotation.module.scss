@@ -46,8 +46,7 @@
     margin-top: 4px;
     li {
         position: relative; /* กำหนดให้เป็นตำแหน่งแบบเก็บ */
-      }
-      
+    }
     li::before {
         content: "\2022"; /* รหัสของ dot ใน unicode */
         color: #000; /* สีของ dot */
@@ -58,6 +57,3 @@
         transform: translateY(-60%); /* ย้าย dot ให้อยู่ตรงกลางแนวตั้ง */
     }
 }
-  
-  
-  

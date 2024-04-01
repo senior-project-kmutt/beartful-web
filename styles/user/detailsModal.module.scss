@@ -18,9 +18,11 @@
         color: white;
         padding: 8px 13px;
         border-radius: 50%;
+        transition: all 0.5s ease-in-out;
         &:hover {
-            background-color: #873C18;
+            background-color: #E16428;
             cursor: pointer;
+            transform: scale(1.05);
         }
     }
 
@@ -106,8 +108,8 @@
             .level {
                 width: 30%;
                 text-align: center;
-                background-color: #F3C1A9;
-                color: #5A2810;
+                background-color: #E78353;
+                color: white;
                 border-radius: 12px;
                 font-size: smaller;
                 padding-top: 2px;

@@ -39,6 +39,7 @@
         margin-left: 4%;
         padding: 4%;
         cursor: pointer;
+        transition: all 1s;
 
         .image {
             width: 22%;
@@ -81,6 +82,7 @@
         background-color: #F9E0D4;
         background-position: 0 0;
         border-radius: 15px;
+        transition: all 0.7s;
     }
 
     .message_main {
@@ -271,6 +273,7 @@
                         cursor: pointer;
                         color: #E16428;
                         margin-right: 8px;
+                        transition: all 0.7s;
                     }
 
                     .input_file {
@@ -281,10 +284,12 @@
                         .icon {
                             cursor: pointer;
                             color: #E16428;
+                            transition: all 0.7s;
                         }
 
                         .icon:hover {
-                            color: #000
+                            color: #5A2810;
+                            transform: scale(1.1);
                         }
                     }
 
@@ -306,10 +311,12 @@
                     width: 7%;
                     color: #E16428;
                     text-align: center;
+                    transition: all 0.7s;
                 }
 
                 .send:hover {
-                    color: #000;
+                    color: #5A2810;
+                    transform: scale(1.1);
                 }
             }
         }
@@ -378,7 +385,7 @@
                 .role {
                     font-size: 14px;
                     color: #FDFBFB;
-                    background-color: #B5B5B5;
+                    background-color: #E16428;
                     cursor: default;
                     padding: 4px 16px;
                     border-radius: 18px;
@@ -406,6 +413,10 @@
                     text-align: center;
                     margin-right: 5px;
                     margin-left: 5px;
+                    transition: all 0.7s;
+                    &:hover {
+                        transform: scale(1.05);
+                    }
                 }
 
                 .view_review {
@@ -428,6 +439,10 @@
                     text-align: center;
                     margin-right: 5px;
                     margin-left: 5px;
+                    transition: all 0.7s;
+                    &:hover {
+                        transform: scale(1.05);
+                    }
                 }
             }
         }

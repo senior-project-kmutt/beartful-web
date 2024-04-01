@@ -15,11 +15,11 @@
             margin-left: 8px;
         }
 
-        .saveButton {
+        .chatButton {
             width: 120px;
             height: 20px;
             border-radius: 15px;
-            color: white;
+            // color: white;
             color: #E16428;
             background-color: #FFFFFF;
             margin-right: 7px;
@@ -31,17 +31,19 @@
             min-height: 30px;
             outline: 0;
             padding: 8px 4px;
+            transition: all .3s ease-in-out;
         }
 
-        .saveButton:hover,
-        .saveButton:active {
+        .chatButton:hover,
+        .chatButton:active {
             background-color: #E16428;
             background-position: 0 0;
             color: white;
+            transform: scale(1.05);
         }
 
 
-        .cancelButton {
+        .viewProfileButton {
             width: 120px;
             height: 25px;
             border-radius: 15px;
@@ -57,13 +59,15 @@
             outline: 0;
             padding: 8px 12px;
             text-align: center;
+            transition: all .3s ease-in-out;
         }
 
-        .cancelButton:hover,
-        .cancelButton:active {
+        .viewProfileButton:hover,
+        .viewProfileButton:active {
             background-color: #E16428;
             background-position: 0 0;
             color: white;
+            transform: scale(1.5);
         }
     }
 
@@ -127,6 +131,7 @@
             align-items: center;
 
             .confirmButton {
+                transition: all 0.6s;
                 padding: 8px 52px;
                 background: #E16428;
                 color: white;
@@ -148,9 +153,21 @@
 
             .confirmButton:hover,
             .confirmButton:active {
-                background-color: initial;
-                background-position: 0 0;
-                color: #FF4742;
+                // background-color: initial;
+                // background-position: 0 0;
+                // color: #FF4742;
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
+                transform: scale(1.05);
+            }
+
+            .deleteIcon {
+                color: #5A2810;
+                cursor: pointer;
+                transition: all .5s ease-in-out;
+                &:hover {
+                    color: #E16428;
+                    transform: scale(1.05);
+                }
             }
         }
 

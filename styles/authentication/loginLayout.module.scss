@@ -11,6 +11,7 @@
     .welcome {
         margin-top: 30px;
         text-align: center;
+        
         h1 {
             font-weight: 900;
             font-size: 50px;
@@ -37,17 +38,26 @@
         background: #F9E0D4;
         font-weight: 800;
         margin-top: 50px;
+        transition:all 1s;
+    }
+    .item {
+        padding: 6px 50px;
+        border-radius: 20px;
+        transition:all 1s;
+        cursor: pointer;
 
-        .item {
-            padding: 6px 50px;
-            border-radius: 20px;
+        &:hover {
+            color: #5A2810;
+            cursor: pointer;
+            transform: scale(1.01);
         }
-
+    }
+    
         .item_active {
             padding: 6px 50px;
             border-radius: 20px;
             background: #E78353;
-        }
+            }
     }
 
     .input_form {
@@ -82,7 +92,6 @@
     .input_button {
         margin-left: 130px;
         font-size: 12px;
-        font-weight: 700;
 
         .submit_button {
             width: 35%;
@@ -90,13 +99,18 @@
             color: white;
             padding: 8px;
             border-radius: 20px;
+            transition: all 0.5s;
 
             &:hover {
                 background-color: #E16428;
                 border-color: #E16428;
+                transform: scale(1.05);
+                cursor: pointer;
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
+                font-weight: 600;
             }
         }
-
+        
         .cancel_button {
             display: inline-block;
             text-align: center;
@@ -105,11 +119,16 @@
             padding: 8px;
             border-radius: 20px;
             border: #B45020 2px solid;
-
+            transition: all 0.5s;
+            
             &:hover {
                 background-color: #E16428;
                 color: white;
                 border-color: #E16428;
+                transform: scale(1.05);
+                cursor: pointer;
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
+                font-weight: 600;
             }
         }
     }
@@ -171,4 +190,3 @@
             }
         }
     }
-}

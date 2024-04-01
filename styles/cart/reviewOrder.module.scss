@@ -231,6 +231,14 @@
         font-weight: 500;
         background-color: white;
         border-radius: 10px;
+        transition: all .3s ease-in-out;
+
+        &:hover {
+            background-color: #E16428;
+            filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+            // transform: scale(1.05);
+            transform: translateY(-2px);
+        }
     }
 
     .purchaseButton {

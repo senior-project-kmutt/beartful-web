@@ -47,6 +47,15 @@
             border-radius: 4px;
             color: white;
             height: 32px;
+            transition: all .4s ease-in-out;
+
+            &:hover {
+                border: 1px solid #E16428;
+                background-color: #E16428;
+                color: white;
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+                transform: translateY(-3px);
+            }
         }
 
         .cancelButton {
@@ -57,7 +66,14 @@
             margin-right: 10px;
             border-radius: 4px;
             height: 32px;
-
+            transition: all .4s ease-in-out;
+            &:hover {
+                border: 1px solid #E16428;
+                background-color: #E16428;
+                color: white;
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+                transform: translateY(-3px);
+            }
         }
     }
 

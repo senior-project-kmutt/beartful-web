@@ -70,7 +70,7 @@ const CustomerPurchase = (props: Props) => {
                 </div>
 
                 <div className={style.main}>
-                    <div className="text-xl font-bol ">การซื้อและการจ้างของฉัน</div>
+                    <div className="text-xl font-semibold mb-1">การซื้อและการจ้างของฉัน</div>
                     <PurchaseStatusBar role="freelance" setStatus={setStatus} />
                     <div className="overflow-y-auto h-screen">
                         {order.map((item, index) => {

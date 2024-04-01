@@ -15,7 +15,7 @@
             margin-left: 8px;
         }
 
-        .saveButton {
+        .chatButton {
             width: 120px;
             height: 20px;
             border-radius: 15px;
@@ -31,17 +31,19 @@
             min-height: 30px;
             outline: 0;
             padding: 8px 4px;
+            transition: all .5s ease-in-out;
         }
 
-        .saveButton:hover,
-        .saveButton:active {
+        .chatButton:hover,
+        .chatButton:active {
             background-color: #E16428;
             background-position: 0 0;
             color: white;
+            transform: translateY(-2px);
         }
 
 
-        .cancelButton {
+        .viewProfileButton {
             width: 120px;
             height: 25px;
             border-radius: 15px;
@@ -57,13 +59,16 @@
             outline: 0;
             padding: 8px 12px;
             text-align: center;
+            transition: all .5s ease-in-out;
         }
 
-        .cancelButton:hover,
-        .cancelButton:active {
+        .viewProfileButton:hover,
+        .viewProfileButton:active {
             background-color: #E16428;
             background-position: 0 0;
             color: white;
+            transform: translateY(-2px);
+            // transform: scale(1.05);
         }
     }
 
@@ -162,6 +167,16 @@
                 color: white;
                 border-radius: 4px;
                 margin-right: 12px;
+            }
+        }
+
+        .deleteIcon {
+            color: #5A2810;
+            cursor: pointer;
+            transition: all .5s ease-in-out;
+            &:hover {
+                color: #E16428;
+                transform: scale(1.2);
             }
         }
 

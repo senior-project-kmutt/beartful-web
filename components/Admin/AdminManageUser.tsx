@@ -14,7 +14,7 @@ const AdminManageUser = () => {
     const [openDetailModal, setOpenDetailModal] = useState<boolean>(false)
     const [item, setItem] = useState<FreelanceUsers>()
 
-    const columnName = ['Username', 'Email', 'Last Updated', 'Type', 'Action']
+    const columnName = ['ชื่อผู้ใช้งาน', 'อีเมล', 'แก้ไขล่าสุด', 'ประเภทผู้ใช้งาน', 'ดูรายละเอียด']
     const roleSelect = ['ทั้งหมด', 'customer', 'freelance', 'admin']
 
     useEffect(() => {
@@ -56,7 +56,7 @@ const AdminManageUser = () => {
 
                         <div className={style.reset}>
                             <FontAwesomeIcon icon={faReply} color="white" className="mt-3 ml-3" />
-                            <div className="text-white ml-2 mt-2" onClick={() => { setRole(''); setPage(1); }}>Reset Filter</div>
+                            <div className="text-white ml-2 mt-2" onClick={() => { setRole(''); setPage(1); }}>รีเช็ตตัวกรอง</div>
                         </div>
 
                     </div>
@@ -73,8 +73,8 @@ const AdminManageUser = () => {
                             </thead>
                             <tbody>
                                 {user?.users.map((item, index) => (
-                                    <tr key={index} onClick={()=>{setItem(item); setOpenDetailModal(true)}} className="odd:bg-white even:bg-[#FFFAF7] border-b" style={{cursor: 'pointer'}}>
-                                        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    <tr key={index} onClick={()=>{setItem(item); setOpenDetailModal(true)}} className="odd:bg-white even:bg-[#FFFAF7] border-b transition duration-300 ease-in-out hover:bg-primary5 hover:text-white" style={{cursor: 'pointer'}}>
+                                        <td className="px-6 py-4 font-mediumwhitespace-nowrap">
                                             {item.username}
                                         </td>
                                         <td className="px-6 py-4">
@@ -87,7 +87,7 @@ const AdminManageUser = () => {
                                             {item.role}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <FontAwesomeIcon icon={faBarsStaggered} style={{ cursor: 'pointer' }} />
+                                            <FontAwesomeIcon icon={faBarsStaggered} className={style.icon} style={{ cursor: 'pointer' }} />
                                         </td>
                                     </tr>
                                 ))}

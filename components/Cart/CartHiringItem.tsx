@@ -49,8 +49,8 @@ const CartHiringItem = (props: Props) => {
                 <FontAwesomeIcon icon={faUser} size="sm" style={{ marginTop: "4px" }}></FontAwesomeIcon>
                 <p className={style.username}>{item.freelanceUsername}</p>
                 <div className="ml-8">
-                    <button className={style.saveButton} onClick={handleGoToChat}>แชท</button>
-                    <button className={style.cancelButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${item.freelanceUsername}`)}>ดูโปรไฟล์</button>
+                    <button className={style.chatButton} onClick={handleGoToChat}>แชท</button>
+                    <button className={style.viewProfileButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${item.freelanceUsername}`)}>ดูโปรไฟล์</button>
                 </div>
             </div>
             {item.cartItem.map((item) => {

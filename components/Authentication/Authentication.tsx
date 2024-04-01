@@ -89,7 +89,7 @@ const Authentication = () => {
               <div className={style.sign_in}>
                 <h1>สมัครสมาชิก <span className="">BEARTFUL</span> </h1>
                 <p>กรอกข้อมูลในฟอร์มเพื่อสมัครเป็นสมาชิก</p>
-                <p>เป็นสมาชิกยู่แล้ว ? <span onClick={() => changePageParams('login')} className="font-extrabold cursor-pointer underline">เข้าสู่ระบบ</span></p>
+                <p>เป็นสมาชิกยู่แล้ว ? <span onClick={() => changePageParams('login')} className="font-extrabold cursor-pointer underline transition duration-300 ease-in-out hover:text-primary4 hover:drop-shadow-md">เข้าสู่ระบบ</span></p>
               </div>
             )}
         </div>
@@ -128,7 +128,7 @@ const Authentication = () => {
                   <input className={`${style.submit_button} mr-4`} type="submit" value="เข้าสู่ระบบ" />
                   <div className={style.cancel_button} onClick={()=>router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`)}>ยกเลิก</div>
                   <p className="text-xs pt-3 pl-2 font-medium">ยังไม่ได้เป็นสมาชิก?&nbsp;
-                    <span onClick={() => changePageParams('signup')} className="font-semibold underline cursor-pointer">คลิกเพื่อสมัครสมาชิก</span>
+                    <span onClick={() => changePageParams('signup')} className="font-semibold underline cursor-pointer transition duration-300 ease-in-out hover:text-primary4 hover:drop-shadow-md">คลิกเพื่อสมัครสมาชิก</span>
                   </p>
                 </div>
               </form>

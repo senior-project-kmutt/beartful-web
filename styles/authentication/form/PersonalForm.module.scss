@@ -100,6 +100,13 @@
                     margin: 15px 0;
                     border-radius: 10px;
                     text-align: center;
+                    transition: all 0.5s;
+                    
+                    &:hover {
+                        background-color: #E16428;
+                        cursor: pointer;
+                        color: #FAF2F2;
+                    }
                 }
             }
 
@@ -119,34 +126,42 @@
         font-size: 14px;
         margin-top: 24px;
         .submit {
-            border: 2px solid #5A2810;
             background-color: #5A2810;
-            color: #FAF2F2;
-            padding: 10px 50px;
-            border-radius: 40px;
-            text-transform: uppercase;
-            font-weight: 700;
+            color: white;
+            width: 16%;
+            padding: 8px;
             margin-right: 12px;
+            border-radius: 20px;
+            transition: all 0.5s;
 
             &:hover {
-                background-color: #E78353;
-                border: 2px solid #E78353;
+                background-color: #E16428;
+                transform: scale(1.05);
+                cursor: pointer;
+                color: #FAF2F2;
+                box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+                font-weight: 600;
             }
         }
 
         .cancel {
-            border: 2px solid #B45020;
+            display: inline-block;
+            text-align: center;
+            width: 16%;
             color: #B45020;
-            padding: 10px 50px;
-            border-radius: 40px;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-right: 12px;
-
+            padding: 8px;
+            border-radius: 20px;
+            border: #B45020 2px solid;
+            transition: all 0.5s;
+            
             &:hover {
-                background-color: #E78353;
-                border: 2px solid #E78353;
-                color: #FAF2F2;
+                background-color: #E16428;
+                color: white;
+                border-color: #E16428;
+                transform: scale(1.05);
+                cursor: pointer;
+                box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+                font-weight: 600;
             }
         }
     }

@@ -76,7 +76,7 @@ const CartQuotationHiringItem = (props: Props) => {
                 <div className={style.price}>{formattedPrice(item.amount)} บาท </div>
                 <div className={style.confirm}>
                     <button className={style.confirmButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart/review-order-hiring?item=${item._id}`)}>จัดจ้าง</button>
-                    <FontAwesomeIcon icon={faTrash} style={{ color: '#5A2810', cursor: 'pointer' }} size="xl" onClick={() => deleteItem()}></FontAwesomeIcon>
+                    <FontAwesomeIcon icon={faTrash} className={style.deleteIcon} size="xl" onClick={() => deleteItem()}></FontAwesomeIcon>
                 </div>
             </div>
         </div>

@@ -93,7 +93,7 @@ const FreelanceArtwork = (props: Props) => {
                         <div className={style.button_container}>
                             <button className={style.description} onClick={() => setIsOpenDetailsModal(true)}>รายละเอียดเพิ่มเติม</button>
                             {user && (
-                                <FontAwesomeIcon icon={faCommentDots} className='cursor-pointer' size="2xl" onClick={handleGoToChat} />
+                                <FontAwesomeIcon icon={faCommentDots} className={style.icon} size="2xl" onClick={handleGoToChat} />
                             )}
                         </div>
                     </div>

@@ -27,7 +27,7 @@ const FreelanceDetailModal = (props: Props) => {
                 {data.type === 'transfer' && <>
                     <div className={style.group1}>
                         <div className={style.rectangle}>
-                            <FontAwesomeIcon icon={faCircleArrowDown} size="2xl" style={{ color: '#E16428' }} />
+                            <FontAwesomeIcon icon={faCircleDollarToSlot} size="2xl" style={{ color: '#E16428' }} />
                         </div>
                         <div className={style.title}>รายการถอนเงิน</div>
                     </div>
@@ -47,7 +47,7 @@ const FreelanceDetailModal = (props: Props) => {
                 {data.type === 'paid' && <>
                     <div className={style.group1}>
                         <div className={style.rectangle}>
-                            <FontAwesomeIcon icon={faCircleDollarToSlot} size="2xl" style={{ color: '#E16428' }} />
+                            <FontAwesomeIcon icon={faCircleArrowDown} size="2xl" style={{ color: '#E16428' }} />
                         </div>
                         <div className={style.title}>รายการเงินเข้า</div>
                     </div>

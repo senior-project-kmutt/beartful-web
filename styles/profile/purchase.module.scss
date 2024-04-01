@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.4s ease-in-out;
 
     .item_active {
         display: flex;
@@ -36,6 +37,7 @@
         cursor: pointer;
         margin-right: 20px;
         margin-left: 20px;
+        transition: all 0.4s ease-in-out;
     }
 
     .item:hover {
@@ -63,6 +65,11 @@
         width: fit-content;
         word-break: break-word;
         border: 0;
+        color: #fff;
+        background-color: #E16428;
+        border: 2px solid #E16428;
+        filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+        transform: translateY(-2px);
     }
 }
 
@@ -89,7 +96,6 @@
             width: 120px;
             height: 20px;
             border-radius: 15px;
-            color: white;
             color: #E16428;
             background-color: #FFFFFF;
             margin-right: 7px;
@@ -101,6 +107,7 @@
             min-height: 30px;
             outline: 0;
             padding: 8px 4px;
+            transition: all 0.4s ease-in-out;
         }
 
         .saveButton:hover,
@@ -150,6 +157,7 @@
         background-color: white;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         border-radius: 15px;
+        transition: all 0.4s ease-in-out;
 
         .userImage {
             height: 100%;
@@ -221,6 +229,7 @@
                 outline: 0;
                 padding: 8px 12px;
                 text-align: center;
+                transition: all 0.4s ease-in-out;
             }
 
             .confirmButton:hover,
@@ -268,6 +277,7 @@
             outline: 0;
             padding: 8px 12px;
             text-align: center;
+            transition: all 0.4s ease-in-out;
         }
 
         .toReviewButton:hover,

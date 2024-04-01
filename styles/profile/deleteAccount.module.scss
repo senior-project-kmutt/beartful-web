@@ -14,8 +14,12 @@
     padding: 8px 75px;
     background-color: #FDFBFB;
     color: #B45020;
+    transition: all .4s ease-in-out;
     &:hover {
-        background-color: #B45020;
-        color: #FDFBFB;
+        border: 1px solid #E16428;
+        background-color: #E16428;
+        color: white;
+        filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+        transform: translateY(-3px);
     }
 }

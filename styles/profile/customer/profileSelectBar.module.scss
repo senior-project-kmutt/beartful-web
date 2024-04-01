@@ -14,8 +14,6 @@
     align-items: center;
     margin-top: 3rem;
     padding-left: 35px;
-    cursor: pointer;
-
 
     img {
         margin-right: 8px;
@@ -38,12 +36,9 @@
 
 
         .edit {
-            background: #E16428;
             border-radius: 10px;
-            box-shadow: #E16428 0 5px 20px -10px;
             box-sizing: border-box;
-            color: #FFFFFF;
-            cursor: pointer;
+            color: #545151;
             font-size: 0.9rem;
             font-weight: 300;
             line-height: 24px;
@@ -69,6 +64,7 @@
         font-size: 1.1rem;
         margin-top: 1rem;
         padding-left: 35px;
+        transition: all 0.5s ease-in-out;
     }
     .heading:hover,
     .heading:active {
@@ -88,6 +84,7 @@
         margin-left: 1.8rem;
         margin-top: 0.2rem;
         cursor: pointer;
+        transition: all 0.5s ease-in-out;
     }
     .subHeading:hover,
     .subHeading:active {

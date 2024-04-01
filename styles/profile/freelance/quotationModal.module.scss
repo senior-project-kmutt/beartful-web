@@ -24,6 +24,13 @@
             color: white;
             height: 30px;
             margin-right: 10px;
+            transition: all .4s ease-in-out;
+
+            &:hover {
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+                // transform: scale(1.05);
+                transform: translateY(-2px);
+            }
         }
 
         .cancelButton {
@@ -33,6 +40,13 @@
             color: #B45020;
             border-radius: 15px;
             height: 30px;
+            transition: all .4s ease-in-out;
+
+            &:hover {
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+                transform: scale(1.05);
+                // transform: translateY(-2px);
+            }
 
         }
     }

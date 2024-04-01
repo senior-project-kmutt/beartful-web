@@ -245,11 +245,14 @@ const ArtworkDetail = (props: Props) => {
                 <p className={style.fullname}>
                   {profile?.firstname} {profile?.lastname}
                 </p>
+                {/* <p className={style.fullname}>
+                  คะแนนรีวิว - - - - -
+                </p> */}
               </div>
 
             </div>
             <div className={style.button_container}>
-              <FontAwesomeIcon icon={faCommentDots} className='cursor-pointer' size="2xl" onClick={handleGoToChat} />
+              <FontAwesomeIcon icon={faCommentDots} className={style.chat_icon} size="2xl" onClick={handleGoToChat} />
               <button
                 className={`${style.view_profile} justify-self-end`}
                 onClick={() =>

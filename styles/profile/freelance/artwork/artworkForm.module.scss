@@ -1,7 +1,8 @@
 .main {
     margin-top: 45px;
-    margin-left: 18px;
-    width: 82%;
+    margin-left: 45px;
+    margin-right: 8px;
+    width: 78%;
 }
 
 .inputField {
@@ -66,12 +67,18 @@
     border-radius: 3px;
     background-image: linear-gradient(#D9D9D9, #D9D9D9);
     border-color: #D9D9D9;
+    cursor: pointer;
 }
 
 .customFileInput {
     display: inline-block;
     border-radius: 30px;
     cursor: pointer;
+    transition: all ease-in-out 0.5s;
+    &:hover{
+        transform: translateY(-4px);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    }
 }
 
 .customFileInput input {
@@ -103,6 +110,10 @@
     font-weight: bold;
     margin-right: 7px;
     cursor: pointer;
+    transition: all ease-in-out 0.5s;
+    &:hover{
+        transform: translateY(-3px);
+    }
 }
 
 .cancelButton {
@@ -114,11 +125,13 @@
     color: #B45020;
     font-weight: bold;
     cursor: pointer;
+    transition: all ease-in-out 0.5s;
 
     &:hover {
         border: 1.5px solid #E16428;
         background-color: #E16428;
         color: white;
+        transform: translateY(-4px);
     }
 }
 

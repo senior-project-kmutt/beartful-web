@@ -41,7 +41,7 @@
     .button_container {
         display: flex;
         align-items: center;
-        color: #E16428;
+        color: #5A2810;
         .description {
             background-color: white;
             height: 35px;
@@ -49,7 +49,24 @@
             border-radius: 20px;
             color: #E16428;
             margin-right: 20px;
+            transition: all 1s;
+            &:hover {
+                background-color: #E16428;
+                color: #FFF;
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
+                transform: scale(1.01);
+                font-size: 400;
+            }
         }
-
+        .icon {
+            transition: all 0.5s;
+            &:hover {
+                cursor: pointer;
+                color: #E16428;
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.05));
+                transform: scale(1.1);
+                font-size: 400;
+            } 
+        }
     }
 }

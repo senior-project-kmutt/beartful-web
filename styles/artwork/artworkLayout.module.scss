@@ -49,6 +49,14 @@
         .item {
             color: black;
             cursor: pointer;
+            transition: all .3s ease-in-out;
+
+            &:hover {
+                color: #E16428;
+                cursor: pointer;
+                // transform: scale(1.01);
+                transform: translateY(-2px);
+            }
         }
 
         .item_active {
@@ -72,7 +80,7 @@
 
 .artwork_detail {
     margin: 40px 2%;
-    padding: 4px 20px;
+    padding: 1.6%;
     display: flex;
     border: solid 0.5px #e1dddc;
     box-shadow: 2px 2px 2px #EBE9E9;
@@ -103,7 +111,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            cursor: pointer;
+            cursor: zoom-in;
         }
 
         .fullscreen_image{
@@ -138,6 +146,7 @@
             padding: 4px 20px;
             border-radius: 15px;
             color: #E16428;
+            transition: all 0.7s;
 
             &:hover {
                 background-color: #E16428;
@@ -256,16 +265,22 @@
             background-color: #f9e0d467;
             border-radius: 8px;
             color: #E16428;
+            transition: all 0.5s;
             &:hover {
                 color: #FDFBFB;
-                background-color: #873C18;
-                border: 1px solid #873C18;
+                background-color: #E16428;
+                border-color: #E16428;
+                transform: scale(1.05);
+                cursor: pointer;
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
+                font-weight: 500;
             }
         }
     }
 
     .freelance_profile {
         width: 108%;
+        
         display: flex;
         .profile {
             height: 4rem;
@@ -312,11 +327,27 @@
                 border-radius: 15px;
                 color: #fff;
                 font-weight: 500;
-                margin-left: 8px;
+                margin-left: 12px;
+                transition: all 0.5s;
     
                 &:hover {
-                    background-color: #5A2810;
-                    color: #FFFFFF;
+                    background-color: #E16428;
+                    border-color: #E16428;
+                    transform: scale(1.05);
+                    cursor: pointer;
+                    filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
+                    font-weight: 500;
+                }
+            }
+            .chat_icon {
+                color: #5A2810;
+                transition: all 0.5s;
+                &:hover {
+                    color: #E16428;
+                    transform: scale(1.05);
+                    cursor: pointer;
+                    filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
+                    font-weight: 500;
                 }
             }
         }
@@ -334,11 +365,16 @@
         font-weight: 500;
         color: #FFFFFF;
         position: absolute;
-        right: 35px;
+        right: 48px;
+        transition: all 0.5s;
 
         &:hover {
+            font-weight: 700;
             background-color: #B45020;
-            box-shadow: 2px 2px 2px gray;
+            transform: scale(1.05);
+            cursor: pointer;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            font-weight: 500;
         }
     }
 }

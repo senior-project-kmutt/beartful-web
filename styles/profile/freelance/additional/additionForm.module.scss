@@ -13,10 +13,13 @@
         text-transform: uppercase;
         font-weight: 700;
         margin-right: 12px;
-
+        transition: all .4s ease-in-out;
         &:hover {
-            background-color: #E78353;
-            border: 2px solid #E78353;
+            border: 1px solid #E16428;
+            background-color: #E16428;
+            color: white;
+            filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+            transform: translateY(-3px);
         }
     }
 
@@ -28,11 +31,13 @@
         text-transform: uppercase;
         font-weight: 700;
         margin-right: 12px;
-
+        transition: all .4s ease-in-out;
         &:hover {
-            background-color: #E78353;
-            border: 2px solid #E78353;
-            color: #FAF2F2;
+            border: 1px solid #E16428;
+            background-color: #E16428;
+            color: white;
+            filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+            transform: translateY(-3px);
         }
     }
 }

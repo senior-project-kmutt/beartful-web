@@ -81,7 +81,7 @@ const ArtworkList = (props: Props) => {
   return (
     <div>
       {artwork.length === 0 &&
-        <div className={style.no_artwork}> NO ARTWORK <br /> . . . . </div>
+        <div className={style.no_artwork}> พบกันเร็วๆนี้ <br /> . . . . </div>
       }
       {isShowDetail && artworkDetail && (
         <>

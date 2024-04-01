@@ -36,6 +36,15 @@
 
             .transaction_item {
                 cursor: pointer;
+                transition: all .6s ease-in-out;
+                &:hover {
+                        padding: 10px;
+                        background-color: #C3C1C1;
+                        color: white;
+                        filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+                        transform: translateY(-3px);
+                        border-radius: 20px;
+                    }
                 .icon {
                     padding: 10px 0;
                     width: 100%;
@@ -73,7 +82,7 @@
                     .price {
                         display: flex;
                         position: absolute;
-                        right: 100px;
+                        right: 6%;
 
                         .priceText {
                             margin-left: 0.4rem;
@@ -132,6 +141,11 @@
                     background-color: #E16428;
                     color: white;
                     border-radius: 8px;
+                    transition: all .4s ease-in-out;
+                    &:hover {
+                        filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+                        transform: translateY(-4px);
+                    }
                 }
             }
         }
@@ -181,6 +195,14 @@
                         color: white;
                         border-radius: 8px;
                         margin-right: 8px;
+                        transition: all .4s ease-in-out;
+                        &:hover {
+                            border: 1px solid #E16428;
+                            background-color: #E16428;
+                            color: white;
+                            filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+                            transform: translateY(-3px);
+                        }
                     }
 
                     .cancel {
@@ -191,6 +213,14 @@
                         color: #E16428;
                         border-radius: 8px;
                         margin-left: 8px;
+                        transition: all .4s ease-in-out;
+                        &:hover {
+                            border: 1px solid #E16428;
+                            background-color: #E16428;
+                            color: white;
+                            filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+                            transform: translateY(-3px);
+                        }
                     }
                 }
             }
@@ -209,6 +239,14 @@
             color: white;
             border-radius: 8px;
             margin-right: 8px;
+            transition: all .4s ease-in-out;
+            &:hover {
+                border: 1px solid #E16428;
+                background-color: #E16428;
+                color: white;
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+                transform: translateY(-3px);
+            }
         }
 
         .cancel {
@@ -219,6 +257,14 @@
             color: #E16428;
             border-radius: 8px;
             margin-left: 8px;
+            transition: all .4s ease-in-out;
+            &:hover {
+                border: 1px solid #E16428;
+                background-color: #E16428;
+                color: white;
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+                transform: translateY(-3px);
+            }
         }
     }
 }
@@ -238,6 +284,14 @@
         color: white;
         border-radius: 8px;
         margin-right: 8px;
+        transition: all .4s ease-in-out;
+        &:hover {
+            border: 1px solid #E16428;
+            background-color: #E16428;
+            color: white;
+            filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+            transform: translateY(-3px);
+        }
     }
 
     .cancel {
@@ -248,6 +302,14 @@
         color: #E16428;
         border-radius: 8px;
         margin-left: 8px;
+        transition: all .4s ease-in-out;
+        &:hover {
+            border: 1px solid #E16428;
+            background-color: #E16428;
+            color: white;
+            filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+            transform: translateY(-3px);
+        }
     }
 }
 

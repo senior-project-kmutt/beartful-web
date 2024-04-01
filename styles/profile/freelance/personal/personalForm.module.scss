@@ -91,12 +91,14 @@
                     margin: 22px 0;
                     border-radius: 26px;
                     text-align: center;
+                    transition: all 0.5s ease-in-out;
 
                     &:hover {
                         background-color: #E16428;
                         border: #E16428 solid 2px;
-                        color: #FAF2F2;
-
+                        color: #fff;
+                        filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+                        transform: translateY(-1px);
                     }
                 }
 
@@ -127,10 +129,14 @@
         text-transform: uppercase;
         font-weight: 700;
         margin-right: 12px;
+        transition: all 0.4s ease-in-out;
 
         &:hover {
-            background-color: #E78353;
-            border: 2px solid #E78353;
+            color: #fff;
+            background-color: #E16428;
+            border: 2px solid #E16428;
+            filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+            transform: translateY(-2px);
         }
     }
 
@@ -142,11 +148,14 @@
         text-transform: uppercase;
         font-weight: 700;
         margin-right: 12px;
+        transition: all 0.4s ease-in-out;
 
         &:hover {
-            background-color: #E78353;
-            border: 2px solid #E78353;
-            color: #FAF2F2;
+            color: #fff;
+            background-color: #E16428;
+            border: 2px solid #E16428;
+            filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+            transform: translateY(-2px);
         }
     }
 }

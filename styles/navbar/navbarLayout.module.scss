@@ -32,10 +32,15 @@
 .text_menu {
     color: #E78353;
     font-weight: 800;
+    font-size: 1rem;
     cursor: pointer;
+    transition: all .1s ease-in-out;
 
     &:hover {
-        color: #5A2810;
+        color: #E16428;
+        filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.2));
+        // transform: scale(1.05);
+        transform: translateY(-2px);
     }
 }
 
@@ -60,12 +65,16 @@
         height: 1.6rem;
         width: 1.6rem;
         color: #2B2929;
+        cursor: pointer;
+        transition: all .3s ease-in-out;
 
         &:hover {
-            color: #5A2810;
+            color: #E16428;
+            transform: scale(1.2);
         }
         &:active {
-            color: #5A2810;
+            color: #E16428;
+            transform: scale(1.2);
         }
     }
     img {
