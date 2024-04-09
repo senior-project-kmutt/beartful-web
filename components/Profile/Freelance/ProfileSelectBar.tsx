@@ -38,7 +38,7 @@ const ProfileSelectBarFreelance = (props: Props) => {
                                     <>
                                         <p
                                             className={`${style.subHeading} ${activeMenu === menu.value && `${style.activeMenu}`}`}
-                                            onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/${menu.value}`)}>
+                                            onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/${menu.value}`, undefined, { shallow: true })}>
                                             {menu.title}
                                         </p>
                                     </>
@@ -47,19 +47,19 @@ const ProfileSelectBarFreelance = (props: Props) => {
                         </div>
                         <div className="seller">
                             <p className={`${style.heading} ${activeMenu === 'purchase' && `${style.activeMenu}`} cursor-pointer`}
-                                onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`)}>
+                                onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`, undefined, { shallow: true })}>
                                 <FontAwesomeIcon icon={faWindowRestore} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> ประวัติการขาย/รับงาน
                             </p>
                         </div>
                         <div className="score">
                             <p className={`${style.heading} ${activeMenu === 'review' && `${style.activeMenu}`} cursor-pointer`}
-                                onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/review`)}>
+                                onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/review`, undefined, { shallow: true })}>
                                 <FontAwesomeIcon icon={faStar} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> คะแนนของฉัน
                             </p>
                         </div>
                         <div className="transfer">
                             <p className={`${style.heading} ${activeMenu === 'transfer' && `${style.activeMenu}`} cursor-pointer`}
-                                onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/transfer`)}>
+                                onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/transfer`, undefined, { shallow: true })}>
                                 <FontAwesomeIcon icon={faDonate} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> เงินในบัญชีของฉัน
                             </p>
                         </div>
