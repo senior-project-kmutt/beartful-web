@@ -18,6 +18,11 @@ const ProfileSelectBarFreelance = (props: Props) => {
     useEffect(() => {
         setUser(JSON.parse(localStorage.getItem("user") || ""));
     }, [])
+
+    const handleRouterLink = (e: React.MouseEvent<HTMLParagraphElement, MouseEvent>, url: string) => {
+        e.preventDefault()
+        router.push(url)
+    }
     return (
         <>
             <div className={style.selectBar}>
@@ -38,7 +43,8 @@ const ProfileSelectBarFreelance = (props: Props) => {
                                     <>
                                         <p
                                             className={`${style.subHeading} ${activeMenu === menu.value && `${style.activeMenu}`}`}
-                                            onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/${menu.value}`, undefined, { shallow: true })}>
+                                            // onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/${menu.value}`, undefined, { shallow: true })}>
+                                            onClick={(e) => handleRouterLink(e, `${process.env.NEXT_PUBLIC_BASEPATH}/profile/${menu.value}`)}>
                                             {menu.title}
                                         </p>
                                     </>
@@ -47,19 +53,22 @@ const ProfileSelectBarFreelance = (props: Props) => {
                         </div>
                         <div className="seller">
                             <p className={`${style.heading} ${activeMenu === 'purchase' && `${style.activeMenu}`} cursor-pointer`}
-                                onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`, undefined, { shallow: true })}>
+                                // onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`, undefined, { shallow: true })}>
+                                onClick={(e) => handleRouterLink(e, `${process.env.NEXT_PUBLIC_BASEPATH}/profile/purchase`)}>
                                 <FontAwesomeIcon icon={faWindowRestore} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> ประวัติการขาย/รับงาน
                             </p>
                         </div>
                         <div className="score">
                             <p className={`${style.heading} ${activeMenu === 'review' && `${style.activeMenu}`} cursor-pointer`}
-                                onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/review`, undefined, { shallow: true })}>
+                                // onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/review`, undefined, { shallow: true })}>
+                                onClick={(e) => handleRouterLink(e, `${process.env.NEXT_PUBLIC_BASEPATH}/profile/review`)}>
                                 <FontAwesomeIcon icon={faStar} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> คะแนนของฉัน
                             </p>
                         </div>
                         <div className="transfer">
                             <p className={`${style.heading} ${activeMenu === 'transfer' && `${style.activeMenu}`} cursor-pointer`}
-                                onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/transfer`, undefined, { shallow: true })}>
+                                // onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/transfer`, undefined, { shallow: true })}>
+                                onClick={(e) => handleRouterLink(e, `${process.env.NEXT_PUBLIC_BASEPATH}/profile/transfer`)}>
                                 <FontAwesomeIcon icon={faDonate} size="sm" style={{ color: 'black' }}></FontAwesomeIcon> เงินในบัญชีของฉัน
                             </p>
                         </div>
