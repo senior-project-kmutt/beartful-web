@@ -1,6 +1,4 @@
 .container {
-    width: 85%;
-
     .text {
         text-align: center;
         color: #635B5B;
@@ -9,18 +7,64 @@
 
 .artwork_container {
     margin: 20px auto;
-    padding: 0 20px;
+    padding: 0 10%;
     columns: 5;
     column-gap: 20px;
 
     .artwork_box {
         width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         break-inside: avoid;
+        cursor: pointer;
 
         img {
             max-width: 100%;
-            border-radius: 20px;
+            border-radius: 5px;
+        }
+
+        .detail_artbox {
+            display: flex;
+            align-items: center;
+            margin: 1%;
+            margin-left: 3%;
+
+            img {
+                border-radius: 50%;
+                width: 35px;
+                height: 35px;
+            }
+        }
+    }
+}
+
+.artwork_container_show_detail {
+    margin: 20px auto;
+    padding-left: 5%;
+    columns: 3;
+    column-gap: 20px;
+
+    .artwork_box {
+        width: 100%;
+        margin-bottom: 12px;
+        break-inside: avoid;
+        cursor: pointer;
+
+        img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+
+        .detail_artbox {
+            display: flex;
+            align-items: center;
+            margin: 1%;
+            margin-left: 3%;
+
+            img {
+                border-radius: 50%;
+                width: 35px;
+                height: 35px;
+            }
         }
     }
 }
@@ -32,39 +76,42 @@
 }
 
 .artwork_category {
-    margin: 5% auto;
-    margin-left: 2%;
-    padding: 0 12px;
-    width: 15%;
-    word-wrap: break-word;
+    margin-top: 3%;
+    padding: 0 10%;
+    width: 100%;
+    margin-bottom: 20px;
 
-    .warp {
+    // .item {
+    //     color: black;
+    //     cursor: pointer;
+    //     transition: all .3s ease-in-out;
+    //     margin-right: 30px;
+    //     margin-left: 30px;
+
+    // &:hover {
+    //     color: #E16428;
+    //     cursor: pointer;
+    //     // transform: scale(1.01);
+    //     transform: translateY(-2px);
+    // }
+    // }
+
+    .item_active {
+        cursor: pointer;
+        background-color: #E16428;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        color: #ffffff;
         display: flex;
-    }
-
-    .switch {
-        font-weight: 800;
-        font-size: 22px;
-
-        .item {
-            color: black;
-            cursor: pointer;
-            transition: all .3s ease-in-out;
-
-            &:hover {
-                color: #E16428;
-                cursor: pointer;
-                // transform: scale(1.01);
-                transform: translateY(-2px);
-            }
-        }
-
-        .item_active {
-            color: #E78353;
-            cursor: pointer;
-        }
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px;
+        height: 2.5rem;
+        transition-property: all;
+        top: 4px;
     }
 }
+
+// }
 
 .no_artwork {
     text-align: center;
@@ -79,18 +126,19 @@
 }
 
 .artwork_detail {
-    margin: 40px 2%;
+    // margin: 10px 2%;
+    margin-top: 2%;
+    margin-right: 3%;
     padding: 1.6%;
-    display: flex;
+    // display: flex;
+    width: 35%;
     border: solid 0.5px #e1dddc;
     box-shadow: 2px 2px 2px #EBE9E9;
     border-radius: 20px;
+    float: right;
 
     .image_gallery {
-        margin-top: 10px;
-        margin-right: 4px;
-        width: 45%;
-        height: 24rem;
+        height: 15rem;
 
         img {
             width: 100%;
@@ -99,7 +147,7 @@
             border-radius: 20px;
         }
 
-          /* Styles for the fullscreen overlay */
+        /* Styles for the fullscreen overlay */
         .fullscreen_overlay {
             position: fixed;
             top: 0;
@@ -114,9 +162,10 @@
             cursor: zoom-in;
         }
 
-        .fullscreen_image{
+        .fullscreen_image {
             display: flex;
             justify-content: center;
+
             .image {
                 width: 85% !important;
                 height: 85% !important;
@@ -124,12 +173,11 @@
                 justify-content: center;
                 border-radius: 0px !important;
             }
-        } 
+        }
     }
 }
 
 .detail {
-    width: 50%;
     margin: 10px 5%;
     height: 24rem;
 
@@ -140,18 +188,13 @@
     }
 
     .category {
+        width: 100%;
+
         span {
-            border: solid 1px #E16428;
             margin-right: 10px;
             padding: 4px 20px;
             border-radius: 15px;
-            color: #E16428;
             transition: all 0.7s;
-
-            &:hover {
-                background-color: #E16428;
-                color: #FFF;
-            }
         }
     }
 
@@ -266,6 +309,7 @@
             border-radius: 8px;
             color: #E16428;
             transition: all 0.5s;
+
             &:hover {
                 color: #FDFBFB;
                 background-color: #E16428;
@@ -280,15 +324,16 @@
 
     .freelance_profile {
         width: 108%;
-        
+
         display: flex;
+
         .profile {
             height: 4rem;
             width: 70%;
             display: flex;
             align-items: center;
             margin: 3rem auto;
-    
+
             img {
                 margin-right: 8px;
                 border-radius: 50%;
@@ -296,17 +341,17 @@
                 height: 60px;
                 object-fit: cover;
             }
-    
+
             .name_box {
                 justify-items: start;
                 justify-content: start;
-    
+
                 .username {
                     margin-left: 4px;
                     font-weight: 500;
                     font-size: 1.2rem;
                 }
-    
+
                 .fullname {
                     margin-left: 4px;
                     font-size: 0.8rem;
@@ -321,6 +366,7 @@
             align-items: center;
             justify-content: end;
             color: #873C18;
+
             .view_profile {
                 background-color: #E78353;
                 padding: 4px 20px;
@@ -329,7 +375,7 @@
                 font-weight: 500;
                 margin-left: 12px;
                 transition: all 0.5s;
-    
+
                 &:hover {
                     background-color: #E16428;
                     border-color: #E16428;
@@ -339,9 +385,11 @@
                     font-weight: 500;
                 }
             }
+
             .chat_icon {
                 color: #5A2810;
                 transition: all 0.5s;
+
                 &:hover {
                     color: #E16428;
                     transform: scale(1.05);
@@ -351,7 +399,7 @@
                 }
             }
         }
-        
+
     }
 }
 

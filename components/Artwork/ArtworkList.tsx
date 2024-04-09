@@ -31,7 +31,7 @@ const ArtworkList = (props: Props) => {
       }
     };
     getData();
-  }, [type, artworkDetail]);
+  }, [type]);
 
   useEffect(() => {
     onCloseDetail();
@@ -64,9 +64,6 @@ const ArtworkList = (props: Props) => {
   };
 
   const onShowDetail = (item: ArtworkList) => {
-    setArtwork([])
-    setPage(1);
-    setHasMore(true)
     setIsShowDetail(true);
     setArtworkDetail(item);
     window.scrollTo({
@@ -86,7 +83,6 @@ const ArtworkList = (props: Props) => {
       {isShowDetail && artworkDetail && (
         <>
           <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
-          <div className={style.text}>--------- คุณอาจชอบสิ่งนี้ ---------</div>
         </>
       )}
       <InfiniteScroll
@@ -95,7 +91,7 @@ const ArtworkList = (props: Props) => {
         hasMore={hasMore}
         loader={""}
       >
-        <div className={style.artwork_container}>
+        <div className={`${style.artwork_container} ${isShowDetail ? style.artwork_container_show_detail : ''}`}>
           {artwork?.map((item, index) => {
             return (
               <ArtworkItem
