@@ -64,7 +64,7 @@
             }
 
             .latest_message {
-                font-size: 12px;
+                font-size: smaller;
                 color: #424949;
             }
         }
@@ -480,4 +480,33 @@
     .container .no_message .icon {
         left: 16%;
     }
+}
+
+@media (max-width:1024px) {
+    .container {
+        font-size: smaller;
+        .chat_room {
+            width: 30%;
+        }
+        .chat_room_main {
+            .image {
+    
+                img {
+                    width: 33px;
+                    height: 33px;
+                }
+    
+            }
+        }
+        .message_main {
+            .message_container {
+                width: 100%;
+
+            }
+            .profile {
+                display: none;
+
+            }
+        }
+    } 
 }
