@@ -102,6 +102,7 @@
             .chat_header {
                 display: flex;
                 align-items: center;
+                justify-content: space-between;
                 background-color: #FFFFFF;
                 // border-radius: 10px;
                 padding: 10px 25px;
@@ -120,6 +121,27 @@
                 p {
                     font-weight: 800;
                     font-size: 18px;
+                }
+
+                .star_rating {
+                    width: 68px;
+                    display: none;
+                }
+
+                .button {
+                    display: none;
+                    font-size: 14px;
+                    color: #FDFBFB;
+                    background-color: #E16428;
+                    cursor: pointer;
+                    padding: 4px 16px;
+                    border-radius: 18px;
+                    margin-top: 6px;
+                    font-weight: 600;
+                    &:hover {
+                        background-color: #B45020
+                    }
+
                 }
             }
 
@@ -501,6 +523,15 @@
         .message_main {
             .message_container {
                 width: 100%;
+
+                .chat_header {
+                    .star_rating {
+                        display: block
+                    }
+                    .button {
+                        display: block
+                    }
+                }
 
             }
             .profile {
