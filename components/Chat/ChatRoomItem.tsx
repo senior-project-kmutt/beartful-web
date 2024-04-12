@@ -51,7 +51,7 @@ const ChatRoomItem = (props: Props) => {
 
   const handleClickChatRoom = () => {
     setChatRoomId(chatRoomItem._id)
-    router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/chat?chatRoom=${chatRoomItem._id}`);
+    router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/chat?chatRoom=${chatRoomItem._id}`, undefined, { shallow: true });
   }
   return (
     <div

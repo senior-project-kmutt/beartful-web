@@ -35,26 +35,28 @@
     .chat_room_main {
         display: flex;
         align-items: center;
-        margin-right: 4%;
+        margin-right: 4% !important;
         margin-left: 4%;
-        padding: 4%;
+        padding: 16px 12px;
         cursor: pointer;
-        transition: all 1s;
+        transition: all 0.6s;
 
         .image {
-            width: 22%;
+            // width: 22%;
+            position: absolute;
 
             img {
                 object-fit: cover;
-                width: 60px;
-                height: 60px;
+                width: 55px;
+                height: 55px;
                 border-radius: 50%;
             }
 
         }
 
         .text {
-            width: 72%;
+            width: 90%;
+            padding-left: 50px;
 
             h1,
             .latest_message {
@@ -64,7 +66,7 @@
             }
 
             .latest_message {
-                font-size: 12px;
+                font-size: smaller;
                 color: #424949;
             }
         }
@@ -102,6 +104,7 @@
             .chat_header {
                 display: flex;
                 align-items: center;
+                justify-content: space-between;
                 background-color: #FFFFFF;
                 // border-radius: 10px;
                 padding: 10px 25px;
@@ -120,6 +123,25 @@
                 p {
                     font-weight: 800;
                     font-size: 18px;
+                }
+
+                .star_rating {
+                    width: 68px;
+                }
+
+                .button {
+                    font-size: 14px;
+                    color: #FDFBFB;
+                    background-color: #E16428;
+                    cursor: pointer;
+                    padding: 4px 16px;
+                    border-radius: 18px;
+                    margin-top: 6px;
+                    font-weight: 600;
+                    &:hover {
+                        background-color: #B45020
+                    }
+
                 }
             }
 
@@ -367,6 +389,8 @@
                         color: #E16428;
                         display: flex;
                         justify-content: end;
+                        align-items: center;
+                        height: 90%;
 
                         div {
                             width: 85px;
@@ -397,9 +421,6 @@
                     background-color: #E16428;
                     color: #FAF2F2;
                     border-radius: 10px;
-                    font-size: 12px;
-                    font-weight: 700;
-                    padding: 6px 18px;
                     cursor: pointer;
                     box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
                     display: inline-block;
@@ -423,9 +444,6 @@
                     background-color: #FFFFFF;
                     color: #E16428;
                     border-radius: 10px;
-                    font-size: 12px;
-                    font-weight: 700;
-                    padding: 6px 18px;
                     cursor: pointer;
                     box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 4px;
                     display: inline-block;
@@ -480,4 +498,21 @@
     .container .no_message .icon {
         left: 16%;
     }
+}
+
+@media (max-width:1310px) {
+    .container {
+        font-size: smaller;
+        .chat_room {
+            width: 30%;
+        }
+        .message_main {
+            .message_container {
+                width: 100%;
+            }
+            .profile {
+                display: none;
+            }
+        }
+    } 
 }
