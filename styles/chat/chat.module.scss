@@ -125,11 +125,9 @@
 
                 .star_rating {
                     width: 68px;
-                    display: none;
                 }
 
                 .button {
-                    display: none;
                     font-size: 14px;
                     color: #FDFBFB;
                     background-color: #E16428;
@@ -523,16 +521,6 @@
         .message_main {
             .message_container {
                 width: 100%;
-
-                .chat_header {
-                    .star_rating {
-                        display: block
-                    }
-                    .button {
-                        display: block
-                    }
-                }
-
             }
             .profile {
                 display: none;

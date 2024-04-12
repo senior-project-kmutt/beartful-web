@@ -17,6 +17,7 @@ import ReceiptModal from '../Profile/Freelance/ReceiptModal';
 import { getFreelanceAverageScore } from '@/services/review/review.api';
 import StarRating from '../Profile/Freelance/Review/StarRating';
 import { calculatePercentage } from '@/core/tranform';
+import { useWindowSize } from '@/core/windowSize';
 
 interface Props {
   selectedChatRoom?: IChatRoom
@@ -48,7 +49,9 @@ const ChatMessage = (props: Props) => {
   const chatContainerRef = useRef<HTMLDivElement>(null); // Create a ref for the chat container div
   const [isQuotationModalOpen, setIsQuotationModalOpen] = useState<boolean>(false);
   const [isReceiptModalOpen, setIsReceiptModalOpen] = useState<boolean>(false);
-  const [freelanceAverageScore, setFreelanceAverageScore] = useState<number>(0)
+  const [freelanceAverageScore, setFreelanceAverageScore] = useState<number>(0);
+  const { width } = useWindowSize();
+  const isIpad = width && width <= 1024;
 
   initializeApp(firebaseConfig);
   socketMessage.connect();
@@ -199,14 +202,14 @@ const ChatMessage = (props: Props) => {
             <img src={selectedChatRoom?.participants[0].profileImage} alt="" />
             <div>
               <p>{selectedChatRoom?.participants[0].username}</p>
-              {selectedChatRoom?.participants[0].role === 'freelance' && (
+              {(selectedChatRoom?.participants[0].role === 'freelance' && isIpad) && (
                 <div className={styles.star_rating}>
                   <div><StarRating percent={calculatePercentage(5, freelanceAverageScore)} /></div>
                 </div>
               )}
             </div>
           </div>
-          {selectedChatRoom?.participants[0].role === 'freelance' && (
+          {(selectedChatRoom?.participants[0].role === 'freelance' && isIpad) && (
             <div className={styles.button}>
               ดูโปรไฟล์
             </div>
