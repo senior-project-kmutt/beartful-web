@@ -389,6 +389,8 @@
                         color: #E16428;
                         display: flex;
                         justify-content: end;
+                        align-items: center;
+                        height: 90%;
 
                         div {
                             width: 85px;
@@ -419,9 +421,6 @@
                     background-color: #E16428;
                     color: #FAF2F2;
                     border-radius: 10px;
-                    font-size: 12px;
-                    font-weight: 700;
-                    padding: 6px 18px;
                     cursor: pointer;
                     box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
                     display: inline-block;
@@ -445,9 +444,6 @@
                     background-color: #FFFFFF;
                     color: #E16428;
                     border-radius: 10px;
-                    font-size: 12px;
-                    font-weight: 700;
-                    padding: 6px 18px;
                     cursor: pointer;
                     box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 4px;
                     display: inline-block;
@@ -504,7 +500,7 @@
     }
 }
 
-@media (max-width:1024px) {
+@media (max-width:1310px) {
     .container {
         font-size: smaller;
         .chat_room {
@@ -516,7 +512,6 @@
             }
             .profile {
                 display: none;
-
             }
         }
     } 

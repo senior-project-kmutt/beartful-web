@@ -18,6 +18,7 @@ import { getFreelanceAverageScore } from '@/services/review/review.api';
 import StarRating from '../Profile/Freelance/Review/StarRating';
 import { calculatePercentage } from '@/core/tranform';
 import { useWindowSize } from '@/core/windowSize';
+import { useRouter } from 'next/router';
 
 interface Props {
   selectedChatRoom?: IChatRoom
@@ -51,7 +52,8 @@ const ChatMessage = (props: Props) => {
   const [isReceiptModalOpen, setIsReceiptModalOpen] = useState<boolean>(false);
   const [freelanceAverageScore, setFreelanceAverageScore] = useState<number>(0);
   const { width } = useWindowSize();
-  const isIpad = width && width <= 1024;
+  const isIpad = width && width <= 1310;
+  const router = useRouter();
 
   initializeApp(firebaseConfig);
   socketMessage.connect();
@@ -210,7 +212,7 @@ const ChatMessage = (props: Props) => {
             </div>
           </div>
           {(selectedChatRoom?.participants[0].role === 'freelance' && isIpad) && (
-            <div className={styles.button}>
+            <div className={styles.button} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${selectedChatRoom?.participants[0].username}`)}>
               ดูโปรไฟล์
             </div>
           )}
