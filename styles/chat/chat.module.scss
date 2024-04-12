@@ -35,26 +35,28 @@
     .chat_room_main {
         display: flex;
         align-items: center;
-        margin-right: 4%;
+        margin-right: 4% !important;
         margin-left: 4%;
-        padding: 4%;
+        padding: 16px 12px;
         cursor: pointer;
-        transition: all 1s;
+        transition: all 0.6s;
 
         .image {
-            width: 22%;
+            // width: 22%;
+            position: absolute;
 
             img {
                 object-fit: cover;
-                width: 60px;
-                height: 60px;
+                width: 55px;
+                height: 55px;
                 border-radius: 50%;
             }
 
         }
 
         .text {
-            width: 72%;
+            width: 90%;
+            padding-left: 50px;
 
             h1,
             .latest_message {
@@ -507,16 +509,6 @@
         font-size: smaller;
         .chat_room {
             width: 30%;
-        }
-        .chat_room_main {
-            .image {
-    
-                img {
-                    width: 33px;
-                    height: 33px;
-                }
-    
-            }
         }
         .message_main {
             .message_container {
