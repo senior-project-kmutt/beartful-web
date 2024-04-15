@@ -4,13 +4,17 @@ import style from "@/styles/navbar/navbarLayout.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faMessage, faHistory, faBell, faPalette, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { Users } from '@/models/users';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { SearchFreelance, Users } from '@/models/users';
 import { LOGO_IMAGE } from '@/config/constants';
+import { getSearchFreelance } from '@/services/user/user.api';
 
 const NavBar = () => {
   const router = useRouter();
   const [user, setUser] = useState<Users | null>(null);
+  const [keywordSearch, setKeywordSearch] = useState<string>('');
+  const [searchResult, setSearchResult] = useState<SearchFreelance[]>([]);
+  const [isResultEmpty, setIsResultEmpty] = useState<boolean>(false);
 
   useEffect(() => {
     const userSession = localStorage.getItem('user')
@@ -26,6 +30,32 @@ const NavBar = () => {
     setUser(null);
     router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`);
   }
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setKeywordSearch(value);
+  }
+
+  const handleSearch = async (keyword: string) => {
+    setIsResultEmpty(false)
+    const token = localStorage.getItem("auth");
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const result = await getSearchFreelance(keyword, headers) as SearchFreelance[];
+    if (result.length === 0) {
+      setIsResultEmpty(true)
+    }
+    setSearchResult(result);
+  }
+
+  useEffect(() => {
+    if (keywordSearch) {
+      handleSearch(keywordSearch)
+    } else {
+      setSearchResult([])
+    }
+  }, [keywordSearch])
 
   return (
     <>
@@ -48,33 +78,35 @@ const NavBar = () => {
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                   </svg>
                 </div>
-                <input type="search" id="search" className="block w-80 p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="ค้นหาฟรีแลนซ์" required />
-                <div className={`${style.search_result}`}>
-                  <div className={`${style.result_item}`}>
-                    <div className='flex items-center'>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/beartful-ef55a.appspot.com/o/artwork%2Fariice%2F8372075.jpg?alt=media&token=2337e6cb-57f1-4c28-9ac5-a4c9eb1cfc61" alt="" />
-                      <div>
-                        <p className={style.username} >Username</p>
-                        <p className={style.name}>Firstname Lastname</p>
-                      </div>
+                <input onChange={handleInputChange} type="search" id="search" className="block w-80 p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="ค้นหาฟรีแลนซ์" required />
+                {keywordSearch && (
+                  <>
+                    <div className={`${style.search_result}`}>
+                      {isResultEmpty && (
+                        <p className='text-gray-400 font-bold p-6 text-center'>ไม่พบฟรีแลนซ์</p>
+                      )}
+                      {searchResult.map(item => {
+                        return (
+                          <>
+                            <div className={`${style.result_item}`} onClick={() => router.push(`/user?username=${item.username}`)}>
+                              <div className='flex items-center'>
+                                <img src={item.profileImage} alt="" />
+                                <div>
+                                  <p className={style.username}>{item.username}</p>
+                                  <p className={style.name}>{item.firstname} {item.lastname}</p>
+                                </div>
+                              </div>
+                              <div>
+                                <FontAwesomeIcon icon={faArrowRight} size='lg' />
+                              </div>
+                            </div>
+                          </>
+                        )
+                      })}
                     </div>
-                    <div>
-                      <FontAwesomeIcon icon={faArrowRight} size='lg' />
-                    </div>
-                  </div>
-                  <div className={`${style.result_item}`}>
-                    <div className='flex items-center'>
-                      <img src="https://firebasestorage.googleapis.com/v0/b/beartful-ef55a.appspot.com/o/artwork%2Fariice%2F8372075.jpg?alt=media&token=2337e6cb-57f1-4c28-9ac5-a4c9eb1cfc61" alt="" />
-                      <div>
-                        <p className={style.username} >Username</p>
-                        <p className={style.name}>Firstname Lastname</p>
-                      </div>
-                    </div>
-                    <div>
-                      <FontAwesomeIcon icon={faArrowRight} size='lg' />
-                    </div>
-                  </div>
-                </div>
+                  </>
+                )}
+
               </div>
               <div className={style.menu}>
                 {user.role === 'customer' && (

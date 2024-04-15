@@ -67,3 +67,9 @@ export const getUsers = (page: number, pageSize: number, role: string): Observab
   const params = `?page=${page}&pageSize=${pageSize}&role=${role}`
   return get(`/user${params}`);
 };
+
+export const getSearchFreelance = (keyword: string, headers: IncomingHttpHeaders): Promise<any> => {
+  const params = `?keyword=${keyword}`
+  const url = `/user/search/freelance${params}`;
+  return getPromise(url, headers);
+};
