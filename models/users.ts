@@ -84,3 +84,10 @@ export interface UserPagination {
   currentPage: number;
   count: number;
 }
+
+export interface SearchFreelance{
+  profileImage: string;
+  username: string;
+  firstname: string;
+  lastname: string;
+}

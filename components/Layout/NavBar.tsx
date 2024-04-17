@@ -2,15 +2,19 @@ import Link from 'next/link';
 import { Avatar, Dropdown, Navbar } from 'flowbite-react';
 import style from "@/styles/navbar/navbarLayout.module.scss"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faMessage, faHistory, faBell, faPalette } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faMessage, faHistory, faBell, faPalette, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { Users } from '@/models/users';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { SearchFreelance, Users } from '@/models/users';
 import { LOGO_IMAGE } from '@/config/constants';
+import { getSearchFreelance } from '@/services/user/user.api';
 
 const NavBar = () => {
   const router = useRouter();
   const [user, setUser] = useState<Users | null>(null);
+  const [keywordSearch, setKeywordSearch] = useState<string>('');
+  const [searchResult, setSearchResult] = useState<SearchFreelance[]>([]);
+  const [isResultEmpty, setIsResultEmpty] = useState<boolean>(false);
 
   useEffect(() => {
     const userSession = localStorage.getItem('user')
@@ -27,9 +31,35 @@ const NavBar = () => {
     router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`);
   }
 
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setKeywordSearch(value);
+  }
+
+  const handleSearch = async (keyword: string) => {
+    setIsResultEmpty(false)
+    const token = localStorage.getItem("auth");
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    const result = await getSearchFreelance(keyword, headers) as SearchFreelance[];
+    if (result.length === 0) {
+      setIsResultEmpty(true)
+    }
+    setSearchResult(result);
+  }
+
+  useEffect(() => {
+    if (keywordSearch) {
+      handleSearch(keywordSearch)
+    } else {
+      setSearchResult([])
+    }
+  }, [keywordSearch])
+
   return (
     <>
-      <Navbar className="space-x-6 h-8 sm:h-12" fluid rounded>
+      <Navbar className="space-x-6 h-8 sm:h-12 mt-3" fluid rounded>
         <Navbar.Brand as={Link} href={`${process.env.NEXT_PUBLIC_BASEPATH}/`} >
           <img src={LOGO_IMAGE} className="h-4 sm:h-6 ml-4" alt="Beartful Logo" />
         </Navbar.Brand>
@@ -42,6 +72,42 @@ const NavBar = () => {
             </>
           ) : (
             <>
+              <div className="relative">
+                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                  </svg>
+                </div>
+                <input onChange={handleInputChange} type="search" id="search" className="block w-80 p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="ค้นหาฟรีแลนซ์" required />
+                {keywordSearch && (
+                  <>
+                    <div className={`${style.search_result}`}>
+                      {isResultEmpty && (
+                        <p className='text-gray-400 font-bold p-6 text-center'>ไม่พบฟรีแลนซ์</p>
+                      )}
+                      {searchResult.map(item => {
+                        return (
+                          <>
+                            <div className={`${style.result_item}`} onClick={() => router.push(`/user?username=${item.username}`)}>
+                              <div className='flex items-center'>
+                                <img src={item.profileImage} alt="" />
+                                <div>
+                                  <p className={style.username}>{item.username}</p>
+                                  <p className={style.name}>{item.firstname} {item.lastname}</p>
+                                </div>
+                              </div>
+                              <div>
+                                <FontAwesomeIcon icon={faArrowRight} size='lg' />
+                              </div>
+                            </div>
+                          </>
+                        )
+                      })}
+                    </div>
+                  </>
+                )}
+
+              </div>
               <div className={style.menu}>
                 {user.role === 'customer' && (
                   <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>
