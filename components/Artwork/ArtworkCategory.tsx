@@ -23,12 +23,15 @@ const ArtworkCategory = (props: Props) => {
       // setIsShowDetail(false)
     }
   }
+
   return (
     <div className={style.artwork_category}>
-      <div className={style.warp}>
-        <div className={style.switch}>
-          <div className={type === 'hired' ? `${style.item_active}` : `${style.item}`} onClick={() => setTypeArtwork('hired')}>Hiring</div>
-          <div className={type === 'readyMade' ? `${style.item_active}` : `${style.item}`} onClick={() => setTypeArtwork('readyMade')}>Ready Made</div>
+      <div className="mx-48 shadow rounded-full h-10 flex p-1 relative items-center">
+        <div className={`w-full flex justify-center ${type === 'hired' && `${style.item_active}`}`}>
+          <button onClick={() => setTypeArtwork('hired')}>Hiring</button>
+        </div>
+        <div className={`w-full flex justify-center ${type === 'readyMade' && `${style.item_active}`}`}>
+          <button onClick={() => setTypeArtwork('readyMade')}>Ready Made</button>
         </div>
       </div>
     </div>

@@ -189,22 +189,10 @@ const ArtworkDetail = (props: Props) => {
         </div>
         <div className={style.name}>
           {name}
-          {/* <span className={`${style.heart} cursor-pointer`}>
-            <FontAwesomeIcon
-              icon={faHeart}
-              className={style.heart_icon}
-            ></FontAwesomeIcon>
-          </span>
-          <span className={`${style.bookmark} cursor-pointer`}>
-            <FontAwesomeIcon
-              icon={faBookmark}
-              className={style.bookmark_icon}
-            ></FontAwesomeIcon>
-          </span> */}
         </div>
         <div className={style.category}>
           {categoryNames.map((name, index) => (
-            <span key={index}>{name}</span>
+            <span className="inline-block bg-gray-200 rounded-full px-2 py-1 text-xs font-semibold text-gray-700 mr-2 mb-1">{name}</span>
           ))}
         </div>
         <div className={style.description}>
@@ -215,22 +203,8 @@ const ArtworkDetail = (props: Props) => {
           <span>{type == "hired" ? "เรทราคา :" : "ราคา"}</span>
           <span className={style.price_tag}>{price} บาท</span>
         </div>
-        <div className={style.heart}>
-          <span>จำนวนที่ถูกใจ</span>
-          <span className={style.heart_count}>{likeCount} ครั้ง</span>
-        </div>
         {type === "readyMade" && user?.role === "customer" && (
           <div className={style.quantity}>
-            {/* <span>จำนวนที่ถูกใจ</span> */}
-            {/* <span className={style.quantityControll}>
-            <button onClick={() => setQuantity(quantity -= 1)}>-</button>
-            <input
-              type="number"
-              value={quantity}
-              onChange={(event) => setQuantity(parseInt(event.target.value))}
-            />
-            <button onClick={() => setQuantity(quantity += 1)}>+</button>
-          </span> */}
             <button className={style.addToCart} onClick={handleAddToCart}>
               เพิ่มลงตะกร้า
             </button>
@@ -245,9 +219,6 @@ const ArtworkDetail = (props: Props) => {
                 <p className={style.fullname}>
                   {profile?.firstname} {profile?.lastname}
                 </p>
-                {/* <p className={style.fullname}>
-                  คะแนนรีวิว - - - - -
-                </p> */}
               </div>
 
             </div>
