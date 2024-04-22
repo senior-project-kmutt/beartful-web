@@ -10,7 +10,6 @@ import { IUser } from "@/pages/chat";
 import style from "@/styles/profile/freelance/artwork/artworkForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import Router from 'next/router';
 import Swal from "sweetalert2";
@@ -150,9 +149,7 @@ const ArtworkForm = (props: Props) => {
 
   return (
     <>
-      <NavBar />
-      <div className="flex">
-
+      <div className="flex mt-20">
         <div style={{ width: '22%' }}>
           <ProfileSelectBarFreelance activeMenu="artwork" />
         </div>

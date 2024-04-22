@@ -40,7 +40,7 @@ const FreelancePurchaseItem = (props: Props) => {
     }
 
     return (
-        <div className={style.purchaseItem}>
+        <div className={`${style.purchaseItem} ml-6 mr-6`}>
             <div className={style.profile}>
                 <FontAwesomeIcon icon={faUser} size="sm" style={{ marginTop: "4px" }}></FontAwesomeIcon>
                 <p className={style.username}>{item.customerUsername}</p>

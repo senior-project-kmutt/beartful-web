@@ -1,6 +1,5 @@
 
 import style from "@/styles/profile/customer/purchase/customerPurchase.module.scss"
-import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBarCustomer from "@/components/Profile/Customer/ProfileSelectBar";
 import PurchaseStatusBar from "../../Component/PurchaseStatusBar";
 import { useEffect, useState } from "react";
@@ -84,16 +83,18 @@ const CustomerPurchase = (props: Props) => {
     }
     return (
         <>
-            <NavBar />
-            <div className="flex">
-                <div style={{ width: "22%" }}>
+            <div className="flex mt-16">
+                <div className="fixed inset-0 bg-white z-3 mt-20" style={{ width: "22%" }}>
                     <ProfileSelectBarCustomer activeMenu='purchase' />
                 </div>
 
                 <div className={style.main}>
-                    <div className="text-xl font-bold">การซื้อและการจ้างของฉัน</div>
-                    <PurchaseStatusBar role="customer" setStatus={setStatus} />
-                    <div className="overflow-y-auto h-screen">
+                    <div className="fixed inset-0 z-3 mt-24 ml-80 ">
+                        <div className="text-xl font-bold ml-10">การซื้อและการจ้างของฉัน</div>
+                        <PurchaseStatusBar role="customer" setStatus={setStatus} />
+                    </div>
+
+                    <div className="ml-80 fixed  mt-44 inset-0  overflow-y-auto" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20 }}>
                         {order.map((item, index) => {
                             return (
                                 <div style={{ position: 'relative' }} key={index}>

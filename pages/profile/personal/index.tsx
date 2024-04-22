@@ -1,4 +1,3 @@
-import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import PersonalUpdateForm from "@/components/Profile/Freelance/Personal/PersonalUpdateForm";
 import { useEffect, useState } from "react";
@@ -16,8 +15,7 @@ const ProfilePersonal = () => {
   }, []);
   return (
     <>
-      <NavBar />
-      <div className="flex">
+      <div className="flex mt-16">
         {user?.role === 'freelance' && (
           <div style={{width: "22%"}}>
             <ProfileSelectBarFreelance activeMenu="personal" />

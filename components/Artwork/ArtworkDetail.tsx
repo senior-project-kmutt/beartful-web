@@ -14,6 +14,7 @@ import { getUserByIdNotAuthen } from "@/services/user/user.api";
 import { Users } from "@/models/users";
 import router from "next/router";
 import { createChatRoom } from "@/services/chat/chat.api";
+import { formattedPrice } from "@/core/tranform";
 
 interface Props {
   item: Artwork;
@@ -148,7 +149,40 @@ const ArtworkDetail = (props: Props) => {
   }
 
   return (
-    <div className={style.artwork_detail}>
+    <div className={`${style.artwork_detail}`}>
+      {user?.role === "customer" && (
+          <div className={style.freelance_profile}>
+            <div className={style.profile}>
+              <img src={profile?.profileImage} />
+              <div className={style.name_box}>
+                <p className={style.username}>{profile?.username}</p>
+                <p className={style.fullname}>
+                  {profile?.firstname} {profile?.lastname}
+                </p>
+              </div>
+
+            </div>
+            <div className={style.button_container}>
+              {/* <FontAwesomeIcon icon={faCommentDots} className={style.chat_icon} size="2xl" onClick={handleGoToChat} /> */}
+              <button
+                className={`${style.view_profile} justify-self-end`}
+                onClick={() =>
+                  router.push(
+                    `${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${profile?.username}`
+                  )
+                }
+              >
+                ดูโปรไฟล์
+              </button>
+              <div onClick={handleCloseDetail} className={`${style.close}`}>
+        <span className="cursor-pointer"> X </span>
+      </div>
+            </div>
+          </div>
+        )}
+      {/* <div onClick={handleCloseDetail} className={`${style.close}`}>
+        <span className="cursor-pointer"> X </span>
+      </div> */}
       <div className={style.image_gallery}>
         <Carousel
           key={_id}
@@ -184,9 +218,6 @@ const ArtworkDetail = (props: Props) => {
         )}
       </div>
       <div className={`${style.detail}`}>
-        <div onClick={handleCloseDetail} className={`${style.close}`}>
-          <span className="cursor-pointer"> X </span>
-        </div>
         <div className={style.name}>
           {name}
         </div>
@@ -196,47 +227,39 @@ const ArtworkDetail = (props: Props) => {
           ))}
         </div>
         <div className={style.description}>
-          <p>รายละเอียด</p>
-          <span className="text-primary3">{description}</span>
+          <span className="text-gray-600">{description}</span>
         </div>
         <div className={style.price}>
-          <span>{type == "hired" ? "เรทราคา :" : "ราคา"}</span>
-          <span className={style.price_tag}>{price} บาท</span>
+          <span className={style.price_tag}>{formattedPrice(parseInt(price, 10))} บาท</span>
+          {type === "readyMade" && user?.role === "customer" && (
+            <div className={style.quantity}>
+
+              <button className={style.addToCart} onClick={handleAddToCart}>
+                เพิ่มลงตะกร้า
+              </button>
+            </div>
+          )}
+
+          {type === "hired" && user?.role === "customer" && (
+            <div className={style.quantity}>
+              <button className={style.addToCart} onClick={() =>
+                router.push(
+                  `${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${profile?.username}`
+                )
+              }>
+                แชทกับฟรีแลนซ์
+              </button>
+            </div>
+          )}
         </div>
-        {type === "readyMade" && user?.role === "customer" && (
+        {/* {type === "readyMade" && user?.role === "customer" && (
           <div className={style.quantity}>
             <button className={style.addToCart} onClick={handleAddToCart}>
               เพิ่มลงตะกร้า
             </button>
           </div>
-        )}
-        {user?.role === "customer" && (
-          <div className={style.freelance_profile}>
-            <div className={style.profile}>
-              <img src={profile?.profileImage} />
-              <div className={style.name_box}>
-                <p className={style.username}>{profile?.username}</p>
-                <p className={style.fullname}>
-                  {profile?.firstname} {profile?.lastname}
-                </p>
-              </div>
-
-            </div>
-            <div className={style.button_container}>
-              <FontAwesomeIcon icon={faCommentDots} className={style.chat_icon} size="2xl" onClick={handleGoToChat} />
-              <button
-                className={`${style.view_profile} justify-self-end`}
-                onClick={() =>
-                  router.push(
-                    `${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${profile?.username}`
-                  )
-                }
-              >
-                ดูโปรไฟล์
-              </button>
-            </div>
-          </div>
-        )}
+        )} */}
+        
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { IUser } from "../../chat";
 import AccountingForm from "@/components/Authentication/FormRegister/AccountingForm";
-import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import style from '@/styles/profile/freelance/artwork/viewArtwork.module.scss'
 import { getUserById, updateBankAccount } from "@/services/user/user.api";
@@ -88,8 +87,7 @@ const ProfileBankAccount = () => {
 
   return (
     <>
-      <NavBar />
-      <div className="flex">
+      <div className="flex mt-16">
 
         <div style={{width: "22%"}}>
           <ProfileSelectBarFreelance activeMenu="bankAccount" />

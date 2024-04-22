@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
 import ArtworkList from "../Artwork/ArtworkList";
-import NavBar from "../Layout/NavBar";
 import UserSideBar from "./UserSideBar";
 import style from "@/styles/user/freelanceArtwork.module.scss"
 import { FreelanceUsers } from "@/models/users";
@@ -76,8 +75,7 @@ const FreelanceArtwork = (props: Props) => {
 
     return (
         <>
-            <NavBar />
-            <div className="flex mt-8 mx-5">
+            <div className="flex mt-24 mx-5">
                 <div className="" style={{ width: "14%" }}>
                     <UserSideBar type={type} setType={setType} />
                 </div>

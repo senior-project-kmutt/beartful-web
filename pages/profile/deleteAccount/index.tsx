@@ -1,4 +1,3 @@
-import NavBar from "@/components/Layout/NavBar";
 import DeleteAccountComponent from "@/components/Profile/Component/DeleteAccountComponent";
 import ProfileSelectBarCustomer from "@/components/Profile/Customer/ProfileSelectBar";
 import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
@@ -15,8 +14,7 @@ const DeleteAccount = () => {
 
     return (
         <>
-            <NavBar />
-            <div className="flex">
+            <div className="flex mt-16">
                 {user?.role === 'freelance' && (
                     <div style={{ width: "22%" }}>
                         <ProfileSelectBarFreelance activeMenu="deleteAccount" />

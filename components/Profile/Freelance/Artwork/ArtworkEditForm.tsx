@@ -7,7 +7,6 @@ import { initializeApp } from "firebase/app";
 import { IUser } from "@/pages/chat";
 import { Artwork } from "@/models/artwork";
 import style from "@/styles/profile/freelance/artwork/artworkForm.module.scss";
-import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import { editArtwork } from "@/services/artwork/artwork.api";
 import Router from 'next/router';
@@ -122,8 +121,7 @@ const ArtworkForm = (props: Props) => {
 
   return (
     <>
-      <NavBar />
-      <div className="flex">
+      <div className="fle mt-20">
 
         <div>
           <ProfileSelectBarFreelance activeMenu="artwork" />

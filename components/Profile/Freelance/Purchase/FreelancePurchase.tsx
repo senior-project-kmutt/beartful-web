@@ -1,6 +1,5 @@
 
 import style from "@/styles/profile/customer/purchase/customerPurchase.module.scss"
-import NavBar from "@/components/Layout/NavBar";
 import PurchaseStatusBar from "../../Component/PurchaseStatusBar";
 import { useEffect, useState } from "react";
 import { IUser } from "@/pages/chat";
@@ -62,8 +61,7 @@ const CustomerPurchase = (props: Props) => {
 
     return (
         <>
-            <NavBar />
-            <div className="flex">
+            <div className="flex mt-16">
 
                 <div className={style.sideBar} style={{ width: "22%" }}>
                     <ProfileSelectBarFreelance activeMenu="purchase" />

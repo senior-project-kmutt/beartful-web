@@ -1,4 +1,3 @@
-import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBarCustomer from "@/components/Profile/Customer/ProfileSelectBar";
 import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import { IPurchaseOrderDetail } from "@/models/purchaseOrder";
@@ -38,8 +37,7 @@ const OrderDetail = () => {
 
     return (
         <>
-            <NavBar />
-            <div className="flex">
+            <div className="flex mt-16">
                 {user?.role === 'freelance' && (
                     <div style={{ width: "22%" }}>
                         <ProfileSelectBarFreelance activeMenu="purchase" />

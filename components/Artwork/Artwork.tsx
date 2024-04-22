@@ -7,8 +7,13 @@ const Artwork = () => {
 
   return (
     <div>
+      <div className="fixed inset-0 overflow-auto mt-12">
       <ArtworkCategory type={type} setType={setType} />
-      <ArtworkList from="homepage" type={type} />
+      </div>
+      <div className="fixed inset-0 overflow-auto mt-40">
+        <ArtworkList from="homepage" type={type} />
+      </div>
+      
     </div>
   );
 };

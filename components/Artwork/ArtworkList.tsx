@@ -81,9 +81,9 @@ const ArtworkList = (props: Props) => {
         <div className={style.no_artwork}> พบกันเร็วๆนี้ <br /> . . . . </div>
       }
       {isShowDetail && artworkDetail && (
-        <>
+        <div className="fixed inset-0 overflow-auto mt-36">
           <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
-        </>
+        </div>
       )}
       <InfiniteScroll
         dataLength={artwork.length}

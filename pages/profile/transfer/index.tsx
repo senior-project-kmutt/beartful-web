@@ -1,12 +1,10 @@
-import NavBar from "@/components/Layout/NavBar";
 import FreelanceTransfer from "@/components/Profile/Freelance/Transfer/FreelanceTransfer";
 
 const Review = () => {
     return (
-        <>
-            <NavBar />
+        <div className="mt-16">
             <FreelanceTransfer />
-        </>
+        </div>
     );
 };
 

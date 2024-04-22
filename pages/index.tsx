@@ -1,5 +1,4 @@
 import Artwork from "@/components/Artwork/Artwork";
-import NavBar from "@/components/Layout/NavBar";
 import { useEffect, useState } from "react";
 import { IUser } from "./chat";
 import { useRouter } from "next/router";
@@ -27,7 +26,6 @@ export default function Home() {
   }, [user]);
   return (
     <>
-      <NavBar />
       <Artwork />
     </>
   );
