@@ -81,7 +81,7 @@ const CustomerPurchase = (props: Props) => {
                             </div>
                         )}
 
-                        {order.map((item, index) => {
+                        {order.map((item, index) => { 
                             return (
                                 <div style={{ position: 'relative' }} key={index}>
                                     <FreelancePurchaseItem item={item} updateStatus={updateStatus} />
