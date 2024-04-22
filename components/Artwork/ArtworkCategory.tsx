@@ -6,8 +6,10 @@ import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 interface Props {
-  type: string
+  type: string;
+  category: string;
   setType: Dispatch<SetStateAction<string>>;
+  setCategory: Dispatch<SetStateAction<string>>;
   setPage?: Dispatch<SetStateAction<number>>;
   setArtwork?: Dispatch<SetStateAction<Artwork[]>>;
   setHasMore?: Dispatch<SetStateAction<boolean>>;
@@ -15,7 +17,7 @@ interface Props {
 }
 
 const ArtworkCategory = (props: Props) => {
-  const { setType, setPage, setArtwork, setHasMore, setIsShowDetail, type } = props
+  const { setType, setCategory, setPage, setArtwork, setHasMore, setIsShowDetail, type, category } = props
   const [categories, setCategories] = useState<Category[]>([])
 
   useEffect(() => {
@@ -66,12 +68,12 @@ const ArtworkCategory = (props: Props) => {
         </div>
         {/* <div className='flex overflow-x-scroll whitespace-nowrap pb-4 hide-scroll-bar'> */}
         <div className={style.category_container}>
-          <div className={style.category}>
-            <button onClick={() => setTypeArtwork('hired')}>ทั้งหมด</button>
+          <div className={`${style.category} ${category == '' &&`${style.active}`}`}>
+            <button onClick={() => setCategory('')}>ทั้งหมด</button>
           </div>
           {categories.map((item) => (
-            <div className={style.category} key={item._id}>
-              <button onClick={() => setTypeArtwork(item.name)}>{item.name}</button>
+            <div className={`${style.category} ${category == item._id &&`${style.active}`}`} key={item._id}>
+              <button onClick={() => setCategory(item._id)}>{item.name}</button>
             </div>
           ))}
         </div>

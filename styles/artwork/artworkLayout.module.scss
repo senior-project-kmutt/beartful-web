@@ -141,15 +141,13 @@
             border-radius: 6px;
             margin: 0 2px;
 
-            &:hover {
+            &:hover, &.active  {
                 background-color: #E16428;
                 color: white;
             }
         }
     }
 }
-
-// }
 
 .no_artwork {
     text-align: center;
