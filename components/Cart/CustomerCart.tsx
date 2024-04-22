@@ -74,7 +74,7 @@ const CustomerCart = () => {
     return (
         <>
             <div>
-                <div className={`${style.sideBar} fixed inset-0 overflow-auto z-10 mt-16`}>
+                <div className={`${style.sideBar} fixed inset-0 overflow-auto z-10 mt-20`}>
                     <CartSelectBar type={type} setType={setType} />
                 </div>
 

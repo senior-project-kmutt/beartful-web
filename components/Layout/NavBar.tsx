@@ -59,7 +59,7 @@ const NavBar = () => {
 
   return (
     <>
-      <Navbar className="space-x-6 h-8 sm:h-12 mt-3" fluid rounded>
+      <Navbar className="space-x-6 h-8 sm:h-12 mt-2 pb-14" fluid rounded style={{ boxShadow: "rgba(33, 35, 38, 0.4) 0px 10px 10px -10px" }}>
         <Navbar.Brand as={Link} href={`${process.env.NEXT_PUBLIC_BASEPATH}/`} >
           <img src={LOGO_IMAGE} className="h-4 sm:h-6 ml-4" alt="Beartful Logo" />
         </Navbar.Brand>

@@ -62,24 +62,25 @@ const CustomerPurchase = (props: Props) => {
 
     return (
         <>
-            <div className="flex mt-16">
-
-                <div className="fixed inset-0 bg-white z-3 mt-20" style={{ width: "22%" }}>
-                    <ProfileSelectBarFreelance activeMenu="purchase" />
+            <div>
+                <div className="fixed inset-0 bg-white z-3 mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
+                    <ProfileSelectBarFreelance activeMenu='purchase' />
                 </div>
 
-                <div className={style.main}>
-                    <div className="fixed inset-0 z-3 mt-24 ml-80 ">
-                        <div className="text-xl font-semibold mb-1 ml-4">การซื้อและการจ้างของฉัน</div>
-                        <PurchaseStatusBar role="freelance" setStatus={setStatus} />
+                <div className="fixed ml-0 sm:ml-80 mt-44 sm:mt-24 md:mt-5 lg:mt-28 xl:mt-28 inset-0" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, overflow: 'hidden' }}>
+                    <div className="text-xl font-bold ml-10 sm:mt-24 lg:mt-0 xl:mt-0">การซื้อและการจ้างของฉัน</div>
+                    <div className="flex justify-center items-center">
+                        <PurchaseStatusBar role="customer" setStatus={setStatus} />
                     </div>
-                    <div className="ml-80 fixed mt-44 inset-0 overflow-y-auto">
-                    {order.length === 0 && (
-                            <div className="flex justify-center items-center flex-col h-full -mt-6">
+
+                    <div style={{ maxHeight: 'calc(100vh - 32px)', overflowY: 'auto' }}>
+                        {order.length === 0 && (
+                            <div className="flex justify-center items-center flex-col h-full mt-16">
                                 <img src={WISH_LIST} className="sm:h-64 ml-4 h-96" alt="Empty Cart" />
                                 <div className="mt-2 text-center text-gray-500">ยังไม่มีรายการ</div>
                             </div>
                         )}
+
                         {order.map((item, index) => {
                             return (
                                 <div style={{ position: 'relative' }} key={index}>
