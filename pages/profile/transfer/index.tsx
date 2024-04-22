@@ -2,9 +2,7 @@ import FreelanceTransfer from "@/components/Profile/Freelance/Transfer/Freelance
 
 const Review = () => {
     return (
-        <div className="mt-16">
-            <FreelanceTransfer />
-        </div>
+        <FreelanceTransfer />
     );
 };
 

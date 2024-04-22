@@ -48,7 +48,7 @@
 
 .formGrid {
     display: grid;
-    grid-template-columns: repeat(2, 0.4fr);
+    grid-template-columns: repeat(2, 0.15fr);
     gap: 10px;
 }
 
@@ -175,6 +175,14 @@
 @media (max-width:1024px) {
     .sideBar {
         width: 30%;
+    }
+
+
+}
+
+@media (max-width:1300px) {
+    .formGrid {
+        grid-template-columns: repeat(2, 0.4fr);
     }
 
 }

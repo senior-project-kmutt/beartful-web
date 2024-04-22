@@ -1,6 +1,6 @@
 .main {
     width: 100%;
-    margin: 2.8rem 2.4rem;
+    // margin: 2.8rem 2.4rem;
 
     .overallScore {
         color: #E16428;
@@ -31,6 +31,7 @@
                 width: 60px;
                 height: 60px;
                 background-color: #545151;
+                max-width: none;
             }
         }
         

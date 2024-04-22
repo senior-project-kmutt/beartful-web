@@ -150,11 +150,11 @@ const ArtworkForm = (props: Props) => {
   return (
     <>
       <div className="flex mt-20">
-        <div className="fixed inset-0 bg-white mt-20" style={{ width: "22%" }}>
+        <div className="fixed inset-0 bg-white z-3 mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
           <ProfileSelectBarFreelance activeMenu="artwork" />
         </div>
 
-        <div id="add_artwork" className={`${style.main} fixed inset-0 overflow-y-auto`} style={{ maxHeight: 'calc(100vh - 96px)', zIndex: 20, marginLeft: "350px", marginTop: "120px" }}>
+        <div id="add_artwork" className={`${style.main} fixed mt-32 inset-0 overflow-y-auto mr-12`} style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "350px", marginTop: "120px" }}>
           <form onSubmit={onSubmit}>
             <div>
               <label>เพิ่มผลงาน</label>

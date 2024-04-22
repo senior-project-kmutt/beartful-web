@@ -95,7 +95,7 @@ const CustomerPurchase = (props: Props) => {
                         <PurchaseStatusBar role="customer" setStatus={setStatus} />
                     </div>
 
-                    <div style={{ maxHeight: 'calc(100vh - 32px)', overflowY: 'auto' }}>
+                    <div className="overflow-y-auto" style={{ maxHeight: '100%', overflowX: 'hidden' }}>
                         {order.length === 0 && (
                             <div className="flex justify-center items-center flex-col h-full mt-16">
                                 <img src={WISH_LIST} className="sm:h-64 ml-4 h-96" alt="Empty Cart" />
@@ -113,8 +113,6 @@ const CustomerPurchase = (props: Props) => {
                     </div>
                 </div>
             </div>
-
-
         </>
     );
 };

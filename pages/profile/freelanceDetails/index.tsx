@@ -80,7 +80,7 @@ const ProfileBankAccount = () => {
       for (let index = 0; index < formEducation.length; index++) {
         const formItem: any = formEducation[index];
         const infoItem: any = educationInfo[index];
-    
+
         for (const key in formItem) {
           if (formItem[key] !== infoItem[key]) {
             return true;
@@ -90,7 +90,7 @@ const ProfileBankAccount = () => {
       return false;
     }
   };
-  
+
 
   const handleSubmitForm = () => {
     if (user) {
@@ -132,11 +132,11 @@ const ProfileBankAccount = () => {
   return (
     <>
       <div className="flex mt-16">
-        <div className="fixed inset-0 bg-white z-3 mt-20" style={{ width: "22%" }}>
-         <ProfileSelectBarFreelance activeMenu='freelanceDetails' />
-       </div>
+        <div className="fixed inset-0 bg-white z-3 mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
+          <ProfileSelectBarFreelance activeMenu='freelanceDetails' />
+        </div>
 
-        <div className="fixed mt-32 inset-0 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "350px" }}>
+        <div className="fixed mt-32 inset-0 overflow-y-auto mr-12" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "350px" }}>
           <div className='mb-8'>
             <EducationForm
               defaultFormData={formEducation}
@@ -164,7 +164,7 @@ const ProfileBankAccount = () => {
               setIsFormValid={setIsFormSkillAndLanguageValid}
               isHideButton={true}
               isSaveForm={isSaveForm}
-              />
+            />
           </div>
 
           <div className='mb-8'>
@@ -174,7 +174,7 @@ const ProfileBankAccount = () => {
               setIsFormValid={setIsFormAwardValid}
               isHideButton={true}
               isSaveForm={isSaveForm}
-              />
+            />
           </div>
           <div>
             <div className={style.button}>

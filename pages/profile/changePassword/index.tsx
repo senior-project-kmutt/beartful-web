@@ -16,12 +16,12 @@ const ProfilePassword = () => {
     <>
       <div className="flex mt-16">
         {user?.role === 'freelance' && (
-          <div className="fixed inset-0 bg-white z-3 mt-20" style={{ width: "22%" }}>
+          <div className="fixed inset-0 bg-white z-3 mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
           <ProfileSelectBarFreelance activeMenu='changePassword' />
         </div>
         )}
         {user?.role === 'customer' && (
-         <div className="fixed inset-0 bg-white z-3 mt-20" style={{ width: "22%" }}>
+         <div className="fixed inset-0 bg-white z-3 mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
          <ProfileSelectBarCustomer activeMenu='changePassword' />
        </div>
         )}

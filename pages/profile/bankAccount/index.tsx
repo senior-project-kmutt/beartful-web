@@ -89,11 +89,11 @@ const ProfileBankAccount = () => {
     <>
       <div className="flex mt-16">
 
-      <div className="fixed inset-0 bg-white z-3 mt-20" style={{ width: "22%" }}>
+      <div className="fixed inset-0 bg-white z-3 mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
           <ProfileSelectBarFreelance activeMenu='bankAccount' />
         </div>
 
-        <div className="fixed mt-32 mb-8 inset-0 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "350px" }}>
+        <div className="fixed mt-32 inset-0 overflow-y-auto mr-12" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "350px" }}>
           <AccountingForm saveFormRegister={setFormBankAccount} defaultFormData={formBankAccount} />
         </div>
       </div>
