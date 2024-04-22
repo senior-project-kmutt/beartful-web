@@ -10,6 +10,7 @@ interface Props {
   username?: string;
   from: string;
   type: string;
+  category: string
 }
 const ArtworkList = (props: Props) => {
   const [artwork, setArtwork] = useState<ArtworkList[]>([]);
@@ -17,7 +18,7 @@ const ArtworkList = (props: Props) => {
   const [isShowDetail, setIsShowDetail] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState(true);
-  const { from, type, username } = props;
+  const { from, type, username, category } = props;
 
   useEffect(() => {
     const getData = async () => {
@@ -31,11 +32,11 @@ const ArtworkList = (props: Props) => {
       }
     };
     getData();
-  }, [type]);
+  }, [type, category]);
 
   useEffect(() => {
     onCloseDetail();
-  }, [type]);
+  }, [type, category]);
 
   const fetchData = async () => {
     const data = await getArtworkData(page);
@@ -48,7 +49,7 @@ const ArtworkList = (props: Props) => {
     let response: ArtworkList[] = [];
     try {
       if (from === "homepage") {
-        const res = await getArtwork(page, 50, type).toPromise();
+        const res = await getArtwork(page, 50, type, category).toPromise();
           response = res.data;
       }
       if (from === "freelance") {

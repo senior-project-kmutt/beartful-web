@@ -3,8 +3,8 @@ import { deleteMethod, get, patch, post } from "../HttpClient";
 import { ArtworkFormData } from "@/components/Profile/Freelance/Artwork/ArtworkAddForm";
 import { IncomingHttpHeaders } from "http";
 
-export const getArtwork = (page: number, pageSize: number, type: string): Observable<any> => {
-  const params = `?page=${page}&pageSize=${pageSize}&type=${type}`
+export const getArtwork = (page: number, pageSize: number, type: string, category: string): Observable<any> => {
+  const params = `?page=${page}&pageSize=${pageSize}&type=${type}&category=${category}`
   return get(`/artwork${params}`);
 };
 
@@ -14,9 +14,9 @@ export const getFreelanceArtwork = (userId: string, page: number, pageSize: numb
   return get(`${params}`);
 };
 
-export const fetchArtworkData = async (pageNumber: number, type: string, isSpecificFreelance: boolean, username: string) => {
+export const fetchArtworkData = async (pageNumber: number, type: string, isSpecificFreelance: boolean, username: string, category: string) => {
   try {
-    const apiCall = isSpecificFreelance ? getFreelanceArtwork(username, pageNumber, 50, type) : getArtwork(pageNumber, 50, type);
+    const apiCall = isSpecificFreelance ? getFreelanceArtwork(username, pageNumber, 50, type) : getArtwork(pageNumber, 50, type, category);
     const res = await apiCall.toPromise();
     return res.data;
   } catch (error) {
