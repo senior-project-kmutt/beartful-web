@@ -30,11 +30,14 @@ const FreelanceReviewScore = () => {
     return (
         <>
             <div className="flex">
-                <div style={{ width: '22%' }}>
-                    <ProfileSelectBarFreelance activeMenu="review" />
+            <div className="fixed inset-0 bg-white z-3 mt-20" style={{ width: '22%' }}>
+                        <ProfileSelectBarFreelance activeMenu='review' />
                 </div>
                 {freelanceReviews && (
-                    <FreelanceReviewList title='คะแนนของฉัน' reviewsData={freelanceReviews} averageScore={freelanceAverageScore} />
+                <div className={`fixed mt-16 inset-0 overflow-y-auto ml-80`} style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20}}>
+                                        <FreelanceReviewList title='คะแนนของฉัน' reviewsData={freelanceReviews} averageScore={freelanceAverageScore} />
+
+                </div>
                 )}
             </div>
         </>

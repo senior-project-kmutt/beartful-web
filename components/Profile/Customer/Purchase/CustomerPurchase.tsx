@@ -7,6 +7,7 @@ import { ICustomerPurchaseOrder } from "@/models/purchaseOrder";
 import { getCustomerPurchaseOrder, updatePurchaseOrderStatus } from "@/services/purchaseOrder/purchaseOrder.api";
 import { IUser } from "@/pages/chat";
 import CustomerPurchaseItem from "./CustomerPurchaseItem";
+import { WISH_LIST } from "@/config/constants";
 interface Props {
     user: IUser
 }
@@ -94,7 +95,15 @@ const CustomerPurchase = (props: Props) => {
                         <PurchaseStatusBar role="customer" setStatus={setStatus} />
                     </div>
 
-                    <div className="ml-80 fixed  mt-44 inset-0  overflow-y-auto" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20 }}>
+                    <div className="ml-80 fixed mt-44 inset-0 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20 }}>
+
+                        {order.length === 0 && (
+                            <div className="flex justify-center items-center flex-col h-full -mt-6">
+                                <img src={WISH_LIST} className="sm:h-64 ml-4 h-96" alt="Empty Cart" />
+                                <div className="mt-2 text-center text-gray-500">ยังไม่มีรายการ</div>
+                            </div>
+                        )}
+
                         {order.map((item, index) => {
                             return (
                                 <div style={{ position: 'relative' }} key={index}>

@@ -123,11 +123,11 @@ const ArtworkForm = (props: Props) => {
     <>
       <div className="fle mt-20">
 
-        <div>
+        <div className="fixed inset-0 bg-white mt-20" style={{ width: "22%" }}>
           <ProfileSelectBarFreelance activeMenu="artwork" />
         </div>
 
-        <div id="edit_artwork" className={style.main}>
+        <div id="edit_artwork" className={`${style.main} fixed inset-0 overflow-y-auto`} style={{ maxHeight: 'calc(100vh - 96px)', zIndex: 20, marginLeft: "350px", marginTop: "120px" }}>
           <form onSubmit={onSubmit}>
             <div>
               <label>แก้ไขผลงาน</label>

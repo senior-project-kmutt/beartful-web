@@ -132,12 +132,11 @@ const ProfileBankAccount = () => {
   return (
     <>
       <div className="flex mt-16">
+        <div className="fixed inset-0 bg-white z-3 mt-20" style={{ width: "22%" }}>
+         <ProfileSelectBarFreelance activeMenu='freelanceDetails' />
+       </div>
 
-        <div style={{width: "22%"}}>
-          <ProfileSelectBarFreelance activeMenu="freelanceDetails" />
-        </div>
-
-        <div className={`my-12 mx-4`} style={{ width: '82%' }}>
+        <div className="fixed mt-32 inset-0 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "350px" }}>
           <div className='mb-8'>
             <EducationForm
               defaultFormData={formEducation}
