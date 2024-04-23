@@ -75,11 +75,11 @@ const FreelanceArtwork = (props: Props) => {
 
     return (
         <>
-            <div className="flex mt-24 mx-5">
-                <div className="" style={{ width: "14%" }}>
+            <div className="flex mt-24 mx-5 fixed inset-0">
+                <div className="fixed inset-0 bg-white z-3 mt-28 sm:w-1/4 lg:w-1/5 xl:w-1/6">
                     <UserSideBar type={type} setType={setType} />
                 </div>
-                <div style={{ width: "86%" }}>
+                <div className="fixed mt-32 inset-0 overflow-y-auto mr-12" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "200px" }}>
                     <div className={style.profileDescription}>
                         <div className={style.profile}>
                             <img src={freelance?.profileImage} />
@@ -98,7 +98,7 @@ const FreelanceArtwork = (props: Props) => {
                     {(type == 'hired' || type == 'readyMade' || type == '') && <ArtworkList from="freelance" type={type} username={props.username} />}
                     {/* {(type == 'Package&Price') && <div>Package&Price</div>} */}
                     {(type == 'Review') && (
-                        <div style={{ width: "96%" }}>
+                        <div className="fixed mt-72 inset-0 overflow-y-auto mr-12 mb-4" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "200px" }}>
                             {freelanceReviews && (
                                 <FreelanceReviewList title='Review' reviewsData={freelanceReviews} averageScore={freelanceAverageScore} />
                             )}
@@ -107,7 +107,9 @@ const FreelanceArtwork = (props: Props) => {
                     }
                 </div>
                 {(isOpenDetailsModal && freelance) && (
+                
                     <DetailsModal openReviewModal={openReviewModal} data={freelance} />
+                
                 )}
             </div>
         </>

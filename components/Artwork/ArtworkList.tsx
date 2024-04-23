@@ -8,10 +8,10 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import FadeLoader from "react-spinners/FadeLoader";
 
 interface Props {
-  username?: string;
+username?: string;
   from: string;
   type: string;
-  category: string
+  category?: string
 }
 const ArtworkList = (props: Props) => {
   const [artwork, setArtwork] = useState<ArtworkList[]>([]);
@@ -19,21 +19,21 @@ const ArtworkList = (props: Props) => {
   const [isShowDetail, setIsShowDetail] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState<boolean>(true);
+  // const [loading, setLoading] = useState<boolean>(true);
   const { from, type, username, category } = props;
 
   useEffect(() => {
     const getData = async () => {
       try {
-        setLoading(true); // Set loading to true before fetching data
+        // setLoading(true); // Set loading to true before fetching data
         const data = await getArtworkData(1);
         setArtwork(data);
         setPage(2);
         setHasMore(true);
-        setLoading(false); // Set loading to false after data is fetched
+        // setLoading(false); // Set loading to false after data is fetched
       } catch (error) {
         console.error("Error fetching artwork data:", error);
-        setLoading(false);
+        // setLoading(false);
       }
     };
     getData();
@@ -54,7 +54,7 @@ const ArtworkList = (props: Props) => {
     let response: ArtworkList[] = [];
     try {
       if (from === "homepage") {
-        const res = await getArtwork(page, 50, type, category).toPromise();
+        const res = await getArtwork(page, 50, type, category!).toPromise();
           response = res.data;
       }
       if (from === "freelance") {
@@ -81,18 +81,19 @@ const ArtworkList = (props: Props) => {
   const onCloseDetail = () => {
     setIsShowDetail(false);
   };
+  console.log(from);
   return (
     <div>
-      {loading && (
+      {/* {loading && (
         <div className={style.loader}>
           <FadeLoader color="#36d7b7" />
         </div>
-      )}
+      )} */}
       {artwork.length === 0 &&
         <div className={style.no_artwork}> พบกันเร็วๆนี้ <br /> . . . . </div>
       }
       {isShowDetail && artworkDetail && (
-        <div className="fixed inset-0 overflow-auto mt-48">
+        <div className="fixed inset-0 overflow-auto mt-48" style={{marginTop: `${from==='freelance' && '230px'}`}}>
           <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
         </div>
       )}
@@ -102,7 +103,8 @@ const ArtworkList = (props: Props) => {
         hasMore={hasMore}
         loader={""}
       >
-        <div className={`${style.artwork_container} ${isShowDetail ? style.artwork_container_show_detail : ''}`}>
+        <div className={`${style.artwork_container} ${isShowDetail ? style.artwork_container_show_detail : ''}`} style={from === 'freelance' ? { marginRight: isShowDetail ? '36%' : '0%' } : {}}
+>
           {artwork?.map((item, index) => {
             return (
               <ArtworkItem

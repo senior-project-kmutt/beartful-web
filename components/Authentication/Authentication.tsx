@@ -72,10 +72,7 @@ const Authentication = () => {
 
   return (
     <div>
-      <div onClick={()=>router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`)}>
-        <img src={LOGO_IMAGE} className="h-4 sm:h-6 ml-6 mt-6" alt="Beartful Logo" />
-      </div>
-      <div className={style.main}>
+      <div className={`${style.main} fixed inset-0 mt-8`}>
       <div>
         <div className={style.welcome}>
             {activeMenu === "login" && (

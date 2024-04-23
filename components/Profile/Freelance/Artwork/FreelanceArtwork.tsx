@@ -55,7 +55,7 @@ const FreelanceArtwork = (props: Props) => {
                         <p className="text-xl font-bold ml-96">ผลงานของฉัน</p>
                     </div>
                     {isShowDetail && artworkDetail && (
-                        <div className="-ml-12">
+                        <div className="ml-12">
                             <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
                         </div>
                     )}
