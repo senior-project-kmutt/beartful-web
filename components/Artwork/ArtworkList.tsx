@@ -5,10 +5,11 @@ import style from "@/styles/artwork/artworkLayout.module.scss";
 import ArtworkItem from "./ArtworkItem";
 import ArtworkDetail from "./ArtworkDetail";
 import InfiniteScroll from "react-infinite-scroll-component";
-import FadeLoader from "react-spinners/FadeLoader";
+import { NO_ARTWORK } from "@/config/constants";
+// import FadeLoader from "react-spinners/FadeLoader";
 
 interface Props {
-username?: string;
+  username?: string;
   from: string;
   type: string;
   category?: string
@@ -55,7 +56,7 @@ const ArtworkList = (props: Props) => {
     try {
       if (from === "homepage") {
         const res = await getArtwork(page, 50, type, category!).toPromise();
-          response = res.data;
+        response = res.data;
       }
       if (from === "freelance") {
         if (username) {
@@ -89,11 +90,14 @@ const ArtworkList = (props: Props) => {
           <FadeLoader color="#36d7b7" />
         </div>
       )} */}
-      {artwork.length === 0 &&
-        <div className={style.no_artwork}> พบกันเร็วๆนี้ <br /> . . . . </div>
-      }
+      {artwork.length === 0 && (
+        <div className="flex justify-center items-center flex-col h-full mt-16">
+          <img src={NO_ARTWORK} className="sm:h-64 ml-4 h-96" alt="No Artwork" />
+          <div className="mt-2 text-center text-gray-500">พบกันเร็วๆนี้</div>
+        </div>
+      )}
       {isShowDetail && artworkDetail && (
-        <div className="fixed inset-0 overflow-auto mt-48" style={{marginTop: `${from==='freelance' && '230px'}`}}>
+        <div className="fixed inset-0 overflow-auto mt-48" style={{ marginTop: `${from === 'freelance' && '230px'}` }}>
           <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
         </div>
       )}
@@ -104,7 +108,7 @@ const ArtworkList = (props: Props) => {
         loader={""}
       >
         <div className={`${style.artwork_container} ${isShowDetail ? style.artwork_container_show_detail : ''}`} style={from === 'freelance' ? { marginRight: isShowDetail ? '36%' : '0%' } : {}}
->
+        >
           {artwork?.map((item, index) => {
             return (
               <ArtworkItem
