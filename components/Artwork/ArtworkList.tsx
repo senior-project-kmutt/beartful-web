@@ -10,7 +10,7 @@ interface Props {
   username?: string;
   from: string;
   type: string;
-  category?: string
+  category: string
 }
 const ArtworkList = (props: Props) => {
   const [artwork, setArtwork] = useState<ArtworkList[]>([]);
@@ -49,7 +49,7 @@ const ArtworkList = (props: Props) => {
     let response: ArtworkList[] = [];
     try {
       if (from === "homepage") {
-        const res = await getArtwork(page, 50, type, category!).toPromise();
+        const res = await getArtwork(page, 50, type, category).toPromise();
           response = res.data;
       }
       if (from === "freelance") {

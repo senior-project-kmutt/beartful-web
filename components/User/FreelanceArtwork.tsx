@@ -97,7 +97,7 @@ const FreelanceArtwork = (props: Props) => {
                             )}
                         </div>
                     </div>
-                    {(type == 'hired' || type == 'readyMade' || type == '') && <ArtworkList from="freelance" type={type} username={props.username} />}
+                    {(type == 'hired' || type == 'readyMade' || type == '') && <ArtworkList from="freelance" type={type} username={props.username} category="" />}
                     {/* {(type == 'Package&Price') && <div>Package&Price</div>} */}
                     {(type == 'Review') && (
                         <div style={{ width: "96%" }}>
