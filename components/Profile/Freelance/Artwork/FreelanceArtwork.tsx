@@ -7,6 +7,7 @@ import ArtworkDetail from "@/components/Artwork/ArtworkDetail";
 import ArtworkList from "@/components/Artwork/ArtworkList";
 import ArtworkItem from "@/components/Profile/Freelance/Artwork/ArtworkItem";
 import router from "next/router";
+import { NO_ARTWORK_FREELANCE } from "@/config/constants";
 
 interface Props {
     username: string;
@@ -57,6 +58,12 @@ const FreelanceArtwork = (props: Props) => {
                     {isShowDetail && artworkDetail && (
                         <div className="ml-12">
                             <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
+                        </div>
+                    )}
+                    {artworks?.length === 0 && (
+                        <div className="flex justify-center items-center flex-col h-full mt-16 ml-80">
+                            <img src={NO_ARTWORK_FREELANCE} className="sm:h-64 ml-4 h-96" alt="No Artwork" />
+                            <div className="mt-2 text-center text-gray-500">ยังไม่มีผลงาน</div>
                         </div>
                     )}
                     <div className={`${style.artworkContainer} fixed inset-0 overflow-y-auto`} style={{ maxHeight: 'calc(100vh - 96px)', zIndex: 20, marginLeft: "350px", marginTop: "190px" }}>
