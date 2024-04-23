@@ -151,35 +151,39 @@ const ArtworkDetail = (props: Props) => {
   return (
     <div className={`${style.artwork_detail}`}>
       {user?.role === "customer" && (
-          <div className={style.freelance_profile}>
-            <div className={style.profile}>
-              <img src={profile?.profileImage} />
-              <div className={style.name_box}>
-                <p className={style.username}>{profile?.username}</p>
-                <p className={style.fullname}>
-                  {profile?.firstname} {profile?.lastname}
-                </p>
-              </div>
-
+        <div className={style.freelance_profile}>
+          <div className={style.profile}>
+            <img src={profile?.profileImage} />
+            <div className={style.name_box}>
+              <p className={style.username}>{profile?.username}</p>
+              <p className={style.fullname}>
+                {profile?.firstname} {profile?.lastname}
+              </p>
             </div>
-            <div className={style.button_container}>
-              {/* <FontAwesomeIcon icon={faCommentDots} className={style.chat_icon} size="2xl" onClick={handleGoToChat} /> */}
-              <button
-                className={`${style.view_profile} justify-self-end`}
-                onClick={() =>
-                  router.push(
-                    `${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${profile?.username}`
-                  )
-                }
-              >
-                ดูโปรไฟล์
-              </button>
-              <div onClick={handleCloseDetail} className={`${style.close}`}>
-        <span className="cursor-pointer"> X </span>
-      </div>
+
+          </div>
+          <div className={style.button_container}>
+            {/* <FontAwesomeIcon icon={faCommentDots} className={style.chat_icon} size="2xl" onClick={handleGoToChat} /> */}
+            <button
+              className={`${style.view_profile} justify-self-end`}
+              onClick={() =>
+                router.push(
+                  `${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${profile?.username}`
+                )
+              }
+            >
+              ดูโปรไฟล์
+            </button>
+            <div onClick={handleCloseDetail} className={`${style.close}`}>
+              <span className="cursor-pointer"> X </span>
             </div>
           </div>
-        )}
+        </div>
+      )}
+
+      {user?.role === "freelance" && (<div onClick={handleCloseDetail} className={`${style.close}`}>
+        <span className="cursor-pointer mt-5 right-1"> X </span>
+      </div>)}
       {/* <div onClick={handleCloseDetail} className={`${style.close}`}>
         <span className="cursor-pointer"> X </span>
       </div> */}
@@ -259,7 +263,7 @@ const ArtworkDetail = (props: Props) => {
             </button>
           </div>
         )} */}
-        
+
       </div>
     </div>
   );
