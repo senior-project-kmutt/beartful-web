@@ -8,6 +8,7 @@ import { getCustomerPurchaseOrder, updatePurchaseOrderStatus } from "@/services/
 import { IUser } from "@/pages/chat";
 import CustomerPurchaseItem from "./CustomerPurchaseItem";
 import { WISH_LIST } from "@/config/constants";
+import { FadeLoader } from "react-spinners";
 interface Props {
     user: IUser
 }
@@ -15,6 +16,7 @@ const CustomerPurchase = (props: Props) => {
     const { user } = props
     const [status, setStatus] = useState<string>('all')
     const [order, setOrder] = useState<ICustomerPurchaseOrder[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     useEffect(() => {
         getOrderByStatus()
     }, [status])
@@ -23,11 +25,13 @@ const CustomerPurchase = (props: Props) => {
         const token = localStorage.getItem("auth");
 
         if (token) {
+            setIsLoading(true)
             const headers = {
                 Authorization: `Bearer ${token}`,
             };
             await getCustomerPurchaseOrder(user.id, status, headers).subscribe((res => {
                 setOrder(res.data as ICustomerPurchaseOrder[])
+                setIsLoading(false)
             }))
         }
     }
@@ -95,22 +99,28 @@ const CustomerPurchase = (props: Props) => {
                         <PurchaseStatusBar role="customer" setStatus={setStatus} />
                     </div>
 
-                    <div className="overflow-y-auto" style={{ maxHeight: '100%', overflowX: 'hidden' }}>
-                        {order.length === 0 && (
-                            <div className="flex justify-center items-center flex-col h-full mt-16">
-                                <img src={WISH_LIST} className="sm:h-64 ml-4 h-96" alt="Empty Cart" />
-                                <div className="mt-2 text-center text-gray-500">ยังไม่มีรายการ</div>
-                            </div>
-                        )}
-
-                        {order.map((item, index) => {
-                            return (
-                                <div style={{ position: 'relative' }} key={index}>
-                                    <CustomerPurchaseItem item={item} user={user} updateStatus={updateStatus} updateReviewStatus={updateReviewStatus} />
+                    {isLoading ? (
+                        <div className={style.loader}>
+                            <FadeLoader color="#E78353" />
+                        </div>
+                    ) : (
+                        <div className="overflow-y-auto" style={{ maxHeight: '100%', overflowX: 'hidden' }}>
+                            {order.length === 0 && (
+                                <div className="flex justify-center items-center flex-col h-full mt-16">
+                                    <img src={WISH_LIST} className="sm:h-64 ml-4 h-96" alt="Empty Cart" />
+                                    <div className="mt-2 text-center text-gray-500">ยังไม่มีรายการ</div>
                                 </div>
-                            )
-                        })}
-                    </div>
+                            )}
+
+                            {order.map((item, index) => {
+                                return (
+                                    <div style={{ position: 'relative' }} key={index}>
+                                        <CustomerPurchaseItem item={item} user={user} updateStatus={updateStatus} updateReviewStatus={updateReviewStatus} />
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    )}
                 </div>
             </div>
         </>

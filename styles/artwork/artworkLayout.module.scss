@@ -5,6 +5,12 @@
     }
 }
 
+.loader {
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+}
+
 .artwork_container {
     margin: 20px auto;
     padding: 0 10%;
@@ -497,7 +503,7 @@
     }
 }
 
-@media (min-width:1706px) {
+@media (min-width:1940px) {
     .arrow {
         visibility: hidden;
     }
