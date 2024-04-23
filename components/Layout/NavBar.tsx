@@ -72,41 +72,43 @@ const NavBar = () => {
             </>
           ) : (
             <>
-              <div className="relative -mr-8">
-                <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                  <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                  </svg>
-                </div>
-                <input onChange={handleInputChange} type="search" id="search" className="block w-72 p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="ค้นหาฟรีแลนซ์" required />
-                {keywordSearch && (
-                  <>
-                    <div className={`${style.search_result}`}>
-                      {isResultEmpty && (
-                        <p className='text-gray-400 font-bold p-6 text-center'>ไม่พบฟรีแลนซ์</p>
-                      )}
-                      {searchResult.map(item => {
-                        return (
-                          <>
-                            <div className={`${style.result_item}`} onClick={() => router.push(`/user?username=${item.username}`)}>
-                              <div className='flex items-center'>
-                                <img src={item.profileImage} alt="" />
+              {user.role === 'customer' && (
+                <div className="relative -mr-8">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                  </div>
+                  <input onChange={handleInputChange} type="search" id="search" className="block w-72 p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="ค้นหาฟรีแลนซ์" required />
+                  {keywordSearch && (
+                    <>
+                      <div className={`${style.search_result}`}>
+                        {isResultEmpty && (
+                          <p className='text-gray-400 font-bold p-6 text-center'>ไม่พบฟรีแลนซ์</p>
+                        )}
+                        {searchResult.map(item => {
+                          return (
+                            <>
+                              <div className={`${style.result_item}`} onClick={() => router.push(`/user?username=${item.username}`)}>
+                                <div className='flex items-center'>
+                                  <img src={item.profileImage} alt="" />
+                                  <div>
+                                    <p className={style.username}>{item.username}</p>
+                                    <p className={style.name}>{item.firstname} {item.lastname}</p>
+                                  </div>
+                                </div>
                                 <div>
-                                  <p className={style.username}>{item.username}</p>
-                                  <p className={style.name}>{item.firstname} {item.lastname}</p>
+                                  <FontAwesomeIcon icon={faArrowRight} size='lg' />
                                 </div>
                               </div>
-                              <div>
-                                <FontAwesomeIcon icon={faArrowRight} size='lg' />
-                              </div>
-                            </div>
-                          </>
-                        )
-                      })}
-                    </div>
-                  </>
-                )}
-              </div>
+                            </>
+                          )
+                        })}
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
               <div className={style.menu}>
                 {user.role === 'customer' && (
                   <Navbar.Link onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/cart`)}>
