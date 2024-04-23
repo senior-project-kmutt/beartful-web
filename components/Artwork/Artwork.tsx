@@ -11,7 +11,7 @@ const Artwork = () => {
       <div className="fixed inset-0 overflow-auto mt-12">
       <ArtworkCategory type={type} setType={setType} category={category} setCategory={setCategory} />
       </div>
-      <div className="fixed inset-0 overflow-auto mt-40">
+      <div className="fixed inset-0 overflow-auto mt-52 z-3">
         <ArtworkList from="homepage" type={type} category={category} />
       </div>
     </div>

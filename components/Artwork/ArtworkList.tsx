@@ -5,6 +5,7 @@ import style from "@/styles/artwork/artworkLayout.module.scss";
 import ArtworkItem from "./ArtworkItem";
 import ArtworkDetail from "./ArtworkDetail";
 import InfiniteScroll from "react-infinite-scroll-component";
+import FadeLoader from "react-spinners/FadeLoader";
 
 interface Props {
   username?: string;
@@ -18,17 +19,21 @@ const ArtworkList = (props: Props) => {
   const [isShowDetail, setIsShowDetail] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const { from, type, username, category } = props;
 
   useEffect(() => {
     const getData = async () => {
       try {
+        setLoading(true); // Set loading to true before fetching data
         const data = await getArtworkData(1);
         setArtwork(data);
         setPage(2);
         setHasMore(true);
+        setLoading(false); // Set loading to false after data is fetched
       } catch (error) {
         console.error("Error fetching artwork data:", error);
+        setLoading(false);
       }
     };
     getData();
@@ -78,11 +83,16 @@ const ArtworkList = (props: Props) => {
   };
   return (
     <div>
+      {loading && (
+        <div className={style.loader}>
+          <FadeLoader color="#36d7b7" />
+        </div>
+      )}
       {artwork.length === 0 &&
         <div className={style.no_artwork}> พบกันเร็วๆนี้ <br /> . . . . </div>
       }
       {isShowDetail && artworkDetail && (
-        <div className="fixed inset-0 overflow-auto mt-36">
+        <div className="fixed inset-0 overflow-auto mt-48">
           <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
         </div>
       )}
