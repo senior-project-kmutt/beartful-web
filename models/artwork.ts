@@ -1,3 +1,5 @@
+import { IUser } from "@/pages/chat"
+
 export interface Artwork {
     _id: string
     freelanceId: string
@@ -10,4 +12,5 @@ export interface Artwork {
     likeCount: number
     createdAt: Date
     updatedAt: Date
+    freelance?: IUser
 }
