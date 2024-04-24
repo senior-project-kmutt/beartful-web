@@ -95,7 +95,7 @@ const FreelanceArtwork = (props: Props) => {
                             )}
                         </div>
                     </div>
-                    {(type == 'hired' || type == 'readyMade' || type == '') && <ArtworkList from="freelance" type={type} username={props.username} />}
+                    {(type == 'hired' || type == 'readyMade' || type == '') && <ArtworkList from="freelance" type={type} username={props.username} category="" />}
                     {/* {(type == 'Package&Price') && <div>Package&Price</div>} */}
                     {(type == 'Review') && (
                         <div className="fixed mt-72 inset-0 overflow-y-auto mr-12 mb-4" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "200px" }}>
