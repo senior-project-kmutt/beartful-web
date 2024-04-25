@@ -46,7 +46,7 @@ const FreelanceArtwork = (props: Props) => {
     return (
         <>
             <div className="flex mt-16">
-                <div className="fixed inset-0 bg-white z-3 mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
+                <div className="fixed inset-0 bg-white z-50 mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
                     <ProfileSelectBarFreelance activeMenu="artwork" />
                 </div>
 
@@ -55,18 +55,15 @@ const FreelanceArtwork = (props: Props) => {
                         <button className={style.addButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/artwork/add`)}>เพิ่มผลงาน</button>
                         <p className="text-xl font-bold ml-96">ผลงานของฉัน</p>
                     </div>
-                    {isShowDetail && artworkDetail && (
-                        <div className="ml-12">
-                            <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
-                        </div>
-                    )}
+
                     {artworks?.length === 0 && (
                         <div className="flex justify-center items-center flex-col h-full mt-16 ml-80">
                             <img src={NO_ARTWORK_FREELANCE} className="sm:h-64 ml-4 h-96" alt="No Artwork" />
                             <div className="mt-2 text-center text-gray-500">ยังไม่มีผลงาน</div>
                         </div>
                     )}
-                    <div className={`${style.artworkContainer} fixed inset-0 overflow-y-auto`} style={{ maxHeight: 'calc(100vh - 96px)', zIndex: 20, marginLeft: "350px", marginTop: "190px" }}>
+
+                    <div className={`${style.artworkContainer} fixed inset-0 overflow-y-auto`} style={{ maxHeight: 'calc(100vh - 96px)', zIndex: 20, paddingLeft: "350px", marginTop: "190px", width: isShowDetail && artworkDetail ? '65%' : 'auto' }}>
                         {artworks?.map((item: Artwork, index: number) => {
                             return (
                                 <div
@@ -84,6 +81,11 @@ const FreelanceArtwork = (props: Props) => {
                     </div>
                 </div>
             </div>
+            {isShowDetail && artworkDetail && (
+                <div className="mt-16 z-50" style={{ width: '78%', marginLeft: '280px' }}>
+                    <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
+                </div>
+            )}
         </>
     );
 };
