@@ -59,6 +59,7 @@ const ArtworkDetail = (props: Props) => {
       imageUrl: image,
       imageAlt: "A tall image",
       background: "rgba(255, 255, 255, 0)",
+      backdrop: "rgba(0, 0, 0, 0.7)",
       showConfirmButton: false,
       customClass: {
         // popup: `${style.my_custom_modal_class}`,
