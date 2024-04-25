@@ -55,8 +55,18 @@ const ArtworkDetail = (props: Props) => {
   const [categories, setCategories] = useState<Category[]>([]);
 
   const handleImageClick = (image: string) => {
-    setImageFullScreen(image);
-    setShowFullScreen(true);
+    Swal.fire({
+      imageUrl: image,
+      imageAlt: "A tall image",
+      background: "rgba(255, 255, 255, 0)",
+      showConfirmButton: false,
+      customClass: {
+        // popup: `${style.my_custom_modal_class}`,
+        // image: `${style.my_custom_image_class}`
+      },
+    });
+    // setImageFullScreen(image);
+    // setShowFullScreen(true);
   };
 
   const handleCloseFullScreen = () => {
