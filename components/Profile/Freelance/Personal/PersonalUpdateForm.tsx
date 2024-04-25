@@ -7,6 +7,7 @@ import { errorMessageEmtryField, regexpEmail, regexpOnlyNumber, requiredFieldsFr
 import { IUser } from "@/pages/chat";
 import { defaultProfileImage } from "@/config/constants";
 import { uploadFileToFirebase } from "@/services/firebase/firebase-api";
+import LoadingModal from "@/components/Shared/LoadingModal";
 
 interface formDataType {
   [key: string]: any;
@@ -21,6 +22,8 @@ const PersonalUpdateForm = () => {
   const [errorMessage, setErrorMessage] = useState<formDataType>({});
   const [profileImage, setProfileImage] = useState<string>(defaultProfileImage);
   const [profileImageFile, setProfileImageFile] = useState<File>();
+  const [isOpenLoadingModal, setIsOpenLoadingModal] = useState<boolean>(false);
+
 
   useEffect(() => {
     const user: IUser = JSON.parse(localStorage.getItem('user') || '');
@@ -134,6 +137,7 @@ const PersonalUpdateForm = () => {
 
       setErrorMessage(newErrorMessage);
       if (isValid) {
+        setIsOpenLoadingModal(true)
         if (profileImageFile) {
           const imageUrls = await uploadFileToFirebase([profileImageFile], `user/profile-image`, user?.username);
           submitDataForm['profileImage'] = imageUrls[0]
@@ -141,6 +145,7 @@ const PersonalUpdateForm = () => {
         const headers = getHeaderRequest();
         updatePersonal(user?.id, submitDataForm, headers).then((res) => {
           getFreelanceDetailsInfo();
+          setIsOpenLoadingModal(false)
           Swal.fire({
             icon: "success",
             title: "แก้ไขข้อมูลสำเร็จ",
@@ -148,6 +153,7 @@ const PersonalUpdateForm = () => {
             timer: 1500
           })
         }).catch(error => {
+          setIsOpenLoadingModal(false)
           Swal.fire({
             title: "เกิดข้อผิดพลาด",
             text: "โปรดลองใหม่อีกครั้ง",
@@ -179,6 +185,9 @@ const PersonalUpdateForm = () => {
       <div>
         {formPersonal && (
           <div>
+            {isOpenLoadingModal && (
+              <LoadingModal></LoadingModal>
+            )}
             <div>
               <h1 className="text-xl font-semibold mb-1">ข้อมูลของฉัน</h1>
               <p className="text-sm text-gray-400">จัดการข้อมูลส่วนตัวคุณเพื่อความปลอดภัยของบัญชีผู้ใช้นี้</p>
@@ -293,7 +302,7 @@ const PersonalUpdateForm = () => {
                       </div>
                     </div>
                     <div className="flex items-start">
-                      <div className={style.each_field} style={{alignItems: 'start'}}>
+                      <div className={style.each_field} style={{ alignItems: 'start' }}>
                         <p className="mr-5">ที่อยู่ปัจจุบัน</p>
                         <div>
                           <textarea
