@@ -88,7 +88,7 @@ const NavBar = () => {
                       {searchResult.map(item => {
                         return (
                           <>
-                            <div className={`${style.result_item}`} onClick={() => router.push(`/user?username=${item.username}`)}>
+                            <div className={`${style.result_item}`} onClick={() => router.push(`/${process.env.NEXT_PUBLIC_BASEPATH}/user?username=${item.username}`)}>
                               <div className='flex items-center'>
                                 <img src={item.profileImage} alt="" />
                                 <div>
