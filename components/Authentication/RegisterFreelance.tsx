@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import bcrypt from "bcryptjs";
 import { defaultProfileImage } from "@/config/constants";
 import { uploadFileToFirebase } from "@/services/firebase/firebase-api";
+import LoadingModal from "../Shared/LoadingModal";
 
 interface Props {
   roleSelected: string;
@@ -43,6 +44,7 @@ const RegisterFreelance = (props: Props) => {
   const [isFormSkillAndLanguageSave, setIsFormSkillAndLanguageSave] = useState<boolean>(false)
   const [isFormAwardSave, setIsFormAwardSave] = useState<boolean>(false)
   const [isSubmitForm, setIsSubmitForm] = useState<boolean>(false)
+  const [isOpenLoadingModal, setIsOpenLoadingModal] = useState<boolean>(false)
 
   useEffect(() => {
     if (isFormPersonalValid) {
@@ -112,6 +114,7 @@ const RegisterFreelance = (props: Props) => {
       cancelButtonText: "ตรวจสอบข้อมูลอีกครั้ง"
     }).then(async (result) => {
       if (result.isConfirmed) {
+        setIsOpenLoadingModal(true);
         const skill = formSkillAndLanguage.filter(item => item.type === 'skill');
         const language = formSkillAndLanguage.filter(item => item.type === 'language');
         const formRegisterData = {
@@ -121,7 +124,7 @@ const RegisterFreelance = (props: Props) => {
           skill: [...skill],
           language: [...language],
           award: [...formAward],
-          bankAccount: {...formBankAccount}
+          bankAccount: { ...formBankAccount }
         }
 
         if (formRegisterData?.profileImage) {
@@ -143,6 +146,7 @@ const RegisterFreelance = (props: Props) => {
         createUser(formRegisterData as unknown as FreelanceUsers).subscribe((res: any) => {
           localStorage.setItem("auth", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
+          setIsOpenLoadingModal(false);
           Swal.fire({
             icon: "success",
             title: "สร้างบัญชีสำเร็จ",
@@ -157,12 +161,14 @@ const RegisterFreelance = (props: Props) => {
           router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/`);
         }, error => {
           if (error.response.status === 409) {
+            setIsOpenLoadingModal(false);
             Swal.fire({
               title: "ชื่อผู้ใช้งานนี้ซ้ำกับในระบบ",
               text: "โปรดเปลี่ยนชื่อผู้ใช้งาน",
               icon: "warning"
             })
           } else {
+            setIsOpenLoadingModal(false);
             Swal.fire({
               title: "เกิดข้อผิดพลาด",
               text: "โปรดลองใหม่อีกครั้ง",
@@ -178,6 +184,9 @@ const RegisterFreelance = (props: Props) => {
 
   return (
     <div>
+      {isOpenLoadingModal && (
+        <LoadingModal></LoadingModal>
+      )}
       {activeMenu === "personal" && (
         <PersonalForm
           roleSelected={roleSelected}

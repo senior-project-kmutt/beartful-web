@@ -72,7 +72,7 @@ const Authentication = () => {
 
   return (
     <div>
-      <div className={`${style.main} fixed inset-0 mt-8`}>
+      <div className={`${style.main} fixed inset-0 mt-8 overflow-y-auto`}>
       <div>
         <div className={style.welcome}>
             {activeMenu === "login" && (
