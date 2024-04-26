@@ -102,7 +102,7 @@ const ArtworkList = (props: Props) => {
             </div>
           )}
           {isShowDetail && artworkDetail && (
-            <div className="fixed inset-0 overflow-auto mt-48" style={{ marginTop: `${from === 'freelance' && '230px'}` }}>
+            <div className="fixed inset-0 overflow-auto mt-48" style={{ marginTop: `${from === 'freelance' && '260px'}` }}>
               <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
             </div>
           )}
