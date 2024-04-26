@@ -62,8 +62,7 @@ const FreelanceArtwork = (props: Props) => {
                             <div className="mt-2 text-center text-gray-500">ยังไม่มีผลงาน</div>
                         </div>
                     )}
-
-                    <div className={`${style.artworkContainer} fixed inset-0 overflow-y-auto`} style={{ maxHeight: 'calc(100vh - 96px)', zIndex: 20, paddingLeft: "350px", marginTop: "190px", width: isShowDetail && artworkDetail ? '65%' : 'auto' }}>
+                    <div className={`${style.artworkContainer} fixed inset-0 overflow-y-auto`} style={{ maxHeight: 'calc(100vh - 190px)', top:"190px", paddingBottom:"30px", zIndex: 20, paddingLeft: "350px", width: isShowDetail && artworkDetail ? '65%' : 'auto' }}>
                         {artworks?.map((item: Artwork, index: number) => {
                             return (
                                 <div
@@ -80,9 +79,10 @@ const FreelanceArtwork = (props: Props) => {
                         })}
                     </div>
                 </div>
+
             </div>
             {isShowDetail && artworkDetail && (
-                <div className="mt-16 z-50 relative" style={{ width: '78%', marginLeft:'280px' }}>
+                <div className="mt-16 z-50 relative" style={{ width: '78%', marginLeft: '280px' }}>
                     <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
                 </div>
             )}
