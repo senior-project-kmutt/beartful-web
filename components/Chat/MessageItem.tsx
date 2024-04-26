@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import Swal from 'sweetalert2';
 library.add(fas, far)
 
 interface Props {
@@ -33,8 +34,15 @@ const MessageItem = (props: Props) => {
   const [isImage, setIsImage] = useState<boolean>(false);
   const [showFullScreen, setShowFullScreen] = useState(false);
 
-  const handleImageClick = () => {
-    setShowFullScreen(true);
+  const handleImageClick = (image: string) => {
+    // setShowFullScreen(true);
+    Swal.fire({
+      imageUrl: image,
+      imageAlt: "A tall image",
+      background: "rgba(255, 255, 255, 0)",
+      backdrop: "rgba(0, 0, 0, 0.7)",
+      showConfirmButton: false,
+    });
   };
 
   const handleCloseFullScreen = () => {
@@ -136,7 +144,7 @@ const MessageItem = (props: Props) => {
               <div className='break-all'>
                 {isImage ? (
                   <div className={styles.image_message}>
-                    <img className={styles.image_message} src={item.message} alt="" onClick={handleImageClick} />
+                    <img className={styles.image_message} src={item.message} alt="" onClick={() => handleImageClick(item.message)} />
                     {showFullScreen && (
                       <div
                         className={`${styles.fullscreen_overlay} active`}
