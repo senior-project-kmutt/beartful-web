@@ -5,6 +5,12 @@
     }
 }
 
+.loader {
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+}
+
 .artwork_container {
     margin: 20px auto;
     padding: 0 10%;
@@ -20,18 +26,20 @@
         img {
             max-width: 100%;
             border-radius: 5px;
+            background-color: #D9D9D9;
         }
 
         .detail_artbox {
             display: flex;
             align-items: center;
-            margin: 1%;
+            margin: 2% 0;
             margin-left: 3%;
 
             img {
                 border-radius: 50%;
                 width: 35px;
                 height: 35px;
+                object-fit: cover;
             }
         }
     }
@@ -40,6 +48,7 @@
 .artwork_container_show_detail {
     margin: 20px auto;
     padding-left: 5%;
+    margin-right: 30%;
     columns: 3;
     column-gap: 20px;
 
@@ -133,7 +142,7 @@
         scroll-behavior: smooth;
 
         .category {
-            font-size: smaller;
+            // font-size: smaller;
             width: min-content;
             border: 1px solid #E16428;
             color: #E16428;
@@ -165,7 +174,7 @@
     // margin: 10px 2%;
     margin-top: 2%;
     margin-right: 3%;
-    padding: 1.6%;
+    padding: 1%;
     // display: flex;
     width: 35%;
     border: solid 0.5px #e1dddc;
@@ -174,7 +183,9 @@
     float: right;
 
     .image_gallery {
-        height: 15rem;
+        height: 20rem;
+        margin-top: 25px;
+        z-index: 300;
 
         img {
             width: 100%;
@@ -211,16 +222,110 @@
             }
         }
     }
+
+    .freelance_profile {
+        width: 100%;
+        // background-color: #edeef0;
+        background-color: #F9E0D4;
+        display: flex;
+        border-radius: 20px;
+
+        .profile {
+            padding-left: 3%;
+            height: 0rem;
+            width: 70%;
+            display: flex;
+            align-items: center;
+            margin: 3rem auto;
+
+            img {
+                margin-right: 8px;
+                border-radius: 50%;
+                width: 60px;
+                height: 60px;
+                max-width: none;
+                object-fit: cover;
+            }
+
+            .name_box {
+                justify-items: start;
+                justify-content: start;
+
+                .username {
+                    margin-left: 4px;
+                    font-weight: 500;
+                    font-size: 1.2rem;
+                }
+
+                .fullname {
+                    margin-left: 4px;
+                    font-size: 0.8rem;
+                    color: #716E6E;
+                }
+            }
+        }
+
+        .button_container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            color: #873C18;
+            padding-right: 30px;
+
+            .view_profile {
+                width: 150px;
+                height: 40px;
+                background-color: #E78353;
+                padding: 4px 20px;
+                border-radius: 15px;
+                color: #fff;
+                font-weight: 500;
+                margin-left: 12px;
+                transition: all 0.5s;
+                margin-right: 5px;
+
+                &:hover {
+                    background-color: #E16428;
+                    border-color: #E16428;
+                    transform: scale(1.05);
+                    cursor: pointer;
+                    filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
+                    font-weight: 500;
+                }
+            }
+
+            // .chat_icon {
+            //     color: #5A2810;
+            //     transition: all 0.5s;
+
+            //     &:hover {
+            //         color: #E16428;
+            //         transform: scale(1.05);
+            //         cursor: pointer;
+            //         filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
+            //         font-weight: 500;
+            //     }
+            // }
+        }
+
+    }
 }
+
+.customer_profile {
+ 
+}
+
 
 .detail {
     margin: 10px 5%;
-    height: 24rem;
+    // height: 24rem;
 
     .name {
         font-weight: bold;
+        margin-top: 22px;
         font-size: 1.6rem;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     .category {
@@ -235,10 +340,8 @@
     }
 
     .description {
-        p {
-            margin-top: 20px;
-            margin-bottom: 12px;
-        }
+        margin-top: 15px;
+        margin-bottom: 12px;
 
         span {
             margin-top: 20px;
@@ -250,9 +353,11 @@
 
         .price_tag {
             color: #B45020;
-            position: absolute;
-            right: 35px;
-            margin-right: 2%;
+            font-size: x-large;
+            font-weight: 600;
+            // position: absolute;
+            // right: 35px;
+            // margin-right: 2%;
         }
     }
 
@@ -302,14 +407,10 @@
     .quantity {
         display: flex;
         justify-content: end;
-        margin-top: 22px;
-
-        .addToCart {
-            width: 150px;
-            position: absolute;
-            right: 4%;
-
-        }
+        position: absolute;
+        right: 48px;
+        margin-right: 2%;
+        margin-top: -37px;
 
         .quantityControll {
             margin-left: 100px;
@@ -335,21 +436,36 @@
             }
 
         }
-
-        .addToCart {
-            // position: absolute;
-            width: 150px;
-            height: 38px;
-            border: 1px solid #E16428;
-            background-color: #f9e0d467;
-            border-radius: 8px;
+        .chat_icon {
             color: #E16428;
             transition: all 0.5s;
 
             &:hover {
-                color: #FDFBFB;
-                background-color: #E16428;
-                border-color: #E16428;
+                color: #5A2810;
+                transform: scale(1.05);
+                cursor: pointer;
+                filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
+                font-weight: 500;
+            }
+        }
+
+        .addToCart {
+            position: absolute;
+            top: 5%;
+            width: 150px;
+            height: 38px;
+            border-radius: 8px;
+            color: #FDFBFB;
+            background-color: #E16428;
+            border-color: #E16428;
+            transform: scale(1.05);
+            transition: all 0.5s;
+
+            &:hover {
+                border: 1px solid #5A2810;
+                background-color: #5A2810;
+                border-radius: 8px;
+                color: white;
                 transform: scale(1.05);
                 cursor: pointer;
                 filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
@@ -358,112 +474,37 @@
         }
     }
 
-    .freelance_profile {
-        width: 108%;
-
-        display: flex;
-
-        .profile {
-            height: 4rem;
-            width: 70%;
-            display: flex;
-            align-items: center;
-            margin: 3rem auto;
-
-            img {
-                margin-right: 8px;
-                border-radius: 50%;
-                width: 60px;
-                height: 60px;
-                object-fit: cover;
-            }
-
-            .name_box {
-                justify-items: start;
-                justify-content: start;
-
-                .username {
-                    margin-left: 4px;
-                    font-weight: 500;
-                    font-size: 1.2rem;
-                }
-
-                .fullname {
-                    margin-left: 4px;
-                    font-size: 0.8rem;
-                    color: #716E6E;
-                }
-            }
-        }
-
-        .button_container {
-            width: 30%;
-            display: flex;
-            align-items: center;
-            justify-content: end;
-            color: #873C18;
-
-            .view_profile {
-                background-color: #E78353;
-                padding: 4px 20px;
-                border-radius: 15px;
-                color: #fff;
-                font-weight: 500;
-                margin-left: 12px;
-                transition: all 0.5s;
-
-                &:hover {
-                    background-color: #E16428;
-                    border-color: #E16428;
-                    transform: scale(1.05);
-                    cursor: pointer;
-                    filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
-                    font-weight: 500;
-                }
-            }
-
-            .chat_icon {
-                color: #5A2810;
-                transition: all 0.5s;
-
-                &:hover {
-                    color: #E16428;
-                    transform: scale(1.05);
-                    cursor: pointer;
-                    filter: drop-shadow(0 4px 4px rgba(91, 91, 91, 0.15));
-                    font-weight: 500;
-                }
-            }
-        }
-
-    }
 }
 
 .close {
-    margin: 2px 4px;
+    // margin: 2px 9px;
+    margin-right: 2px;
+    margin-top: -20px;
+    margin-left: 3px;
+    z-index: 100;
+    position: relative;
 
     span {
-        background-color: #5A2810;
-        padding: 5px 15px;
+        // padding: 0px 0px;
         border-radius: 50%;
-        font-weight: 500;
-        color: #FFFFFF;
+        font-weight: 600;
+        font-size:larger;
+        color: #5A2810;
         position: absolute;
-        right: 48px;
+        // right: 0px;
         transition: all 0.5s;
+        cursor: pointer;
 
         &:hover {
-            font-weight: 700;
-            background-color: #B45020;
+            // background-color: #B45020;
             transform: scale(1.05);
             cursor: pointer;
-            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            font-weight: 500;
+            font-weight: 700;
         }
     }
 }
 
-@media (min-width:1706px) {
+@media (min-width:1940px) {
     .arrow {
         visibility: hidden;
     }
@@ -489,6 +530,19 @@
 
     .artwork_category {
         // width: 20%;
+    }
+
+    .detail {
+        .quantity {
+            display: block;
+            justify-content: end;
+            position: static;
+            margin-top: 15px;
+
+            .addToCart {
+                position: static;
+            }
+        }
     }
 }
 

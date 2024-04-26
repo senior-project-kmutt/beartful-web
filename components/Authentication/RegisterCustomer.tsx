@@ -7,6 +7,7 @@ import { defaultProfileImage } from "@/config/constants";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import bcrypt from "bcryptjs";
+import LoadingModal from "../Shared/LoadingModal";
 
 interface Props {
   roleSelected: string;
@@ -14,9 +15,10 @@ interface Props {
 }
 const RegisterCustomer = (props: Props) => {
   const router = useRouter()
-  const { roleSelected, setRoleSelected} = props;
+  const { roleSelected, setRoleSelected } = props;
   const [formPersonal, setFormPersonal] = useState<any>()
   const [isFormPersonalValid, setIsFormPersonalValid,] = useState<boolean>(false)
+  const [isOpenLoadingModal, setIsOpenLoadingModal] = useState<boolean>(false);
 
   useEffect(() => {
     if (isFormPersonalValid) {
@@ -32,7 +34,7 @@ const RegisterCustomer = (props: Props) => {
       }).then((result) => {
         if (result.isConfirmed) {
           handleSubmitFormRegister();
-          
+
         } else {
           setIsFormPersonalValid(false);
         }
@@ -41,7 +43,8 @@ const RegisterCustomer = (props: Props) => {
   }, [formPersonal, isFormPersonalValid])
 
   const handleSubmitFormRegister = async () => {
-    const submitFromData = {...formPersonal}
+    const submitFromData = { ...formPersonal }
+    setIsOpenLoadingModal(true)
     if (formPersonal?.profileImage) {
       const imageUrls = await uploadFileToFirebase([formPersonal.profileImage], `user/profile-image`, formPersonal['username']);
       submitFromData['profileImage'] = imageUrls[0];
@@ -52,6 +55,7 @@ const RegisterCustomer = (props: Props) => {
     delete submitFromData['confirmPassword'];
     submitFromData['password'] = encryptPassword;
     createUser(submitFromData as unknown as Users).subscribe((res: any) => {
+      setIsOpenLoadingModal(false)
       localStorage.setItem("auth", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       Swal.fire({
@@ -66,12 +70,14 @@ const RegisterCustomer = (props: Props) => {
       });
     }, error => {
       if (error.response.status === 409) {
+        setIsOpenLoadingModal(false);
         Swal.fire({
           title: "ชื่อผู้ใช้งานนี้ซ้ำกับในระบบ",
           text: "โปรดเปลี่ยนชื่อผู้ใช้งาน",
           icon: "warning"
         })
       } else {
+        setIsOpenLoadingModal(false);
         Swal.fire({
           title: "เกิดข้อผิดพลาด",
           text: "โปรดลองใหม่อีกครั้ง",
@@ -82,6 +88,9 @@ const RegisterCustomer = (props: Props) => {
   }
   return (
     <>
+      {isOpenLoadingModal && (
+        <LoadingModal></LoadingModal>
+      )}
       <PersonalForm
         roleSelected={roleSelected}
         setRoleSelected={setRoleSelected}

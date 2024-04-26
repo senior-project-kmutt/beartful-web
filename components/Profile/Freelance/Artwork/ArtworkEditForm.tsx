@@ -7,7 +7,6 @@ import { initializeApp } from "firebase/app";
 import { IUser } from "@/pages/chat";
 import { Artwork } from "@/models/artwork";
 import style from "@/styles/profile/freelance/artwork/artworkForm.module.scss";
-import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import { editArtwork } from "@/services/artwork/artwork.api";
 import Router from 'next/router';
@@ -122,14 +121,13 @@ const ArtworkForm = (props: Props) => {
 
   return (
     <>
-      <NavBar />
-      <div className="flex">
+      <div className="fle mt-20">
 
-        <div>
+      <div className="fixed inset-0 bg-white z-3 mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
           <ProfileSelectBarFreelance activeMenu="artwork" />
         </div>
 
-        <div id="edit_artwork" className={style.main}>
+        <div id="edit_artwork"className={`${style.main} fixed mt-32 inset-0 overflow-y-auto mr-12`} style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "350px", marginTop: "120px" }}>
           <form onSubmit={onSubmit}>
             <div>
               <label>แก้ไขผลงาน</label>

@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { IUser } from "../../chat";
 import AccountingForm from "@/components/Authentication/FormRegister/AccountingForm";
-import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import style from '@/styles/profile/freelance/artwork/viewArtwork.module.scss'
 import { getUserById, updateBankAccount } from "@/services/user/user.api";
 import Swal from "sweetalert2";
 import { uploadFileToFirebase } from "@/services/firebase/firebase-api";
+import LoadingModal from "@/components/Shared/LoadingModal";
 
 const ProfileBankAccount = () => {
   const [user, setUser] = useState<IUser>();
   const [formBankAccount, setFormBankAccount] = useState<any>();
   const [bankAccountInfo, setBankAccountInfo] = useState<any>();
+  const [isOpenLoadingModal, setIsOpenLoadingModal] = useState<boolean>(false);
 
   useEffect(() => {
     const user: IUser = JSON.parse(localStorage.getItem('user') || '');
@@ -32,6 +33,7 @@ const ProfileBankAccount = () => {
 
   const handleSubmit = async () => {
     if (user) {
+      setIsOpenLoadingModal(true)
       const formSubmitData = { ...formBankAccount }
 
       if (typeof formSubmitData.bankAccountImage == 'object') {
@@ -46,6 +48,7 @@ const ProfileBankAccount = () => {
         bankAccount: formSubmitData
       }
       updateBankAccount(user.id, updateData, headers).then((res) => {
+        setIsOpenLoadingModal(false)
         Swal.fire({
           icon: "success",
           title: "แก้ไขข้อมูลสำเร็จ",
@@ -53,6 +56,7 @@ const ProfileBankAccount = () => {
           timer: 1500
         })
       }).catch(error => {
+        setIsOpenLoadingModal(false)
         Swal.fire({
           title: "เกิดข้อผิดพลาด",
           text: "โปรดลองใหม่อีกครั้ง",
@@ -88,14 +92,16 @@ const ProfileBankAccount = () => {
 
   return (
     <>
-      <NavBar />
-      <div className="flex">
+      <div className="flex mt-16">
 
-        <div style={{width: "22%"}}>
-          <ProfileSelectBarFreelance activeMenu="bankAccount" />
+        <div className="fixed inset-0 bg-white z-3 mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
+          <ProfileSelectBarFreelance activeMenu='bankAccount' />
         </div>
 
-        <div className={`my-12 mx-4`} style={{ width: '82%' }}>
+        {isOpenLoadingModal && (
+          <LoadingModal></LoadingModal>
+        )}
+        <div className="fixed mt-32 inset-0 overflow-y-auto mr-12" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "350px" }}>
           <AccountingForm saveFormRegister={setFormBankAccount} defaultFormData={formBankAccount} />
         </div>
       </div>

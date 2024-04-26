@@ -1,7 +1,6 @@
 import { Quotation } from "@/models/quotation";
 import { getQuotationById } from "@/services/quotation/quotation.api";
 import { useEffect, useState } from "react";
-import NavBar from "@/components/Layout/NavBar";
 import ReviewCartOrder from "@/components/Cart/ReviewCartOrder";
 import { IUser } from "@/pages/chat";
 import { ICreatePurchaseOrder, PayAmount } from "@/models/purchaseOrder";
@@ -85,8 +84,7 @@ const ReviewOrderHiring = () => {
   }
 
   return (
-    <div>
-      <NavBar />
+    <div className="mt-16">
       {quotationItem && (
         <ReviewCartOrder data={quotationItem} type={OrderStatus.hired} createOrderPurchase={createOrderPurchase} />
       )}

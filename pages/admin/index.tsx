@@ -1,4 +1,3 @@
-import NavBar from "@/components/Layout/NavBar";
 import { useEffect, useState } from "react";
 import { IUser } from "../chat";
 import { useRouter } from "next/router";
@@ -20,8 +19,8 @@ const Admin = () => {
 
     return (
         <>
-            {user && user.role === 'admin' && <> <NavBar />
-                <AdminManageUser /></>}
+            {user && user.role === 'admin' && <div className="mt-16">
+                <AdminManageUser /></div>}
         </>
     );
 };

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ProfileSelectBarFreelance from "../ProfileSelectBar";
-import NavBar from "@/components/Layout/NavBar";
 import style from '@/styles/profile/freelance/artwork/viewArtwork.module.scss'
 import { Artwork } from "@/models/artwork";
 import { getFreelanceArtwork } from "@/services/artwork/artwork.api";
@@ -8,6 +7,7 @@ import ArtworkDetail from "@/components/Artwork/ArtworkDetail";
 import ArtworkList from "@/components/Artwork/ArtworkList";
 import ArtworkItem from "@/components/Profile/Freelance/Artwork/ArtworkItem";
 import router from "next/router";
+import { NO_ARTWORK_FREELANCE } from "@/config/constants";
 
 interface Props {
     username: string;
@@ -45,26 +45,25 @@ const FreelanceArtwork = (props: Props) => {
 
     return (
         <>
-            <NavBar />
-            <div className="flex">
-
-                <div style={{width: "22%"}}>
+            <div className="flex mt-16">
+                <div className="fixed inset-0 bg-white z-50 mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
                     <ProfileSelectBarFreelance activeMenu="artwork" />
                 </div>
 
-                <div className={style.main}>
-                    <div className="mb-11">
+                <div className={`${style.main}`}>
+                    <div className="mb-11 fixed mt-32 inset-0 overflow-y-auto" style={{ zIndex: 10 }}>
                         <button className={style.addButton} onClick={() => router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/artwork/add`)}>เพิ่มผลงาน</button>
-                        <p className="text-xl font-bold">ผลงานของฉัน</p>
+                        <p className="text-xl font-bold ml-96">ผลงานของฉัน</p>
                     </div>
 
-
-                    {isShowDetail && artworkDetail && (
-                        <div className="-ml-12">
-                            <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
+                    {artworks?.length === 0 && (
+                        <div className="flex justify-center items-center flex-col h-full mt-16 ml-80">
+                            <img src={NO_ARTWORK_FREELANCE} className="sm:h-64 ml-4 h-96" alt="No Artwork" />
+                            <div className="mt-2 text-center text-gray-500">ยังไม่มีผลงาน</div>
                         </div>
                     )}
-                    <div className={`${style.artworkContainer} overflow-y-auto h-screen`}>
+
+                    <div className={`${style.artworkContainer} fixed inset-0 overflow-y-auto`} style={{ maxHeight: 'calc(100vh - 96px)', zIndex: 20, paddingLeft: "350px", marginTop: "190px", width: isShowDetail && artworkDetail ? '65%' : 'auto' }}>
                         {artworks?.map((item: Artwork, index: number) => {
                             return (
                                 <div
@@ -82,6 +81,11 @@ const FreelanceArtwork = (props: Props) => {
                     </div>
                 </div>
             </div>
+            {isShowDetail && artworkDetail && (
+                <div className="mt-16 z-50 relative" style={{ width: '78%', marginLeft:'280px' }}>
+                    <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
+                </div>
+            )}
         </>
     );
 };

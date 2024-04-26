@@ -1,6 +1,5 @@
 
 import { useEffect, useState } from "react";
-import NavBar from "@/components/Layout/NavBar";
 import ReviewCartOrder from "@/components/Cart/ReviewCartOrder";
 import { CartItem } from "@/models/cart";
 import { deleteCartById, getCartById } from "@/services/cart/cart.api";
@@ -77,8 +76,7 @@ const ReviewOrderHiring = () => {
   }
 
   return (
-    <div>
-      <NavBar />
+    <div className="mt-16">
       {cartItem && (
         <ReviewCartOrder data={cartItem} type={OrderStatus.readyMade} createOrderPurchase={createOrderPurchase} />
       )}

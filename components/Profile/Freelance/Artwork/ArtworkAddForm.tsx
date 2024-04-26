@@ -10,11 +10,11 @@ import { IUser } from "@/pages/chat";
 import style from "@/styles/profile/freelance/artwork/artworkForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import NavBar from "@/components/Layout/NavBar";
 import ProfileSelectBarFreelance from "@/components/Profile/Freelance/ProfileSelectBar";
 import Router from 'next/router';
 import Swal from "sweetalert2";
 import router from "next/router";
+import LoadingModal from "@/components/Shared/LoadingModal";
 
 export type ArtworkFormData = {
   images: String[]
@@ -36,6 +36,7 @@ const ArtworkForm = (props: Props) => {
   const [inputFiles, setInputFiles] = useState<File[]>([]);
   const [imageSrc, setImageSrc] = useState<string[] | ArrayBuffer[] | null>([]);
   const [priceInputValue, setPriceInputValue] = useState<number>();
+  const [isOpenLoadingModal, setIsOpenLoadingModal] = useState<boolean>(false);
 
   initializeApp(firebaseConfig);
 
@@ -91,6 +92,7 @@ const ArtworkForm = (props: Props) => {
     let imageUrl: String[] = [];
     if (token) {
       if (inputFiles) {
+        setIsOpenLoadingModal(true);
         imageUrl = await uploadFileToFirebase();
       }
 
@@ -118,22 +120,26 @@ const ArtworkForm = (props: Props) => {
               timer: 1500
             }).then((result) => {
               if (result.isConfirmed || result.isDismissed) {
+                setIsOpenLoadingModal(false);
                 router.push(`${process.env.NEXT_PUBLIC_BASEPATH}/profile/artwork`)
               }
             });
           }, error => {
             if (error.response.status === 401) {
+              setIsOpenLoadingModal(false);
               Swal.fire({
                 title: "ไม่มีสิทธ์เข้าถึงการดำเนินการนี้",
                 icon: "warning"
               })
             } else if (error.response.status === 400) {
+              setIsOpenLoadingModal(false);
               Swal.fire({
                 title: "ข้อมูลผิดพลาด",
                 text: "โปรดตรวจสอบข้อมูลของคุณ",
                 icon: "warning"
               })
             } else {
+              setIsOpenLoadingModal(false);
               Swal.fire({
                 title: "เกิดข้อผิดพลาด",
                 text: "โปรดลองใหม่อีกครั้ง",
@@ -150,14 +156,17 @@ const ArtworkForm = (props: Props) => {
 
   return (
     <>
-      <NavBar />
-      <div className="flex">
 
-        <div style={{ width: '22%' }}>
+      <div className="flex mt-20">
+        <div className="fixed inset-0 bg-white z-3 mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
           <ProfileSelectBarFreelance activeMenu="artwork" />
         </div>
 
-        <div id="add_artwork" className={style.main}>
+        {isOpenLoadingModal && (
+          <LoadingModal></LoadingModal>
+        )}
+
+        <div id="add_artwork" className={`${style.main} fixed mt-32 inset-0 overflow-y-auto mr-12`} style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "350px", marginTop: "120px" }}>
           <form onSubmit={onSubmit}>
             <div>
               <label>เพิ่มผลงาน</label>

@@ -3,7 +3,6 @@ import styles from "@/styles/chat/chat.module.scss";
 import { getChatRoomByUserId } from "@/services/chat/chat.api";
 import ChatRoomItem from "@/components/Chat/ChatRoomItem";
 import ChatMessage from "@/components/Chat/ChatMessage";
-import NavBar from "@/components/Layout/NavBar"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMessage } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
@@ -89,8 +88,7 @@ export default function Home() {
   }
 
   return (
-    <>
-      <NavBar />
+    <div className="fixed inset-0 overflow-auto mt-16">
       <div className={styles.container}>
         <div className={styles.chat_room}>
           <h1 className="font-extrabold text-xl underline-offset-2 p-3 mb-4">ข้อความ</h1>
@@ -125,6 +123,6 @@ export default function Home() {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

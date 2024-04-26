@@ -1,12 +1,10 @@
 import Register from "@/components/Authentication/Register";
-import NavBar from "@/components/Layout/NavBar";
 
 const RegisterUser = () => {
   return (
-    <>
-      <NavBar />
+    <div className="mt-16">
       <Register />
-    </>
+    </div>
   );
 };
 

@@ -44,10 +44,10 @@ const FreelanceTransfer = () => {
     return (
         <>
             <div className="flex">
-                <div style={{ width: '22%' }}>
-                    <ProfileSelectBarFreelance activeMenu="transfer" />
+                <div className="fixed inset-0 bg-white mt-20 sm:w-1/4 lg:w-1/5 xl:w-1/6">
+                    <ProfileSelectBarFreelance activeMenu='transfer' />
                 </div>
-                {data && <div className={style.container}>
+                {data && <div className={`${style.container} fixed mt-32 inset-0 overflow-y-auto mr-12`} style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, marginLeft: "350px" }}>
                     {slug === 'dashboard' &&
                         <>
                             <FreelanceDashboard setSlug={setSlug} data={data} title='เงินในบัญชีของฉัน' />

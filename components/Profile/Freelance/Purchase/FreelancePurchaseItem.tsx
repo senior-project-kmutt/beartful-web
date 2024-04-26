@@ -40,7 +40,7 @@ const FreelancePurchaseItem = (props: Props) => {
     }
 
     return (
-        <div className={style.purchaseItem}>
+        <div className={`${style.purchaseItem} ml-6 mr-6`}>
             <div className={style.profile}>
                 <FontAwesomeIcon icon={faUser} size="sm" style={{ marginTop: "4px" }}></FontAwesomeIcon>
                 <p className={style.username}>{item.customerUsername}</p>
@@ -67,8 +67,8 @@ const FreelancePurchaseItem = (props: Props) => {
                             <p className={style.description}>{item.purchaseOrderItem?.description}</p>
                             <p className={style.price}>{formattedPrice(item.purchaseOrder.netAmount!)} บาท</p>
                         </div>}
-                        <div className={style.confirm} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '110px' : '60px' }} >
-                            <div className={style.status} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '-95px' : '-50px' }}>{OrderStatusFreelanceEnum[item.purchaseOrder.status as keyof typeof OrderStatusFreelanceEnum]}</div>
+                        <div className={style.confirm} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '100px' : '82px' }} >
+                            <div className={style.status} style={{ marginTop: item.purchaseOrder.type === 'hired' ? '-95px' : '-85px' }}>{OrderStatusFreelanceEnum[item.purchaseOrder.status as keyof typeof OrderStatusFreelanceEnum]}</div>
                             {/* <FontAwesomeIcon icon={faClipboardList} style={{ color: '#5A2810' }} size="2xl"></FontAwesomeIcon> */}
                             {item.purchaseOrder.status === 'pending' && (
                                 <div>

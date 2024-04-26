@@ -6,7 +6,7 @@ interface Props {
   onShowDetail: (item: Artwork) => void;
 }
 const ArtworkItem = (props: Props) => {
-  const { _id, images, name, price, type, freelanceId } = props.item;
+  const { images, name, freelance } = props.item;
 
   const { onShowDetail } = props;
 
@@ -20,9 +20,9 @@ const ArtworkItem = (props: Props) => {
         <div className="max-w-sm rounded overflow-hidden shadow-lg transform motion-safe:hover:scale-105">
           <img className="w-full" src={images[0]} alt={name} />
           <div className={styled.detail_artbox}>
-            <img className="mr-2" src={images[0]} alt="Avatar of Jonathan Reinink" />
+            <img className="mr-2" src={freelance?.profileImage} alt="Avatar of Jonathan Reinink" />
             <div className="text-sm">
-              <p className="text-gray-900 leading-none">testusernameee</p>
+              <p className="text-gray-900 leading-none">{freelance?.username}</p>
             </div>
           </div>
         </div>

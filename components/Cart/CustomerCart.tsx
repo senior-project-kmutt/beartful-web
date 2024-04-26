@@ -1,6 +1,5 @@
 
 import style from "@/styles/cart/cart.module.scss"
-import NavBar from "../Layout/NavBar";
 import CartSelectBar from "./CartSelectBar";
 import { useEffect, useState } from "react";
 import CartReadyMade from "./CartReadyMade";
@@ -11,6 +10,7 @@ import CartHiringItem from "./CartHiringItem";
 import { IUser } from "@/pages/chat";
 import { useRouter } from "next/router";
 import { getQuotationByCustomerId } from "@/services/quotation/quotation.api";
+import { EMPTY_CART } from "@/config/constants";
 
 const CustomerCart = () => {
     const [type, setType] = useState<string>('hired')
@@ -73,15 +73,23 @@ const CustomerCart = () => {
 
     return (
         <>
-            <NavBar />
             <div>
-                <div className={style.sideBar}>
+                <div className={`${style.sideBar} fixed inset-0 overflow-auto z-10 mt-20`}>
                     <CartSelectBar type={type} setType={setType} />
                 </div>
 
-                <div id="cart_item" className={style.main}>
+                <div id="cart_item" className={`${style.main} fixed inset-0 mt-32 overflow-y-auto`} style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20 }}>
                     {type === 'hired' && (
-                        <div className="overflow-y-auto h-screen">
+                        <div>
+                            <div className="flex justify-center items-center flex-col h-full">
+                                {hiringcart.length === 0 && (
+                                    <>
+                                        <img src={EMPTY_CART} className="sm:h-64 ml-4 h-96 mt-16" alt="Empty Cart" />
+                                        <div className="mt-2 text-center text-gray-500">ไม่มีสินค้าในตะกร้าสินค้า</div>
+                                    </>
+                                )}
+                            </div>
+
                             {hiringcart.map((item, index) => {
                                 return (
                                     <div style={{ position: 'relative' }} key={index}>
@@ -92,16 +100,23 @@ const CustomerCart = () => {
                         </div>
                     )}
                     {type === 'readyMade' && (
-                        <div className="overflow-y-auto h-screen">
-                            <div className=" mt-2 rounded-t-lg">
-                                {cart.map((item, index) => {
-                                    return (
-                                        <div style={{ position: 'relative' }} key={index}>
-                                            <CartReadyMade item={item} />
-                                        </div>
-                                    )
-                                })}</div>
-                        </div>
+                        <div className=" mt-2 rounded-t-lg">
+                            <div className="flex justify-center items-center flex-col h-full">
+                                {cart.length === 0 && (
+                                    <>
+                                        <img src={EMPTY_CART} className="sm:h-64 ml-4 h-96 mt-16" alt="Empty Cart" />
+                                        <div className="mt-2 text-center text-gray-500">ไม่มีสินค้าในตะกร้าสินค้า</div>
+                                    </>
+                                )}
+                            </div>
+                            {cart.map((item, index) => {
+                                return (
+                                    <div key={index}>
+                                        <CartReadyMade item={item} />
+                                    </div>
+                                )
+                            })}</div>
+
                     )}
                 </div>
             </div>

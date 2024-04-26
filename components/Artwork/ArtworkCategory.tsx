@@ -52,7 +52,7 @@ const ArtworkCategory = (props: Props) => {
 
   return (
     <div className={style.artwork_category}>
-      <div className="mx-48 shadow rounded-full h-10 flex p-1 relative items-center">
+      <div className="mx-48 shadow rounded-full h-10 flex p-1 relative items-center mb-6">
         <div className={`w-full flex justify-center ${type === 'hired' && `${style.item_active}`}`}>
           <button onClick={() => setTypeArtwork('hired')}>Hiring</button>
         </div>
