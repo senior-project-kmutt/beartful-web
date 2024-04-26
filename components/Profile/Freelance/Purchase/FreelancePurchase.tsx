@@ -74,7 +74,7 @@ const CustomerPurchase = (props: Props) => {
                 <div className="fixed ml-0 sm:ml-80 mt-44 sm:mt-24 md:mt-5 lg:mt-28 xl:mt-28 inset-0" style={{ maxHeight: 'calc(100vh - 32px)', zIndex: 20, overflow: 'hidden' }}>
                     <div className="text-xl font-bold ml-10 sm:mt-24 lg:mt-0 xl:mt-0">การซื้อและการจ้างของฉัน</div>
                     <div className="flex justify-center items-center">
-                        <PurchaseStatusBar role="customer" setStatus={setStatus} />
+                        <PurchaseStatusBar role="freelance" setStatus={setStatus} />
                     </div>
 
                     {isLoading ? (
@@ -83,7 +83,7 @@ const CustomerPurchase = (props: Props) => {
                         </div>
 
                     ) : (
-                        <div className="overflow-y-auto" style={{ maxHeight: '100%', overflowX: 'hidden' }}>
+                        <div className="overflow-y-auto" style={{ maxHeight: '100vh', overflowX: 'hidden' }}>
                             {order.length === 0 && (
                                 <div className="flex justify-center items-center flex-col h-full mt-16">
                                     <img src={WISH_LIST} className="sm:h-64 ml-4 h-96" alt="Empty Cart" />
