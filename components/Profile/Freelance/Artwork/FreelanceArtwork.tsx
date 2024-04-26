@@ -82,7 +82,7 @@ const FreelanceArtwork = (props: Props) => {
                 </div>
             </div>
             {isShowDetail && artworkDetail && (
-                <div className="mt-16 z-50" style={{ width: '78%', marginLeft: '280px' }}>
+                <div className="mt-16 z-50 relative" style={{ width: '78%', marginLeft:'280px' }}>
                     <ArtworkDetail item={artworkDetail} onCloseDetail={onCloseDetail} />
                 </div>
             )}
